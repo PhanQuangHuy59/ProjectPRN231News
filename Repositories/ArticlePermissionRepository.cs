@@ -12,7 +12,7 @@ namespace Repositories
     {
 
     }
-    public class ArticlePermissionRepository :  RepositoryBase<ArticlePermission>, IArticleRepository
+    public class ArticlePermissionRepository :  RepositoryBase<ArticlePermission>, IArticlePermissionRepository
     {
         public ArticlePermissionRepository(FinalProjectPRN231Context context) : base(context)
         {

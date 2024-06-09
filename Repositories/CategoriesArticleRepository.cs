@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IArticleRepository
+    public interface ICategoriesArticleRepository
     {
 
     }
-    public class ArticleRepository :  RepositoryBase<Article>, IArticleRepository
+    public class CategoriesArticleRepository :  RepositoryBase<CategoriesArticle>, ICategoriesArticleRepository
     {
-        public ArticleRepository(FinalProjectPRN231Context context) : base(context)
+        public CategoriesArticleRepository(FinalProjectPRN231Context context) : base(context)
         {
         }
        

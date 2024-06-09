@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
@@ -9,7 +10,7 @@ namespace BusinessObjects.Models
         {
             Articles = new HashSet<Article>();
         }
-
+        [Key]
         public int ProcessId { get; set; }
         public string NameProcess { get; set; } = null!;
         public string Description { get; set; } = null!;

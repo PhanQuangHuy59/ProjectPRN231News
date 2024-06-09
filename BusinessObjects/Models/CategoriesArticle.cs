@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
@@ -10,7 +11,7 @@ namespace BusinessObjects.Models
             Articles = new HashSet<Article>();
             InverseParentCategory = new HashSet<CategoriesArticle>();
         }
-
+        [Key]
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; } = null!;
         public string? Description { get; set; }

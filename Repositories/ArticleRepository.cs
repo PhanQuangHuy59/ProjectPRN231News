@@ -17,6 +17,7 @@ namespace Repositories
         public ArticleRepository(FinalProjectPRN231Context context) : base(context)
         {
         }
+
        
     }
 }

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IArticleRepository
+    public interface IEmotionRepository
     {
 
     }
-    public class ArticleRepository :  RepositoryBase<Article>, IArticleRepository
+    public class EmotionRepository :  RepositoryBase<Article>, IEmotionRepository
     {
-        public ArticleRepository(FinalProjectPRN231Context context) : base(context)
+        public EmotionRepository(FinalProjectPRN231Context context) : base(context)
         {
         }
        

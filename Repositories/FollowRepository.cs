@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AccessDatas;
+using BusinessObjects.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    internal class FollowRepository
+    public interface IFollowRepository
     {
+
+    }
+    public class FollowRepository : RepositoryBase<Follow>, IFollowRepository
+    {
+        public FollowRepository(FinalProjectPRN231Context context) : base(context)
+        {
+        }
     }
 }

@@ -92,3 +92,8 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Repositorie
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\AccessDatas.pdb
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\BusinessObjects.pdb
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Repositories.pdb
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.AspNetCore.OData.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.OData.Core.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.OData.Edm.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.OData.ModelBuilder.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.Spatial.dll

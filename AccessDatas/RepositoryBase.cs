@@ -12,8 +12,8 @@ namespace AccessDatas
     public abstract class RepositoryBase<T> : IDisposable, IRepository<T> where T : class
     {
         #region Properties
-        private FinalProjectPRN231Context dataContext;
-        private readonly DbSet<T> dbSet;
+        protected FinalProjectPRN231Context dataContext;
+        protected readonly DbSet<T> dbSet;
 
 
         protected FinalProjectPRN231Context FinalDbContext
@@ -51,7 +51,7 @@ namespace AccessDatas
         }
         public async virtual Task<T> DeleteAsync(int id)
         {
-            var entity = dbSet.FindAsync(id).Result;
+            var entity = await dbSet.FindAsync(id);
             T temp = dbSet.Remove(entity).Entity;
             SaveAsync();
             return temp;

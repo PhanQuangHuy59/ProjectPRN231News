@@ -3,12 +3,18 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using WebNewsAPIs.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+
+builder.Services.AddControllers();
+builder.Services.ConfigOdata();
+builder.Services.InjectService();
+
 
 builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
 {

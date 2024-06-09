@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
     public partial class SaveArticle
     {
+        [Key]
         public long SaveId { get; set; }
         public Guid ArticleId { get; set; }
         public Guid UserId { get; set; }
