@@ -10,3 +10,6 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\obj\Debug\net6.0\AccessDatas
 D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\obj\Debug\net6.0\refint\AccessDatas.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\obj\Debug\net6.0\AccessDatas.pdb
 D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\obj\Debug\net6.0\ref\AccessDatas.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\bin\Debug\net6.0\BusinessObjects.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\bin\Debug\net6.0\BusinessObjects.pdb
+D:\Ki8\ProjectWebNews\ProjectPRN231News\AccessDatas\obj\Debug\net6.0\AccessDatas.csproj.CopyComplete

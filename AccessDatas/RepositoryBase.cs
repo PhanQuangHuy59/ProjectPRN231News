@@ -22,61 +22,63 @@ namespace AccessDatas
         }
         #endregion
 
-        protected RepositoryBase()
+        protected RepositoryBase(FinalProjectPRN231Context context)
         {
-            dbSet = FinalDbContext.Set<T>();
+            dataContext = context ?? throw new ArgumentNullException(nameof(context));
+            dbSet = dataContext.Set<T>();
         }
 
         #region Implementation
-        public virtual T Add(T entity)
-        { 
-            T temp = dbSet.Add(entity).Entity;
-            Save();
-            return temp;
+        public async virtual Task<T> AddAsync(T entity)
+        {
+            var entry = await dbSet.AddAsync(entity);
+            SaveAsync();
+            return entry.Entity;
         }
 
-        public virtual void Update(T entity)
+        public async virtual Task UpdateAsync(T entity)
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
-            Save();
+            SaveAsync();
         }
 
-        public virtual T Delete(T entity)
+        public async virtual Task<T> DeleteAsync(T entity)
         {
-            T temp =  dbSet.Remove(entity).Entity;
-            Save();
-            return temp;
-        }
-        public virtual T Delete(int id)
-        {
-            var entity = dbSet.Find(id);
             T temp = dbSet.Remove(entity).Entity;
-            Save();
+            SaveAsync();
             return temp;
         }
-        public virtual void DeleteMulti(Expression<Func<T, bool>> where)
+        public async virtual Task<T> DeleteAsync(int id)
+        {
+            var entity = dbSet.FindAsync(id).Result;
+            T temp = dbSet.Remove(entity).Entity;
+            SaveAsync();
+            return temp;
+        }
+        public async virtual Task DeleteMultiAsync(Expression<Func<T, bool>> where)
         {
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
             foreach (T obj in objects)
                 dbSet.Remove(obj);
-            Save();
+            SaveAsync();
         }
 
-        public virtual T GetSingleById(int id)
+        public async virtual Task<T> GetSingleByIdAsync(int id)
         {
-            return dbSet.Find(id);
+            return await dbSet.FindAsync(id);
         }
 
-        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where, string includes)
+        public async virtual Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> where, string includes)
         {
-            return dbSet.Where(where).ToList();
+            return await dbSet.Include(includes)
+                .Where(where).ToListAsync();
         }
 
 
-        public virtual int Count(Expression<Func<T, bool>> where)
+        public async virtual Task<int> CountAsync(Expression<Func<T, bool>> where)
         {
-            return dbSet.Count(where);
+            return await dbSet.CountAsync(where);
         }
 
         public IEnumerable<T> GetAll(string[] includes = null)
@@ -93,17 +95,18 @@ namespace AccessDatas
             return dataContext.Set<T>().AsQueryable();
         }
 
-        public T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
+        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
         {
             if (includes != null && includes.Count() > 0)
             {
-                
+
                 var query = dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return query.FirstOrDefault(expression);
+                return await query.FirstOrDefaultAsync(expression);
             }
-            return dataContext.Set<T>().FirstOrDefault(expression);
+              
+            return await dataContext.Set<T>().FirstOrDefaultAsync(expression);
         }
 
         public virtual IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)
@@ -143,14 +146,14 @@ namespace AccessDatas
             return _resetSet.AsQueryable();
         }
 
-        public bool CheckContains(Expression<Func<T, bool>> predicate)
+        public async Task<bool> CheckContainsAsync(Expression<Func<T, bool>> predicate)
         {
-            return dataContext.Set<T>().Count<T>(predicate) > 0;
+            return await dataContext.Set<T>().CountAsync<T>(predicate) > 0;
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            dataContext.SaveChanges();
+            await dataContext.SaveChangesAsync();
         }
         private bool disposed = false;
 
@@ -171,6 +174,8 @@ namespace AccessDatas
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        
         #endregion
     }
 }
