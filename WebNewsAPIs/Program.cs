@@ -1,8 +1,11 @@
+using AutoMapper;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
+using ProjectAPIAss.MapperConfig;
 using WebNewsAPIs.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,16 +14,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
-builder.Services.AddControllers();
-builder.Services.ConfigOdata();
-builder.Services.InjectService();
-
-
 builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
 {
     var connectString = builder.Configuration.GetConnectionString("value");
-    options.UseSqlServer(connectString);   
+    options.UseSqlServer(connectString);
 });
+
+builder.Services.AddControllers();
+builder.Services.ConfigOdata();
+builder.Services.InjectService();
+builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
+
+
 
 
 

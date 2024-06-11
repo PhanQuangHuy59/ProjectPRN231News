@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Qi6dB4tEyN5FnzitJrjahwU0rO1fKjD1MLsK1tK2crfYqmfaAgYuqYkxKdeMdRGRXYb5Rou9LJlnIdCK1u3kHw==",
+  "dgSpecHash": "Ue5zaFE32M65wtAWL2EnMLI/smMFjkneV7Q4J5l/rBNaEgTvKrYod7j5Ifatf3561b2M24imn+pZ3TUEqYAzNQ==",
   "success": true,
   "projectFilePath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
     "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\azure.security.keyvault.certificates\\4.1.0\\azure.security.keyvault.certificates.4.1.0.nupkg.sha512",

@@ -64,7 +64,7 @@ CREATE INDEX "users_display_name_index" ON
 CREATE TABLE "Permissions"(
     "permission_id" INT NOT NULL IDENTITY(1,1),
     "permisstion_name" NVARCHAR(300) NOT NULL,
-    "description" NVARCHAR(MAX) NOT NULL
+    "description" NVARCHAR(MAX) NULL
 );
 ALTER TABLE
     "Permissions" ADD CONSTRAINT "permissions_permission_id_primary" PRIMARY KEY("permission_id");
@@ -103,11 +103,11 @@ CREATE TABLE "Articles"(
     "author" uniqueidentifier NOT NULL,
     "created_date" DATETIME NOT NULL DEFAULT GETDATE(),
     "updated_date" DATETIME  NULL,
-    "publish_date" BIGINT  NULL ,
+    "publish_date" DATETIME  NULL ,
     "is_publish" BIT NOT NULL DEFAULT 0,
     "status_process" INT NOT NULL,
     "categorty_id" uniqueidentifier NOT NULL,
-    "short_description" NVARCHAR(255) NOT NULL,
+    "short_description" NVARCHAR(300) NOT NULL,
     "slug" VARCHAR(300) NOT NULL,
     "cover_image" VARCHAR(MAX) NOT NULL,
     "processor" uniqueidentifier NOT NULL,
