@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -43,3 +59,7 @@ build_metadata.AdditionalFiles.CssScope =
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-lohn74csj8
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Shared/_LayoutHomeMain.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRIb21lTWFpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-9h8tbherka

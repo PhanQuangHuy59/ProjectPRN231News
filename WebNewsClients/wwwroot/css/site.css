@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -15,4 +15,18 @@ html {
 
 body {
   margin-bottom: 60px;
+}*/
+.nav-links {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .leader-ad-demo,
+    .article-ad-demo {
+        height: 50px !important;
+    }
+}
+
+#truethemes_container #main {
+    float: left;
 }
