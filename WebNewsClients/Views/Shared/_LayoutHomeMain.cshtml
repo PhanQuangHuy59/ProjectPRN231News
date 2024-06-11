@@ -21,6 +21,8 @@
     <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
     <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; Feed" href="feed/index.html" />
     <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; Comments Feed" href="comments/feed/index.html" />
+    <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; The selfie stick has taken over CES 2015 Comments Feed" href="feed/index.html" />
+
 
 
     <script type="text/javascript">
@@ -660,7 +662,6 @@
             font-family: 'Montserrat', sans-serif;
         }
     </style>
-
     <style type="text/css">
 
 
@@ -735,6 +736,7 @@
 
     <div id="site" class="left relative">
         <div id="site-wrap" class="left relative">
+
             <div id="fly-wrap">
                 <div class="fly-wrap-out">
                     <div class="fly-side-wrap">
@@ -868,7 +870,8 @@
                         </div><!--fly-menu-wrap-->
                     </div><!--fly-wrap-in-->
                 </div><!--fly-wrap-out-->
-            </div><!--fly-wrap-->			<div id="head-main-wrap" class="left relative">
+            </div><!--fly-wrap-->			
+            <div id="head-main-wrap" class="left relative">
                 <div id="head-main-top" class="left relative">
                 </div>
                 <!--head-main-top-->
@@ -999,7 +1002,8 @@
                         </div><!--nav-in-->
                     </div><!--nav-out-->
                 </div><!--main-nav-wrap-->
-            </div><!--head-main-wrap-->
+            </div>
+            <!--head-main-wrap-->
             <div class="col-tabs-wrap left relative">
                 <ul class="col-tabs">
                     <li class="feat-col-tab">
@@ -1233,6 +1237,9 @@
                     </div><!--body-main-out-->
                 </div><!--foot-bot-->
             </footer>
+
+
+
         </div>
     </div>
 
@@ -1275,7 +1282,15 @@
 
             // Main Menu Scroll
             $('.fly-nav-menu').niceScroll({ cursorcolor: "#888", cursorwidth: 7, cursorborder: 0, zindex: 999999 });
+            
+            // Main Menu Scroll
+            $('.fly-nav-menu').niceScroll({ cursorcolor: "#888", cursorwidth: 7, cursorborder: 0, zindex: 999999 });
 
+            $(".comment-click-156").on("click", function () {
+                $(".com-click-id-156").show();
+                $(".disqus-thread-156").show();
+                $(".com-but-156").hide();
+            });
 
             // Infinite Scroll
             $('.infinite-content').infinitescroll({
@@ -1356,6 +1371,7 @@
     <script type="text/javascript" src="~/template/mvpthemes.com/flexmag/wp-content/plugins/mvp-scoreboard/js/score-script5352.js?ver=6.4.4" id="mvp-score-script-js"></script>
     <script type="text/javascript" src="~/template/mvpthemes.com/flexmag/wp-content/plugins/theia-sticky-sidebar/js/theia-sticky-sidebare7f0.js?ver=1.3.1" id="theia-sticky-sidebar.js-js"></script>
     <script type="text/javascript" src="~/template/mvpthemes.com/flexmag/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min117a.js?ver=8.7.0" id="sourcebuster-js-js"></script>
+    <script type="text/javascript" src="~/template/mvpthemes.com/flexmag/wp-content/plugins/anti-spam/assets/js/anti-spama927.js?ver=7.3.5" id="anti-spam-script-js"></script>
 
     <script type="text/javascript" src="~/template/mvpthemes.com/flexmag/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min117a.js?ver=8.7.0" id="wc-order-attribution-js"></script>
     <script type="text/javascript" src="~/template/mvpthemes.com/www.google.com/recaptcha/api6c7d.js?onload=rwpReCaptchaLoad&amp;render=explicit&amp;ver=3.8.1" id="reviewer-recaptcha-js"></script>

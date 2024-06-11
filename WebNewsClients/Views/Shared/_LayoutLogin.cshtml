@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Login</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/brands.min.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/solid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/iofrm-style.css" />
+    <link rel="stylesheet" href="~/css/iofrm-theme4.css" />
+    @*<link rel="stylesheet" href="~/WebNewsClients.styles.css" asp-append-version="true" />*@
+</head>
+<body>
+
+    <div style="width:60%">
+        @RenderBody()
+    </div>
+    
+
+
+    <script src="~/js/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/main_login.js" ></script>
+    <script src="~/js/popper.min.js" ></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
