@@ -12,7 +12,7 @@ namespace Repositories
     {
 
     }
-    public class EmotionRepository :  RepositoryBase<Article>, IEmotionRepository
+    public class EmotionRepository :  RepositoryBase<Emotion>, IEmotionRepository
     {
         public EmotionRepository(FinalProjectPRN231Context context) : base(context)
         {

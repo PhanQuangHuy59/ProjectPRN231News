@@ -98,3 +98,4 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.O
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.OData.ModelBuilder.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.Spatial.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\AutoMapper.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\BCrypt.Net-Next.dll

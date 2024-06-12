@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IRoleRepository : : IRepository<Role>
+    public interface IRoleRepository : IRepository<Role>
     {
 
     }

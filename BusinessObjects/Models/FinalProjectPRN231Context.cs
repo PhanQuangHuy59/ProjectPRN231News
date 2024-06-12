@@ -450,7 +450,7 @@ namespace BusinessObjects.Models
                     .HasMaxLength(255)
                     .HasColumnName("phone_number");
 
-                entity.Property(e => e.Roleid).HasColumnName("roleid");
+                entity.Property(e => e.RoleId).HasColumnName("roleid");
 
                 entity.Property(e => e.Updateddate)
                     .HasColumnType("datetime")
@@ -462,7 +462,7 @@ namespace BusinessObjects.Models
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.Roleid)
+                    .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("users_roleid_foreign");
             });
