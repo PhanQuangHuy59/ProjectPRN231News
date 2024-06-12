@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebNewsAPIs.Dtos
 {
 
-    public class UserUpdateDto
+    public class UpdateUserDto
     {
         [Required]
         public Guid UserId { get; set; }
@@ -23,9 +23,6 @@ namespace WebNewsAPIs.Dtos
         public Guid RoleId { get; set; }
 
         [Required]
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
 
@@ -43,11 +40,8 @@ namespace WebNewsAPIs.Dtos
 
         
     }
-    public class UserCreateDto
+    public class AddUserDto
     {
-        [Required]
-        public Guid UserId { get; set; }
-
         [Required]
         [EmailAddress]
         public string Username { get; set; } = null!;
@@ -78,13 +72,14 @@ namespace WebNewsAPIs.Dtos
         
     }
 
-    public class UserViewDto
+    public class ViewUserDto
     {
         public Guid UserId { get; set; }
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string? DisplayName { get; set; }
-        public Guid Roleid { get; set; }
+        public Guid RoleId { get; set; }
+        public string RoleName { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Updateddate { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -93,6 +88,6 @@ namespace WebNewsAPIs.Dtos
         public string? PhoneNumber { get; set; }
         public string? Image { get; set; }
 
-        public virtual Role Role { get; set; } = null!;
+        
     }
 }

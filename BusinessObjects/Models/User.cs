@@ -23,7 +23,7 @@ namespace BusinessObjects.Models
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string? DisplayName { get; set; }
-        public Guid Roleid { get; set; }
+        public Guid RoleId { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Updateddate { get; set; }
         public DateTime? DateOfBirth { get; set; }

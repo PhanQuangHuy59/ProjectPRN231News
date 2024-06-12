@@ -10,41 +10,182 @@ namespace ProjectAPIAss.MapperConfig
     {
         public MapperProfile()
         {
+
             //Article
-            CreateMap<Article, ArticleViewDto>();
-            CreateMap<ArticleCreateDto, Article>();
-            CreateMap<ArticleUpdateDto, Article>();
+            CreateMap<AddArticleDto, Article>();
+            CreateMap<UpdateArticleDto, Article>();
+            CreateMap<Article, ViewArticleDto>()
+                .ForMember(des => des.CategortyName
+                , act =>
+                {
+                    act.MapFrom(src => src.Categorty.CategoryName);
+                })
+                .ForMember(des => des.ProcessorName
+                , act =>
+                {
+                    act.MapFrom(src => src.ProcessorNavigation.DisplayName);
+                })
+                 .ForMember(des => des.AuthorName
+                , act =>
+                {
+                    act.MapFrom(src => src.AuthorNavigation.DisplayName);
+                });
 
-            //Categories
-            CreateMap<CategoriesArticle, CategoriesArticleViewDto>();
-            CreateMap<CategoriesArticleCreateDto, CategoriesArticle>();
-            CreateMap<CategoriesArticleUpdateDto, CategoriesArticle>();
-            //CommentDto
-            CreateMap<Comment, CommentViewDto>();
-            CreateMap<CommentCreateDto, Comment>();
-            CreateMap<CommentUpdateDto, Comment>();
+            //Article
+            CreateMap<AddArticlePermissionDto, ArticlePermission>();
+            CreateMap<UpdateArticlePermissionDto, ArticlePermission>();
+            CreateMap<ArticlePermission, ViewArticlePermissionDto>()
+                .ForMember(des => des.Username
+                , act =>
+                {
+                    act.MapFrom(src => src.User.DisplayName);
+                })
+                .ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article.Title);
+                })
+                 .ForMember(des => des.PermissionTypeName
+                , act =>
+                {
+                    act.MapFrom(src => src.PermissionTypeNavigation.PermisstionName);
+                });
+            //Article
+            CreateMap<AddArticlePermissionDto, ArticlePermission>();
+            CreateMap<UpdateArticlePermissionDto, ArticlePermission>();
+            CreateMap<ArticlePermission, ViewArticlePermissionDto>()
+                .ForMember(des => des.Username
+                , act =>
+                {
+                    act.MapFrom(src => src.User.DisplayName);
+                })
+                .ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article.Title);
+                })
+                 .ForMember(des => des.PermissionTypeName
+                , act =>
+                {
+                    act.MapFrom(src => src.PermissionTypeNavigation.PermisstionName);
+                });
+            //Category Article
+            CreateMap<AddCategoriesArticleDto, ArticlePermission>();
+            CreateMap<UpdateCategoriesArticleDto, ArticlePermission>();
+            CreateMap<CategoriesArticle, ViewCategoriesArticleDto>()
+                .ForMember(des => des.ParentCategoryName
+                , act =>
+                {
+                    act.MapFrom(src => src.ParentCategory != null ? src.ParentCategory.CategoryName : null);
+                })
+                ;
 
-            //Emotion
-            CreateMap<Emotion, EmotionViewDto>();
-            CreateMap<EmotionCreateDto, Emotion>();
-            CreateMap<EmotionUpdateDto, Emotion>();
+            //Comment
+            CreateMap<AddCommentDto, Comment>();
+            CreateMap<UpdateCommentDto, Comment>();
+            CreateMap<Comment, ViewCommentDto>()
+                .ForMember(des => des.UserName
+                , act =>
+                {
+                    act.MapFrom(src => src.User != null ? src.User.DisplayName : null);
+                })
+                 .ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article != null ? src.Article.Title : null);
+                })
+                 .ForMember(des => des.UserReplyName
+                , act =>
+                {
+                    act.MapFrom(src => src.UserIdReplyNavigation != null ? src.UserIdReplyNavigation.DisplayName : null);
+                });
 
-            //Permission
-            CreateMap<Permission, PermissionViewDto>();
-            CreateMap<PermissionCreateDto, Permission>();
-            CreateMap<PermissionUpdateDto, Permission>();
-            // ProcessStatus
-            CreateMap<ProcessStatus, ProcessStatusViewDto>();
-            CreateMap<ProcessStatusCreateDto, ProcessStatus>();
-            CreateMap<ProcessStatusUpdateDto, ProcessStatus>();
-            // Role
-            CreateMap<Role, RoleViewDto>();
-            CreateMap<RoleCreateDto, Role>();
-            CreateMap<RoleUpdateDto, Role>();
+
+            //Drop Emotion
+            CreateMap<AddDropEmotionDto, DropEmotion>();
+            CreateMap<UpdateDropEmotionDto, DropEmotion>();
+            CreateMap<DropEmotion, ViewDropEmotionDto>()
+                .ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article != null ? src.Article.Title : null);
+                })
+                 .ForMember(des => des.UserName
+                , act =>
+                {
+                    act.MapFrom(src => src.User != null ? src.User.DisplayName : null);
+                })
+                 .ForMember(des => des.EmotionName
+                , act =>
+                {
+                    act.MapFrom(src => src.Emotion != null ? src.Emotion.NameEmotion : null);
+                });
+            // Emotion
+            CreateMap<AddEmotionDto, DropEmotion>();
+            CreateMap<UpdateEmotionDto, DropEmotion>();
+            CreateMap<DropEmotion, ViewEmotionDto>();
+            // Follow
+            CreateMap<AddFollowDto, DropEmotion>();
+            CreateMap<UpdateEmotionDto, DropEmotion>();
+            CreateMap<Follow, ViewFollowDto>()
+                 .ForMember(des => des.FollowIdName
+                , act =>
+                {
+                    act.MapFrom(src => src.FollowId != null ? src.FollowIdByNavigation.DisplayName : null);
+                })
+                 .ForMember(des => des.FollowIdByName
+                , act =>
+                {
+                    act.MapFrom(src => src.FollowIdByNavigation != null ? src.FollowIdByNavigation.DisplayName : null);
+                });
+            // Permission
+            CreateMap<AddPermissionDto, Permission>();
+            CreateMap<UpdatePermissionDto, Permission>();
+            CreateMap<Permission, ViewPermissionDto>();
+            // Permission
+            CreateMap<AddProcessStatusDto, ProcessStatus>();
+            CreateMap<UpdateProcessStatusDto, ProcessStatus>();
+            CreateMap<ProcessStatus, ViewProcessStatusDto>();
+            // Permission
+            CreateMap<AddRoleDto, Role>();
+            CreateMap<UpdateRoleDto, Role>();
+            CreateMap<Role, ViewRoleDto>();
+            // Permission
+            CreateMap<AddSaveArticleDto, SaveArticle>();
+            CreateMap<UpdateSaveArticleDto, SaveArticle>();
+            CreateMap<SaveArticle, ViewSaveArticleDto>()
+                 .ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article != null ? src.Article.Title : null);
+                })
+                  .ForMember(des => des.UserName
+                , act =>
+                {
+                    act.MapFrom(src => src.User != null ? src.User.DisplayName : null);
+                });
             // User
-            CreateMap<User, UserViewDto>();
-            CreateMap<UserCreateDto, User>();
-            CreateMap<UserUpdateDto, User>();
+            CreateMap<AddUserDto, User>();
+            CreateMap<UpdateSaveArticleDto, User>();
+            CreateMap<User, ViewUserDto>()
+                 .ForMember(des => des.RoleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Role != null ? src.Role.Rolename : null);
+                });
+                 // View
+            CreateMap<AddViewDto, View>();
+            CreateMap<UpdateViewDto, View>();
+            CreateMap<View, ViewViewDto>()
+                 .ForMember(des => des.UserName
+                , act =>
+                {
+                    act.MapFrom(src => src.User != null ? src.User.Username : null);
+                }).ForMember(des => des.ArticleName
+                , act =>
+                {
+                    act.MapFrom(src => src.Article != null ? src.Article.Title : null);
+                });
 
 
 
