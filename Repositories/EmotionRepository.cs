@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IEmotionRepository
+    public interface IEmotionRepository :IRepository<Emotion>
     {
 
     }

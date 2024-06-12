@@ -226,3 +226,4 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\WebNewsC
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\bundleconfig.json
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutHomeMain.cshtml.rz.scp.css
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutLogin.cshtml.rz.scp.css
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutPersonalInformation.cshtml.rz.scp.css

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IViewRepository
+    public interface IViewRepository :  IRepository<View>
     {
 
     }

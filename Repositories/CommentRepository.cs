@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface ICommentRepository
+    public interface ICommentRepository : IRepository<Comment>
     {
 
     }

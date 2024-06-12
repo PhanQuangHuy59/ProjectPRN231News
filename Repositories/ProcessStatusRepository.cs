@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IProcessStatusRepository
+    public interface IProcessStatusRepository : IRepository<ProcessStatus>
     {
 
     }

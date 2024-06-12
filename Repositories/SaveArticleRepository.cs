@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface ISaveArticleRepository
+    public interface ISaveArticleRepository : IRepository<SaveArticle>
     {
 
     }

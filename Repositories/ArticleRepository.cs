@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace Repositories
 {
-    public interface IArticleRepository
+    public interface IArticleRepository : IRepository<Article>
     {
         public IEnumerable<Article> GetLastestArticleInDay(int statusProcess);
         public IEnumerable<Article> GetAllArticlePublishOrUnPublish(bool ispublish, int statusProcess);

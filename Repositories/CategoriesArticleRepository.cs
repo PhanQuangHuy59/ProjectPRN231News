@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface ICategoriesArticleRepository
+    public interface ICategoriesArticleRepository : IRepository<CategoriesArticle>
     {
 
     }

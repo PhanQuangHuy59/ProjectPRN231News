@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IPermissionRepository
+    public interface IPermissionRepository : IRepository<Permission>
     {
 
     }

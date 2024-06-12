@@ -405,6 +405,310 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\animate.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\animate.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\bootstrap-select.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\bootstrap-select.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\color_2.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\color_2.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\colors.html",
+      "PackagePath": "staticwebassets\\pluto\\css\\colors.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\custom.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\custom.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\flaticon.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\flaticon.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\images\\layout_img\\pattern_h.html",
+      "PackagePath": "staticwebassets\\pluto\\css\\images\\layout_img\\pattern_h.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\jquery.fancybox.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\jquery.fancybox.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\perfect-scrollbar.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\perfect-scrollbar.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\pluto\\css\\responsive.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\Flaticon.eot",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\Flaticon.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\Flaticon.svg",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\Flaticon.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\Flaticon.ttf",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\Flaticon.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\Flaticon.woff",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\Flaticon.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\Flaticond41d.eot",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\Flaticond41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfont5b62.eot",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfont5b62.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfont5b62.svg",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfont5b62.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfont5b62.ttf",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfont5b62.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfont5b62.woff",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfont5b62.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfont5b62.woff2",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfont5b62.woff2"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\fonts\\fontawesome-webfontd41d.eot",
+      "PackagePath": "staticwebassets\\pluto\\fonts\\fontawesome-webfontd41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\bg.html",
+      "PackagePath": "staticwebassets\\pluto\\images\\bg.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\fevicon.html",
+      "PackagePath": "staticwebassets\\pluto\\images\\fevicon.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\american-express.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\american-express.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\error.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\error.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g1.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g1.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g10.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g10.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g11.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g11.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g12.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g12.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g13.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g13.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g14.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g14.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g15.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g15.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g16.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g16.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g2.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g2.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g3.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g3.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g4.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g4.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g5.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g5.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g6.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g6.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g7.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g7.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g8.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g8.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\g9.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\g9.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\login_image.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\login_image.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\mastercard.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\mastercard.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\msg1.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\msg1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\msg2.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\msg2.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\msg3.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\msg3.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\msg4.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\msg4.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\msg5.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\msg5.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\pattern_h.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\pattern_h.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\paypal.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\paypal.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\user_img.jpg",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\user_img.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\layout_img\\visa.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\layout_img\\visa.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\logo\\logo.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\logo\\logo.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\logo\\logo_black.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\logo\\logo_black.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\images\\logo\\logo_icon.png",
+      "PackagePath": "staticwebassets\\pluto\\images\\logo\\logo_icon.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\Chart.bundle.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\Chart.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\Chart.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\Chart.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\analyser.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\analyser.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\animate.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\animate.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\bootstrap-select.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\bootstrap-select.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\chart_custom_style1.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\chart_custom_style1.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\chart_custom_style2.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\chart_custom_style2.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\custom.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\jquery-3.3.1.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\jquery-3.3.1.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\jquery.fancybox.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\jquery.fancybox.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\owl.carousel.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\owl.carousel.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\perfect-scrollbar.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\perfect-scrollbar.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\popper.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\semantic.min.html",
+      "PackagePath": "staticwebassets\\pluto\\js\\semantic.min.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\semantic.min.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\semantic.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\js\\utils.js",
+      "PackagePath": "staticwebassets\\pluto\\js\\utils.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\pluto\\style.css",
+      "PackagePath": "staticwebassets\\pluto\\style.css"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\template\\cdn.ampproject.org\\v0.js",
       "PackagePath": "staticwebassets\\template\\cdn.ampproject.org\\v0.js"
     },
