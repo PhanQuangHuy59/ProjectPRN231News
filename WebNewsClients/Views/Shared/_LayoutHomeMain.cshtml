@@ -1,10 +1,62 @@
-﻿<!DOCTYPE html>
+﻿@using System.Text;
+@using WebNewsClients.Dtos;
+
+@{
+    var listCategory = (IEnumerable<ViewCategoriesArticleDto>)ViewBag.Category;
+
+    
+
+     string GenerateMenuHtml(IEnumerable<ViewCategoriesArticleDto> categories)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        foreach (var category in categories)
+        {
+            sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10\">");
+            sb.Append($"<a href=\"#\">{category.CategoryName}</a>");
+
+            if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
+            {
+                sb.Append("<ul class=\"sub-menu\">");
+                sb.Append(GenerateSubMenuHtml(category.InverseParentCategory));
+                sb.Append("</ul>");
+            }
+            sb.Append("</li>");
+        }
+
+        return sb.ToString();
+    }
+
+     string GenerateSubMenuHtml(IEnumerable<ViewCategoriesArticleDto> subCategories)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        foreach (var subCategory in subCategories)
+        {
+            sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
+            sb.Append($"<a href=\"#\">{subCategory.CategoryName}</a>");
+
+            if (subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
+            {
+                sb.Append("<ul class=\"sub-menu\">");
+                sb.Append(GenerateSubMenuHtml(subCategory.InverseParentCategory));
+                sb.Append("</ul>");
+            }
+
+            sb.Append("</li>");
+        }
+
+        return sb.ToString();
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <meta property="og:description" content="Powerfully Simple WordPress News &amp; Magazine Theme" />
-    <title>Flex Mag - Powerfully Simple WordPress News &amp; Magazine Theme</title>
+    <title>@ViewData["Title"]</title>
     <meta name='robots' content='max-image-preview:large' />
     <meta name="generator" content="WordPress 6.4.4" />
     <meta name="generator" content="WooCommerce 8.7.0" />
@@ -22,9 +74,6 @@
     <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; Feed" href="feed/index.html" />
     <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; Comments Feed" href="comments/feed/index.html" />
     <link rel="alternate" type="application/rss+xml" title="Flex Mag &raquo; The selfie stick has taken over CES 2015 Comments Feed" href="feed/index.html" />
-
-
-
     <script type="text/javascript">
 
         window._wpemojiSettings = { "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/", "ext": ".png", "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/", "svgExt": ".svg", "source": { "concatemoji": "https:\/\/mvpthemes.com\/flexmag\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.4.4" } };
@@ -742,42 +791,42 @@
                     <div class="fly-side-wrap">
                         <ul class="fly-bottom-soc left relative">
                             <li class="fb-soc">
-                                <a href="http://www.facebook.com/envato" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-facebook"></i>
                                 </a>
                             </li>
                             <li class="twit-soc">
-                                <a href="http://www.twitter.com/mvpthemes" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-twitter"></i>
                                 </a>
                             </li>
                             <li class="pin-soc">
-                                <a href="http://www.pinterest.com/envato" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-pinterest"></i>
                                 </a>
                             </li>
                             <li class="inst-soc">
-                                <a href="http://www.instagram.com/envato" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-instagram"></i>
                                 </a>
                             </li>
                             <li class="yt-soc">
-                                <a href="https://www.youtube.com/user/envato" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-youtube"></i>
                                 </a>
                             </li>
                             <li class="link-soc">
-                                <a href="https://www.linkedin.com/company/envato" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-linkedin"></i>
                                 </a>
                             </li>
                             <li class="tum-soc">
-                                <a href="http://wonderfulworldofwebdesign.tumblr.com/" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-brands fa-square-tumblr"></i>
                                 </a>
                             </li>
                             <li class="rss-soc">
-                                <a href="feed/rss/index.html" target="_blank">
+                                <a href="https://www.facebook.com/huy.phanquang.9400/" target="_blank">
                                     <i class="fa-solid fa-rss"></i>
                                 </a>
                             </li>
@@ -788,7 +837,10 @@
                             <nav class="fly-nav-menu left relative">
                                 <div class="menu-main-menu-container">
                                     <ul id="menu-main-menu" class="menu">
-                                        <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="index.html">Home</a></li>
+                                        <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                         </li>
+
                                         <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
                                             <a href="#">Features</a>
                                             <ul class="sub-menu">
@@ -851,6 +903,8 @@
                                                 <li id="menu-item-1810" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1810"><a href="typography/index.html">Typography</a></li>
                                             </ul>
                                         </li>
+
+
                                         <li id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
                                         <li id="menu-item-170" class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-170"><a href="category/sports/index.html">Sports</a></li>
                                         <li id="menu-item-1836" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1836"><a href="videos/index.html">Videos</a></li>
@@ -899,7 +953,12 @@
                                                     <div class="menu-main-menu-container">
                                                         <ul id="menu-main-menu-1" class="menu">
                                                             <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="index.html">Home</a></li>
-                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
+                                                           @*fasdfa*@
+
+                                                           
+
+                                                            @*@GenerateMenuHtml(listCategory);*@
+                                                            @*<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
                                                                 <a href="#">Features</a>
                                                                 <ul class="sub-menu">
                                                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015">
@@ -910,58 +969,12 @@
                                                                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2016"><a href="logo-wide/index.html">Logo Wide</a></li>
                                                                         </ul>
                                                                     </li>
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1771">
-                                                                        <a href="#">Theme Skins</a>
-                                                                        <ul class="sub-menu">
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1830"><a href="entertainment-skin/index.html">Entertainment Skin</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1824"><a href="tech-skin/index.html">Tech Skin</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1815"><a href="fashion-skin/index.html">Fashion Skin</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1827"><a href="sports-skin/index.html">Sports Skin</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1767">
-                                                                        <a href="#">Featured Layouts</a>
-                                                                        <ul class="sub-menu">
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1768"><a href="featured-posts-1/index.html">Featured Posts 1</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1776"><a href="featured-posts-2/index.html">Featured Posts 2</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1779"><a href="featured-posts-3/index.html">Featured Posts 3</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1782"><a href="featured-posts-4/index.html">Featured Posts 4</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1785"><a href="featured-posts-5/index.html">Featured Posts 5</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1788"><a href="featured-posts-6/index.html">Featured Posts 6</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1791"><a href="featured-posts-7/index.html">Featured Posts 7</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1794"><a href="featured-posts-8/index.html">Featured Posts 8</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1797"><a href="featured-posts-9/index.html">Featured Posts 9</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1769">
-                                                                        <a href="#">Post Templates</a>
-                                                                        <ul class="sub-menu">
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1801"><a href="http://www.mvpthemes.com/flexmag/8-fall-outfit-ideas-brought-to-you-by-celebs/">Post Template 1</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1803"><a href="http://www.mvpthemes.com/flexmag/the-uk-is-testing-out-roads-that-charge-electric-cars-as-they-go/">Post Template 2</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1804"><a href="http://www.mvpthemes.com/flexmag/google-confirms-the-newest-version-of-android-is-called-marshmallow/">Post Template 3</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1806"><a href="http://www.mvpthemes.com/flexmag/amy-schumers-trainwreck-has-amazing-titles-in-other-countries/">Post Template 4</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1805"><a href="http://www.mvpthemes.com/flexmag/flex-mag-powerfully-simple-wordpress-theme/">Post Template 5</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1807"><a href="http://www.mvpthemes.com/flexmag/15-date-night-outfits-inspired-by-celebs/">Post Template 6</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1808"><a href="http://www.mvpthemes.com/flexmag/terrell-owens-says-he-doesnt-care-about-the-hall-of-fame/">Post Template 7</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1809"><a href="http://www.mvpthemes.com/flexmag/the-most-iconic-royal-wedding-gowns-of-all-time/">Post Template 8</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1854"><a href="http://www.mvpthemes.com/flexmag/watch-the-60-sickest-crossovers-of-the-nba-season/">Image Gallery</a></li>
-                                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1987"><a href="http://www.mvpthemes.com/flexmag/nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/">Audio Post</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1770">
-                                                                        <a href="#">Page Templates</a>
-                                                                        <ul class="sub-menu">
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1800"><a href="authors-list/index.html">Authors List</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1798"><a href="full-width-page/index.html">Full-Width Page</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1799"><a href="latest-news/index.html">Latest News</a></li>
-                                                                        </ul>
-                                                                    </li>
                                                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2001"><a href="sports-skin/index.html">Optional Scoreboard</a></li>
                                                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1870"><a href="wallpaper-ad/index.html">Wallpaper Ad</a></li>
                                                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1810"><a href="typography/index.html">Typography</a></li>
                                                                 </ul>
-                                                            </li>
-                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
+                                                            </li>*@
+                                                            @*<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
                                                             <li class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-170"><a href="category/sports/index.html">Sports</a><div class="mega-dropdown"><ul class="mega-list"><li><a href="only-three-players-have-a-winning-record-against-rafael-nadal/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/09/tennis1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Only three players have a winning record against Rafael Nadal</a></li><li><a href="terrell-owens-says-he-doesnt-care-about-the-hall-of-fame/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/football1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /><div class="feat-vid-but"><i class="fa fa-play fa-3"></i></div></div>Terrell Owens says he doesn&#8217;t care about the Hall of Fame</a></li><li><a href="watch-the-60-sickest-crossovers-of-the-nba-season/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/09/basketball1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Watch the 60 sickest crossovers of the NBA season</a></li><li><a href="real-madrids-sergio-ramos-salutes-iker-casillas-with-video/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/soccer-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Real Madrid&#8217;s Sergio Ramos salutes Iker Casillas with video</a></li><li><a href="7-crazy-facts-about-novak-djokovics-back-to-back-wimbledon-titles/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/tennis-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>7 crazy facts about Novak Djokovic&#8217;s back-to-back Wimbledon titles</a></li></ul></div></li>
                                                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1836"><a href="videos/index.html">Videos</a></li>
                                                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="shop/index.html">Shop</a></li>
@@ -973,7 +986,7 @@
                                                                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-169"><a href="category/fashion/index.html">Fashion</a></li>
                                                                     <li class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-168"><a href="category/tech/index.html">Tech</a><div class="mega-dropdown"><ul class="mega-list"><li><a href="sound-isolating-headphones-let-you-really-hear-your-own-voice/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/man-headphones-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Sound-isolating headphones let you really hear your own voice</a></li><li><a href="the-selfie-stick-has-taken-over-ces-2015/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/selfie-stick-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>The selfie stick has taken over CES 2015</a></li><li><a href="samsung-flags-australian-pricing-and-dates-for-its-new-galaxy-phones/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/phones-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Samsung flags Australian pricing and dates for its new Galaxy phones</a></li><li><a href="nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/video-game-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Nvidia moves into your living room with a device not just for gaming</a></li><li><a href="amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/warehouse-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Amazon Flex could be a new way to get your packages, report says</a></li></ul></div></li>
                                                                 </ul>
-                                                            </li>
+                                                            </li>*@
                                                         </ul>
                                                     </div>
                                                 </nav>
@@ -1021,7 +1034,7 @@
             <main role="main">
                 @RenderBody()
             </main>
-
+            <p> @GenerateMenuHtml(listCategory);</p>
             <footer id="foot-wrap" class="left relative">
                 <div id="foot-top-wrap" class="left relative">
                     <div class="body-main-out relative">

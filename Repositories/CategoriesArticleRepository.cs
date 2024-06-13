@@ -10,7 +10,7 @@ namespace Repositories
 {
     public interface ICategoriesArticleRepository : IRepository<CategoriesArticle>
     {
-
+        
     }
     public class CategoriesArticleRepository :  RepositoryBase<CategoriesArticle>, ICategoriesArticleRepository
     {

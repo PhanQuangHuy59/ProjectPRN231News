@@ -37,9 +37,10 @@ namespace WebNewsAPIs.Dtos
 
         [Url(ErrorMessage = "Please enter a valid URL.")]
         public string? Image { get; set; }
+		public bool IsConfirm { get; set; }
 
-        
-    }
+
+	}
     public class AddUserDto
     {
         [Required]
@@ -87,7 +88,7 @@ namespace WebNewsAPIs.Dtos
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Image { get; set; }
+		public bool IsConfirm { get; set; }
 
-        
-    }
+	}
 }

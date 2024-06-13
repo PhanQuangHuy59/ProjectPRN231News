@@ -52,6 +52,7 @@ CREATE TABLE "Users"(
     "address" NVARCHAR(MAX)  NULL,
     "phone_number" NVARCHAR(255)  NULL,
     "image" NVARCHAR(MAX) NULL,
+	"is_confirm" BIT NOT NULL DEFAULT 0,
 	CONSTRAINT chk_gender CHECK (gender IN (N'Nam', N'Nữ', N'Khác'))
 );
 ALTER TABLE
@@ -111,7 +112,8 @@ CREATE TABLE "Articles"(
     "slug" VARCHAR(300) NOT NULL,
     "cover_image" VARCHAR(MAX) NOT NULL,
     "processor" uniqueidentifier NOT NULL,
-    "link_audio" NVARCHAR(300)  NULL
+    "link_audio" NVARCHAR(300)  NULL,
+	"views" BIGINT NULL DEFAULT 0
 );
 ALTER TABLE
     "Articles" ADD CONSTRAINT "articles_article_id_primary" PRIMARY KEY("article_id");

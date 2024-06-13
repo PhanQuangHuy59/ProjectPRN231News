@@ -72,7 +72,8 @@ namespace WebNewsAPIs.Dtos
 
         [Url]
         public string? LinkAudio { get; set; }
-    }
+		public int? ViewArticles { get; set; }
+	}
     public class ViewArticleDto
     {
         public Guid ArticleId { get; set; }
@@ -93,7 +94,8 @@ namespace WebNewsAPIs.Dtos
         public Guid Processor { get; set; }
         public string ProcessorName { get; set; } = null!;
         public string? LinkAudio { get; set; }
+		public int? ViewArticles { get; set; }
 
-    }
+	}
 
 }
