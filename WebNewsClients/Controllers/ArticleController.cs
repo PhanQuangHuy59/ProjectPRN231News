@@ -8,5 +8,9 @@ namespace WebNewsClients.Controllers
         {
             return View();
         }
+        public IActionResult ArticleOfCategory(Guid categoryArticleId)
+        {
+            return View();
+        }
     }
 }

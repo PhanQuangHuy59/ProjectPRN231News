@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
 using ProjectAPIAss.MapperConfig;
 using WebNewsAPIs.Extentions;
+using WebNewsAPIs.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,9 @@ builder.Services.AddControllers();
 builder.Services.ConfigOdata();
 builder.Services.InjectService();
 builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
+//MailSetting
+var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
+builder.Services.Configure<MailSettings>(mailsettings);
 
 
 builder.Services.AddControllers();

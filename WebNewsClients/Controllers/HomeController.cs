@@ -26,8 +26,6 @@ namespace WebNewsClients.Controllers
             responseMessage.EnsureSuccessStatusCode();
             var listCategories = responseMessage.Content.ReadFromJsonAsync<IEnumerable<ViewCategoriesArticleDto>>()
                 .Result;
-            //
-
             //Trả dữ liệu về view
             ViewBag.Category = listCategories;
 

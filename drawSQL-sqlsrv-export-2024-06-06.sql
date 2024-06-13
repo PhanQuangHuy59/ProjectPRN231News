@@ -113,7 +113,7 @@ CREATE TABLE "Articles"(
     "cover_image" VARCHAR(MAX) NOT NULL,
     "processor" uniqueidentifier NOT NULL,
     "link_audio" NVARCHAR(300)  NULL,
-	"views" BIGINT NULL DEFAULT 0
+	"view_articles" BIGINT NULL DEFAULT 0
 );
 ALTER TABLE
     "Articles" ADD CONSTRAINT "articles_article_id_primary" PRIMARY KEY("article_id");

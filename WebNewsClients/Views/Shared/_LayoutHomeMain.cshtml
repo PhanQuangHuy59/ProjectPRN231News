@@ -4,16 +4,25 @@
 @{
     var listCategory = (IEnumerable<ViewCategoriesArticleDto>)ViewBag.Category;
 
-    
 
-     string GenerateMenuHtml(IEnumerable<ViewCategoriesArticleDto> categories)
+
+    string GenerateMenuHtml(IEnumerable<ViewCategoriesArticleDto> categories)
     {
         StringBuilder sb = new StringBuilder();
 
         foreach (var category in categories)
         {
-            sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10\">");
-            sb.Append($"<a href=\"#\">{category.CategoryName}</a>");
+
+            if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
+            {
+                sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={category.CategoryId}\">{category.CategoryName}</a>");
+            }
+            else
+            {
+                sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-2015\">");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={category.CategoryId}\">{category.CategoryName}</a>");
+            }
 
             if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
             {
@@ -27,14 +36,23 @@
         return sb.ToString();
     }
 
-     string GenerateSubMenuHtml(IEnumerable<ViewCategoriesArticleDto> subCategories)
+    string GenerateSubMenuHtml(IEnumerable<ViewCategoriesArticleDto> subCategories)
     {
         StringBuilder sb = new StringBuilder();
 
         foreach (var subCategory in subCategories)
         {
-            sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
-            sb.Append($"<a href=\"#\">{subCategory.CategoryName}</a>");
+            if(subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
+            {
+                sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={subCategory.CategoryId}\">{subCategory.CategoryName}</a>");
+            }
+            else
+            {
+                sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-2015\">");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={subCategory.CategoryId}\">{subCategory.CategoryName}</a>");
+            }
+
 
             if (subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
             {
@@ -841,69 +859,7 @@
                                             <a asp-controller="Home" asp-action="Index">Home</a>
                                          </li>
 
-                                        <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
-                                            <a href="#">Features</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-2015" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015">
-                                                    <a href="#">Logo Locations</a>
-                                                    <ul class="sub-menu">
-                                                        <li id="menu-item-2017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2017"><a href="logo-leaderboard/index.html">Logo Leaderboard</a></li>
-                                                        <li id="menu-item-2020" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2020"><a href="logo-nav/index.html">Logo Nav</a></li>
-                                                        <li id="menu-item-2016" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2016"><a href="logo-wide/index.html">Logo Wide</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li id="menu-item-1771" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1771">
-                                                    <a href="#">Theme Skins</a>
-                                                    <ul class="sub-menu">
-                                                        <li id="menu-item-1830" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1830"><a href="entertainment-skin/index.html">Entertainment Skin</a></li>
-                                                        <li id="menu-item-1824" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1824"><a href="tech-skin/index.html">Tech Skin</a></li>
-                                                        <li id="menu-item-1815" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1815"><a href="fashion-skin/index.html">Fashion Skin</a></li>
-                                                        <li id="menu-item-1827" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1827"><a href="sports-skin/index.html">Sports Skin</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li id="menu-item-1767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1767">
-                                                    <a href="#">Featured Layouts</a>
-                                                    <ul class="sub-menu">
-                                                        <li id="menu-item-1768" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1768"><a href="featured-posts-1/index.html">Featured Posts 1</a></li>
-                                                        <li id="menu-item-1776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1776"><a href="featured-posts-2/index.html">Featured Posts 2</a></li>
-                                                        <li id="menu-item-1779" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1779"><a href="featured-posts-3/index.html">Featured Posts 3</a></li>
-                                                        <li id="menu-item-1782" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1782"><a href="featured-posts-4/index.html">Featured Posts 4</a></li>
-                                                        <li id="menu-item-1785" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1785"><a href="featured-posts-5/index.html">Featured Posts 5</a></li>
-                                                        <li id="menu-item-1788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1788"><a href="featured-posts-6/index.html">Featured Posts 6</a></li>
-                                                        <li id="menu-item-1791" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1791"><a href="featured-posts-7/index.html">Featured Posts 7</a></li>
-                                                        <li id="menu-item-1794" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1794"><a href="featured-posts-8/index.html">Featured Posts 8</a></li>
-                                                        <li id="menu-item-1797" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1797"><a href="featured-posts-9/index.html">Featured Posts 9</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li id="menu-item-1769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1769">
-                                                    <a href="#">Post Templates</a>
-                                                    <ul class="sub-menu">
-                                                        <li id="menu-item-1801" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1801"><a href="http://www.mvpthemes.com/flexmag/8-fall-outfit-ideas-brought-to-you-by-celebs/">Post Template 1</a></li>
-                                                        <li id="menu-item-1803" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1803"><a href="http://www.mvpthemes.com/flexmag/the-uk-is-testing-out-roads-that-charge-electric-cars-as-they-go/">Post Template 2</a></li>
-                                                        <li id="menu-item-1804" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1804"><a href="http://www.mvpthemes.com/flexmag/google-confirms-the-newest-version-of-android-is-called-marshmallow/">Post Template 3</a></li>
-                                                        <li id="menu-item-1806" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1806"><a href="http://www.mvpthemes.com/flexmag/amy-schumers-trainwreck-has-amazing-titles-in-other-countries/">Post Template 4</a></li>
-                                                        <li id="menu-item-1805" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1805"><a href="http://www.mvpthemes.com/flexmag/flex-mag-powerfully-simple-wordpress-theme/">Post Template 5</a></li>
-                                                        <li id="menu-item-1807" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1807"><a href="http://www.mvpthemes.com/flexmag/15-date-night-outfits-inspired-by-celebs/">Post Template 6</a></li>
-                                                        <li id="menu-item-1808" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1808"><a href="http://www.mvpthemes.com/flexmag/terrell-owens-says-he-doesnt-care-about-the-hall-of-fame/">Post Template 7</a></li>
-                                                        <li id="menu-item-1809" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1809"><a href="http://www.mvpthemes.com/flexmag/the-most-iconic-royal-wedding-gowns-of-all-time/">Post Template 8</a></li>
-                                                        <li id="menu-item-1854" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1854"><a href="http://www.mvpthemes.com/flexmag/watch-the-60-sickest-crossovers-of-the-nba-season/">Image Gallery</a></li>
-                                                        <li id="menu-item-1987" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1987"><a href="http://www.mvpthemes.com/flexmag/nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/">Audio Post</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li id="menu-item-1770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1770">
-                                                    <a href="#">Page Templates</a>
-                                                    <ul class="sub-menu">
-                                                        <li id="menu-item-1800" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1800"><a href="authors-list/index.html">Authors List</a></li>
-                                                        <li id="menu-item-1798" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1798"><a href="full-width-page/index.html">Full-Width Page</a></li>
-                                                        <li id="menu-item-1799" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1799"><a href="latest-news/index.html">Latest News</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li id="menu-item-2001" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2001"><a href="sports-skin/index.html">Optional Scoreboard</a></li>
-                                                <li id="menu-item-1870" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1870"><a href="wallpaper-ad/index.html">Wallpaper Ad</a></li>
-                                                <li id="menu-item-1810" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1810"><a href="typography/index.html">Typography</a></li>
-                                            </ul>
-                                        </li>
-
+                                        @Html.Raw(GenerateMenuHtml(listCategory));
 
                                         <li id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
                                         <li id="menu-item-170" class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-170"><a href="category/sports/index.html">Sports</a></li>
@@ -952,11 +908,13 @@
                                                 <nav class="main-menu-wrap left">
                                                     <div class="menu-main-menu-container">
                                                         <ul id="menu-main-menu-1" class="menu">
-                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="index.html">Home</a></li>
+                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                                                <a asp-controller="Home" asp-action="Index">Home</a>
+                                                                </li>
                                                            @*fasdfa*@
 
-                                                           
 
+                                                            @Html.Raw(GenerateMenuHtml(listCategory));
                                                             @*@GenerateMenuHtml(listCategory);*@
                                                             @*<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
                                                                 <a href="#">Features</a>
@@ -1034,7 +992,7 @@
             <main role="main">
                 @RenderBody()
             </main>
-            <p> @GenerateMenuHtml(listCategory);</p>
+            
             <footer id="foot-wrap" class="left relative">
                 <div id="foot-top-wrap" class="left relative">
                     <div class="body-main-out relative">

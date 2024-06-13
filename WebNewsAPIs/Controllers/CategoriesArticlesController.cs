@@ -20,7 +20,7 @@ namespace WebNewsAPIs.Controllers
 			this._mapper = mapper;
 		}
 		[HttpGet("getAllCategory")]
-		public async Task<ActionResult<IEnumerable<ViewCategoriesArticleDto>>> getAllCategory()
+		public async Task<ActionResult<IEnumerable<ViewCategoriesArticleDto>>> GetgetAllCategory()
 		{
 			string[] includes = new string[]
 			{
@@ -31,10 +31,26 @@ namespace WebNewsAPIs.Controllers
 			{
 				return BadRequest();
 			}
-			var temp = _categoryRepository.GetMulti(c => c.ParentCategory == null, includes);
+			var temp = _categoryRepository.GetMulti(c => c.ParentCategory == null, includes)
+				.OrderBy(c => c.OrderLevel);
 			var resultList = _mapper.Map<IEnumerable<ViewCategoriesArticleDto>>(temp);
 
 			return Ok(resultList);
 		}
-	}
+        [HttpGet]
+        public async Task<IEnumerable<CategoriesArticle>> Get()
+        {
+            string[] includes = new string[]
+            {
+                nameof(CategoriesArticle.ParentCategory),
+                nameof(CategoriesArticle.InverseParentCategory)
+            };
+            
+            var temp = _categoryRepository.GetAll(includes).OrderBy(c => c.OrderLevel);
+
+            return temp;
+        }
+
+
+    }
 }
