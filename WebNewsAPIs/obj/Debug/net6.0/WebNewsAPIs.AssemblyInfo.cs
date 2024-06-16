@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-WebNewsAPIs-b05fa17b-8791-4a43-a204-38ebcd817618")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebNewsAPIs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

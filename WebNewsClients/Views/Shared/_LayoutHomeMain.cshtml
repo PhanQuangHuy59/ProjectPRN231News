@@ -850,6 +850,7 @@
                             </li>
                         </ul>
                     </div><!--fly-side-wrap-->
+                    
                     <div class="fly-wrap-in">
                         <div id="fly-menu-wrap">
                             <nav class="fly-nav-menu left relative">
@@ -882,7 +883,9 @@
                 </div><!--fly-wrap-out-->
             </div><!--fly-wrap-->			
             <div id="head-main-wrap" class="left relative">
-                <div id="head-main-top" class="left relative">
+
+                <div style="width:100%;" id="head-main-top" class="left relative">
+                   
                 </div>
                 <!--head-main-top-->
                 <div id="main-nav-wrap">
@@ -898,13 +901,15 @@
                                             <span></span>
                                         </div><!--fly-but-wrap-->
                                         <div class="nav-logo left">
-                                            <a itemprop="url" href="index.html"><img itemprop="logo" src="~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-nav.png" alt="Flex Mag" data-rjs="2" /></a>
+                                            <a itemprop="url" href="index.html">
+                                                <img itemprop="logo" src="~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-nav.png" alt="Flex Mag" data-rjs="2" />
+                                                </a>
                                             <h1 class="mvp-logo-title">Flex Mag</h1>
                                         </div><!--nav-logo-->
                                     </div><!--nav-left-wrap-->
                                     <div class="nav-logo-in">
                                         <div class="nav-menu-out">
-                                            <div class="nav-menu-in">
+                                            <div style="width:85%;" class="nav-menu-in">
                                                 <nav class="main-menu-wrap left">
                                                     <div class="menu-main-menu-container">
                                                         <ul id="menu-main-menu-1" class="menu">
@@ -913,38 +918,8 @@
                                                                 </li>
                                                            @*fasdfa*@
 
-
                                                             @Html.Raw(GenerateMenuHtml(listCategory));
-                                                            @*@GenerateMenuHtml(listCategory);*@
-                                                            @*<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-10">
-                                                                <a href="#">Features</a>
-                                                                <ul class="sub-menu">
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015">
-                                                                        <a href="#">Logo Locations</a>
-                                                                        <ul class="sub-menu">
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2017"><a href="logo-leaderboard/index.html">Logo Leaderboard</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2020"><a href="logo-nav/index.html">Logo Nav</a></li>
-                                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2016"><a href="logo-wide/index.html">Logo Wide</a></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2001"><a href="sports-skin/index.html">Optional Scoreboard</a></li>
-                                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1870"><a href="wallpaper-ad/index.html">Wallpaper Ad</a></li>
-                                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1810"><a href="typography/index.html">Typography</a></li>
-                                                                </ul>
-                                                            </li>*@
-                                                            @*<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
-                                                            <li class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-170"><a href="category/sports/index.html">Sports</a><div class="mega-dropdown"><ul class="mega-list"><li><a href="only-three-players-have-a-winning-record-against-rafael-nadal/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/09/tennis1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Only three players have a winning record against Rafael Nadal</a></li><li><a href="terrell-owens-says-he-doesnt-care-about-the-hall-of-fame/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/football1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /><div class="feat-vid-but"><i class="fa fa-play fa-3"></i></div></div>Terrell Owens says he doesn&#8217;t care about the Hall of Fame</a></li><li><a href="watch-the-60-sickest-crossovers-of-the-nba-season/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/09/basketball1-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/basketball1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Watch the 60 sickest crossovers of the NBA season</a></li><li><a href="real-madrids-sergio-ramos-salutes-iker-casillas-with-video/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/soccer-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/soccer.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Real Madrid&#8217;s Sergio Ramos salutes Iker Casillas with video</a></li><li><a href="7-crazy-facts-about-novak-djokovics-back-to-back-wimbledon-titles/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/07/tennis-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/tennis.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>7 crazy facts about Novak Djokovic&#8217;s back-to-back Wimbledon titles</a></li></ul></div></li>
-                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1836"><a href="videos/index.html">Videos</a></li>
-                                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="shop/index.html">Shop</a></li>
-                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1816">
-                                                                <a href="#">More</a>
-                                                                <ul class="sub-menu">
-                                                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-166"><a href="category/business/index.html">Business</a></li>
-                                                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-167"><a href="category/entertainment/index.html">Entertainment</a></li>
-                                                                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-169"><a href="category/fashion/index.html">Fashion</a></li>
-                                                                    <li class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-168"><a href="category/tech/index.html">Tech</a><div class="mega-dropdown"><ul class="mega-list"><li><a href="sound-isolating-headphones-let-you-really-hear-your-own-voice/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/man-headphones-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Sound-isolating headphones let you really hear your own voice</a></li><li><a href="the-selfie-stick-has-taken-over-ces-2015/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/selfie-stick-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>The selfie stick has taken over CES 2015</a></li><li><a href="samsung-flags-australian-pricing-and-dates-for-its-new-galaxy-phones/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/phones-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Samsung flags Australian pricing and dates for its new Galaxy phones</a></li><li><a href="nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/video-game-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Nvidia moves into your living room with a device not just for gaming</a></li><li><a href="amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html"><div class="mega-img"><img width="300" height="180" src="wp-content/uploads/2015/08/warehouse-300x180.jpg" class="unlazy wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" /></div>Amazon Flex could be a new way to get your packages, report says</a></li></ul></div></li>
-                                                                </ul>
-                                                            </li>*@
+                                                            
                                                         </ul>
                                                     </div>
                                                 </nav>
@@ -959,12 +934,13 @@
                                                         </form>
                                                     </div><!--search-fly-wrap-->
                                                 </div><!--nav-search-wrap-->
-                                                <a href="http://www.facebook.com/envato" target="_blank">
+                                                
+                                                @*<a href="http://www.facebook.com/envato" target="_blank">
                                                     <span class="nav-soc-but"><i class="fa-brands fa-square-facebook"></i></span>
                                                 </a>
                                                 <a href="http://www.twitter.com/mvpthemes" target="_blank">
                                                     <span class="nav-soc-but"><i class="fa-brands fa-square-twitter"></i></span>
-                                                </a>
+                                                </a>*@
                                             </div><!--nav-right-wrap-->
                                         </div><!--nav-menu-out-->
                                     </div><!--nav-logo-in-->

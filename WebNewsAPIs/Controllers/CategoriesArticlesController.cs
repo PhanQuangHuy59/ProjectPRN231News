@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessObjects.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Repositories;
 using WebNewsAPIs.Dtos;
 
@@ -19,6 +21,8 @@ namespace WebNewsAPIs.Controllers
 			this._categoryRepository = categoriesArticleRepository;
 			this._mapper = mapper;
 		}
+
+
 		[HttpGet("getAllCategory")]
 		public async Task<ActionResult<IEnumerable<ViewCategoriesArticleDto>>> GetgetAllCategory()
 		{
@@ -37,6 +41,7 @@ namespace WebNewsAPIs.Controllers
 
 			return Ok(resultList);
 		}
+		[EnableQuery]
         [HttpGet]
         public async Task<IEnumerable<CategoriesArticle>> Get()
         {
@@ -48,7 +53,7 @@ namespace WebNewsAPIs.Controllers
             
             var temp = _categoryRepository.GetAll(includes).OrderBy(c => c.OrderLevel);
 
-            return temp;
+            return temp.AsQueryable();
         }
 
 

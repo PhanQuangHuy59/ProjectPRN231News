@@ -7,5 +7,6 @@ namespace WebNewsAPIs.Controllers
     [ApiController]
     public class ArticlesController : ControllerBase
     {
+
     }
 }
