@@ -1,8 +1,4 @@
-﻿
-
-/*<style id='wp-emoji-styles-inline-css' type='text/css' >*/
-
-img.wp-smiley, img.emoji {
+﻿img.wp-smiley, img.emoji {
     display: inline !important;
     border: none !important;
     box-shadow: none !important;
@@ -13,33 +9,21 @@ img.wp-smiley, img.emoji {
     background: none !important;
     padding: 0 !important;
 }
-
-/*<style type="text/css" >*/
-
-
-
-.nav-links {
-    display: none;
+.wp-block-button__link {
+    color: #fff;
+    background-color: #32373c;
+    border-radius: 9999px;
+    box-shadow: none;
+    text-decoration: none;
+    padding: calc(.667em + 2px) calc(1.333em + 2px);
+    font-size: 1.125em
 }
 
-@media screen and (max-width: 767px) {
-    .leader-ad-demo,
-    .article-ad-demo {
-        height: 50px !important;
-    }
+.wp-block-file__button {
+    background: #32373c;
+    color: #fff;
+    text-decoration: none
 }
-/*<style id='woocommerce-inline-inline-css' type='text/css' >*/
-.woocommerce form .form-row .required {
-    visibility: visible;
-}
-
-
-#truethemes_container #main {
-    float: left;
-}
-
-</style >
-/*<style id='global-styles-inline-css' type='text/css' >*/
 body {
     --wp--preset--color--black: #000000;
     --wp--preset--color--cyan-bluish-gray: #abb8c3;
@@ -82,7 +66,6 @@ body {
     --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
     --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
 }
-
 
 :where(.is-layout-flex) {
     gap: 0.5em;
@@ -406,41 +389,8 @@ body .is-layout-grid {
     line-height: 1.6;
 }
 
-
-/*<style id='woocommerce-inline-inline-css' type='text/css' >*/
-.woocommerce form .form-row .required {
-    visibility: visible;
-}
-
-/*<style type="text/css" id="custom-background-css" >*/
-body.custom-background {
-    background-color: #eeeeee;
-}
-
-
-
-<style id='classic-theme-styles-inline-css' type='text/css' >
-/*! This file is auto-generated */
-.wp-block-button__link {
-    color: #fff;
-    background-color: #32373c;
-    border-radius: 9999px;
-    box-shadow: none;
-    text-decoration: none;
-    padding: calc(.667em + 2px) calc(1.333em + 2px);
-    font-size: 1.125em
-}
-
-.wp-block-file__button {
-    background: #32373c;
-    color: #fff;
-    text-decoration: none
-}
-
-
 </style >
-
-
+<style type='text/css' >
 #wallpaper {
     background: url() no-repeat 50% 0;
 }
@@ -661,4 +611,13 @@ h3.foot-head,
 #content-main h5,
 #content-main h6 {
     font-family: 'Montserrat', sans-serif;
+}
+.woocommerce-product-gallery {
+    opacity: 1 !important;
+}
+body.custom-background {
+    background-color: #eeeeee;
+}
+.woocommerce form .form-row .required {
+    visibility: visible;
 }

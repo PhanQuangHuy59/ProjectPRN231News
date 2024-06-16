@@ -29,7 +29,7 @@ namespace BusinessObjects.Models
         public string CoverImage { get; set; } = null!;
         public Guid Processor { get; set; }
         public string? LinkAudio { get; set; }
-        public int? ViewArticles { get; set; }
+        public long? ViewArticles { get; set; }
 
         public virtual User AuthorNavigation { get; set; } = null!;
         public virtual CategoriesArticle Categorty { get; set; } = null!;

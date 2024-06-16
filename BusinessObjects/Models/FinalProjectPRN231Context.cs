@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects.Models
 {
@@ -15,7 +14,6 @@ namespace BusinessObjects.Models
         public FinalProjectPRN231Context(DbContextOptions<FinalProjectPRN231Context> options)
             : base(options)
         {
-            
         }
 
         public virtual DbSet<Article> Articles { get; set; } = null!;
@@ -36,9 +34,8 @@ namespace BusinessObjects.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var ConnectionString = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json").Build().GetConnectionString("value");
-                optionsBuilder.UseSqlServer(ConnectionString);
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server =(local); database = FinalProjectPRN231; uid=sa;pwd=123;Trusted_Connection=True;Encrypt=False");
             }
         }
 
@@ -77,10 +74,12 @@ namespace BusinessObjects.Models
 
                 entity.Property(e => e.Processor).HasColumnName("processor");
 
-                entity.Property(e => e.PublishDate).HasColumnName("publish_date");
+                entity.Property(e => e.PublishDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("publish_date");
 
                 entity.Property(e => e.ShortDescription)
-                    .HasMaxLength(255)
+                    .HasMaxLength(300)
                     .HasColumnName("short_description");
 
                 entity.Property(e => e.Slug)
@@ -97,6 +96,10 @@ namespace BusinessObjects.Models
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("datetime")
                     .HasColumnName("updated_date");
+
+                entity.Property(e => e.ViewArticles)
+                    .HasColumnName("view_articles")
+                    .HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.AuthorNavigation)
                     .WithMany(p => p.ArticleAuthorNavigations)
@@ -444,13 +447,15 @@ namespace BusinessObjects.Models
 
                 entity.Property(e => e.Image).HasColumnName("image");
 
+                entity.Property(e => e.IsConfirm).HasColumnName("is_confirm");
+
                 entity.Property(e => e.Password).HasColumnName("password");
 
                 entity.Property(e => e.PhoneNumber)
                     .HasMaxLength(255)
                     .HasColumnName("phone_number");
 
-                entity.Property(e => e.RoleId).HasColumnName("roleid");
+                entity.Property(e => e.Roleid).HasColumnName("roleid");
 
                 entity.Property(e => e.Updateddate)
                     .HasColumnType("datetime")
@@ -462,7 +467,7 @@ namespace BusinessObjects.Models
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleId)
+                    .HasForeignKey(d => d.Roleid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("users_roleid_foreign");
             });

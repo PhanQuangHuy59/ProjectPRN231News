@@ -23,7 +23,7 @@ namespace BusinessObjects.Models
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string? DisplayName { get; set; }
-        public Guid RoleId { get; set; }
+        public Guid Roleid { get; set; }
         public DateTime Createddate { get; set; }
         public DateTime? Updateddate { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -31,10 +31,9 @@ namespace BusinessObjects.Models
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Image { get; set; }
-        public bool IsConfirm { get;set; }
+        public bool IsConfirm { get; set; }
 
-
-		public virtual Role Role { get; set; } = null!;
+        public virtual Role Role { get; set; } = null!;
         public virtual ICollection<Article> ArticleAuthorNavigations { get; set; }
         public virtual ICollection<ArticlePermission> ArticlePermissions { get; set; }
         public virtual ICollection<Article> ArticleProcessorNavigations { get; set; }

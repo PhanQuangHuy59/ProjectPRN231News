@@ -12,7 +12,7 @@ namespace BusinessObjects.Models
 
         public int PermissionId { get; set; }
         public string PermisstionName { get; set; } = null!;
-        public string? Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         public virtual ICollection<ArticlePermission> ArticlePermissions { get; set; }
     }

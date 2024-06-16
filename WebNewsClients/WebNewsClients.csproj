@@ -23,4 +23,9 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj" />
+    <ProjectReference Include="..\WebNewsAPIs\WebNewsAPIs.csproj" />
+  </ItemGroup>
+
 </Project>

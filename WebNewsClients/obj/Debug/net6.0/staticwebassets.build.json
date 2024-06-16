@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "1uQvUImX9AObpU/UzuFiMJW5NjN/UKJlaCzlql9LcEs=",
+  "Hash": "hQ0k6EwjiUl2rYPnlAsP/HAoqFGB52mdl41tUy5PIlc=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
+      "Version": 2,
+      "Source": "WebNewsAPIs",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "WebNewsClients\\wwwroot",

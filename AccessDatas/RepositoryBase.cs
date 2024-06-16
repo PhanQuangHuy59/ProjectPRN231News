@@ -89,10 +89,10 @@ namespace AccessDatas
                 var query = dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return query.AsQueryable();
+                return query;
             }
 
-            return dataContext.Set<T>().AsQueryable();
+            return dataContext.Set<T>();
         }
 
         public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)

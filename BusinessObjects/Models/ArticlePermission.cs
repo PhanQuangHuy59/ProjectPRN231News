@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
     public partial class ArticlePermission
     {
-        [Key]
         public long ApermissionId { get; set; }
         public Guid UserId { get; set; }
         public Guid ArticleId { get; set; }

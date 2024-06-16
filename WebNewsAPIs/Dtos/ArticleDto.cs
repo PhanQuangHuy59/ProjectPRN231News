@@ -83,7 +83,7 @@ namespace WebNewsAPIs.Dtos
         public string AuthorName { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public long? PublishDate { get; set; }
+        public DateTime? PublishDate { get; set; }
         public bool IsPublish { get; set; }
         public int StatusProcess { get; set; }
         public Guid CategortyId { get; set; }
