@@ -1,4 +1,4 @@
-/*html {
+﻿/*html {
   font-size: 14px;
 }
 
@@ -30,3 +30,19 @@ body {
 #truethemes_container #main {
     float: left;
 }
+.divContainImg{
+    width: 80px;
+  
+}
+    .divContainImg img {
+        width: 100%; /* Chiều rộng của ảnh sẽ bằng chiều rộng của container */
+        height: 60px; /* Chiều cao sẽ tự động điều chỉnh để giữ nguyên tỷ lệ */
+    }
+.containIamgeW300 {
+    width: 300px;
+    height: 180px;
+}
+    .containIamgeW300 img {
+        width: 100%; /* Chiều rộng của ảnh sẽ bằng chiều rộng của container */
+        height: 100%; /* Chiều cao sẽ tự động điều chỉnh để giữ nguyên tỷ lệ */
+    }

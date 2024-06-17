@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Repositories;
 using WebNewsAPIs.Dtos;
+using WebNewsAPIs.Services;
 
 namespace WebNewsAPIs.Controllers
 {
@@ -14,10 +15,12 @@ namespace WebNewsAPIs.Controllers
     {
         private IArticleRepository _articleRepository;
         private IMapper _mapper;
-        public ArticlesController(IArticleRepository articleRepository, IMapper mapper)
+        private ArticleService _articleService;
+        public ArticlesController(IArticleRepository articleRepository, IMapper mapper, ArticleService article)
         {
             _articleRepository = articleRepository;
             _mapper = mapper;
+            this._articleService = article;
         }
         [HttpGet]
         [EnableQuery]
@@ -52,5 +55,24 @@ namespace WebNewsAPIs.Controllers
             var response = _mapper.Map<IEnumerable<ViewArticleDto>>(listArticles).OrderBy(c => c.PublishDate);
             return Ok(response);
         }
-    }
+
+		[HttpGet("GetArticleOfRootCategory")]
+
+		public async Task<ActionResult<Dictionary<string, List<ViewArticleDto>>>> GetArticleOfRootCategory()
+		{
+            if(_articleService == null)
+            {
+                return BadRequest();
+            }
+            var data = _articleService.GetAllArticlesOfRootCategory();
+            var response = new Dictionary<string, List<ViewArticleDto>>();
+            foreach (var category in data.Keys)
+            {
+                
+                var listArticleMapper = _mapper.Map<List<ViewArticleDto>>(data[category]);
+                response.Add(category, listArticleMapper);
+            }
+			return Ok(response);
+		}
+	}
 }

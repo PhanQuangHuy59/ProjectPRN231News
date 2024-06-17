@@ -95,7 +95,8 @@ namespace WebNewsAPIs.Dtos
         public string ProcessorName { get; set; } = null!;
         public string? LinkAudio { get; set; }
 		public int? ViewArticles { get; set; }
-
+		public virtual ICollection<ViewCommentDto> Comments { get; set; }
+		
 	}
 
 }

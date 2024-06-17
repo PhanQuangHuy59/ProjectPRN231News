@@ -1,4 +1,5 @@
 ﻿using Repositories;
+using WebNewsAPIs.Services;
 
 namespace WebNewsAPIs.Extentions
 {
@@ -18,7 +19,10 @@ namespace WebNewsAPIs.Extentions
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ISaveArticleRepository,  SaveArticleRepository>();    
             services.AddTransient<IUserRepository,  UserRepository>();
-            services.AddTransient<IViewRepository, ViewRepository>(); 
+            services.AddTransient<IViewRepository, ViewRepository>();
+
+            //add Service
+            services.AddTransient<ArticleService>();
         }
     }
 }

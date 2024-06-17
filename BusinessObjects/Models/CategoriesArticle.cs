@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace BusinessObjects.Models
 {
@@ -22,5 +23,22 @@ namespace BusinessObjects.Models
         public virtual CategoriesArticle? ParentCategory { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<CategoriesArticle> InverseParentCategory { get; set; }
-    }
+		public override bool Equals(object obj)
+		{
+			if (obj == null || GetType() != obj.GetType())
+			{
+				return false;
+			}
+
+			var categoryArticle = (CategoriesArticle)obj;
+			return this.CategoryId == categoryArticle.CategoryId
+				&& this.CategoryName == categoryArticle.CategoryName
+				&& this.Description == categoryArticle.Description;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+	}
 }

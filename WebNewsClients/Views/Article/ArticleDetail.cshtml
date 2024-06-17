@@ -1,10 +1,18 @@
-﻿<div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
+﻿@using BusinessObjects.Models;
+@{
+
+	var article =(Article) ViewBag.Article;
+	var listArticle = (IEnumerable<Article>) ViewBag.ListArticle;
+     var category = (CategoriesArticle)ViewBag.CategoryOfArticle;
+}
+
+<div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
 	<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" />
 	<div class="body-main-out relative">
 		<div class="body-main-in">
 			<div id="body-main-cont" class="left relative">
 				<div id="leader-wrap" class="left relative">
-					<div style="width: 90%; height: 30px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
+					<div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
 				</div><!--leader-wrap-->
 				<div id="post-main-wrap" class="left relative">
 					<div class="post-wrap-out1">
@@ -12,21 +20,21 @@
 							<div id="post-left-col" class="relative">
 								<article id="post-area" class="post-156 post type-post status-publish format-standard has-post-thumbnail hentry category-tech tag-ces-2015 tag-mobile-phones tag-selfie-stick tag-tech">
 									<header id="post-header">
-										<a class="post-cat-link" href="../category/tech/index.html"><span class="post-head-cat">Tech</span></a>
-										<h1 class="post-title entry-title left" itemprop="headline">The selfie stick has taken over CES 2015</h1>
+										<a class="post-cat-link" href="../category/tech/index.html"><span class="post-head-cat">@category.CategoryName</span></a>
+										<h1 class="post-title entry-title left" itemprop="headline">@article.Title</h1>
 										<div id="post-info-wrap" class="left relative">
 											<div class="post-info-out">
 												<div class="post-info-img left relative">
-													<img alt='' src='https://secure.gravatar.com/avatar/ace9a57f1346d0657bcedfa39507830e?s=50&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ace9a57f1346d0657bcedfa39507830e?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' />
+													<img alt='' src='@article.AuthorNavigation.Image;d=mm&amp;r=g' srcset='@article.AuthorNavigation.Image;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' />
 												</div><!--post-info-img-->
 												<div class="post-info-in">
 													<div class="post-info-right left relative">
 														<div class="post-info-name left relative" itemprop="author" itemscope itemtype="https://schema.org/Person">
-															<span class="post-info-text">By</span> <span class="author-name vcard fn author" itemprop="name"><a href="../author/fanpress/index.html" title="Posts by Flex Mag Staff" rel="author">Flex Mag Staff</a></span> <span class="author-twitter"><a href="http://www.twitter.com/mvpthemes" class="twitter-but" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></span> <span class="author-email"><a href="mailto:mvpthemes.alt@gmail.com"><i class="fa-solid fa-envelope"></i></a></span>
+															<span class="post-info-text">By</span> <span class="author-name vcard fn author" itemprop="name"><a href="../author/fanpress/index.html" title="Posts by Flex Mag Staff" rel="author">@article.AuthorNavigation.DisplayName</a></span> <span class="author-twitter"><a href="http://www.twitter.com/mvpthemes" class="twitter-but" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></span> <span class="author-email"><a href="mailto:mvpthemes.alt@gmail.com"><i class="fa-solid fa-envelope"></i></a></span>
 														</div><!--post-info-name-->
 														<div class="post-info-date left relative">
-															<span class="post-info-text">Posted on</span> <span class="post-date updated"><time class="post-date updated" itemprop="datePublished" datetime="2015-08-19">August 19, 2015</time></span>
-															<meta itemprop="dateModified" content="2016-03-17" />
+															<span class="post-info-text">Posted on</span> <span class="post-date updated"><time class="post-date updated" itemprop="datePublished" datetime="@article.CreatedDate">@article.CreatedDate</time></span>
+															<meta itemprop="dateModified" content="@article.CreatedDate" />
 														</div><!--post-info-date-->
 													</div><!--post-info-right-->
 												</div><!--post-info-in-->

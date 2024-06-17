@@ -621,3 +621,14 @@ body.custom-background {
 .woocommerce form .form-row .required {
     visibility: visible;
 }
+.parent {
+    position: relative;
+    height: 300px; /* độ cao của thẻ div cha */
+}
+
+.child {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -0%);
+}

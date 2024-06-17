@@ -1,7 +1,10 @@
 ﻿using BusinessObjects.Models;
 using Microsoft.AspNetCore.OData;
+using Microsoft.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using Microsoft.OData.UriParser;
+using System.Globalization;
 using System.Security.Permissions;
 
 namespace WebNewsAPIs.Extentions
@@ -40,4 +43,56 @@ namespace WebNewsAPIs.Extentions
             return conventionModelBuilder.GetEdmModel();
         }
     }
+	public class MyResolver : UnqualifiedODataUriResolver
+	{
+		private StringAsEnumResolver enumResolver = new StringAsEnumResolver();
+
+		public MyResolver()
+		{
+			EnableCaseInsensitive = true;
+		}
+
+		public override void PromoteBinaryOperandTypes(BinaryOperatorKind binaryOperatorKind, ref SingleValueNode leftNode, ref SingleValueNode rightNode, out IEdmTypeReference typeReference)
+		{
+			typeReference = null;
+
+			if (leftNode.TypeReference.IsEnum() && rightNode.TypeReference.IsInt32() && rightNode is ConstantNode)
+			{
+				string text = (((ConstantNode)rightNode).Value).ToString();
+				ODataEnumValue val;
+				IEdmTypeReference typeRef = leftNode.TypeReference;
+
+				if (TryParseEnum(typeRef.Definition as IEdmEnumType, text, out val))
+				{
+					rightNode = new ConstantNode(val, text, typeRef);
+					return;
+				}
+			}
+			else if (rightNode.TypeReference.IsEnum() && leftNode.TypeReference.IsInt32() && leftNode is ConstantNode)
+			{
+				string text = ((ConstantNode)leftNode).Value.ToString();
+				ODataEnumValue val;
+				IEdmTypeReference typeRef = rightNode.TypeReference;
+				if (TryParseEnum(typeRef.Definition as IEdmEnumType, text, out val))
+				{
+					leftNode = new ConstantNode(val, text, typeRef);
+					return;
+				}
+			}
+
+			enumResolver.PromoteBinaryOperandTypes(binaryOperatorKind, ref leftNode, ref rightNode, out typeReference);
+		}
+
+		private static bool TryParseEnum(IEdmEnumType enumType, string value, out ODataEnumValue enumValue)
+		{
+			long parseResult;
+			bool num = enumType.TryParseEnum(value, ignoreCase: true, out parseResult);
+			enumValue = null;
+			if (num)
+			{
+				enumValue = new ODataEnumValue(parseResult.ToString(CultureInfo.InvariantCulture), enumType.FullTypeName());
+			}
+			return num;
+		}
+	}
 }

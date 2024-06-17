@@ -3757,6 +3757,998 @@
       "PackagePath": "staticwebassets\\template\\www.mvpthemes.com\\flexmag\\wp-content\\uploads\\2015\\09\\flex300x600.jpg"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\css\\bootstrap1.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\css\\bootstrap1.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\css\\colors\\default.css",
+      "PackagePath": "staticwebassets\\user-management-html\\css\\colors\\default.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\css\\metisMenu.css",
+      "PackagePath": "staticwebassets\\user-management-html\\css\\metisMenu.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\css\\preloader.html",
+      "PackagePath": "staticwebassets\\user-management-html\\css\\preloader.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\css\\style1.css",
+      "PackagePath": "staticwebassets\\user-management-html\\css\\style1.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\bak_hovers\\sad.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\bak_hovers\\sad.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\banner.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\banner.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\card\\card-2.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\card\\card-2.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\card\\card-5.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\card\\card-5.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\client_img.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\client_img.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\crm\\bg.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\crm\\bg.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\crm\\businessman.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\crm\\businessman.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\crm\\customer.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\crm\\customer.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\crm\\infographic.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\crm\\infographic.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\crm\\sqr.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\crm\\sqr.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_2.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_2.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_3.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_3.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_4.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_4.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_5.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_5.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\customers\\pro_6.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\customers\\pro_6.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\dateBg.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\dateBg.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\default-skin\\default-skin.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\default-skin\\default-skin.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\default-skin\\default-skin.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\default-skin\\default-skin.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\1.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\1.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\2.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\2.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\3.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\3.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\4.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\4.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\5.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\5.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\6.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\6.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon2\\7.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon2\\7.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon\\bell.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon\\bell.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon\\calender_icon.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon\\calender_icon.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon\\icon_search.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon\\icon_search.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\icon\\msg.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\icon\\msg.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\line_img.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\line_img.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\logo.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\logo.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\logo_white.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\logo_white.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\10.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\10.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\11.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\11.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\12.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\12.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\13.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\13.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\14.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\14.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\15.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\15.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\16.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\16.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\17.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\17.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\18.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\18.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\19.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\19.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\2.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\2.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\20.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\20.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\21.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\21.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\3.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\3.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\4.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\4.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\5.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\5.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\6.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\6.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\7.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\7.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\8.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\8.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\9.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\9.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\menu-icon\\dashboard.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\menu-icon\\dashboard.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\messages\\1.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\messages\\1.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\messages\\1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\messages\\1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\messages\\2.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\messages\\2.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\messages\\3.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\messages\\3.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\messages\\4.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\messages\\4.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\mini_logo.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\mini_logo.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\plane_thumb.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\plane_thumb.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\pro_complete.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\pro_complete.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\01.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\01.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\02.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\02.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\img-1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\img-1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\img-2.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\img-2.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\img-4.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\img-4.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\products\\img-5.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\products\\img-5.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\1.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\1.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\2.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\2.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\3.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\3.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\7.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\7.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\8.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\8.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\profilebox\\9.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\profilebox\\9.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\progress\\design-progress-red.html",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\progress\\design-progress-red.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\progress\\design-progress-yellow.html",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\progress\\design-progress-yellow.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\progress\\progress-bg.html",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\progress\\progress-bg.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\shape_2.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\shape_2.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\staf\\1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\staf\\1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\staf\\2.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\staf\\2.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\staf\\3.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\staf\\3.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\staf\\4.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\staf\\4.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\staf\\5.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\staf\\5.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\table.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\table.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\1.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\1.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\2.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\2.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\3.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\3.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\4.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\4.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\5.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\5.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\6.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\6.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\tilt\\7.jpg",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\tilt\\7.jpg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\img\\weather_1.png",
+      "PackagePath": "staticwebassets\\user-management-html\\img\\weather_1.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\bootstrap1.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\bootstrap1.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\chart.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\chart.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\ckeditor-classic.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\ckeditor-classic.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\dashboard_init.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\dashboard_init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\jquery1-3.4.1.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\jquery1-3.4.1.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\metisMenu.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\metisMenu.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\popper1.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\popper1.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\amchart-init.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\amchart-init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\amcharts.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\amcharts.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\ammap.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\ammap.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\amstock.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\amstock.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\dataloader.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\dataloader.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\export.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\export.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\pie.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\pie.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\serial.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\serial.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\am_chart\\worldLow.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\am_chart\\worldLow.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\animation\\tilt\\tilt-custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\animation\\tilt\\tilt-custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\animation\\tilt\\tilt.jquery.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\animation\\tilt\\tilt.jquery.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\animation\\wow\\animate.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\animation\\wow\\animate.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\animation\\wow\\wow-init.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\animation\\wow\\wow-init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\animation\\wow\\wow.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\animation\\wow\\wow.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\apex-chart2.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\apex-chart2.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\apex_chart_list.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\apex_chart_list.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\apex_dashboard.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\apex_dashboard.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\apexchart_lists.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\apexchart_lists.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\apexcharts.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\apexcharts.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\apex_chart\\bar_active_1.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\apex_chart\\bar_active_1.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\activation.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\activation.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\core\\main.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\core\\main.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\core\\main.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\core\\main.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\daygrid\\main.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\daygrid\\main.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\daygrid\\main.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\daygrid\\main.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\interaction\\main.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\interaction\\main.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\list\\main.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\list\\main.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\list\\main.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\list\\main.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\timegrid\\main.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\timegrid\\main.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\calender_js\\timegrid\\main.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\calender_js\\timegrid\\main.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chart_am\\animated.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chart_am\\animated.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chart_am\\chart-custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chart_am\\chart-custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chart_am\\charts.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chart_am\\charts.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chart_am\\core.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chart_am\\core.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chart_am\\kelly.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chart_am\\kelly.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chartjs\\chartjs_init.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chartjs\\chartjs_init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chartjs\\roundedBar.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chartjs\\roundedBar.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\chartlist\\Chart.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\chartlist\\Chart.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\count_up\\jquery.counterup.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\count_up\\jquery.counterup.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\count_up\\jquery.waypoints.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\count_up\\jquery.waypoints.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\css\\buttons.dataTables.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\css\\buttons.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\css\\jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\css\\jquery.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\css\\responsive.dataTables.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\css\\responsive.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\images\\sort_asc.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\images\\sort_asc.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\images\\sort_asc_disabled.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\images\\sort_asc_disabled.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\images\\sort_both.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\images\\sort_both.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\images\\sort_desc.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\images\\sort_desc.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\images\\sort_desc_disabled.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\images\\sort_desc_disabled.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\buttons.flash.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\buttons.flash.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\buttons.html5.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\buttons.html5.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\buttons.print.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\buttons.print.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\dataTables.buttons.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\dataTables.buttons.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\dataTables.responsive.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\dataTables.responsive.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\jszip.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\jszip.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\pdfmake.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\pdfmake.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datatable\\js\\vfs_fonts.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datatable\\js\\vfs_fonts.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datepicker\\date-picker.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datepicker\\date-picker.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datepicker\\datepicker.custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datepicker\\datepicker.custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datepicker\\datepicker.en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datepicker\\datepicker.en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\datepicker\\datepicker.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\datepicker\\datepicker.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\drag\\dragable_sortable.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\drag\\dragable_sortable.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\drag\\jquery.ui.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\drag\\jquery.ui.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\drag\\sortable-custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\drag\\sortable-custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\css\\all.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\css\\all.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.woff2",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400.woff2"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400d41d.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-brands-400d41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.woff2",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400.woff2"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400d41d.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-regular-400d41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.woff2",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900.woff2"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900d41d.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\font_awesome\\webfonts\\fa-solid-900d41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\gijgo\\gijgo.min.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\gijgo\\gijgo.min.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\jquery-sparkline\\jquery.sparkline.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\jquery-sparkline\\jquery.sparkline.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\jquery-sparkline\\spactkine_init.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\jquery-sparkline\\spactkine_init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\mapsjs-core.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\mapsjs-core.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\mapsjs-mapevents.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\mapsjs-mapevents.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\mapsjs-ui.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\mapsjs-ui.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\mapsjs-ui.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\mapsjs-ui.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\mapJs\\mapsjs_service.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\mapJs\\mapsjs_service.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\material_icon\\MaterialIcons-Regular.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\material_icon\\MaterialIcons-Regular.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\material_icon\\material-icons.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\material_icon\\material-icons.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\material_icon\\material-icons.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\material_icon\\material-icons.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\morris\\morris.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\morris\\morris.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\niceselect\\css\\nice-select.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\niceselect\\css\\nice-select.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\niceselect\\js\\jquery.nice-select.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\niceselect\\js\\jquery.nice-select.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\nvd3\\d3.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\nvd3\\d3.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\nvd3\\layers.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\nvd3\\layers.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\nvd3\\nv.d3.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\nvd3\\nv.d3.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\owl_carousel\\css\\owl.carousel.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\owl_carousel\\css\\owl.carousel.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\owl_carousel\\css\\owl.video.play.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\owl_carousel\\css\\owl.video.play.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\owl_carousel\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\owl_carousel\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\photoswip\\photoswipe-ui-default.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\photoswip\\photoswipe-ui-default.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\photoswip\\photoswipe.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\photoswip\\photoswipe.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\photoswip\\photoswipe.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\photoswip\\photoswipe.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\progressbar\\jquery.barfiller.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\progressbar\\jquery.barfiller.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll\\perfect-scrollbar.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll\\perfect-scrollbar.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll\\scrollable-custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll\\scrollable-custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll\\scrollable.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll\\scrollable.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll_reval\\modernizr.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll_reval\\modernizr.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll_reval\\reveal-custom.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll_reval\\reveal-custom.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\scroll_reval\\scrollreveal.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\scroll_reval\\scrollreveal.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\select2\\css\\select2.min.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\select2\\css\\select2.min.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\swiper_slider\\css\\swiper.min.html",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\swiper_slider\\css\\swiper.min.html"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\tagsinput\\tagsinput.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\tagsinput\\tagsinput.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\tagsinput\\tagsinput.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\tagsinput\\tagsinput.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\text_editor\\fonts\\summernote.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\text_editor\\fonts\\summernote.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\text_editor\\fonts\\summernote.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\text_editor\\fonts\\summernote.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\text_editor\\fonts\\summernote.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\text_editor\\fonts\\summernote.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\text_editor\\summernote-bs4.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\text_editor\\summernote-bs4.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\text_editor\\summernote-bs4.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\text_editor\\summernote-bs4.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.svg",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.ttf",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.ttf"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.woff",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\fonts\\themify9f24.woff"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\fonts\\themifyd41d.eot",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\fonts\\themifyd41d.eot"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\themefy_icon\\themify-icons.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\themefy_icon\\themify-icons.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\vectormap-home\\vectormap-2.0.2.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\vectormap-home\\vectormap-2.0.2.css"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\vectormap-home\\vectormap-2.0.2.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\vectormap-home\\vectormap-2.0.2.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\vectormap-home\\vectormap-world-mill-en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\vectormap-home\\vectormap-world-mill-en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-2.0.2.min.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-2.0.2.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-asia-mill.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-asia-mill.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-au-mill.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-au-mill.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-chicago-mill-en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-chicago-mill-en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-in-mill.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-in-mill.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-uk-mill-en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-uk-mill-en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-us-aea-en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-us-aea-en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\jvectormap-world-mill-en.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\jvectormap-world-mill-en.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\map-vector.js",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\map-vector.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\vendors\\verctorMap\\vector-map.css",
+      "PackagePath": "staticwebassets\\user-management-html\\vendors\\verctorMap\\vector-map.css"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebNewsClients.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

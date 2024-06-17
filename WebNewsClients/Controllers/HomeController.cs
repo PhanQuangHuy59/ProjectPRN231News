@@ -20,7 +20,7 @@ namespace WebNewsClients.Controllers
         }
 
         
-        public IActionResult Index()
+        public  IActionResult Index()
         {
             //$"{BaseUrls.BASE_URL_CategoryArticle}/api/CategoriesArticles/getAllCategory"
             //Call api của Category
@@ -37,38 +37,61 @@ namespace WebNewsClients.Controllers
             var listLastestNews = responseMessageLastestNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>()
                 .Result.data;
             // slide 
-            Dictionary<String, IEnumerable<Article>> slide = new Dictionary<String, IEnumerable<Article>>();
-			var groups = listLastestNews.GroupBy(c => c.Categorty.CategoryName);
-            foreach(var group in groups)
-            {
-                var listArticle = new List<Article>();
-               foreach(var article in group)
-               {
-                    listArticle.Add(article);
-               }
-				slide.Add(group.Key, listArticle.Take(4));
-			}
-              
+            string urlGetAllArticleOfRoot = "https://localhost:7251/api/Articles/GetArticleOfRootCategory";
+			var responseMessageAllArticleOfRoot = _httpClient.GetAsync(urlGetAllArticleOfRoot).Result;
+			responseMessageLastestNew.EnsureSuccessStatusCode();
+            var slide =  responseMessageAllArticleOfRoot.Content.ReadFromJsonAsync<Dictionary<string, List<ViewArticleDto>>>().Result;
 
-            //Trả dữ liệu về view
-            ViewBag.Category = listCategories;
+            //lấy top 20 bài article có view nhiều nhất
+            string urlGetAllArticleHaveViewHighest = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$top=10&orderby=ViewArticles desc,CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and month(CreatedDate) eq month(now()) and year(CreatedDate) eq year(CreatedDate)";
+			var responseMessageAllArticleHighest = _httpClient.GetAsync(urlGetAllArticleHaveViewHighest).Result;
+			responseMessageAllArticleHighest.EnsureSuccessStatusCode();
+			var mostPopular = responseMessageAllArticleHighest.Content.ReadFromJsonAsync<OdataResponse<List<Article>>>().Result.data;
+			//Trả dữ liệu về view
+			ViewBag.Category = listCategories;
             ViewBag.LastestNews = listLastestNews;
             ViewBag.Slide = slide;
+            ViewBag.MostPopular = mostPopular;
 
             return View();
         }
-
-
 
         public IActionResult Privacy()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+      
+        public IActionResult Error400()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //Call api của Category
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
+
+            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            responseMessage.EnsureSuccessStatusCode();
+            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
+                .Result.data;
+            ViewBag.Category = listCategories;
+
+            string message = TempData["message"] as string;
+            ViewBag.message = message;
+            return View();
+        }
+        
+        public IActionResult Error500()
+        {
+            //Call api của Category
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
+
+            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            responseMessage.EnsureSuccessStatusCode();
+            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
+                .Result.data;
+            ViewBag.Category = listCategories;
+
+            string message = TempData["message"] as string;
+            ViewBag.message = message;
+            return View();
         }
     }
 }
