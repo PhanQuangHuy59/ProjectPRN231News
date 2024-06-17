@@ -23,6 +23,7 @@ namespace WebNewsAPIs.Extentions
 
             //add Service
             services.AddTransient<ArticleService>();
-        }
+			
+		}
     }
 }

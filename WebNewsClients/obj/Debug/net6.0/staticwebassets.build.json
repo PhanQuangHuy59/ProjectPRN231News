@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nDTknGVK9gLpoNyGkqdjIsv836NqbSa2daKfX2SU2cE=",
+  "Hash": "JDWOKtFk4an/IOIAaA1MDESdYRJUNMPxJsu6L4nVh6Y=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -4532,23 +4532,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\template\\mvpthemes.com\\flexmag\\wp-content\\themes\\flex-mag\\images\\logos\\logo-foot.png"
-    },
-    {
-      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\template\\mvpthemes.com\\flexmag\\wp-content\\themes\\flex-mag\\images\\logos\\logo-large.png",
-      "SourceId": "WebNewsClients",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
-      "BasePath": "_content/WebNewsClients",
-      "RelativePath": "template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-large.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\template\\mvpthemes.com\\flexmag\\wp-content\\themes\\flex-mag\\images\\logos\\logo-large.png"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\template\\mvpthemes.com\\flexmag\\wp-content\\themes\\flex-mag\\images\\logos\\logo-leader.png",

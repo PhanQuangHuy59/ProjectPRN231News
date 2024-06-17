@@ -103,10 +103,10 @@ namespace AccessDatas
                 var query = dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return await query.FirstOrDefaultAsync(expression);
+                return  query.FirstOrDefaultAsync(expression).Result;
             }
               
-            return await dataContext.Set<T>().FirstOrDefaultAsync(expression);
+            return dataContext.Set<T>().FirstOrDefaultAsync(expression).Result;
         }
 
         public virtual IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)

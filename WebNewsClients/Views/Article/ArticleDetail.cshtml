@@ -1,13 +1,42 @@
 ﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
 @{
 
 	var article =(Article) ViewBag.Article;
 	var listArticle = (IEnumerable<Article>) ViewBag.ListArticle;
-     var category = (CategoriesArticle)ViewBag.CategoryOfArticle;
+	var category = (CategoriesArticle)ViewBag.CategoryOfArticle;
+	var listArticleRecommend = (List<ViewArticleDto>)ViewBag.ListArticleRecomend;
+
+	var tempCategory = category;
+	List<CategoriesArticle> listCategory = new List<CategoriesArticle>();
+	listCategory.Add(tempCategory);
+	while(tempCategory.ParentCategory != null)
+	{
+		
+		tempCategory = tempCategory.ParentCategory; 
+		listCategory.Insert(0, tempCategory);
+	}
 }
+
 
 <div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
 	<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" />
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+		@foreach (var cate in listCategory)
+		{
+			if(cate.CategoryId == listCategory[listCategory.Count - 1].CategoryId)
+			{
+				<li class="breadcrumb-item active"><a href="#">@cate.CategoryName</a></li>
+			}
+			else
+			{
+				<li class="breadcrumb-item"><a href="#">@cate.CategoryName</a></li>
+			}
+
+		}
+	</ol>
+	
 	<div class="body-main-out relative">
 		<div class="body-main-in">
 			<div id="body-main-cont" class="left relative">
@@ -42,14 +71,14 @@
 										</div><!--post-info-wrap-->
 									</header><!--post-header-->
 									<div id="post-feat-img" class="left relative" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-										<img width="1000" height="600" src="../wp-content/uploads/2015/08/selfie-stick.jpg" class="attachment- size- wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg 1000w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick-450x270.jpg 450w" sizes="(max-width: 1000px) 100vw, 1000px" />																								<meta itemprop="url" content="../wp-content/uploads/2015/08/selfie-stick.jpg">
+										<img width="1000" height="600" src="@article.CoverImage" class="attachment- size- wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="@article.CoverImage 1000w, @article.CoverImage 300w, @article.CoverImage 450w" sizes="(max-width: 1000px) 100vw, 1000px" />																								<meta itemprop="url" content="../wp-content/uploads/2015/08/selfie-stick.jpg">
 										<meta itemprop="width" content="1000">
 										<meta itemprop="height" content="600">
 										<div class="post-feat-text">
 											<span class="post-excerpt left">
-												<p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.</p>
+												<p>@article.ShortDescription</p>
 											</span>
-											<span class="feat-caption">Photo: Shutterstock</span>
+											<span class="feat-caption">Author: @article.AuthorNavigation.DisplayName</span>
 										</div><!--post-feat-text-->
 									</div><!--post-feat-img-->
 									<div id="content-area" itemprop="articleBody" class="post-156 post type-post status-publish format-standard has-post-thumbnail hentry category-tech tag-ces-2015 tag-mobile-phones tag-selfie-stick tag-tech">
@@ -59,35 +88,30 @@
 
 
 													<section class="social-sharing-top">
-														<a href="#" onclick="window.open('http://www.facebook.com/sharer.php?u=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;t=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"><div class="facebook-share"><span class="fb-but1"><i class="fa-brands fa-square-facebook"></i></span><span class="social-text">Share</span></div></a>
+														<a href="#" onclick="window.open(`http://www.facebook.com/sharer.php?u=${@Url.ActionLink(action:"ArticleDetail", controller:"Article", values: new{slug = article.Slug})};t=${@article.Title}`, 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"><div class="facebook-share"><span class="fb-but1"><i class="fa-brands fa-square-facebook"></i></span><span class="social-text">Share</span></div></a>
 														<a href="#" onclick="window.open('http://twitter.com/share?text=The%20selfie%20stick%20has%20taken%20over%20CES%202015%20-&amp;url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/', 'twitterShare', 'width=626,height=436'); return false;" title="Tweet This Post"><div class="twitter-share"><span class="twitter-but1"><i class="fa-brands fa-square-twitter"></i></span><span class="social-text">Tweet</span></div></a>
 														<a href="whatsapp://send?text=The selfie stick has taken over CES 2015 https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="whatsapp-share"><span class="whatsapp-but1"><i class="fa-brands fa-square-whatsapp"></i></span><span class="social-text">Share</span></div></a>
 														<a href="#" onclick="window.open('http://pinterest.com/pin/create/button/?url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;media=https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg&amp;description=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'pinterestShare', 'width=750,height=350'); return false;" title="Pin This Post"><div class="pinterest-share"><span class="pinterest-but1"><i class="fa-brands fa-square-pinterest"></i></span><span class="social-text">Share</span></div></a>
 														<a href="mailto:?subject=The selfie stick has taken over CES 2015&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="email-share"><span class="email-but"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Email</span></div></a>
 														<a href="index.html#comments"><div class="social-comments comment-click-156"><i class="fa-solid fa-comment-dots"></i><span class="social-text-com">Comments</span></div></a>
 													</section><!--social-sharing-top-->
-													<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-													<p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-													<blockquote><p>&#8220;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat&#8221;</p></blockquote>
-													<p>Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-													<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-													<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
-													<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-													<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
-													<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+													<p>@article.Content</p>
+
 													<div class="mvp-org-wrap" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
 														<div class="mvp-org-logo" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-															<img src="../wp-content/themes/flex-mag/images/logos/logo-large.png" alt="Flex Mag" />
-															<meta itemprop="url" content="../wp-content/themes/flex-mag/images/logos/logo-large.png">
+															<img src="~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-fashion.png" alt="Flex Mag" />
+															<meta itemprop="url" content="~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-fashion.png">
 														</div><!--mvp-org-logo-->
 														<meta itemprop="name" content="Flex Mag">
 													</div><!--mvp-org-wrap-->
+
+
 													<div class="posts-nav-link">
 													</div><!--posts-nav-link-->
 													<div class="post-tags">
 														<span class="post-tags-header">Related Items:</span><span itemprop="keywords"><a href="../tag/ces-2015/index.html" rel="tag">CES 2015</a>, <a href="../tag/mobile-phones/index.html" rel="tag">Mobile Phones</a>, <a href="../tag/selfie-stick/index.html" rel="tag">Selfie Stick</a>, <a href="../tag/tech/index.html" rel="tag">Tech</a></span>
 													</div><!--post-tags-->
+
 													<div class="social-sharing-bot">
 														<a href="#" onclick="window.open('http://www.facebook.com/sharer.php?u=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;t=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"><div class="facebook-share"><span class="fb-but1"><i class="fa-brands fa-square-facebook"></i></span><span class="social-text">Share</span></div></a>
 														<a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=The%20selfie%20stick%20has%20taken%20over%20CES%202015%20-&amp;url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/', 'twitterShare', 'width=626,height=436'); return false;" title="Tweet This Post"><div class="twitter-share"><span class="twitter-but1"><i class="fa-brands fa-square-twitter"></i></span><span class="social-text">Tweet</span></div></a>
@@ -98,40 +122,26 @@
 													<div class="mvp-related-posts left relative">
 														<h4 class="post-header"><span class="post-header">Recommended for you</span></h4>
 														<ul>
-															<li>
-																<div class="mvp-related-img left relative">
-																	<a href="../sound-isolating-headphones-let-you-really-hear-your-own-voice/index.html" rel="bookmark" title="Sound-isolating headphones let you really hear your own voice">
-																		<img width="300" height="180" src="../wp-content/uploads/2015/08/man-headphones-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/man-headphones-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />
-																	</a>
-																</div><!--related-img-->
-																<div class="mvp-related-text left relative">
-																	<a href="../sound-isolating-headphones-let-you-really-hear-your-own-voice/index.html">Sound-isolating headphones let you really hear your own voice</a>
-																</div><!--related-text-->
-															</li>
-															<li>
-																<div class="mvp-related-img left relative">
-																	<a href="../nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/index.html" rel="bookmark" title="Nvidia moves into your living room with a device not just for gaming">
-																		<img width="300" height="180" src="../wp-content/uploads/2015/08/video-game-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/video-game-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/video-game-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />
-																	</a>
-																</div><!--related-img-->
-																<div class="mvp-related-text left relative">
-																	<a href="../nvidia-moves-into-your-living-room-with-a-device-not-just-for-gaming/index.html">Nvidia moves into your living room with a device not just for gaming</a>
-																</div><!--related-text-->
-															</li>
-															<li>
-																<div class="mvp-related-img left relative">
-																	<a href="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" rel="bookmark" title="Amazon Flex could be a new way to get your packages, report says">
-																		<img width="300" height="180" src="../wp-content/uploads/2015/08/warehouse-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/warehouse-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/warehouse-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />
-																	</a>
-																</div><!--related-img-->
-																<div class="mvp-related-text left relative">
-																	<a href="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html">Amazon Flex could be a new way to get your packages, report says</a>
-																</div><!--related-text-->
-															</li>
+															@foreach (var a in listArticleRecommend)
+															{
+																<li>
+																	<div class="mvp-related-img left relative">
+																		<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark" title="Sound-isolating headphones let you really hear your own voice">
+																			<img width="300" height="180" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" srcset="@a.CoverImage 300w, @a.CoverImage 450w, @a.CoverImage 1000w" sizes="(max-width: 300px) 100vw, 300px" />					
+																		</a>
+																	</div><!--related-img-->
+																	<div class="mvp-related-text left relative">
+																		<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug">@a.Title</a>
+																	</div><!--related-text-->
+																</li>
+															}
+
 														</ul>
 													</div>																															<div id="article-ad">
-														<div style="width: 90%; height: 30px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
+														<div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
 													</div><!--article-ad-->
+
+
 													<div id="comments-button" class="left relative comment-click-156 com-but-156">
 														<span class="comment-but-text">9 Comments</span>
 													</div><!--comments-button-->
@@ -392,7 +402,7 @@
 												</div><!--content-main-->
 											</div><!--post-cont-in-->
 											<div id="post-sidebar-wrap">
-												<img src="../../../www.mvpthemes.com/flexmag/wp-content/uploads/2015/09/flex300x600.jpg" />
+												<img src="~/template/www.mvpthemes.com/flexmag/wp-content/uploads/2015/09/flex300x600.jpg" />
 											</div><!--post-sidebar-wrap-->
 										</div><!--post-cont-out-->
 									</div><!--content-area-->
@@ -411,163 +421,46 @@
 							</div><!--side-title-wrap-->
 							<div class="side-pop-wrap left relative">
 								<div class="feat-widget-cont left relative">
-									<div class="feat-widget-wrap left relative">
-										<a href="../kylie-jenner-was-paid-six-figures-to-attend-her-own-18th-birthday-party/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/08/celebrity1-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/celebrity1-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/celebrity1-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">174.0K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">10</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Fashion</span>
-												<h2>Kylie Jenner was paid six figures to attend her own 18th birthday party</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
+
+									@foreach(var n in listArticle)
+									{
+										if(n.ArticleId != article.ArticleId)
+										{
+										<div class="feat-widget-wrap left relative">
+											<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@n.Slug">
+												<div class="feat-widget-img left relative">
+													<img width="300" height="180" src="@n.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@n.CoverImage 300w, @n.CoverImage 450w, @n.CoverImage 1000w" sizes="(max-width: 300px) 100vw, 300px" />
+													<div class="feat-info-wrap">
+														<div class="feat-info-views">
+															<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@n.ViewArticles</span>
+														</div><!--feat-info-views-->
+														<div class="feat-info-comm">
+															<i class="fa fa-comment"></i> <span class="feat-info-text">@n.Comments.Count</span>
+														</div><!--feat-info-comm-->
+													</div><!--feat-info-wrap-->
+												</div><!--feat-widget-img-->
+												<div class="feat-widget-text">
+													<span class="side-list-cat">@n.Categorty.CategoryName</span>
+													<h2>@n.Title</h2>
+												</div><!--feat-widget-text-->
+											</a>
+										</div>
+										}
+
+										<!--feat-widget-wrap-->
+									}
+									
 									<div class="widget-ad left relative pop-ad">
-										<a href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes" target="_blank"><img src="../../../www.mvpthemes.com/flexmag/wp-content/uploads/2015/09/flex300x250.jpg" /></a>
+										<a href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes" target="_blank"><img src="~/template/www.mvpthemes.com/flexmag/wp-content/uploads/2015/09/flex300x250.jpg" /></a>
 									</div><!--widget-ad-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../tesla-is-installing-rapid-charging-stations-in-manhattan-garages/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/08/car2-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/car2-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/car2-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">124.3K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">9</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Business</span>
-												<h2>Tesla is installing rapid charging stations in Manhattan garages</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../samsung-flags-australian-pricing-and-dates-for-its-new-galaxy-phones/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/08/phones-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/phones-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/phones-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">119.9K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">2</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Tech</span>
-												<h2>Samsung flags Australian pricing and dates for its new Galaxy phones</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../terrell-owens-says-he-doesnt-care-about-the-hall-of-fame/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/07/football1-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/07/football1-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/football1-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">118.0K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">18</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-												<div class="feat-vid-but">
-													<i class="fa fa-play fa-3"></i>
-												</div><!--feat-vid-but-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Sports</span>
-												<h2>Terrell Owens says he doesn&#8217;t care about the Hall of Fame</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../15-date-night-outfits-inspired-by-celebs/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/08/couple-fashion-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-1000x600.jpg 1000w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-450x270.jpg 450w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/couple-fashion-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/couple-fashion-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">109.7K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">9</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Fashion</span>
-												<h2>15 Date Night Outfits Inspired by Celebs</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../sound-isolating-headphones-let-you-really-hear-your-own-voice/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/08/man-headphones-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/08/man-headphones-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/man-headphones-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">105.9K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">5</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Tech</span>
-												<h2>Sound-isolating headphones let you really hear your own voice</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../6-mlb-teams-that-could-use-upgrades-at-the-trade-deadline/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/07/scoreboard-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/07/scoreboard-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/07/scoreboard-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">105.5K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">2</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Sports</span>
-												<h2>6 MLB teams that could use upgrades at the trade deadline</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
-									<div class="feat-widget-wrap left relative">
-										<a href="../only-three-players-have-a-winning-record-against-rafael-nadal/index.html">
-											<div class="feat-widget-img left relative">
-												<img width="300" height="180" src="../wp-content/uploads/2015/09/tennis1-300x180.jpg" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-300x180.jpg 300w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-450x270.jpg 450w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px" />						<img width="80" height="80" src="../wp-content/uploads/2015/09/tennis1-80x80.jpg" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-80x80.jpg 80w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-150x150.jpg 150w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-180x180.jpg 180w, https://mvpthemes.com/flexmag/wp-content/uploads/2015/09/tennis1-600x600.jpg 600w" sizes="(max-width: 80px) 100vw, 80px" />													<div class="feat-info-wrap">
-													<div class="feat-info-views">
-														<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">100.5K</span>
-													</div><!--feat-info-views-->
-													<div class="feat-info-comm">
-														<i class="fa fa-comment"></i> <span class="feat-info-text">19</span>
-													</div><!--feat-info-comm-->
-												</div><!--feat-info-wrap-->
-											</div><!--feat-widget-img-->
-											<div class="feat-widget-text">
-												<span class="side-list-cat">Sports</span>
-												<h2>Only three players have a winning record against Rafael Nadal</h2>
-											</div><!--feat-widget-text-->
-										</a>
-									</div><!--feat-widget-wrap-->
+									
 								</div><!--feat-widget-cont-->
 							</div><!--side-pop-wrap-->
 						</div><!--post-right-col-->
 					</div><!--post-wrap-out1-->
 				</div><!--post-main-wrap-->
 				<div id="foot-ad-wrap" class="left relative">
-					<div style="width: 90%; height: 30px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
+					<div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
 				</div><!--foot-ad-wrap-->
 			</div><!--body-main-cont-->
 		</div><!--body-main-in-->

@@ -14,13 +14,17 @@ namespace WebNewsAPIs.Controllers
     public class ArticlesController : ControllerBase
     {
         private IArticleRepository _articleRepository;
+        private ICategoriesArticleRepository _categoryRepository;
         private IMapper _mapper;
         private ArticleService _articleService;
-        public ArticlesController(IArticleRepository articleRepository, IMapper mapper, ArticleService article)
+        public ArticlesController(IArticleRepository articleRepository
+            , IMapper mapper, ArticleService article
+            ,ICategoriesArticleRepository categoriesArticleRepository)
         {
             _articleRepository = articleRepository;
             _mapper = mapper;
             this._articleService = article;
+            this._categoryRepository = categoriesArticleRepository;
         }
         [HttpGet]
         [EnableQuery]
@@ -68,11 +72,35 @@ namespace WebNewsAPIs.Controllers
             var response = new Dictionary<string, List<ViewArticleDto>>();
             foreach (var category in data.Keys)
             {
-                
                 var listArticleMapper = _mapper.Map<List<ViewArticleDto>>(data[category]);
                 response.Add(category, listArticleMapper);
             }
 			return Ok(response);
 		}
+        [HttpGet("GetAllArticleOfAllCategory")]
+		public async Task<ActionResult<List<ViewArticleDto>>> GetArticleOfHaveSameRoot([FromQuery]Guid categoryId)
+		{
+            string[] includes = new string[]
+            {
+                nameof(Article.Categorty)
+
+            };
+			if (_articleRepository == null)
+			{
+				return BadRequest();
+			}
+			var rootCate = _categoryRepository.getRootOfCategory(categoryId);
+            if(rootCate == null)
+            {
+                return NotFound();
+            }
+			//var listArticle = _articleRepository.GetMulti(c => _categoryRepository.getRootOfCategory(c.CategortyId).CategoryId.Equals(rootCate.CategoryId), includes);
+			var data = _articleService.GetAllArticlesOfRootCategory();
+            var dataResponse = data[rootCate.CategoryName];
+
+			return Ok(_mapper.Map<List<ViewArticleDto>>(dataResponse));
+		}
+
+
 	}
 }

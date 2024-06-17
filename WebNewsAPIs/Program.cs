@@ -12,8 +12,8 @@ using WebNewsAPIs.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
 {
@@ -25,6 +25,9 @@ builder.Services.AddControllers();
 builder.Services.ConfigOdata();
 builder.Services.InjectService();
 builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
+builder.ConfigAuthenAuthor();
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication();
 //MailSetting
 var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
 builder.Services.Configure<MailSettings>(mailsettings);

@@ -16,12 +16,12 @@
             if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
-                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={category.CategoryId}\">{category.CategoryName}</a>");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory/{category.CategoryId}.html\">{category.CategoryName}</a>");
             }
             else
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-2015\">");
-                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={category.CategoryId}\">{category.CategoryName}</a>");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory/{category.CategoryId}.html\">{category.CategoryName}</a>");
             }
 
             if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
@@ -45,12 +45,12 @@
             if(subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015\">");
-                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={subCategory.CategoryId}\">{subCategory.CategoryName}</a>");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory/{subCategory.CategoryId}.html\">{subCategory.CategoryName}</a>");
             }
             else
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-2015\">");
-                sb.Append($"<a href=\"/Article/ArticleOfCategory?categoryArticleId={subCategory.CategoryId}\">{subCategory.CategoryName}</a>");
+                sb.Append($"<a href=\"/Article/ArticleOfCategory/{subCategory.CategoryId}.html\">{subCategory.CategoryName}</a>");
             }
 
 
