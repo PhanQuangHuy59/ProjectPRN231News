@@ -3,6 +3,7 @@ using Repositories;
 
 namespace WebNewsAPIs.Services
 {
+
 	public class ArticleService
 	{
 		private readonly ICategoriesArticleRepository _category;

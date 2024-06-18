@@ -9,8 +9,8 @@ namespace BusinessObjects.Models
         {
             InverseReplyForNavigation = new HashSet<Comment>();
         }
-
-        public long CommentId { get; set; }
+		
+		public long CommentId { get; set; }
         public Guid ArticleId { get; set; }
         public Guid UserId { get; set; }
         public string Content { get; set; } = null!;

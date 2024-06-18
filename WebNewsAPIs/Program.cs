@@ -22,12 +22,23 @@ builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(2);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.ConfigOdata();
 builder.Services.InjectService();
 builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
 builder.ConfigAuthenAuthor();
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORSPolicy", builder =>
+    builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed((host) => true));
+});
 //MailSetting
 var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
 builder.Services.Configure<MailSettings>(mailsettings);
@@ -48,9 +59,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("CORSPolicy");
 
 app.MapControllers();
 

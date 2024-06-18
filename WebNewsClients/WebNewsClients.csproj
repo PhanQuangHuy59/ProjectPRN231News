@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\comments.js" />
     <Content Remove="wwwroot\template\mvpthemes.com\flexmag\wp-content\themes\flex-mag\images\logos\logo-large.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\comments.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +31,10 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\comments.js" />
   </ItemGroup>
 
   <ItemGroup>

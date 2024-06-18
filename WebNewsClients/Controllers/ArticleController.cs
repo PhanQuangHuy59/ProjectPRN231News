@@ -92,12 +92,16 @@ namespace WebNewsClients.Controllers
 				responseMessageCallApiCategoryOfArticle.EnsureSuccessStatusCode();
 				var category = responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
 					.Result.data.ToList();
+				// Call api comment of Article 
+				string urlCallApiComment = $"https://localhost:7251/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ReplyFor eq null and ArticleId eq {article1.ArticleId}";
+				var responseMessageCallApiComment =  _httpClient.GetAsync(urlCallApiComment).Result;
+				responseMessageCallApiComment.EnsureSuccessStatusCode();
+				var articlesComment = responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>()
+					.Result.data.ToList();
+
+
 
 				//Call api tim cacs article theo loai cua bai bao
-
-
-
-
 				string urlCallApiArticlesForRecomment = $"https://localhost:7251/api/Articles/GetAllArticleOfAllCategory?categoryId={category[0].CategoryId}";
 				var responseMessageCallApiArticlesForRecomment = _httpClient.GetAsync(urlCallApiArticlesForRecomment).Result;
 				responseMessageCallApiArticlesForRecomment.EnsureSuccessStatusCode();
@@ -124,6 +128,7 @@ namespace WebNewsClients.Controllers
 				ViewBag.ListArticle = articles;
 				ViewBag.ListArticleRecomend = listArticlesRecommend;
 				ViewBag.CategoryOfArticle = category[0];
+				ViewBag.Comments = articlesComment;
 				return View();
 			}
 

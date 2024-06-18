@@ -3,6 +3,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebNewsAPIs.Dtos
 {
+    public class AddCommentStringDto
+    {
+        [Required]
+        public string ArticleId { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
+        [Required]
+        [StringLength(1000, ErrorMessage = "Content cannot exceed 1000 characters.")]
+        public string Content { get; set; } = null!;
+
+        [Range(0, long.MaxValue, ErrorMessage = "Likes must be a non-negative number.")]
+        public long? Likes { get; set; }
+
+        [Range(0, long.MaxValue, ErrorMessage = "Dislikes must be a non-negative number.")]
+        public long? Dislikes { get; set; }
+
+        public long? ReplyFor { get; set; }
+
+        public string? UserIdReply { get; set; }
+    }
     public class AddCommentDto
     {
         [Required]

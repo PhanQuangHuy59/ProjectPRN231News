@@ -83,6 +83,17 @@ namespace ProjectAPIAss.MapperConfig
             //Comment
             CreateMap<AddCommentDto, Comment>();
             CreateMap<UpdateCommentDto, Comment>();
+            CreateMap<AddCommentStringDto, Comment>()
+                .ForMember(des => des.ArticleId
+                , act =>
+                {
+                    act.MapFrom(src => Guid.Parse(src.ArticleId));
+                }).ForMember(des => des.UserId
+                , act =>
+                {
+                    act.MapFrom(src => Guid.Parse(src.UserId));
+                });
+
             CreateMap<Comment, ViewCommentDto>()
                 .ForMember(des => des.UserName
                 , act =>
