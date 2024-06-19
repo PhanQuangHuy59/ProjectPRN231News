@@ -22,14 +22,26 @@ namespace WebNewsClients.Controllers
         
         public  IActionResult Index()
         {
-            //$"{BaseUrls.BASE_URL_CategoryArticle}/api/CategoriesArticles/getAllCategory"
-            //Call api của Category
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
+            ////$"{BaseUrls.BASE_URL_CategoryArticle}/api/CategoriesArticles/getAllCategory"
+            ////Call api của Category
+            //string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
 
-            var responseMessage =  _httpClient.GetAsync(urlOdataAllCategory).Result;
+            //var responseMessage =  _httpClient.GetAsync(urlOdataAllCategory).Result;
+            //responseMessage.EnsureSuccessStatusCode();
+            //var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
+            //    .Result.data;
+
+            //Call api của Category Root
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+
+            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
             responseMessage.EnsureSuccessStatusCode();
             var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
                 .Result.data;
+            //
+           
+
+
             //Call Api lastest new 
             string urlOdataLastestNew = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=20&orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3";
             var responseMessageLastestNew = _httpClient.GetAsync(urlOdataLastestNew).Result;

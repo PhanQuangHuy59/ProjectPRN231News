@@ -93,7 +93,7 @@ namespace WebNewsClients.Controllers
 				var category = responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
 					.Result.data.ToList();
 				// Call api comment of Article 
-				string urlCallApiComment = $"https://localhost:7251/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ReplyFor eq null and ArticleId eq {article1.ArticleId}";
+				string urlCallApiComment = $"https://localhost:7251/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ArticleId eq {article1.ArticleId}";
 				var responseMessageCallApiComment =  _httpClient.GetAsync(urlCallApiComment).Result;
 				responseMessageCallApiComment.EnsureSuccessStatusCode();
 				var articlesComment = responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>()

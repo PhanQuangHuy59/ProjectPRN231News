@@ -1,0 +1,38 @@
+﻿@using BusinessObjects.Models;
+@model User;
+@if (Model == null)
+{
+    <div style="margin-right: 10px" class="d-flex justify-content-between align-items-center text-center">
+        <div>
+            <a class="text-white" asp-controller="User" asp-action="Login" >
+                <i style="font-size:30px;display:block;padding-top:10px" title="Login" class="fa-regular fa-user"></i>
+                SignIn
+            </a>
+        </div>
+        <div>
+            <a class="text-white" asp-controller="User" asp-action="Register" >
+                <i style="font-size:30px;display:block;padding-top:10px" title="Login" class="fa-solid fa-user-plus"></i>
+
+                SignUp
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <div style="margin-right: 10px" class="d-flex justify-content-between align-items-center text-center">
+        <div>
+            <a class="text-white" asp-controller="User" asp-action="PersonalInformation" >
+                Phan Huy
+            </a>
+        </div>
+        <div>
+            <a class="text-white" asp-controller="User" asp-action="Logout"  >
+
+                <i style="font-size:30px;display:block;padding-top:10px" title="Logout" class="fa-solid fa-right-to-bracket"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+}
+

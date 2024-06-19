@@ -1,11 +1,18 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     // Lấy tất cả các thẻ a có class 'comment-reply-link'
     const replyLinks = document.querySelectorAll('.comment-reply-link');
+    $('#articleId').val('');
+    $('#userId').val('');
+    $('#replyFor').val('');
+    $('#cancel-comment-reply-link').hide();
+    console.log("Chay vao Khoi Dong");
 
     // Thêm event listener cho mỗi thẻ a
     replyLinks.forEach(function (link) {
         link.addEventListener('click', function (event) {
             event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a nếu cần
+            // hiển thị nut cancle
+            $('#cancel-comment-reply-link').show();
             // Lấy các dữ liệu từ thuộc tính data-*
             const commentId = link.dataset.commentid;
             const articleid = link.dataset.articleid;
@@ -19,18 +26,37 @@
             console.log('Comment ID:', commentId);
             console.log('Article ID:', articleid);
             console.log('User Id:', userid);
-            
+
 
             // Bạn có thể thực hiện các hành động khác tại đây
         });
+    });
+    main_information_comment
+    $("#cancel-comment-reply-link").on('click', function (event) {
+        $('#articleId').val('');
+        $('#userId').val('');
+        $('#replyFor').val
+        $('#cancel-comment-reply-link').hide();
+        console.log("Chay vao Cancel");
+
     });
 
     $('#commentform').on('submit', function (event) {
         event.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
         // Tạo đối tượng FormData từ form
-        var formData = new FormData(this);
+       
+        var inforMainComment = document.getElementById('main_information_comment');
+        if ($('#articleId').val() === ''
+            & $('#userId').val() === '')
+        {
+            $('#articleId').val("" + inforMainComment.dataset.articleid);
+            $('#userId').val(""+inforMainComment.dataset.userid);
+            $('#replyFor').val('-1');
+            
+        }
 
+        var formData = new FormData(this);
         // Lấy dữ liệu từ các input ẩn và thêm vào FormData nếu chưa có
         if (!formData.has('ArticleId')) {
             formData.append('ArticleId', $('#articleId').val());
@@ -42,7 +68,7 @@
             formData.append('ReplyFor', $('#replyFor').val());
         }
         const data = {};
-        let requestToken = "";
+        
         formData.forEach((value, key) => {
             if (key != "comment_post_ID" & key != "comment_parent"
                 & key != "__RequestVerificationToken"
@@ -52,19 +78,23 @@
             if (key == "__RequestVerificationToken") {
                 requestToken = value;
             }
-            
+
         });
         // In ra console để kiểm tra các giá trị
         console.log(JSON.stringify(data));
         var urlComment = "";
-        // Tạo và gửi request bằng AJAX
+         //Tạo và gửi request bằng AJAX
+
         $.ajax({
             url: `https://localhost:7251/api/Comments`,
             type: 'POST',
             data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
             contentType: "application/json",
             success: function (result, status, xhr) {
-                
+                //location.reload
+                if (confirm("Bạn có muốn reload để thấy comment của bạn không ?")) {
+                    window.location.reload();
+                } 
                 console.log('Success:', result);
             },
             error: function (xhr, status, error) {
@@ -73,8 +103,6 @@
             }
         });
     });
-
-    
 });
 
 

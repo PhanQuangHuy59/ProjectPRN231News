@@ -90,6 +90,7 @@ public class ViewCommentDto
         public long? ReplyFor { get; set; }
         public Guid? UserIdReply { get; set; }
         public string? UserReplyName { get; set; }
+        public virtual ICollection<ViewCommentDto> InverseReplyForNavigation { get; set; }
 
 
     }

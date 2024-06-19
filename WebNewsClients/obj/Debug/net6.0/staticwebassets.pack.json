@@ -129,6 +129,14 @@
       "PackagePath": "staticwebassets\\fontawesome\\webfonts\\fa-v4compatibility.woff2"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anhbialogin.png",
+      "PackagePath": "staticwebassets\\images\\anhbialogin.png"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anhlogologin.png",
+      "PackagePath": "staticwebassets\\images\\anhlogologin.png"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\graphic1.svg",
       "PackagePath": "staticwebassets\\images\\graphic1.svg"
     },

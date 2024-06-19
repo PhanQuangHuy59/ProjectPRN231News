@@ -49,15 +49,40 @@ namespace WebNewsAPIs.Controllers
             {
                 return StatusCode(400, "Dữ liệu của bạn không thỏa mãn");
             }
-            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.ToString().Equals(comment.UserId));
+            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.ToString().Equals(comment.UserId)).Result;
             if (checkUser == null){
                 return StatusCode(404, "Không tìm thấy User");
             }
+
             var commentAdd = _mapper.Map<Comment>(comment);
             commentAdd.CreateDate = DateTime.Now;
-            _commentRepo.AddAsync(commentAdd);
+            commentAdd = _commentRepo.AddAsync(commentAdd).Result;
+            commentAdd.User = checkUser;
 
             return Ok(_mapper.Map<ViewCommentDto>(commentAdd));
+        }
+
+        [HttpGet("GetCommentOfArticle")]
+        public  ActionResult<List<ViewCommentDto>> GetCommentOfArticle(Guid id)
+        {
+            if (_commentRepo == null || _mapper == null)
+            {
+                return StatusCode(500, "Dịch vụ hệ thống đang gặp lỗi xin hãy chờ đợi");
+            }
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400, "Dữ liệu của bạn không thỏa mãn");
+            }
+            string[] includes = new string[]
+            {
+                nameof(Comment.User),
+                nameof(Comment.InverseReplyForNavigation)
+
+            };
+            var commentOfArticle = _commentRepo.GetMulti(c => c.ArticleId.Equals(id), includes);
+            var listCommentRespont = _mapper.Map<List<ViewCommentDto>>(commentOfArticle);
+            
+            return Ok(listCommentRespont);
         }
     }
 }

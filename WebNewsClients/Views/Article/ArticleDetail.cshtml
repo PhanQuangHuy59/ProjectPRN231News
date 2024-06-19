@@ -20,104 +20,113 @@
 
     // xu ly comment
     var comment = (IEnumerable<Comment>)ViewBag.Comments;
-    int countComment = 0;
+
+    var commentReplyForNull = comment.Where(c => c.ReplyFor == null);
+    var commentReplyFor = comment.Where(c => c.ReplyFor != null);
+
     string pathImag = @"/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-ent.png";
+
+    
     string GenerateCommentHtml(IEnumerable<Comment> comments, int depth)
     {
         StringBuilder sb = new StringBuilder();
-
+        sb.AppendLine("<ol id=\"mainCommentArticle\" class=\"list-group commentlist\">");
+        var margin = depth * 20;
         foreach (var comment in comments)
         {
-            ++countComment;
-            sb.Append($"<li class=\"comment byuser comment-author-fanpress bypostauthor thread-even \" id=\"li-comment-{comment.CommentId}\">");
-            sb.Append($"  <div class=\"comment-wrapper\" id=\"comment-{comment.CommentId}\">");
-            sb.Append($"    <div class=\"comment-inner\">");
-            sb.Append($"      <div class=\"comment-avatar\">");
+
+            sb.AppendLine($"<li style=\"margin-left: {margin}px\" class=\"list-group-item\" id=\"li-comment-{comment.CommentId}\">");
+            sb.AppendLine($"  <div class=\"comment-wrapper\" id=\"comment-{comment.CommentId}\">");
+            sb.AppendLine($"    <div class=\"comment-inner\">");
+            sb.AppendLine($"      <div class=\"comment-avatar\">");
             if (comment.User == null || comment.User.Image == null)
             {
-                sb.Append($"<img alt='' src='{pathImag}' srcset='{pathImag}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
+                sb.AppendLine($"<img alt='' src='{pathImag}' srcset='{pathImag}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
             }
             else
             {
-                sb.Append($"        <img alt='' src='{comment.User.Image}' srcset='{comment.User.Image}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
+                sb.AppendLine($"        <img alt='' src='{comment.User.Image}' srcset='{comment.User.Image}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
             }
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"commentmeta\">");
-            sb.Append($"        <p class=\"comment-meta-1\">");
-            sb.Append($"          <cite class=\"fn\">{comment.User.DisplayName}</cite>");
-            sb.Append($"        </p>");
-            sb.Append($"        <p class=\"comment-meta-2\">");
-            sb.Append($"          {comment.CreateDate.ToString("MMMM dd, yyyy hh:mm tt")}");
-            sb.Append($"        </p>");
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"text\">");
-            sb.Append($"        <div class=\"c\">");
-            sb.Append($"          <p>{comment.Content}</p>");
-            sb.Append($"        </div>");
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"clear\"></div>");
-            sb.Append($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
-            sb.Append($"    </div>");
-            sb.Append($"  </div>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"commentmeta\">");
+            sb.AppendLine($"        <p class=\"comment-meta-1\">");
+            sb.AppendLine($"          <cite class=\"fn\">{comment.User.DisplayName}</cite>");
+            sb.AppendLine($"        </p>");
+            sb.AppendLine($"        <p class=\"comment-meta-2\">");
+            sb.AppendLine($"          {comment.CreateDate.ToString("MMMM dd, yyyy hh:mm tt")}");
+            sb.AppendLine($"        </p>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"text\">");
+            sb.AppendLine($"        <div class=\"c\">");
+            sb.AppendLine($"          <p>{comment.Content}</p>");
+            sb.AppendLine($"        </div>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"clear\"></div>");
+            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
+            sb.AppendLine($"    </div>");
+            sb.AppendLine($"  </div>");
+            var listCommentReplyFor = commentReplyFor.Where(c => c.ReplyFor == comment.CommentId);
 
-            if (comment.InverseReplyForNavigation != null && comment.InverseReplyForNavigation.Count > 0)
+            if (listCommentReplyFor != null && listCommentReplyFor.Count() > 0)
             {
-                var listComment = comment.InverseReplyForNavigation;
-                sb.Append($"<ul class=\"children\">");
-                sb.Append(GenerateSubCommentHtml(comment.InverseReplyForNavigation, 2, ref countComment));
-                sb.Append($"</ul>");
+                var depnew = depth + 1;
+                sb.AppendLine($"<ul class=\"list-group\">");
+                sb.Append(GenerateSubCommentHtml(listCommentReplyFor, ++depnew));
+                sb.AppendLine($"</ul>");
             }
-            sb.Append("</li>");
-        }
 
+        }
+        sb.AppendLine("</li>");
+        sb.AppendLine("</ol>");
         return sb.ToString();
     }
 
-    string GenerateSubCommentHtml(IEnumerable<Comment> subComment, int depth, ref int countComment1)
+    string GenerateSubCommentHtml(IEnumerable<Comment> subComment, int depth)
     {
         StringBuilder sb = new StringBuilder();
-
+        var margin = depth * 20;
         foreach (var comment in subComment)
         {
-            ++countComment;
-            sb.Append($"<li class=\"comment  alt \" id=\"li-comment-{comment.CommentId}\">");
-            sb.Append($"  <div class=\"comment-wrapper\" id=\"comment-{comment.CommentId}\">");
-            sb.Append($"    <div class=\"comment-inner\">");
-            sb.Append($"      <div class=\"comment-avatar\">");
+            sb.AppendLine($"<li style=\"margin-left: {margin}px\" class=\"list-group-item\" id=\"li-comment-{comment.CommentId}\">");
+            sb.AppendLine($"  <div class=\"comment-wrapper\" id=\"comment-{comment.CommentId}\">");
+            sb.AppendLine($"    <div class=\"comment-inner\">");
+            sb.AppendLine($"      <div class=\"comment-avatar\">");
             if (comment.User == null || comment.User.Image == null)
             {
-                sb.Append($"<img alt='' src='{pathImag}' srcset='{pathImag}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
+                sb.AppendLine($"<img alt='' src='{pathImag}' srcset='{pathImag}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
             }
             else
             {
-                sb.Append($"        <img alt='' src='{comment.User.Image}' srcset='{comment.User.Image}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
+                sb.AppendLine($"        <img alt='' src='{comment.User.Image}' srcset='{comment.User.Image}&#038;d=mm&#038;r=g 2x' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />");
             }
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"commentmeta\">");
-            sb.Append($"        <p class=\"comment-meta-1\">");
-            sb.Append($"          <cite class=\"fn\"><a href=\" \" class=\"url\" rel=\"ugc external nofollow\">{(comment.User == null ? "NO User" : comment.User.DisplayName)}></cite>");
-            sb.Append($"        </p>");
-            sb.Append($"        <p class=\"comment-meta-2\">");
-            sb.Append($"          {comment.CreateDate.ToString("MMMM dd, yyyy hh:mm tt")}");
-            sb.Append($"        </p>");
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"text\">");
-            sb.Append($"        <div class=\"c\">");
-            sb.Append($"          <p>{comment.Content}</p>");
-            sb.Append($"        </div>");
-            sb.Append($"      </div>");
-            sb.Append($"      <div class=\"clear\"></div>");
-            sb.Append($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond'  data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.CommentId}\" aria-label='Reply to {comment.CommentId}'>Reply</a></span></div>");
-            sb.Append($"    </div>");
-            sb.Append($"  </div>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"commentmeta\">");
+            sb.AppendLine($"        <p class=\"comment-meta-1\">");
+            sb.AppendLine($"          <cite class=\"fn\"><a href=\" \" class=\"url\" rel=\"ugc external nofollow\">{(comment.User == null ? "NO User" : comment.User.DisplayName)}></cite>");
+            sb.AppendLine($"        </p>");
+            sb.AppendLine($"        <p class=\"comment-meta-2\">");
+            sb.AppendLine($"          {comment.CreateDate.ToString("MMMM dd, yyyy hh:mm tt")}");
+            sb.AppendLine($"        </p>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"text\">");
+            sb.AppendLine($"        <div class=\"c\">");
+            sb.AppendLine($"          <p>{comment.Content}</p>");
+            sb.AppendLine($"        </div>");
+            sb.AppendLine($"      </div>");
+            sb.AppendLine($"      <div class=\"clear\"></div>");
+            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond'  data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.CommentId}\" aria-label='Reply to {comment.CommentId}'>Reply</a></span></div>");
+            sb.AppendLine($"    </div>");
+            sb.AppendLine($"  </div>");
 
-            if (comment.InverseReplyForNavigation != null && comment.InverseReplyForNavigation.Count > 0)
+            var listCommentReplyFor = commentReplyFor.Where(c => c.ReplyFor == comment.CommentId);
+            if (listCommentReplyFor != null && listCommentReplyFor.Count() > 0)
             {
-                sb.Append($"<ul class=\"children\">");
-                GenerateSubCommentHtml(comment.InverseReplyForNavigation, depth++, ref countComment1);
-                sb.Append($"</ul>");
+                var depnew = depth + 1;
+                sb.AppendLine($"<ul class=\"list-group\">");
+                sb.AppendLine(GenerateSubCommentHtml(listCommentReplyFor, depnew));
+                sb.AppendLine($"</ul>");
             }
-            sb.Append("</li>");
+            sb.AppendLine("</li>");
         }
 
         return sb.ToString();
@@ -125,6 +134,7 @@
 }
 
 <div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
+    <div id="main_information_comment"  data-articleid="@article.ArticleId.ToString()" data-userid="@Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()"></div>
     <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" />
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -141,6 +151,7 @@
 
         }
     </ol>
+
     <div class="body-main-out relative">
         <div class="body-main-in">
             <div id="body-main-cont" class="left relative">
@@ -245,7 +256,6 @@
                                                         <div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
                                                     </div><!--article-ad-->
 
-
                                                     <div id="comments-button" class="left relative comment-click-156 com-but-156">
                                                         <span class="comment-but-text">@comment.Count() Comments</span>
                                                     </div><!--comments-button-->
@@ -256,9 +266,11 @@
                                                             </span>
                                                         </h4>
 
-                                                        <ol class="commentlist">
-                                                            @Html.Raw(GenerateCommentHtml(comment, 1));
-                                                        </ol>
+
+                                                        @Html.Raw(GenerateCommentHtml(commentReplyForNull, 1))
+
+
+
 
                                                         @*ArticleId,UserId,Content,ReplyFor*@
                                                         <div id="respond" class="comment-respond">

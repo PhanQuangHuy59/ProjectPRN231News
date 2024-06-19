@@ -92,6 +92,11 @@ namespace ProjectAPIAss.MapperConfig
                 , act =>
                 {
                     act.MapFrom(src => Guid.Parse(src.UserId));
+                })
+                .ForMember(des => des.ReplyFor
+                , act =>
+                {
+                    act.MapFrom(src => src.ReplyFor == -1 ? null: src.ReplyFor);
                 });
 
             CreateMap<Comment, ViewCommentDto>()
@@ -109,6 +114,10 @@ namespace ProjectAPIAss.MapperConfig
                 , act =>
                 {
                     act.MapFrom(src => src.UserIdReplyNavigation != null ? src.UserIdReplyNavigation.DisplayName : null);
+                }).ForMember(des => des.InverseReplyForNavigation
+                , act =>
+                {
+                    act.MapFrom(src => src.InverseReplyForNavigation);
                 });
 
 

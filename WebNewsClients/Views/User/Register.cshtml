@@ -5,7 +5,9 @@
     <div class="website-logo">
         <a href="index.html">
             <div class="logo">
-                <img class="logo-size" src="images/logo-light.svg" alt="">
+                <object data="~/images/logo-light.svg" type="image/svg+xml" class="bg-primary" width="100" height="50">
+                    Your browser does not support SVG
+                </object>
             </div>
         </a>
     </div>
@@ -13,7 +15,9 @@
         <div class="img-holder">
             <div class="bg"></div>
             <div class="info-holder">
-                <img src="images/graphic1.svg" alt="">
+                <object data="~/images/graphic1.svg" type="image/svg+xml" width="500" height="600">
+                    Your browser does not support SVG
+                </object>
             </div>
         </div>
         <div class="form-holder">
@@ -22,7 +26,7 @@
                     <h3>Get more things done with Loggin platform.</h3>
                     <p>Access to the most powerfull tool in the entire design and web industry.</p>
                     <div class="page-links">
-                        <a href="login4.html">Login</a><a href="register4.html" class="active">Register</a>
+                        <a asp-controller="User" asp-action="Login">Login</a><a href="#" class="active">Register</a>
                     </div>
                     <form>
                         <input class="form-control" type="text" name="name" placeholder="Full Name" required>

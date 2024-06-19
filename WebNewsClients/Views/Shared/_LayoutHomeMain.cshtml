@@ -4,7 +4,8 @@
 @{
     var listCategory = (IEnumerable<CategoriesArticle>)ViewBag.Category;
 
-
+    var listCategoryRoot = listCategory.Where(c => c.ParentCategory == null).ToList();
+    var listCategoryNotRoot = listCategory.Where(c => c.ParentCategory != null).ToList();
 
     string GenerateMenuHtml(IEnumerable<CategoriesArticle> categories)
     {
@@ -12,8 +13,8 @@
 
         foreach (var category in categories)
         {
-
-            if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
+            var listChildren = listCategoryNotRoot.Where(c => c.ParentCategoryId.Equals(category.CategoryId)).ToList();
+            if (listChildren != null && listChildren.Any())
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015 element\">");
                 sb.Append($"<a href=\"/Article/ArticleOfCategory/{category.CategoryId}.html\">{category.CategoryName}</a>");
@@ -24,10 +25,10 @@
                 sb.Append($"<a href=\"/Article/ArticleOfCategory/{category.CategoryId}.html\">{category.CategoryName}</a>");
             }
 
-            if (category.InverseParentCategory != null && category.InverseParentCategory.Any())
+            if (listChildren != null && listChildren.Any())
             {
                 sb.Append("<ul class=\"sub-menu wrapper\">");
-                sb.Append(GenerateSubMenuHtml(category.InverseParentCategory));
+                sb.Append(GenerateSubMenuHtml(listChildren));
                 sb.Append("</ul>");
             }
             sb.Append("</li>");
@@ -42,7 +43,8 @@
 
         foreach (var subCategory in subCategories)
         {
-            if(subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
+            var listChildren = listCategoryNotRoot.Where(c => c.ParentCategoryId.Equals(subCategory.CategoryId)).ToList();
+            if (listChildren != null && listChildren.Any())
             {
                 sb.Append("<li class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2015 element\">");
                 sb.Append($"<a href=\"/Article/ArticleOfCategory/{subCategory.CategoryId}.html\">{subCategory.CategoryName}</a>");
@@ -54,10 +56,10 @@
             }
 
 
-            if (subCategory.InverseParentCategory != null && subCategory.InverseParentCategory.Any())
+            if (listChildren != null && listChildren.Any())
             {
                 sb.Append("<ul class=\"sub-menu wrapper\">");
-                sb.Append(GenerateSubMenuHtml(subCategory.InverseParentCategory));
+                sb.Append(GenerateSubMenuHtml(listChildren));
                 sb.Append("</ul>");
             }
 
@@ -78,7 +80,7 @@
     <meta name='robots' content='max-image-preview:large' />
     <meta name="generator" content="WordPress 6.4.4" />
     <meta name="generator" content="WooCommerce 8.7.0" />
-    
+
     <link rel="stylesheet" href="~/user-management-html/css/style1.css" />
 
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="feed/index.html" />
@@ -127,7 +129,7 @@
     <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="~/fontawesome/css/brands.css" rel="stylesheet" />
     <link href="~/fontawesome/css/solid.css" rel="stylesheet" />
-  
+
 
     <link rel='stylesheet' id='mvp-style-css' href='~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/style5352.css?ver=6.4.4' type='text/css' media='all' />
     <!--[if lt IE 10]>
@@ -219,7 +221,7 @@
                             </li>
                         </ul>
                     </div><!--fly-side-wrap-->
-                    
+
                     <div class="fly-wrap-in">
                         <div id="fly-menu-wrap">
                             <nav class="fly-nav-menu left relative">
@@ -227,7 +229,7 @@
                                     <ul id="menu-main-menu" class="menu">
                                         <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
                                             <a asp-controller="Home" asp-action="Index">Home</a>
-                                         </li>
+                                        </li>
 
                                         @Html.Raw(GenerateMenuHtml(listCategory));
 
@@ -250,11 +252,10 @@
                         </div><!--fly-menu-wrap-->
                     </div><!--fly-wrap-in-->
                 </div><!--fly-wrap-out-->
-            </div><!--fly-wrap-->			
+            </div><!--fly-wrap-->
             <div id="head-main-wrap" class="left relative">
 
                 <div style="width:100%;" id="head-main-top" class="left relative">
-                   
                 </div>
                 <!--head-main-top-->
                 <div id="main-nav-wrap">
@@ -272,7 +273,7 @@
                                         <div class="nav-logo left">
                                             <a itemprop="url" href="index.html">
                                                 <img itemprop="logo" src="~/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-nav.png" alt="Flex Mag" data-rjs="2" />
-                                                </a>
+                                            </a>
                                             <h1 class="mvp-logo-title">Flex Mag</h1>
                                         </div><!--nav-logo-->
                                     </div><!--nav-left-wrap-->
@@ -284,32 +285,32 @@
                                                         <ul id="menu-main-menu-1" class="menu">
                                                             <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
                                                                 <a asp-controller="Home" asp-action="Index">Home</a>
-                                                                </li>
-                                                           @*fasdfa*@
+                                                            </li>
+                                                            @*fasdfa*@
 
-                                                            @Html.Raw(GenerateMenuHtml(listCategory));
-                                                            
+                                                            @Html.Raw(GenerateMenuHtml(listCategoryRoot));
+                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                                                <div class="nav-search-wrap left relative">
+                                                                    <span class="nav-search-but left"><i class="fa fa-search fa-2"></i></span>
+                                                                    <div class="search-fly-wrap">
+                                                                        <form method="get" id="searchform" action="https://mvpthemes.com/flexmag/">
+                                                                            <input type="text" name="s" id="s" value="Type search term and press enter" onfocus='if (this.value == "Type search term and press enter") { this.value = ""; }' onblur='if (this.value == "") { this.value = "Type search term and press enter"; }' />
+                                                                            <input type="hidden" id="searchsubmit" value="Search" />
+                                                                        </form>
+                                                                    </div><!--search-fly-wrap-->
+                                                                </div><!--nav-search-wrap-->
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </nav>
                                             </div><!--nav-menu-in-->
                                             <div class="nav-right-wrap relative">
-                                                <div class="nav-search-wrap left relative">
-                                                    <span class="nav-search-but left"><i class="fa fa-search fa-2"></i></span>
-                                                    <div class="search-fly-wrap">
-                                                        <form method="get" id="searchform" action="https://mvpthemes.com/flexmag/">
-                                                            <input type="text" name="s" id="s" value="Type search term and press enter" onfocus='if (this.value == "Type search term and press enter") { this.value = ""; }' onblur='if (this.value == "") { this.value = "Type search term and press enter"; }' />
-                                                            <input type="hidden" id="searchsubmit" value="Search" />
-                                                        </form>
-                                                    </div><!--search-fly-wrap-->
-                                                </div><!--nav-search-wrap-->
-                                                
-                                                @*<a href="http://www.facebook.com/envato" target="_blank">
-                                                    <span class="nav-soc-but"><i class="fa-brands fa-square-facebook"></i></span>
-                                                </a>
-                                                <a href="http://www.twitter.com/mvpthemes" target="_blank">
-                                                    <span class="nav-soc-but"><i class="fa-brands fa-square-twitter"></i></span>
-                                                </a>*@
+
+                                                @await Html.PartialAsync("_PartialLogin", null);
+
+
+                                             
+
                                             </div><!--nav-right-wrap-->
                                         </div><!--nav-menu-out-->
                                     </div><!--nav-logo-in-->
@@ -337,7 +338,7 @@
             <main role="main">
                 @RenderBody()
             </main>
-            
+
             <footer id="foot-wrap" class="left relative">
                 <div id="foot-top-wrap" class="left relative">
                     <div class="body-main-out relative">
@@ -598,7 +599,7 @@
 
             // Main Menu Scroll
             $('.fly-nav-menu').niceScroll({ cursorcolor: "#888", cursorwidth: 7, cursorborder: 0, zindex: 999999 });
-            
+
             // Main Menu Scroll
             $('.fly-nav-menu').niceScroll({ cursorcolor: "#888", cursorwidth: 7, cursorborder: 0, zindex: 999999 });
 
