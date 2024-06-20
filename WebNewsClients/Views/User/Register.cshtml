@@ -1,14 +1,28 @@
 ﻿@{
     Layout = "_LayoutLogin";
+    
 }
+@using WebNewsAPIs.Dtos;
+@model AddUserDto;
 <div class="form-body">
     <div class="website-logo">
         <a href="index.html">
-            <div class="logo">
-                <object data="~/images/logo-light.svg" type="image/svg+xml" class="bg-primary" width="100" height="50">
-                    Your browser does not support SVG
-                </object>
+            <div class="d-flex justify-content-between align-items-center text-center">
+                <div>
+                    <button class="btn btn-outline-primary m-3">
+                         <a asp-controller="Home" asp-action="Index" class="text-bg-outline-primary text-decoration-none">Go Back Home</a>
+                    </button>
+                    
+                   
+                </div>
+                <div class="logo">
+                    <object data="~/images/logo-light.svg" type="image/svg+xml" class="bg-primary" width="100" height="50">
+                        Your browser does not support SVG
+                    </object>
+                </div>
+
             </div>
+           
         </a>
     </div>
     <div class="row">
@@ -28,12 +42,27 @@
                     <div class="page-links">
                         <a asp-controller="User" asp-action="Login">Login</a><a href="#" class="active">Register</a>
                     </div>
-                    <form>
-                        <input class="form-control" type="text" name="name" placeholder="Full Name" required>
-                        <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="@Model.DisplayName" class="control-label"></label>
+                            <input type="text" asp-for="@Model.DisplayName" class="form-control" placeholder="Full Name" />
+                            <span asp-validation-for="@Model.DisplayName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Username" class="control-label"></label>
+                            <input type="email" asp-for="@Model.Username" class="form-control" placeholder="E-mail Address" />
+                            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Password" class="control-label"></label>
+                            <input type="password" asp-for="@Model.Password" class="form-control" placeholder="Enter Password" />
+                            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                            
+                        </div>
+                       
                         <div class="form-button">
-                            <button id="submit" type="submit" class="ibtn">Register</button>
+                            <button asp-controller="User" asp-action="RegisterPost" type="submit" class="ibtn">Register</button>
                         </div>
                     </form>
                     <div class="other-links">
@@ -44,3 +73,7 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+}

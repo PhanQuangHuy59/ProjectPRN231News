@@ -96,7 +96,7 @@ namespace ProjectAPIAss.MapperConfig
                 .ForMember(des => des.ReplyFor
                 , act =>
                 {
-                    act.MapFrom(src => src.ReplyFor == -1 ? null: src.ReplyFor);
+                    act.MapFrom(src => src.ReplyFor == -1 ? null : src.ReplyFor);
                 });
 
             CreateMap<Comment, ViewCommentDto>()
@@ -193,7 +193,12 @@ namespace ProjectAPIAss.MapperConfig
                 {
                     act.MapFrom(src => src.Role != null ? src.Role.Rolename : null);
                 });
-                 // View
+            CreateMap<User, AddUserDto>();
+            CreateMap<User, UpdateUserDto>();
+
+
+
+            // View
             CreateMap<AddViewDto, View>();
             CreateMap<UpdateViewDto, View>();
             CreateMap<View, ViewViewDto>()

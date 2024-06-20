@@ -2,6 +2,7 @@
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
@@ -21,13 +22,9 @@ builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
     options.UseSqlServer(connectString);
 });
 
+
 builder.Services.AddControllers();
-//builder.Services.AddSession(options =>
-//{
-//    //options.IdleTimeout = TimeSpan.FromHours(2);
-//    //options.Cookie.HttpOnly = true;
-//    //options.Cookie.IsEssential = true;
-//});
+
 builder.Services.ConfigOdata();
 builder.Services.InjectService();
 builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
@@ -42,6 +39,8 @@ builder.Services.AddCors(options =>
 //MailSetting
 var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
 builder.Services.Configure<MailSettings>(mailsettings);
+
+builder.Services.AddTransient<IEmailSender,SendMailService>();
 
 
 builder.Services.AddControllers();
@@ -59,7 +58,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.UseSession();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("CORSPolicy");

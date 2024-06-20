@@ -31,7 +31,7 @@ namespace AccessDatas
         #region Implementation
         public async virtual Task<T> AddAsync(T entity)
         {
-            var entry = await dbSet.AddAsync(entity);
+            var entry = await dataContext.Set<T>().AddAsync(entity);
             SaveAsync();
             return entry.Entity;
         }
