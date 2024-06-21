@@ -37,8 +37,9 @@ namespace WebNewsClients.Controllers
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
 
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage =  _httpClient.GetAsync(urlOdataAllCategory).Result;
             responseMessage.EnsureSuccessStatusCode();
+
             var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
                 .Result.data;
             //
@@ -66,6 +67,7 @@ namespace WebNewsClients.Controllers
 
 
             //tra ve view
+            
             ViewBag.Category = listCategories;
             ViewBag.CategoryDetail = category1;
             ViewBag.Articles = articles;

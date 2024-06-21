@@ -137,16 +137,32 @@
       "PackagePath": "staticwebassets\\images\\anhlogologin.png"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\female_default.png",
+      "PackagePath": "staticwebassets\\images\\female_default.png"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\graphic1.svg",
       "PackagePath": "staticwebassets\\images\\graphic1.svg"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\img_default.png",
+      "PackagePath": "staticwebassets\\images\\img_default.png"
     },
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\logo-light.svg",
       "PackagePath": "staticwebassets\\images\\logo-light.svg"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\male_default.png",
+      "PackagePath": "staticwebassets\\images\\male_default.png"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\information_personal.js",
+      "PackagePath": "staticwebassets\\js\\information_personal.js"
     },
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\jquery.min.js",

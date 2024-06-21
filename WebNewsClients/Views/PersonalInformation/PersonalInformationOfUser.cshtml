@@ -1,0 +1,350 @@
+﻿
+@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@model AddUserDto;
+@{
+    Layout = "_LayoutPersonalInformation";
+
+    var informationUser = (User)ViewBag.InformationUser;
+    string pathImageDefault = "";
+    string pathImageMale = "/images/male_default.png";
+    string pathImageFemale = "/images/female_default.png";
+    string pathImageKhac = "/images/img_default.png";
+
+
+    if(informationUser.Gender != null)
+    {
+        if (informationUser.Gender.Equals("Nam"))
+        {
+            pathImageDefault = pathImageMale;
+        }
+        else if (informationUser.Gender.Equals("Nữ"))
+        {
+            pathImageDefault = pathImageFemale;
+        }
+        else if (informationUser.Gender.Equals("Khác"))
+        {
+            pathImageDefault = pathImageKhac;
+        }
+
+       
+
+        pathImageDefault = informationUser.Image == null ? pathImageDefault : informationUser.Image;
+    }
+    else
+    {
+        pathImageDefault = pathImageKhac;
+    }
+}
+
+<div class="full_container">
+    <div class="inner_container">
+
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar_blog_1">
+                <div class="sidebar-header">
+                    <div class="logo_section">
+                        <a href="index.html"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
+                    </div>
+                </div>
+                <div class="sidebar_user_info">
+                    <div class="icon_setting"></div>
+                    <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="@pathImageDefault" alt="#" /></div>
+                        <div class="user_info">
+                            <h6 class="text-center">@informationUser.DisplayName</h6>
+                            <p><span class="online_animation"></span> Online</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar_blog_2">
+                <h4>Action General</h4>
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser"
+                           data-toggle="collapse" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                            <span>Thông Tin Tài Khoản</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="widgets.html">
+                            <i class="fa fa-comments-o blue2_color"></i>
+                            <span>Hoạt động bình luận</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#element" data-toggle="collapse" aria-expanded="false">
+                            <i class="fa fa-newspaper-o"></i>
+                            <span>Bảng tin của bạn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#apps" data-toggle="collapse" aria-expanded="false">
+
+                            <i class="fa fa-clock-o orange_color"></i>
+                            <span>Tin Đã xem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="price.html">
+                            <i class="fa fa-briefcase blue1_color"></i>
+                            <span>Tin đã lưu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="contact.html">
+                            <i class="fa fa-sign-out red_color"></i>
+                            @*<i class="fa fa-arrow-right-from-bracket red_color"></i>*@
+                            <span>Đăng xuất</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- end sidebar -->
+        <!-- right content -->
+        <div id="content">
+            <!-- topbar -->
+            <div class="topbar">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                            <a href="index.html"><img class="img-responsive" src="~/pluto/images/logo/logo_black.png" alt="#" /></a>
+                        </div>
+                        <div class="right_topbar">
+                            <div class="icon_info">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                    <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                                </ul>
+                                <ul class="user_profile_dd">
+                                    <li>
+                                        <a class="dropdown-toggle" data-toggle="dropdown">
+                                            <img class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
+                                            <span class="name_user">@informationUser.DisplayName</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">Thông Tin tài khoản</a>
+                                            <a class="dropdown-item" href="settings.html">Hoạt Động bình luận</a>
+                                            <a class="dropdown-item" href="help.html">Bảng Tin của bạn</a>
+                                            <a class="dropdown-item" href="help.html">Tin đã lưu</a>
+                                            <a class="dropdown-item" href="#">
+                                                <span>Đăng xuất</span>
+                                                <i class="fa fa-sign-out"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- end topbar -->
+            <!-- dashboard inner -->
+            <div class="midde_cont">
+                <div class="container-fluid">
+                    <div class="row column_title">
+                        <div class="col-md-12">
+                            <div class="page_title">
+                                <h2>Thông tin tai khoản</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row column1">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="white_shd full margin_bottom_30">
+                                <div class="full graph_head">
+                                    <div class="heading1 margin_0">
+                                        <h2>Hồ sơ người dùng</h2>
+                                    </div>
+                                </div>
+                                <div class="full price_table padding_infor_info">
+                                    <div class="row">
+                                        <!-- user profile section -->
+                                        <!-- profile image -->
+                                        <div class="col-lg-12">
+                                            <div class="full dis_flex center_text">
+                                                <div class="profile_img">
+                                                    <img width="180" class="rounded-circle" src="@pathImageDefault" alt="#" />
+                                                    <i title="Cập nhật hình ảnh đại diện mới" style="margin-left: 43%;font-size: 20px; margin-top: 20px;" class="fa fa-camera"></i>
+                                                </div>
+                                                <div class="profile_contant">
+                                                    <div class="contact_inner">
+                                                        <form id="formUpdateDisplayName">
+                                                            <label for="tenhienthi" class="form-label mb-0">Tên Hiển Thị</label>
+                                                            <div class="row mb-3 align-items-center">
+                                                                <div class="col-10">
+                                                                    <div class="input-group mb-3">
+                                                                        <input id="userId"  type="hidden" name="userId" value="@informationUser.UserId"/>
+                                                                        <input type="text" class="form-control" name="displayName" id="displayName" value="@informationUser.DisplayName" disabled>
+                                                                        <button class="btn btn-primary" type="button" id="buttonEnable">
+                                                                            <i class="fa fa-pencil"></i>
+                                                                        </button>
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                                <button style="margin-top:-13px" type="submit" class="btn btn-primary col-2">
+                                                                    Save
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
+                                                        <p><strong>Role: </strong>@informationUser.Role.Rolename</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><i class="fa fa-envelope-o"></i> : @informationUser.Username</li>
+                                                        </ul>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <!-- profile contant section -->
+                                            <div class="full inner_elements margin_top_30">
+                                                <div class="tab_style2">
+                                                    <div class="tabbar">
+                                                        <nav>
+                                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#recent_activity" role="tab" aria-selected="true">Chỉnh sửa thông tin cá nhân</a>
+                                                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#project_worked" role="tab" aria-selected="false">Thay đổi mật khẩu</a>
+                                                            </div>
+                                                        </nav>
+                                                        <div class="tab-content" id="nav-tabContent">
+                                                            <div class="tab-pane fade show active" id="recent_activity" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                                <div class="msg_list_main">
+                                                                    <form id="formBasicInformation">
+                                                                        <div class="mb-3">
+                                                                            <label for="phonenumber" class="form-label">
+                                                                                Số điện thoại
+                                                                                <i class="fa fa-phone-volume"></i>
+                                                                            </label>
+                                                                            <input type="text" value="@informationUser.PhoneNumber" class="form-control" id="phonenumber" pattern="[0-9]{9,12}" placeholder="Nhập số điện thoại bao gồm 9 - 12 số">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="ngaysinh" class="form-label">
+                                                                                Ngày Sinh
+                                                                                <i class="fa fa-cake-candles"></i>
+                                                                            </label>
+                                                                            <input type="date" class="form-control" value="@(informationUser.DateOfBirth != null ?informationUser.DateOfBirth.Value.ToString("dd/MM/yyyy") :"")" id="ngaysinh" aria-describedby="emailHelp">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">
+                                                                                Giới tính
+                                                                                <i class="fa fa-venus-double"></i>
+                                                                            </label>
+                                                                            <div class="d-flex">
+                                                                                <div class="form-check m-3">
+                                                                                    <input class="form-check-input" type="radio" name="gender" id="genderNam" value="Nam"
+                                                                                    @(informationUser.Gender == null ? "": informationUser.Gender.Equals("Nam")?"checked":"")
+                                                                                    >
+                                                                                    <label class="form-check-label" for="nam">Nam</label>
+                                                                                </div>
+                                                                                <div class="form-check  m-3">
+                                                                                    <input class="form-check-input" type="radio" name="gender" id="genderNu" value="Nữ"
+                                                                                    @(informationUser.Gender == null ? "" : informationUser.Gender.Equals("Nữ") ? "checked" : "")>
+                                                                                    <label class="form-check-label" for="nữ">Nữ</label>
+                                                                                </div>
+                                                                                <div class="form-check  m-3">
+                                                                                    <input class="form-check-input" type="radio" name="gender" id="genderKhac" value="Khác"
+                                                                                    @(informationUser.Gender == null ? "" : informationUser.Gender.Equals("Khác") ? "checked" : "")>
+                                                                                    >
+                                                                                    <label class="form-check-label" for="khác">Khác</label>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-floating mb-3">
+                                                                                <label for="diachi">
+                                                                                    Địa chỉ
+                                                                                    <i class="fa-solid fa-map-location-dot"></i>
+                                                                                </label>
+                                                                                <textarea id="diachi" value="@informationUser.Address" class="form-control"   rows="15" placeholder="Nhập địa chỉ ..."></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                                                                    </form>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="project_worked" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                                <h4 class="text-primary">Form thay đổi mật khẩu</h4>
+                                                                <form id="formChangePasswordMain">
+                                                                    <div class="mb-3">
+                                                                        <label for="currentpass" class="form-label">Nhập mật khẩu hiện tại</label><br />
+
+                                                                        <div class="input-group mb-3">
+                                                                            <input id="oldPassword" type="password" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                                                            <span id="eyeoldPassword" class="input-group-text">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <label for="currentpass" class="form-label">Nhập mật khẩu mới</label><br />
+
+                                                                        <div class="input-group mb-3">
+                                                                            <input id="newPassword" type="password" class="form-control" aria-label="Amount (to the nearest dollar)" required>
+                                                                            <span id="eyenewPassword" class="input-group-text">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <label for="currentpass" class="form-label">Nhập mật khẩu mới</label><br />
+
+                                                                        <div class="input-group mb-3">
+                                                                            <input id="confirmPassword" type="password" class="form-control" aria-label="Amount (to the nearest dollar)" required>
+                                                                            <span id="eyeconfirmPassword" class="input-group-text">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                            
+                                                                        <div class="mb-3 form-check">
+                                                                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                                              <label class="form-check-label" for="exampleCheck1">Ghi nhớ mật khẩu</label>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-primary">Thay Đổi</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end user profile section -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- footer -->
+            <div class="container-fluid">
+                <div class="footer">
+                    <p>
+                        Copyright © 2018 Designed by html.design. All rights reserved.<br><br>
+                        Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
+                    </p>
+                </div>
+            </div>
+            <!-- end dashboard inner -->
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+    <script src="~/js/information_personal.js"></script>
+}

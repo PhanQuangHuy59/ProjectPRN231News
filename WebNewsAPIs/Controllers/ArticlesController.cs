@@ -51,13 +51,17 @@ namespace WebNewsAPIs.Controllers
             {
                 return BadRequest();
             }
+
             string[] includes = new string[]
             {
                 nameof(Article.Categorty),
                 nameof(Article.Comments),
-                nameof(Article.AuthorNavigation)
+                nameof(Article.AuthorNavigation)  
             };
+            
             var listArticles = _articleRepository.GetMulti(c => true, includes);
+           
+
             var response = _mapper.Map<IEnumerable<ViewArticleDto>>(listArticles).OrderBy(c => c.PublishDate);
             return Ok(response);
         }

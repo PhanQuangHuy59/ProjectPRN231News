@@ -20,10 +20,11 @@ using WebNewsAPIs.Dtos;
 using BusinessObjects.Models;
 using WebNewsAPIs.Services;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+using Microsoft.AspNetCore.Components;
 
 namespace WebNewsAPIs.Controllers
 {
-    [Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -133,7 +134,7 @@ namespace WebNewsAPIs.Controllers
             {
                 var code = AuthenticationTokent.GeneraterCodeTokent(user);
                 var url = $"https://localhost:7069/User/NotificationConfirmAccount?userId={user.UserId}&code={code}";
-              
+
                 await _emailSender.SendEmailAsync(user.Username, "Thông Báo confirm account!", $"<h3>Confirm Account</h3>\r\n                    <a href=\"{url}\">CLick To ConfirmAccount</a>");
             }
             catch (Exception ex)
@@ -175,7 +176,7 @@ namespace WebNewsAPIs.Controllers
                 return NotFound();
             }
             var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
-            BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             try
             {
                 userCheck.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -188,7 +189,123 @@ namespace WebNewsAPIs.Controllers
 
             return Ok();
         }
+        //Update display name 
+        [HttpPut("UpdateDisplayName")]
+        public async Task<ActionResult<ViewUserDto>> UpdateDisplayName(Guid? userId, string displayName)
+        {
+            string[] includes = new string[]
+            {
+                nameof(BusinessObjects.Models.User.Role)
+            };
+            if (userId == null || string.IsNullOrEmpty(displayName))
+            {
+                return BadRequest();
+            }
 
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+
+            if (userCheck == null)
+            {
+                return StatusCode(404, "Không thể tìm thấy người dùng để thay đổi Display Name");
+            }
+            userCheck.DisplayName = displayName;
+
+            try
+            {
+                await _userRepo.UpdateAsync(userCheck);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Update không thành công!");
+            }
+            var responseToView = _mapper.Map<ViewUserDto>(userCheck);
+            return Ok(responseToView);
+        }
+        [HttpPut("UpdateInformationBasic")]
+        public async Task<ActionResult<ViewUserDto>> UpdateÌnormationBasic(Guid? userId,string? phoneNumber, DateTime? dateOfBirth, string? gioiTinh, string? address)
+        {
+            string[] includes = new string[]
+            {
+                nameof(BusinessObjects.Models.User.Role)
+            };
+            string[] gender = {"Nam","Nữ","Khác" };
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+
+            if (userCheck == null)
+            {
+                return StatusCode(404, "Không thể tìm thấy người dùng để Update");
+            }
+            if (!string.IsNullOrEmpty(phoneNumber))
+            {
+                userCheck.PhoneNumber = phoneNumber;
+            }
+            if(!string.IsNullOrEmpty(gioiTinh) && gender.Contains(gioiTinh))
+            {
+                userCheck.Gender = gioiTinh; 
+            }
+            userCheck.Address = address;
+
+            try
+            {
+                await _userRepo.UpdateAsync(userCheck);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Update không thành công!");
+            }
+            var responseToView = _mapper.Map<ViewUserDto>(userCheck);
+            return Ok(responseToView);
+        }
+
+
+        [HttpPut("ChangePassword")]
+        public async Task<ActionResult<ViewUserDto>> ChangePassword(Guid? userId, string? oldPassword, string? newPassword)
+        {
+            VerifyInformation verify = new VerifyInformation();
+            
+
+            string[] includes = new string[]
+            {
+                nameof(BusinessObjects.Models.User.Role)
+            };
+            if (userId == null || oldPassword == null || newPassword == null)
+            {
+                return BadRequest();
+            }
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            if(userCheck == null)
+            {
+                return StatusCode(404, "Khong tìm thấy người dùng nào hợp lệ");
+            }
+
+            if(!BCrypt.Net.BCrypt.Verify(oldPassword, userCheck.Password))
+            {
+                return StatusCode(405, "Mật khẩu cũ không trùng khớp");
+            }
+            string ok = verify.IsValidPassword(newPassword, userCheck.Username);
+            if(ok != "Ok")
+            {
+                return StatusCode(406, ok);
+            }
+
+            userCheck.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            try
+            {
+                await _userRepo.UpdateAsync(userCheck);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Thay đổi mật khẩu thành công!");
+            }
+            var responseToView = _mapper.Map<ViewUserDto>(userCheck);
+            return Ok(responseToView);
+        }
         //public IActionResult ResetPassword()
         //{
 
@@ -212,7 +329,7 @@ namespace WebNewsAPIs.Controllers
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Equals(userDto.Username.ToLower()), includes).ToList();
+            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Equals(userDto.Username.ToLower()) && c.IsConfirm == true, includes).ToList();
             if (listUserLogin == null || listUserLogin.Count == 0)
             {
                 return StatusCode(404, "Tài khoản không tồn tại trong hệ thống.");
@@ -229,7 +346,7 @@ namespace WebNewsAPIs.Controllers
             }
             if (userLogin == null)
             {
-                return StatusCode(404, "Tài khoản không tồn tại trong hệ thống.");
+                return StatusCode(404, "Mật khẩu của bạn bị sai hãy nhập lại mật khẩu");
             }
 
 
