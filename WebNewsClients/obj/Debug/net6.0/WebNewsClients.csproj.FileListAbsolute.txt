@@ -582,3 +582,4 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Win
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutMainAdmin.cshtml.rz.scp.css

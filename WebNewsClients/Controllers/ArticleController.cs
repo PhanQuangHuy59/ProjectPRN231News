@@ -277,15 +277,8 @@ namespace WebNewsClients.Controllers
             }
             
 
-            if (categoryId == null)
-            {
-                categoryId = Guid.Parse(GuidDefault);
-            }
-            Guid? tempCategory = null;
-            if(categoryId != Guid.Parse(GuidDefault))
-            {
-                tempCategory = categoryId;
-            }
+          
+           
            
            
 
@@ -302,7 +295,7 @@ namespace WebNewsClients.Controllers
             //Call api của Category Root
             
 
-            string urlSearch = $"https://localhost:7251/api/Articles/SearchArticle?categoryId={tempCategory}&keySearch={keySearch}" +
+            string urlSearch = $"https://localhost:7251/api/Articles/SearchArticle?categoryId={categoryId}&keySearch={keySearch}" +
                 $"&from={fromDate}&to={toDate}&currentPage={currentPage}&size={Items_Page_Search}";
             var httpMessage = new HttpRequestMessage(HttpMethod.Get, urlSearch);
             var responseMessageArticleSearch = _httpClient.SendAsync(httpMessage).Result;
@@ -311,6 +304,10 @@ namespace WebNewsClients.Controllers
 
 
 
+            if (categoryId == null)
+            {
+                categoryId = Guid.Parse(GuidDefault);
+            }
 
             ViewBag.Category = listCategories;
             ViewBag.ListTime = selectListTime;
