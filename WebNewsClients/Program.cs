@@ -1,3 +1,5 @@
+using AutoMapper;
+using ProjectAPIAss.MapperConfig;
 using WebNewsClients.HttpClients;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages()
 	.AddRazorRuntimeCompilation();
+builder.Services.AddSingleton<IMapper>(MapperInstanse.GetMapper());
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {

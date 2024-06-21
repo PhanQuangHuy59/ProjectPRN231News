@@ -1,0 +1,217 @@
+﻿@using WebNewsAPIs.Dtos;
+
+@{
+
+    var currentPage = ((ViewBag.CurrentPage) == null ? int.MinValue : (int)(ViewBag.CurrentPage));
+    var totalPage = (ViewBag.TotalPage) == null ? int.MinValue : (int)(ViewBag.TotalPage);
+    var selectListTime = (SelectList)ViewBag.ListTime;
+    var selectListCategory = (SelectList)ViewBag.ListCategory;
+    var keySearch = (string)ViewBag.KeySearch;
+
+    var categoryId = (Guid)ViewBag.CategoryId;
+
+    var time = (string)ViewBag.Time;
+
+    var listSearchArticle = (ViewBag.ListSearchArticle == null ? null : (List<ViewArticleDto>)ViewBag.ListSearchArticle);
+    var total = (int)ViewBag.TotalResultCount;
+
+
+
+
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("SearchArticle", "Article", new
+                    {
+                        currentPage = indexpage,
+                        categoryId = categoryId,
+                        time = time,
+                        keySearch = keySearch
+                    });
+                }
+
+            };
+
+
+}
+
+<div id="body-main-wrap" class="left relative">
+    <div class="body-main-out relative">
+        <div class="body-main-in">
+            <div id="body-main-cont" class="left relative">
+                <div id="leader-wrap" class="left relative">
+                    <div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
+                </div><!--leader-wrap-->
+                <div id="home-main-wrap" class="left relative">
+                    <div class="home-wrap-out1">
+                        <div class="home-wrap-in1">
+                            <div id="home-left-wrap" class="left relative">
+                                <div id="home-left-col" class="relative">
+                                    <h1 class="cat-head">Search Articles</h1>
+                                    <div id="home-mid-wrap" class="left relative">
+                                        <div id="archive-list-wrap" class="left relative">
+                                            <div class="search w-75 align-center mx-auto m-5">
+                                                <form method="get">
+                                                    <div class="keysearch">
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" name="keySearch" value="@keySearch" placeholder="Nhập chữ vào đây để tìm kiếm ...." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                                            <button class="btn btn-primary" asp-action="SearchArticle" asp-controller="Article" type="submit" id="button-addon2">
+                                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                    <input type="hidden" value="@currentPage" />
+                                                    <div class="d-flex items-justified-space-between align-center text-center">
+                                                        <div>
+                                                            <label for="exampleSelect1" class="form-label mt-4">Chọn thể loại : </label>
+                                                            <select class="form-select form-control" id="exampleSelect1" name="categoryId" asp-items="@selectListCategory"></select>
+                                                        </div>
+                                                        <div>
+                                                            <label for="exampleSelect2" class="form-label mt-4">Chọn Thời Gian: </label>
+                                                            <select class="form-select form-control" id="exampleSelect2" name="time" asp-items="@selectListTime"></select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+                                                @if(listSearchArticle != null)
+                                                {
+                                                    <h5 class="text-primary">
+                                                        Kết quả tìm kiếm cho từ kháo <strong>"@keySearch"</strong> bao gồm <strong>@total</strong> Kết quả nhận được
+                                                    </h5>
+                                                }
+                                               
+
+                                            </div>
+
+                                            @if (listSearchArticle == null)
+                                            {
+                                                <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                    <div class="card-header">Bạn có thể bắt đầu search để hiện thị kết quả </div>
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Hãy bắt đầu điền vào thanh tìm kiếm.</h4>
+                                                        <p class="card-text">Hãy tìm kiếm những bài báo của các thể loại khác.</p>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                            <ul class="archive-col-list left relative infinite-content">
+
+                                                @if (listSearchArticle != null)
+                                                {
+                                                    @foreach (var a in listSearchArticle)
+                                                    {
+                                                        <li class="infinite-post">
+                                                            <a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark" title="Flex Mag: Powerfully simple WordPress theme">
+                                                                <div class="archive-list-out">
+                                                                    <div class="archive-list-img left relative">
+                                                                        <img width="450" height="270" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 450w, @a.CoverImage 300w, @a.CoverImage 1024w, @a.CoverImage 1000w, @a.CoverImage 1600w" sizes="(max-width: 450px) 100vw, 450px" />
+                                                                        <div class="feat-info-wrap">
+                                                                            <div class="feat-info-views">
+                                                                                <i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@a.ViewArticles</span>
+                                                                            </div><!--feat-info-views-->
+                                                                            <div class="feat-info-comm">
+                                                                                <i class="fa fa-comment"></i> <span class="feat-info-text">@a.Comments.Count</span>
+                                                                            </div><!--feat-info-comm-->
+                                                                        </div><!--feat-info-wrap-->
+                                                                    </div><!--archive-list-img-->
+                                                                    <div class="archive-list-in">
+                                                                        <div class="archive-list-text left relative">
+
+                                                                            <span class="side-list-cat text-danger">@a.CategortyName</span>
+                                                                            <span class="side-list-cat">@a.CreatedDate.ToString("dd-MM-yyyy hh:ss:mm")</span>
+                                                                            <h2>@a.AuthorName : @a.Title</h2>
+                                                                            <p>@a.ShortDescription.</p>
+                                                                        </div><!--archive-list-text-->
+                                                                    </div><!--archive-list-in-->
+                                                                </div><!--archive-list-out-->
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                            @if (currentPage != int.MinValue)
+                                            {
+                                                @await Html.PartialAsync("_Pagination",PageModel)
+                                                ;
+                                            }
+                                            <a href="#" class="inf-more-but">More Posts</a>
+                                            <div class="nav-links">
+                                                <div class="pagination"><span>Page 1 of 4</span><span class="current">1</span><a href='page/2/index.html' class="inactive">2</a><a href='page/3/index.html' class="inactive">3</a><a href='page/4/index.html' class="inactive">4</a></div>
+                                            </div><!--nav-links-->
+                                        </div><!--archive-list-wrap-->
+                                    </div><!--home-mid-wrap-->
+                                </div><!--home-left-col-->
+                            </div><!--home-left-wrap-->
+                        </div><!--home-wrap-in1-->
+                        <div id="arch-right-col" class="relative">
+                            <div id="sidebar-wrap" class="left relative theiaStickySidebar">
+                                <div class="widget-ad left relative">
+                                    <a href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes" target="_blank"><img src="~/template/www.mvpthemes.com/flexmag/wp-content/uploads/2015/09/flex300x250.jpg" /></a>
+                                </div><!--widget-ad-->
+                                <div id="mvp_facebook_widget-3" class="side-widget mvp_facebook_widget">
+                                    <h4 class="post-header"><span class="post-header">Facebook</span></h4>
+                                    <div class="fb-page" data-href="http://www.facebook.com/envato" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"></div></div>
+                                    <div id="fb-root"></div>
+
+                                </div><div id="mvp_catlist_widget-7" class="side-widget mvp_catlist_widget">
+                                    <h4 class="post-header"><span class="post-header">Latest News</span></h4>
+                                    <div class="blog-widget-wrap left relative">
+                                        <ul class="blog-widget-list left relative">
+
+                                            @*@foreach(var a in top10Article)
+                                            {
+                                            <li>
+                                            <a href="@a.CoverImage" rel="bookmark">
+                                            <div class="blog-widget-img left relative">
+                                            <img width="300" height="180" src="@a.CoverImage" class="widget-img-main wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 300w, @a.CoverImage 1024w, @a.CoverImage 1000w, @a.CoverImage 450w, @a.CoverImage 1600w" sizes="(max-width: 300px) 100vw, 300px" />
+                                            <img width="80" height="80" src="@a.CoverImage" class="widget-img-side wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 80w, @a.CoverImage 150w, @a.CoverImage 180w, @a.CoverImage 600w" sizes="(max-width: 80px) 100vw, 80px" />
+
+                                            <div class="feat-info-wrap">
+                                            <div class="feat-info-views">
+                                            <i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@a.ViewArticles</span>
+                                            </div><!--feat-info-views-->
+                                            <div class="feat-info-comm">
+                                            <i class="fa fa-comment"></i> <span class="feat-info-text">@a.Comments.Count</span>
+                                            </div><!--feat-info-comm-->
+                                            </div><!--feat-info-wrap-->
+                                            </div><!--blog-widget-img-->
+                                            <div class="blog-widget-text left relative">
+                                            <span class="side-list-cat text-danger">@a.Categorty.CategoryName</span>
+                                            <span class="side-list-cat">@a.CreatedDate.ToString("dd-MM-yyyy hh:ss:mm")</span>
+                                            <h2>@a.AuthorNavigation.DisplayName : @a.Title</h2>
+                                            <p>@a.ShortDescription.</p>
+                                            </div><!--blog-widget-text-->
+                                            </a>
+                                            </li>
+                                            }*@
+
+
+
+                                        </ul>
+                                    </div><!--blog-widget-wrap-->
+                                </div>
+                            </div><!--sidebar-wrap-->
+                        </div><!--home-right-col-->
+                    </div><!--home-wrap-out1-->
+                </div><!--home-main-wrap-->
+                <div id="foot-ad-wrap" class="left relative">
+                    <div style="width: 90%; height: 60px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; padding: 30px 5% 0; overflow: hidden;">RESPONSIVE LEADERBOARD AD AREA</div>
+                </div><!--foot-ad-wrap-->
+            </div><!--body-main-cont-->
+        </div><!--body-main-in-->
+    </div><!--body-main-out-->
+</div><!--body-main-wrap-->
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "../../../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>

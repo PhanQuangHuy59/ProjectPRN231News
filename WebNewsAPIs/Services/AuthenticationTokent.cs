@@ -56,8 +56,6 @@ namespace WebNewsAPIs.Services
 
            
             // validate the token and extract the claims
-           
-
             try
             {
                 var claims = GetClaimsFromToken(token);
@@ -169,7 +167,6 @@ namespace WebNewsAPIs.Services
                     return Guid.Parse(userIdNull);
                 }
             }
-
 
             return user.UserId;
         }

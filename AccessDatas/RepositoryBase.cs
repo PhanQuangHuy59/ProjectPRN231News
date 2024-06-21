@@ -135,14 +135,16 @@ namespace AccessDatas
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
                 _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+                total = _resetSet.Count();
             }
             else
             {
                 _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : dataContext.Set<T>().AsQueryable();
+                total = _resetSet.Count();
             }
 
             _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
-            total = _resetSet.Count();
+           
             return _resetSet.AsQueryable();
         }
 

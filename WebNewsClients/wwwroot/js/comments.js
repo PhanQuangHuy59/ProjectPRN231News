@@ -92,14 +92,47 @@
             contentType: "application/json",
             success: function (result, status, xhr) {
                 //location.reload
-                if (confirm("Bạn có muốn reload để thấy comment của bạn không ?")) {
-                    window.location.reload();
-                } 
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr["success"]('Comment thanh cong hãy reload lại trang')
+                $("#comment").val('');
                 console.log('Success:', result);
             },
             error: function (xhr, status, error) {
                 var text = xhr.responseText;
-                console.log(text)
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr["error"](text)
             }
         });
     });

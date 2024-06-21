@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "_LayoutLogin";
+    ViewData["Title"] = "Register";
     
 }
 @using WebNewsAPIs.Dtos;
@@ -41,6 +42,7 @@
                     <p>Access to the most powerfull tool in the entire design and web industry.</p>
                     <div class="page-links">
                         <a asp-controller="User" asp-action="Login">Login</a><a href="#" class="active">Register</a>
+                        <a asp-controller="User" asp-action="ConfirmAccount">Confirm Account</a>
                     </div>
                     <form method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>

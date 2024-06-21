@@ -37,7 +37,7 @@
 									@foreach(var item in slide[title].Take(4))
 									{
 										<div class="feat-wide5-main left relative">
-											<a href="flex-mag-powerfully-simple-wordpress-theme/index.html" rel="bookmark">
+												<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@item.Slug" rel="bookmark">
 												<div class="feat-wide5-img left relative">
 													<img width="1600" height="960" src="@item.CoverImage" class="unlazy reg-img wp-post-image" alt="" decoding="async" srcset="@item.CoverImage 1600w, @item.CoverImage 300w, @item.CoverImage 1024w, @item.CoverImage 1000w, @item.CoverImage 450w" sizes="(max-width: 1600px) 100vw, 1600px" />
 												</div><!--feat-wide5-img-->
@@ -107,7 +107,7 @@
 														@foreach (var a in cacBaiBaoTuongTacCao)
 														{
 															<li>
-																<a href="starbucks-just-made-a-major-change-to-its-pumpkin-spice-latte/index.html" rel="bookmark" title="@a.Title">
+																<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark" title="@a.Title">
 																	<img width="1000" height="600" src="@a.CoverImage" class="attachment-mvp-post-thumb size-mvp-post-thumb wp-post-image" alt="anh" decoding="async" srcset="@a.CoverImage 1000w, @a.CoverImage 300w, @a.CoverImage 450w" sizes="(max-width: 1000px) 100vw, 1000px" />
 																	<div class="gallery-widget-text">
 																		<p>@a.Title</p>
@@ -150,7 +150,7 @@
 																@foreach(var a in listArticleOrder.Take(1))
 																{
 																	<li>
-																		<a href="yes-there-are-now-jeans-that-can-charge-your-phone/index.html" rel="bookmark">
+																		<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark">
 																			<div class="row-widget-img left relative">
 																				<div class="containIamgeW300">
 																					<img width="300" height="180" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" srcset="@a.CoverImage 300w, @a.CoverImage 450w, @a.CoverImage 1000w" sizes="(max-width: 300px) 100vw, 300px" />
@@ -193,7 +193,7 @@
 																	@foreach (var articleOflast3 in listTopArticle.Skip(1))
 																	{
 																		<li>
-																			<a href="vmas-add-fan-voted-song-of-the-summer-contest-with-12-nominees/index.html" rel="bookmark">
+																			<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@articleOflast3.Slug" rel="bookmark">
 																				<div class="blog-widget-img left relative">
 																					<img width="300" height="180" src="@articleOflast3.CoverImage" class="widget-img-main wp-post-image" alt="" decoding="async" srcset="@articleOflast3.CoverImage 300w, @articleOflast3.CoverImage 1000w, @articleOflast3.CoverImage 450w" sizes="(max-width: 300px) 100vw, 300px" />								
 																					<div class="feat-info-wrap">
@@ -299,7 +299,7 @@
 												@foreach (var n in top10Article)
 												{
 													<li>
-														<a href="tesla-is-installing-rapid-charging-stations-in-manhattan-garages/index.html" rel="bookmark">
+														<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@n.Slug" rel="bookmark">
 															<div class="side-list-out">
 																<div class="side-list-img left relative">
 																	<img width="80" height="80" src="@n.CoverImage" class="attachment-mvp-small-thumb size-mvp-small-thumb wp-post-image" alt="" decoding="async" loading="lazy" srcset="@n.CoverImage 80w, @n.CoverImage 150w, @n.CoverImage 180w, @n.CoverImage 600w" sizes="(max-width: 80px) 100vw, 80px" />
@@ -333,7 +333,7 @@
 									@foreach(var a in popular)
 									{
 										<div class="feat-widget-wrap left relative">
-											<a href="kylie-jenner-was-paid-six-figures-to-attend-her-own-18th-birthday-party/index.html">
+											<a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug">
 												<div class="feat-widget-img left relative">
 													<img width="300" height="180" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 300w, @a.CoverImage 450w, @a.CoverImage 1000w" sizes="(max-width: 300px) 100vw, 300px" />
 														<div class="feat-info-views">

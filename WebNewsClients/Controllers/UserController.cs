@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
@@ -16,11 +17,12 @@ namespace WebNewsClients.Controllers
     public class UserController : Controller
     {
         private HttpClient _httpClient;
+        private IMapper _mapper;
        
-        public UserController(HttpClient httpClient) 
+        public UserController(HttpClient httpClient, IMapper mapper) 
         {
             _httpClient = httpClient;
-          
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -89,8 +91,6 @@ namespace WebNewsClients.Controllers
                 // Session
                 var jsonSerial = JsonConvert.SerializeObject(userLogin);
                 HttpContext.Session.SetString(SaveKeySystem.userLogin, jsonSerial);
-
-
                 return RedirectToAction("Index", "Home");
             }
             return View(user);
@@ -144,8 +144,7 @@ namespace WebNewsClients.Controllers
             if (!response.IsSuccessStatusCode)
             {
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
-              
-                
+             
                 TempData["err"] = $"Không thể tạo tài khoản hãy thử lại \n {errorMessage}";
                 return View("Register", user);
             }
@@ -155,20 +154,213 @@ namespace WebNewsClients.Controllers
             return View("Login",user);
             //return RedirectToAction("Index", "Home");
         }
+
+       
         [HttpGet]
-        public IActionResult ResetPassword()
+        public IActionResult ResetPassword(string? email)
         {
+            if (email == null || string.IsNullOrEmpty(email.Trim()))
+            {
+                TempData["error"] = "Hãy kiểm tra email của bạn không được để tr để resetpassword";
+                ViewBag.email = email;
+                return View();
+            }
+            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
+            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
+                ViewBag.email = email;
+                return View();
+            }
+            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            if (userResponse.Count == 0)
+            {
+                TempData["err"] = $"Trong hệ thống không có tài khoản nào có email này.";
+                ViewBag.email = email;
+                return View();
+            }
+            var user = userResponse[0];
+
+            string urlSendmailResetPass = "https://localhost:7251/api/Users/SendMailResetPassword";
+            var request = new HttpRequestMessage(HttpMethod.Post, urlSendmailResetPass);
+            request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
+
+            var responseCodeSendMail = _httpClient.SendAsync(request).Result;
+            if (!responseCodeSendMail.IsSuccessStatusCode)
+            {
+                TempData["err"] = responseCodeSendMail.Content.ReadAsStringAsync().Result;
+                ViewBag.email = email;
+                return View();
+            }
+            TempData["success"] = "Hãy kiểm tra email của bạn để resetpassword";
+            ViewBag.email = email;
             return View();
         }
-        [HttpPost("ResetPassPost")]
-        public IActionResult ResetPasswordPost()
+        [HttpGet]
+        public IActionResult ConfirmResetPassword(string userId, string code)
         {
+            if (userId == null || code == null)
+            {
+                TempData["err"] = "Thông tin truyền bị bỏ trống";
+                return RedirectToAction("Error400", "Home");
+            }
+           
+            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
+            var response = _httpClient.GetAsync(urlCheckUser).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
+                return RedirectToAction("Error500","Home");
+            }
+            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            if (userResponse.Count == 0)
+            {
+                TempData["err"] = $"Thông tin của người dùng cung cấp không chính xác trong link.";
+                return RedirectToAction("Error400", "Home");
+            }
+            var user = userResponse[0];
+
+            var idFromCode = AuthenticationTokent.ConfirmEmail(user, code);
+            if (!userId.Equals(idFromCode.ToString()))
+            {
+                TempData["err"] = $"\"đường link Code của bạn không hợp lệ. Hãy Confirm email lại\".";
+                return RedirectToAction("Error400", "Home");
+            }
+            ViewBag.userId = userId;    
+            ViewBag.code = code;
+
             return View();
         }
+
+        [HttpPost]
+        public IActionResult ConfirmResetPassword(string userId, string code, string newPassword, string confirmPassword)
+        {
+            if (userId == null || code == null)
+            {
+                TempData["err"] = "Thông tin truyền bị bỏ trống";
+                return View();
+            }
+
+            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
+            var response = _httpClient.GetAsync(urlCheckUser).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
+                return  View(); ;
+            }
+            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            if (userResponse.Count == 0)
+            {
+                TempData["err"] = $"Thông tin của người dùng cung cấp không chính xác trong link.";
+                return  View(); ;
+            }
+            var user = userResponse[0];
+
+            var idFromCode = AuthenticationTokent.ConfirmEmail(user, code);
+            if (!userId.Equals(idFromCode.ToString()))
+            {
+                TempData["err"] = $"\"Code của bạn không hợp lệ. Hãy Confirm email lại\".";
+                return View(); 
+            }
+
+            VerifyInformation verify = new VerifyInformation();
+            var ok = verify.IsValidPassword(newPassword, user.Username);
+            if(ok != "Ok")
+            {
+                TempData["err"] = ok;
+                return View();
+            }
+
+
+            // Call Api to reset password 
+            string urlUpdatePassword = $"https://localhost:7251/api/Users/{user.UserId}";
+            var requestResetPassword = new HttpRequestMessage(HttpMethod.Put, urlUpdatePassword);
+            user.Password = newPassword;
+            var userUdpate = _mapper.Map<UpdateUserDto>(user);
+            requestResetPassword.Content = new StringContent(JsonSerializer.Serialize(userUdpate), Encoding.UTF8, "application/json");
+
+            var responseCodeResetPassword = _httpClient.SendAsync(requestResetPassword).Result;
+            if (!responseCodeResetPassword.IsSuccessStatusCode)
+            {
+                TempData["err"] ="Đã xảy ra lỗi : " +  responseCodeResetPassword.Content.ReadAsStringAsync().Result;
+                return View();
+            }
+            TempData["success"] = "Dã cập nhật thành công password";
+
+            return View();
+        }
+        
+        public IActionResult ConfirmAccount(string email)
+        {
+            if (email == null || string.IsNullOrEmpty(email.Trim()))
+            {
+                TempData["error"] = "Hãy kiểm tra email của bạn không được để tr để resetpassword";
+                ViewBag.email = email;
+                return View();
+            }
+            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
+            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
+                ViewBag.email = email;
+                return View();
+            }
+            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            if (userResponse.Count == 0)
+            {
+                TempData["err"] = $"Trong hệ thống không có tài khoản nào có email này.";
+                ViewBag.email = email;
+                return View();
+            }
+            var user = userResponse[0];
+            string urlConfirmAccount = $"https://localhost:7251/api/Users/SendMailConfirmAccount";
+            var requestConfirmAccount= new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
+            requestConfirmAccount.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
+            var responseCodeConfirmAccount = _httpClient.SendAsync(requestConfirmAccount).Result;
+            if (!responseCodeConfirmAccount.IsSuccessStatusCode)
+            {
+                TempData["err"] = "Đã xảy ra lỗi : " + responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+                return View();
+            }
+            ViewBag.email = email;
+            TempData["success"] = "Hãy kiểm tra email của bạn";
+
+            return View();
+        }
+        public IActionResult NotificationConfirmAccount(Guid userId, string code)
+        {
+
+            
+            string urlConfirmAccount = $"https://localhost:7251/api/Users/ConfirmEmail?userId={userId}&code={code}";
+            var requestConfirmAccount = new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
+            var responseCodeConfirmAccount = _httpClient.SendAsync(requestConfirmAccount).Result;
+            if (!responseCodeConfirmAccount.IsSuccessStatusCode)
+            {
+                TempData["err"] = "Đã xảy ra lỗi : " + responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+                return View("ConfirmAccount");
+            }
+            TempData["success"] = responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+
+
+            return View("ConfirmAccount");
+        }
+
         public IActionResult Logout()
         {
             return RedirectToAction("Index","Home");   
         }
 
+    }
+    public class ResetPassword
+    {
+        public string Email { get; set; }
     }
 }

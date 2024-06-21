@@ -230,22 +230,13 @@
                                         <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
                                             <a asp-controller="Home" asp-action="Index">Home</a>
                                         </li>
-
-                                        @Html.Raw(GenerateMenuHtml(listCategory));
-
-                                        <li id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11"><a target="_blank" rel="noopener" href="http://themeforest.net/item/flex-mag-responsive-wordpress-news-theme/12772303?ref=mvpthemes">Buy Theme</a></li>
-                                        <li id="menu-item-170" class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-170"><a href="category/sports/index.html">Sports</a></li>
-                                        <li id="menu-item-1836" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1836"><a href="videos/index.html">Videos</a></li>
-                                        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="shop/index.html">Shop</a></li>
-                                        <li id="menu-item-1816" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1816">
-                                            <a href="#">More</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-166" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-166"><a href="category/business/index.html">Business</a></li>
-                                                <li id="menu-item-167" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-167"><a href="category/entertainment/index.html">Entertainment</a></li>
-                                                <li id="menu-item-169" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-169"><a href="category/fashion/index.html">Fashion</a></li>
-                                                <li id="menu-item-168" class="mega-dropdown menu-item menu-item-type-taxonomy menu-item-object-category menu-item-168"><a href="category/tech/index.html">Tech</a></li>
-                                            </ul>
+                                        <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                            <a asp-controller="Article" asp-action="LastNew">LastNew</a>
                                         </li>
+
+                                        @Html.Raw(GenerateMenuHtml(listCategoryRoot));
+
+                                       
                                     </ul>
                                 </div>
                             </nav>
@@ -284,22 +275,31 @@
                                                     <div class="menu-main-menu-container">
                                                         <ul id="menu-main-menu-1" class="menu">
                                                             <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                                                <div class="nav-search-wrap left relative">
+
+                                                                    <a class="nav-search-but left" asp-action="SearchArticleView" asp-controller="Article">
+                                                                        <span><i style="font-size:20px" class="fa fa-search fa-2"></i></span>
+                                                                    </a>
+
+                                                                    @*<div class="search-fly-wrap">
+
+                                                                    <form method="get" id="searchform" action="https://mvpthemes.com/flexmag/">
+                                                                    <input type="text" name="s" id="s" value="Type search term and press enter" onfocus='if (this.value == "Type search term and press enter") { this.value = ""; }' onblur='if (this.value == "") { this.value = "Type search term and press enter"; }' />
+                                                                    <input type="hidden" id="searchsubmit" value="Search" />
+                                                                    </form>
+                                                                    </div>*@<!--search-fly-wrap-->
+                                                                </div><!--nav-search-wrap-->
+                                                            </li>
+                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
                                                                 <a asp-controller="Home" asp-action="Index">Home</a>
+                                                            </li>
+                                                            <li id="menu-item-165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
+                                                                <a asp-controller="Article" asp-action="LastNew">LastNew</a>
                                                             </li>
                                                             @*fasdfa*@
 
                                                             @Html.Raw(GenerateMenuHtml(listCategoryRoot));
-                                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165">
-                                                                <div class="nav-search-wrap left relative">
-                                                                    <span class="nav-search-but left"><i class="fa fa-search fa-2"></i></span>
-                                                                    <div class="search-fly-wrap">
-                                                                        <form method="get" id="searchform" action="https://mvpthemes.com/flexmag/">
-                                                                            <input type="text" name="s" id="s" value="Type search term and press enter" onfocus='if (this.value == "Type search term and press enter") { this.value = ""; }' onblur='if (this.value == "") { this.value = "Type search term and press enter"; }' />
-                                                                            <input type="hidden" id="searchsubmit" value="Search" />
-                                                                        </form>
-                                                                    </div><!--search-fly-wrap-->
-                                                                </div><!--nav-search-wrap-->
-                                                            </li>
+                                                            
                                                         </ul>
                                                     </div>
                                                 </nav>
@@ -714,6 +714,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/mainHomeTemplate.js" asp-append-version="true"></script>*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+   
 </body>
 </html>

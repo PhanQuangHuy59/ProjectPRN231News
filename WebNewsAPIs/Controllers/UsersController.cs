@@ -96,7 +96,7 @@ namespace WebNewsAPIs.Controllers
             , protocol: Request.Scheme);
 
 
-            //await _emailSender.SendEmailAsync(userRegister.Username, "Thông Báo tạo tài khoảng thành Công!", WebNewsAPIs.Services.HtmlHelper.GetHtmlForSendMailRegister(userRegister, code));
+            await _emailSender.SendEmailAsync(userRegister.Username, "Thông Báo tạo tài khoảng thành Công!", WebNewsAPIs.Services.HtmlHelper.GetHtmlForSendMailRegister(userRegister, code));
             return _mapper.Map<AddUserDto>(userRegister);
         }
         [HttpGet("ConfirmEmail")]
@@ -104,12 +104,12 @@ namespace WebNewsAPIs.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToPage("/Index");
+                return BadRequest();
             }
-            var user = _userRepo.GetSingleByCondition(c=> c.UserId.Equals(userId)).Result;
+            var user = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
             if (user == null)
             {
-                return NotFound($"Khong thể load được thông tini của bạn có id :'{userId}'.");
+                return NotFound($"Khong thể load được thông tin của bạn có id :'{userId}'.");
             }
 
             var idFromCode = AuthenticationTokent.ConfirmEmail(user, code);
@@ -117,13 +117,85 @@ namespace WebNewsAPIs.Controllers
             {
                 return StatusCode(404, "Code của bạn không hợp lệ. Hãy Confirm email lại");
             }
-            if(!user.IsConfirm)
+            if (!user.IsConfirm)
             {
+                user.IsConfirm = true;
                 _userRepo.UpdateAsync(user);
             }
             // Logic to confirm email
             return Ok("Đã confirm thành công bạn có thể đăng nhập lại.");
         }
+
+        [HttpGet("SendMailConfirmAccount")]
+        public async Task<IActionResult> SendMailConfirmAccountAsync(User user)
+        {
+            try
+            {
+                var code = AuthenticationTokent.GeneraterCodeTokent(user);
+                var url = $"https://localhost:7069/User/NotificationConfirmAccount?userId={user.UserId}&code={code}";
+              
+                await _emailSender.SendEmailAsync(user.Username, "Thông Báo confirm account!", $"<h3>Confirm Account</h3>\r\n                    <a href=\"{url}\">CLick To ConfirmAccount</a>");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Gửi email không thành công xin hãy làm lại");
+            }
+
+            return Ok();
+        }
+
+
+        [HttpPost("SendMailResetPassword")]
+        public async Task<IActionResult> SendMailResetPasswordAsync(User user)
+        {
+            try
+            {
+                var code = AuthenticationTokent.GeneraterCodeTokent(user);
+                var url = $"https://localhost:7069/User/ConfirmResetPassword?userId={user.UserId}&code={code}";
+                await _emailSender.SendEmailAsync(user.Username, "Thông Báo reset password!", $"<h3>Password Reset</h3>\r\n                    <a href=\"{url}\">CLick To ResetPassword</a>");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Gửi email không thành công xin hãy làm lại");
+            }
+
+            return Ok();
+        }
+
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> Update(Guid userId, UpdateUserDto user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
+            if (!userId.Equals(user.UserId))
+            {
+                return NotFound();
+            }
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
+            BCrypt.Net.BCrypt.HashPassword(user.Password);
+            try
+            {
+                userCheck.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                await _userRepo.UpdateAsync(userCheck);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Update không thành công!");
+            }
+
+            return Ok();
+        }
+
+        //public IActionResult ResetPassword()
+        //{
+
+
+        //    return Ok("Đã confirm thành công bạn có thể đăng nhập lại.");
+        //}
+
 
         [HttpGet("Login")]
         public async Task<ActionResult<ViewUserDto>> Login(AddUserDto userDto)

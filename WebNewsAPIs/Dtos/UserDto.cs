@@ -22,8 +22,6 @@ namespace WebNewsAPIs.Dtos
         [Required]
         public Guid RoleId { get; set; }
 
-        [Required]
-
         public DateTime? DateOfBirth { get; set; }
 
         [EnumDataType(typeof(GenderType), ErrorMessage = "Invalid gender.")]

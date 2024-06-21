@@ -83,6 +83,7 @@ namespace WebNewsClients.Controllers
             responseMessage.EnsureSuccessStatusCode();
             var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
                 .Result.data;
+
             ViewBag.Category = listCategories;
 
             string message = TempData["message"] as string;
@@ -99,10 +100,10 @@ namespace WebNewsClients.Controllers
             responseMessage.EnsureSuccessStatusCode();
             var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
                 .Result.data;
-            ViewBag.Category = listCategories;
 
-            string message = TempData["message"] as string;
-            ViewBag.message = message;
+
+			ViewBag.Category = listCategories;
+           
             return View();
         }
     }
