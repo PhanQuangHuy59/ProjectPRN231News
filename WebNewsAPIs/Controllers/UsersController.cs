@@ -248,8 +248,12 @@ namespace WebNewsAPIs.Controllers
             {
                 userCheck.Gender = gioiTinh; 
             }
+            if(dateOfBirth != null)
+            {
+                userCheck.DateOfBirth = dateOfBirth;
+            }
             userCheck.Address = address;
-
+           
             try
             {
                 await _userRepo.UpdateAsync(userCheck);

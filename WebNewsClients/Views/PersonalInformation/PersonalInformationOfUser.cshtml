@@ -236,7 +236,7 @@
                                                                                 Ngày Sinh
                                                                                 <i class="fa fa-cake-candles"></i>
                                                                             </label>
-                                                                            <input type="date" class="form-control" value="@(informationUser.DateOfBirth != null ?informationUser.DateOfBirth.Value.ToString("dd/MM/yyyy") :"")" id="ngaysinh" aria-describedby="emailHelp">
+                                                                            <input type="date" class="form-control" value="@(informationUser.DateOfBirth != null ? @informationUser.DateOfBirth.Value.ToString("yyyy-MM-dd"):"")" id="ngaysinh" aria-describedby="emailHelp">
                                                                         </div>
 
                                                                         <div class="mb-3">
@@ -264,12 +264,14 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            <label for="diachi">
+                                                                                Địa chỉ
+                                                                                <i class="fa-solid fa-map-location-dot"></i>
+                                                                            </label>
                                                                             <div class="form-floating mb-3">
-                                                                                <label for="diachi">
-                                                                                    Địa chỉ
-                                                                                    <i class="fa-solid fa-map-location-dot"></i>
-                                                                                </label>
-                                                                                <textarea id="diachi" value="@informationUser.Address" class="form-control"   rows="15" placeholder="Nhập địa chỉ ..."></textarea>
+                                                                                <textarea id="diachi" class="form-control" placeholder="Nhập địa chỉ ...">
+                                                                                    @informationUser.Address
+                                                                                </textarea>
                                                                             </div>
                                                                         </div>
                                                                         <button type="submit" class="btn btn-primary">Lưu thông tin</button>
