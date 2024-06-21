@@ -222,7 +222,6 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\runtimes
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\WebNewsClients.csproj.CopyComplete
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\bundleconfig.json
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutHomeMain.cshtml.rz.scp.css
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutLogin.cshtml.rz.scp.css
@@ -583,3 +582,10 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsof
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutMainAdmin.cshtml.rz.scp.css
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Core.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Stores.dll
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\WebNewsClients.sourcelink.json
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\obj\Debug\net6.0\WebNewsC.37DF49E0.Up2Date
