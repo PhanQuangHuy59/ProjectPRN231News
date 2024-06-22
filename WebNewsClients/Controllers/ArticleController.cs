@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using WebNewsAPIs.Dtos;
+using WebNewsClients.Ultis;
 
 namespace WebNewsClients.Controllers
 {
@@ -34,6 +35,8 @@ namespace WebNewsClients.Controllers
         [Route("ArticleOfCategory/{categoryArticleId}.html")]
         public IActionResult ArticleOfCategory([FromRoute] Guid categoryArticleId)
         {
+           
+
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
 
@@ -67,7 +70,7 @@ namespace WebNewsClients.Controllers
 
 
             //tra ve view
-            
+           
             ViewBag.Category = listCategories;
             ViewBag.CategoryDetail = category1;
             ViewBag.Articles = articles;
@@ -77,6 +80,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("{slug}.html")]
         public IActionResult ArticleDetail([FromRoute] string slug)
         {
+            ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
             var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
@@ -144,6 +148,7 @@ namespace WebNewsClients.Controllers
                 ViewBag.ListArticleRecomend = listArticlesRecommend;
                 ViewBag.CategoryOfArticle = category[0];
                 ViewBag.Comments = articlesComment;
+                ViewBag.UserLogin = userLogin;
                 return View();
             }
 

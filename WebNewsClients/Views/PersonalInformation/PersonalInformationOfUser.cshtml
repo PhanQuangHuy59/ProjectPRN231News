@@ -70,33 +70,35 @@
                             <span>Thông Tin Tài Khoản</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="widgets.html">
+                    <li >
+                        <a asp-controller="PersonalInformation" asp-action="PersonalArticleComment">
                             <i class="fa fa-comments-o blue2_color"></i>
                             <span>Hoạt động bình luận</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#element" data-toggle="collapse" aria-expanded="false">
+                        <a asp-controller="PersonalInformation" asp-action="PersonalOfNews"
+                        data-toggle="collapse" aria-expanded="false">
                             <i class="fa fa-newspaper-o"></i>
                             <span>Bảng tin của bạn</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#apps" data-toggle="collapse" aria-expanded="false">
+                        <a asp-controller="PersonalInformation" asp-action="ArticleViewed" 
+                        >
 
                             <i class="fa fa-clock-o orange_color"></i>
                             <span>Tin Đã xem</span>
                         </a>
                     </li>
                     <li>
-                        <a href="price.html">
+                        <a asp-controller="PersonalInformation" asp-action="ArticleSaved">
                             <i class="fa fa-briefcase blue1_color"></i>
                             <span>Tin đã lưu</span>
                         </a>
                     </li>
                     <li>
-                        <a href="contact.html">
+                        <a asp-controller="User" asp-action="Logout">
                             <i class="fa fa-sign-out red_color"></i>
                             @*<i class="fa fa-arrow-right-from-bracket red_color"></i>*@
                             <span>Đăng xuất</span>
@@ -132,9 +134,10 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">Thông Tin tài khoản</a>
-                                            <a class="dropdown-item" href="settings.html">Hoạt Động bình luận</a>
-                                            <a class="dropdown-item" href="help.html">Bảng Tin của bạn</a>
-                                            <a class="dropdown-item" href="help.html">Tin đã lưu</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalArticleComment">Hoạt Động bình luận</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
                                             <a class="dropdown-item" href="#">
                                                 <span>Đăng xuất</span>
                                                 <i class="fa fa-sign-out"></i>
@@ -286,7 +289,7 @@
                                                                         <label for="currentpass" class="form-label">Nhập mật khẩu hiện tại</label><br />
 
                                                                         <div class="input-group mb-3">
-                                                                            <input id="oldPassword" type="password" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                                                            <input id="oldPassword" type="password" class="form-control" aria-label="Amount (to the nearest dollar)" required>
                                                                             <span id="eyeoldPassword" class="input-group-text">
                                                                                 <i class="fa fa-eye"></i>
                                                                             </span>

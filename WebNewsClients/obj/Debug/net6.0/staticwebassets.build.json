@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0BQxb8nvzJOMpru7lXifQ+9JeSNbhRk9pD73CWK6UdU=",
+  "Hash": "swZV3x8eQ4BvUvZI5jTQyr+whiq79Y4IRpYf0nX5KzY=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -809,6 +809,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\popper.min.js"
+    },
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\save_delete_article.js",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "js/save_delete_article.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\save_delete_article.js"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\site.js",

@@ -2,7 +2,7 @@
 @using System.Text;
 @using WebNewsAPIs.Dtos;
 @{
-
+    var userLogin = (ViewUserDto)ViewBag.UserLogin;
     var article = (Article)ViewBag.Article;
     var listArticle = (IEnumerable<Article>)ViewBag.ListArticle;
     var category = (CategoriesArticle)ViewBag.CategoryOfArticle;
@@ -62,7 +62,7 @@
             sb.AppendLine($"        </div>");
             sb.AppendLine($"      </div>");
             sb.AppendLine($"      <div class=\"clear\"></div>");
-            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
+            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{(userLogin == null? "nologin":userLogin.UserId.ToString())}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
             sb.AppendLine($"    </div>");
             sb.AppendLine($"  </div>");
             var listCommentReplyFor = commentReplyFor.Where(c => c.ReplyFor == comment.CommentId);
@@ -114,7 +114,7 @@
             sb.AppendLine($"        </div>");
             sb.AppendLine($"      </div>");
             sb.AppendLine($"      <div class=\"clear\"></div>");
-            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond'  data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.CommentId}\" aria-label='Reply to {comment.CommentId}'>Reply</a></span></div>");
+            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond'  data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{(userLogin == null ? "nologin" : userLogin.UserId.ToString())}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.CommentId}\" aria-label='Reply to {comment.CommentId}'>Reply</a></span></div>");
             sb.AppendLine($"    </div>");
             sb.AppendLine($"  </div>");
 
@@ -134,7 +134,7 @@
 }
 
 <div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
-    <div id="main_information_comment"  data-articleid="@article.ArticleId.ToString()" data-userid="@Guid.Parse("F90B2915-3E6C-47CB-8531-41E1C343A19F").ToString()"></div>
+    <div id="main_information_comment" data-articleid="@article.ArticleId.ToString()" data-userid="@(userLogin == null? "nologin":userLogin.UserId.ToString())"></div>
     <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" />
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>

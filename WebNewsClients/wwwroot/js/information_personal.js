@@ -15,13 +15,26 @@
     const eyenewPassword = document.getElementById('eyenewPassword');
     const newPassword = document.getElementById('newPassword');
 
-    eyeoldPassword.addEventListener('click', () => {
+    eyenewPassword.addEventListener('click', () => {s
         if (newPassword.type === 'password') {
             newPassword.type = 'text';
         } else {
             newPassword.type = 'password';
         }
     });
+
+    const eyeconfirmPassword = document.getElementById('eyeconfirmPassword');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    eyeconfirmPassword.addEventListener('click', () => {
+        if (confirmPassword.type === 'password') {
+            confirmPassword.type = 'text';
+        } else {
+            confirmPassword.type = 'password';
+        }
+    });
+
+
 
     function showSuccess(message){
         toastr.options = {
@@ -65,16 +78,7 @@
         toastr["error"](message);
     }
 
-    const eyeconfirmPassword = document.getElementById('eyeconfirmPassword');
-    const confirmPassword = document.getElementById('confirmPassword');
-
-    eyeconfirmPassword.addEventListener('click', () => {
-        if (confirmPassword.type === 'password') {
-            confirmPassword.type = 'text';
-        } else {
-            confirmPassword.type = 'password';
-        }
-    });
+    
 
     $("#buttonEnable").click(function () {
         $("#displayName").prop("disabled", function (i, val) {
@@ -107,46 +111,13 @@
             success: function (result, status, xhr) {
                 //location.reload
                 displayName.value = result.DisplayName;
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["success"]('Đã thay đổi tên thành công.');
+                showSuccess('Đã thay đổi tên thành công.');
+                
                 console.log("Success:", result);
             },
             error: function (xhr, status, error) {
                 var text = xhr.responseText;
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["error"](text);
+                showError(text);
                 console.error("Error: " + text);
             }
         });
@@ -182,46 +153,13 @@
             success: function (result, status, xhr) {
                 //location.reload
                 displayName.value = result.DisplayName;
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["success"]('Update Thành Công THông Tin');
+                showSuccess(('Update Thành Công Thông Tin');
+               
                 console.log("Success:", result);
             },
             error: function (xhr, status, error) {
                 var text = xhr.responseText;
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["error"](text);
+                showError(text);
                 console.error("Error: " + text);
             }
         });
@@ -298,9 +236,5 @@
 
     });
       
-
-  
-
-
 
 });

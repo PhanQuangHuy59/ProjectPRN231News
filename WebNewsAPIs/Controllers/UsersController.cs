@@ -29,17 +29,22 @@ namespace WebNewsAPIs.Controllers
     public class UsersController : ControllerBase
     {
         private IUserRepository _userRepo;
+        private IArticleRepository _articleRepo;
+        private IViewRepository _viewRepo;
         private IMapper _mapper;
         private IEmailSender _emailSender;
         private ILogger<UsersController> _logger;
 
         public UsersController(IUserRepository userRepo, IMapper mapper,
-            IEmailSender emailSender, ILogger<UsersController> logger)
+            IEmailSender emailSender, ILogger<UsersController> logger, 
+            IArticleRepository articleRepo, IViewRepository viewRepo)
         {
             _userRepo = userRepo;
             _mapper = mapper;
             _emailSender = emailSender;
             _logger = logger;
+            _articleRepo = articleRepo;
+            _viewRepo = viewRepo;
         }
         [EnableQuery]
         [HttpGet]
@@ -310,12 +315,55 @@ namespace WebNewsAPIs.Controllers
             var responseToView = _mapper.Map<ViewUserDto>(userCheck);
             return Ok(responseToView);
         }
-        //public IActionResult ResetPassword()
-        //{
 
 
-        //    return Ok("Đã confirm thành công bạn có thể đăng nhập lại.");
-        //}
+
+        [HttpPost("AddArticleToViewUser")]
+        public async Task<ActionResult<ViewUserDto>> AddArticleToViewUser(Guid? userId, Guid? articleId)
+        {
+            
+
+
+            string[] includes = new string[]
+            {
+                nameof(BusinessObjects.Models.User.Role)
+            };
+           
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
+            var articleCheck = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
+            var viewCheck = _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId)).Result;
+            if(viewCheck != null)
+            {
+                return Ok();
+            }
+
+            var listArticleViewOfUser = _viewRepo.GetMulti(c => c.UserId.Equals(userId.Value)).OrderBy(c => c.ViewDate).ToList();
+            if(listArticleViewOfUser.Count > 100)
+            {
+                var listViewDelete = listArticleViewOfUser.Skip(99);
+                _viewRepo.DeleteListView(listViewDelete);
+            }
+
+            var viewAdd = new View
+            {
+                ArticleId = articleId.Value,
+                Article = articleCheck,
+                UserId = userId.Value,
+                User = userCheck,
+                ViewDate = DateTime.Now
+            };
+
+            try
+            {
+                await _viewRepo.AddAsync(viewAdd);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Thêm Không thanh Cong Cho View of user");
+            }
+           
+            return Ok();
+        }
 
 
         [HttpGet("Login")]
@@ -358,6 +406,7 @@ namespace WebNewsAPIs.Controllers
 
             return _mapper.Map<ViewUserDto>(userLogin);
         }
+
 
 
     }

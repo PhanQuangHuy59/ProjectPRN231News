@@ -45,7 +45,7 @@ namespace AccessDatas
 
         public async virtual Task<T> DeleteAsync(T entity)
         {
-            T temp = dbSet.Remove(entity).Entity;
+            T temp = dataContext.Set<T>().Remove(entity).Entity;
             SaveAsync();
             return temp;
         }

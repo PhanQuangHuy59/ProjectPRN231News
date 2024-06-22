@@ -181,6 +181,10 @@
       "PackagePath": "staticwebassets\\js\\popper.min.js"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\save_delete_article.js",
+      "PackagePath": "staticwebassets\\js\\save_delete_article.js"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
