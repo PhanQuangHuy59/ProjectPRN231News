@@ -17,16 +17,19 @@ namespace WebNewsAPIs.Controllers
     {
         private IArticleRepository _articleRepository;
         private ICategoriesArticleRepository _categoryRepository;
+        private IViewRepository _viewRepository;
         private IMapper _mapper;
         private ArticleService _articleService;
         public ArticlesController(IArticleRepository articleRepository
             , IMapper mapper, ArticleService article
-            , ICategoriesArticleRepository categoriesArticleRepository)
+            , ICategoriesArticleRepository categoriesArticleRepository,
+            IViewRepository viewRepository)
         {
             _articleRepository = articleRepository;
             _mapper = mapper;
             this._articleService = article;
             this._categoryRepository = categoriesArticleRepository;
+            _viewRepository = viewRepository;
         }
         [HttpGet]
         [EnableQuery]
@@ -56,11 +59,11 @@ namespace WebNewsAPIs.Controllers
             {
                 nameof(Article.Categorty),
                 nameof(Article.Comments),
-                nameof(Article.AuthorNavigation)  
+                nameof(Article.AuthorNavigation)
             };
-            
+
             var listArticles = _articleRepository.GetMulti(c => true, includes);
-           
+
 
             var response = _mapper.Map<IEnumerable<ViewArticleDto>>(listArticles).OrderBy(c => c.PublishDate);
             return Ok(response);
@@ -136,6 +139,36 @@ namespace WebNewsAPIs.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetBoardArticleOfUser")]
+        public async Task<ActionResult<IEnumerable<ViewArticleDto>>> GetBoardArticleOfUser(Guid? userId = null)
+        {
+            string[] includes = new string[]
+            {
+                nameof(Article.Categorty),
+                nameof(Article.Comments)
+            };
+            string[] includesforViewArticle = new string[]
+            {
+                nameof(View.Article)
+            };
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var getViewArticleOfUser = _viewRepository.GetMulti(c => c.UserId == userId, includesforViewArticle);
+
+            var listArticleIgnore = getViewArticleOfUser.Select(c => c.ArticleId).ToList();
+            var getCategoryFromViewArticleOfUser = getViewArticleOfUser.Select(c => c.Article.CategortyId).ToList();
+
+            var listArticleBoard = _articleRepository.GetMulti(c => getCategoryFromViewArticleOfUser.Contains(c.CategortyId)
+            & !listArticleIgnore.Contains(c.ArticleId)
+            , includes).OrderBy(c => c.CreatedDate).OrderBy(c => c.CreatedDate);
+
+
+            return Ok(_mapper.Map<IEnumerable<ViewArticleDto>>(listArticleBoard));
+        }
+
 
     }
 }

@@ -1,0 +1,277 @@
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@model AddUserDto;
+@{
+    Layout = "_LayoutPersonalInformation";
+
+    // Danh sach comment
+    var listArticleViews = (ViewBag.ArticleViews == null ? null : (IEnumerable<ViewArticleDto>)ViewBag.ArticleViews).ToList();
+    IEnumerable<IGrouping<DateTime, ViewArticleDto>> articleViews = null;
+    if (listArticleViews != null)
+    {
+        articleViews = listArticleViews.GroupBy(c => c.CreatedDate.Date);
+    }
+
+    int currentPage = (int)ViewBag.CurrentPage;
+    int totalPage = (int)ViewBag.TotalPage;
+    int totalResult = (int)ViewBag.TotalResult;
+
+
+    //Xử lí phân trang
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("BoardArticleOfUser", "PersonalInformation", new
+                    {
+                        currentPage = indexpage
+                    });
+                }
+
+            };
+
+    //xử lí đường dẫn hiển thị hình ảnh
+    var informationUser = (User)ViewBag.InformationUser;
+    string pathImageDefault = "";
+    string pathImageMale = "/images/male_default.png";
+    string pathImageFemale = "/images/female_default.png";
+    string pathImageKhac = "/images/img_default.png";
+
+
+    if (informationUser.Gender != null)
+    {
+        if (informationUser.Gender.Equals("Nam"))
+        {
+            pathImageDefault = pathImageMale;
+        }
+        else if (informationUser.Gender.Equals("Nữ"))
+        {
+            pathImageDefault = pathImageFemale;
+        }
+        else if (informationUser.Gender.Equals("Khác"))
+        {
+            pathImageDefault = pathImageKhac;
+        }
+
+
+
+        pathImageDefault = informationUser.Image == null ? pathImageDefault : informationUser.Image;
+    }
+    else
+    {
+        pathImageDefault = pathImageKhac;
+    }
+}
+
+<div class="full_container">
+    <div class="inner_container">
+
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar_blog_1">
+                <div class="sidebar-header">
+                    <div class="logo_section">
+                        <a href="index.html"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
+                    </div>
+                </div>
+                <div class="sidebar_user_info">
+                    <div class="icon_setting"></div>
+                    <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="@pathImageDefault" alt="#" /></div>
+                        <div class="user_info">
+                            <h6 class="text-center">@informationUser.DisplayName</h6>
+                            <p><span class="online_animation"></span> Online</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar_blog_2">
+                <h4>Action General</h4>
+                <ul class="list-unstyled components">
+                    <li>
+                        <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">
+                            <i class="fa fa-user"></i>
+                            <span>Thông Tin Tài Khoản</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a asp-controller="PersonalInformation" asp-action="PersonalArticleComment">
+                            <i class="fa fa-comments-o blue2_color"></i>
+                            <span>Hoạt động bình luận</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="PersonalInformation" asp-action="BoardArticleOfUser">
+                            <i class="fa fa-newspaper-o"></i>
+                            <span>Bảng tin của bạn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="PersonalInformation" asp-action="ArticleViewed">
+
+                            <i class="fa fa-clock-o orange_color"></i>
+                            <span>Tin Đã xem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="PersonalInformation" asp-action="ArticleSaved">
+                            <i class="fa fa-briefcase blue1_color"></i>
+                            <span>Tin đã lưu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="User" asp-action="Logout">
+                            <i class="fa fa-sign-out red_color"></i>
+                            @*<i class="fa fa-arrow-right-from-bracket red_color"></i>*@
+                            <span>Đăng xuất</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- end sidebar -->
+        <!-- right content -->
+        <div id="content">
+            <!-- topbar -->
+
+
+            <div class="topbar">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img class="img-responsive" title="Go To Home" src="~/pluto/images/logo/logo_black.png" alt="#" />
+
+                            </a>
+                        </div>
+                        <div class="right_topbar">
+                            <div class="icon_info">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                    <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                                </ul>
+                                <ul class="user_profile_dd">
+                                    <li>
+                                        <a class="dropdown-toggle" data-toggle="dropdown">
+                                            <img class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
+                                            <span class="name_user">@informationUser.DisplayName</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">Thông Tin tài khoản</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalArticleComment">Hoạt Động bình luận</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
+                                            <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
+                                            <a class="dropdown-item" asp-controller="User" asp-action="Logout">
+                                                <span>Đăng xuất</span>
+                                                <i class="fa fa-sign-out"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- end topbar -->
+            <!-- dashboard inner -->
+            <div class="midde_cont">
+                <div class="container-fluid">
+                    <div class="row column_title">
+                        <div class="col-md-12">
+                            <div class="page_title">
+                                <h2>Bảng tin của bạn</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row column1">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="white_shd full margin_bottom_30">
+                                <div class="full graph_head">
+                                    <div class="heading1 margin_0">
+                                        <h2>Các bài báo dựa trên các lượt xem gần đây của bạn</h2>
+                                    </div>
+                                </div>
+                                <div class="full price_table padding_infor_info">
+                                    @if (listArticleViews == null || listArticleViews.Count == 0)
+                                    {
+                                        <div class="card border-primary mb-3" style="max-width:100%;">
+                                            <div class="card-header">Bạn chưa xem bài báo nào.</div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Hãy Tích cực đọc báo lâu hơn</h4>
+                                                <p class="card-text">Hãy đọc báo ít nhất 2 phút</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var group in articleViews)
+                                        {
+                                            <h3>@(group.Key.Equals(DateTime.Now.Date) ? "Hôm Nay" : group.Key.ToString("dd/MM/yyyy"))</h3> <hr class="w-100 border border-dark mt-3 mb-3 ">
+                                            foreach (var c in group)
+                                            {
+                                                <div class="row mt-3 mb-3">
+                                                    <div style="width:200px;height:140px" class="col-md-4">
+                                                        <img style="max-width: 100%; height: 100%; object-fit: cover;" src="@c.CoverImage" alt="@c.Title" class="img-fluid">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@c.Slug">
+                                                            <h4>@c.Title</h4>
+                                                        </a>
+
+                                                        <p>@c.ShortDescription</p>
+
+                                                    </div>
+                                                </div>
+                                            }
+                                            <hr class="w-100 border border-dark mt-3 mb-3 ">
+                                        }
+                                    }
+
+                                    @if (listArticleViews != null && listArticleViews.Count != 0)
+                                    {
+                                        <di class="text-center">
+                                            @await Html.PartialAsync("_Pagination",PageModel);
+                                        </di>
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- footer -->
+            <div class="container-fluid">
+                <div class="footer">
+                    <p>
+                        Copyright © 2018 Designed by html.design. All rights reserved.<br><br>
+                        Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
+                    </p>
+                </div>
+            </div>
+            <!-- end dashboard inner -->
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+    <script src="~/js/save_delete_article.js"></script>
+}

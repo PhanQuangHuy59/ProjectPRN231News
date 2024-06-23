@@ -77,8 +77,7 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="PersonalInformation" asp-action="PersonalOfNews"
-                        data-toggle="collapse" aria-expanded="false">
+                        <a asp-controller="PersonalInformation" asp-action="BoardArticleOfUser">
                             <i class="fa fa-newspaper-o"></i>
                             <span>Bảng tin của bạn</span>
                         </a>
@@ -178,8 +177,9 @@
                                         <div class="col-lg-12">
                                             <div class="full dis_flex center_text">
                                                 <div class="profile_img">
-                                                    <img width="180" class="rounded-circle" src="@pathImageDefault" alt="#" />
-                                                    <i title="Cập nhật hình ảnh đại diện mới" style="margin-left: 43%;font-size: 20px; margin-top: 20px;" class="fa fa-camera"></i>
+                                                    <img id="imgAvatarDisplay" width="180" class="rounded-circle" src="@pathImageDefault" alt="#" />
+                                                    <input style="display:none;" id="inputAvatar" type="file" name="UploadImageAvatar"/>
+                                                    <i id="clickLoadAvatar" title="Cập nhật hình ảnh đại diện mới" style="margin-left: 43%;font-size: 20px; margin-top: 20px;" class="fa fa-camera"></i>
                                                 </div>
                                                 <div class="profile_contant">
                                                     <div class="contact_inner">

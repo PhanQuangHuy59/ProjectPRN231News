@@ -15,7 +15,7 @@
     const eyenewPassword = document.getElementById('eyenewPassword');
     const newPassword = document.getElementById('newPassword');
 
-    eyenewPassword.addEventListener('click', () => {s
+    eyenewPassword.addEventListener('click', () => {
         if (newPassword.type === 'password') {
             newPassword.type = 'text';
         } else {
@@ -36,7 +36,7 @@
 
 
 
-    function showSuccess(message){
+    function showSuccess(message) {
         toastr.options = {
             "closeButton": false,
             "debug": false,
@@ -57,7 +57,7 @@
         toastr["success"](message);
     }
 
-    function showError(message){
+    function showError(message) {
         toastr.options = {
             "closeButton": false,
             "debug": false,
@@ -78,8 +78,87 @@
         toastr["error"](message);
     }
 
-    
 
+    //UpLoad Hình ảnh
+
+    const elInput = document.getElementById("inputAvatar");
+    const img = document.getElementById("imgAvatarDisplay");
+    const uploadBtn = document.getElementById("clickLoadAvatar");
+
+    uploadBtn.addEventListener("click", () => {
+        elInput.click();
+    });
+
+    elInput.addEventListener("change", previewSelectedImage);
+    function previewSelectedImage() {
+        const file = elInput.files[0];
+
+        const currentTime = new Date();
+        const year = currentTime.getFullYear();
+        const month = currentTime.getMonth() + 1;
+        const day = currentTime.getDate();
+        const hour = currentTime.getHours();
+        const minute = currentTime.getMinutes();
+        const second = currentTime.getSeconds();
+
+        const currentTimeString = `${year}-${month} -${day} ${hour}:${minute}:${second}`;
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.addEventListener("load", (e) => {
+                img.src = e.target.result;
+                const data = reader.result.split(",")[1];
+                const postData = {
+                    name: currentTimeString+file.name,
+                    type: file.type,
+                    data: data,
+                };
+               
+                console.log(postData);
+                postFile(postData);
+            });
+        }
+    }
+
+    async function postFile(postData) {
+       
+        var apiAppScript =
+            "https://script.google.com/macros/s/AKfycbxbO6hUsYNYIEx_ZMY7MvxmT0dFo7zkE5nbg61pexLVVbc2cuicOSHLfHbysv2VxEmz/exec";
+        try {
+            const response = await fetch(apiAppScript, {
+                method: "POST",
+                body: JSON.stringify(postData),
+            });
+            const data = await response.json();
+            console.log(data);
+
+            img.src = data.link;
+
+            const userId = $("#userId").val();
+            let urlUpdateDisplayName = `https://localhost:7251/api/Users/ChangeAvata?userId=${userId}&urlImage=${data.link}`
+            console.log(urlUpdateDisplayName);
+            const responseUpdateImage = await fetch(urlUpdateDisplayName, {
+                method: "PUT"
+            });
+            if (responseUpdateImage.ok) {
+               
+                const dataUploadImage = await responseUpdateImage.json();
+                console.log(dataUploadImage);
+                showSuccess("Thay đổi hình ảnh thành công.")
+            } else {
+                // Request failed
+               showError("Error updating image:" + responseUpdateImage.statusText);
+            }
+
+        } catch (error) {
+            showError("Vui Lòng thử lại");
+        }
+    }
+
+
+
+    ///
     $("#buttonEnable").click(function () {
         $("#displayName").prop("disabled", function (i, val) {
             return !val;
@@ -112,7 +191,7 @@
                 //location.reload
                 displayName.value = result.DisplayName;
                 showSuccess('Đã thay đổi tên thành công.');
-                
+
                 console.log("Success:", result);
             },
             error: function (xhr, status, error) {
@@ -153,8 +232,7 @@
             success: function (result, status, xhr) {
                 //location.reload
                 displayName.value = result.DisplayName;
-                showSuccess(('Update Thành Công Thông Tin');
-               
+                showSuccess('Update Thành Công Thông Tin');
                 console.log("Success:", result);
             },
             error: function (xhr, status, error) {
@@ -235,6 +313,6 @@
         }
 
     });
-      
+
 
 });
