@@ -36,7 +36,7 @@ namespace WebNewsAPIs.Controllers
         private ILogger<UsersController> _logger;
 
         public UsersController(IUserRepository userRepo, IMapper mapper,
-            IEmailSender emailSender, ILogger<UsersController> logger, 
+            IEmailSender emailSender, ILogger<UsersController> logger,
             IArticleRepository articleRepo, IViewRepository viewRepo)
         {
             _userRepo = userRepo;
@@ -227,13 +227,13 @@ namespace WebNewsAPIs.Controllers
             return Ok(responseToView);
         }
         [HttpPut("UpdateInformationBasic")]
-        public async Task<ActionResult<ViewUserDto>> UpdateÌnormationBasic(Guid? userId,string? phoneNumber, DateTime? dateOfBirth, string? gioiTinh, string? address)
+        public async Task<ActionResult<ViewUserDto>> UpdateÌnormationBasic(Guid? userId, string? phoneNumber, DateTime? dateOfBirth, string? gioiTinh, string? address)
         {
             string[] includes = new string[]
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-            string[] gender = {"Nam","Nữ","Khác" };
+            string[] gender = { "Nam", "Nữ", "Khác" };
             if (userId == null)
             {
                 return BadRequest();
@@ -249,16 +249,16 @@ namespace WebNewsAPIs.Controllers
             {
                 userCheck.PhoneNumber = phoneNumber;
             }
-            if(!string.IsNullOrEmpty(gioiTinh) && gender.Contains(gioiTinh))
+            if (!string.IsNullOrEmpty(gioiTinh) && gender.Contains(gioiTinh))
             {
-                userCheck.Gender = gioiTinh; 
+                userCheck.Gender = gioiTinh;
             }
-            if(dateOfBirth != null)
+            if (dateOfBirth != null)
             {
                 userCheck.DateOfBirth = dateOfBirth;
             }
             userCheck.Address = address;
-           
+
             try
             {
                 await _userRepo.UpdateAsync(userCheck);
@@ -276,7 +276,7 @@ namespace WebNewsAPIs.Controllers
         public async Task<ActionResult<ViewUserDto>> ChangePassword(Guid? userId, string? oldPassword, string? newPassword)
         {
             VerifyInformation verify = new VerifyInformation();
-            
+
 
             string[] includes = new string[]
             {
@@ -287,17 +287,17 @@ namespace WebNewsAPIs.Controllers
                 return BadRequest();
             }
             var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
-            if(userCheck == null)
+            if (userCheck == null)
             {
                 return StatusCode(404, "Khong tìm thấy người dùng nào hợp lệ");
             }
 
-            if(!BCrypt.Net.BCrypt.Verify(oldPassword, userCheck.Password))
+            if (!BCrypt.Net.BCrypt.Verify(oldPassword, userCheck.Password))
             {
                 return StatusCode(405, "Mật khẩu cũ không trùng khớp");
             }
             string ok = verify.IsValidPassword(newPassword, userCheck.Username);
-            if(ok != "Ok")
+            if (ok != "Ok")
             {
                 return StatusCode(406, ok);
             }
@@ -316,29 +316,59 @@ namespace WebNewsAPIs.Controllers
             return Ok(responseToView);
         }
 
+        [HttpPut("ChangeAvata")]
+        public async Task<ActionResult<ViewUserDto>> ChangePassword(Guid? userId, string? urlImage)
+        {
 
+            string[] includes = new string[]
+            {
+                nameof(BusinessObjects.Models.User.Role)
+            };
+            if (userId == null || urlImage == null)
+            {
+                return BadRequest();
+            }
+            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            if (userCheck == null)
+            {
+                return StatusCode(404, "Khong tìm thấy người dùng nào hợp lệ");
+            }
+
+            userCheck.Image = urlImage;
+
+            try
+            {
+                await _userRepo.UpdateAsync(userCheck);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Thay đổi mật khẩu thành công!");
+            }
+            var responseToView = _mapper.Map<ViewUserDto>(userCheck);
+            return Ok(responseToView);
+        }
 
         [HttpPost("AddArticleToViewUser")]
         public async Task<ActionResult<ViewUserDto>> AddArticleToViewUser(Guid? userId, Guid? articleId)
         {
-            
+
 
 
             string[] includes = new string[]
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-           
+
             var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
             var articleCheck = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
             var viewCheck = _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId)).Result;
-            if(viewCheck != null)
+            if (viewCheck != null)
             {
                 return Ok();
             }
 
             var listArticleViewOfUser = _viewRepo.GetMulti(c => c.UserId.Equals(userId.Value)).OrderBy(c => c.ViewDate).ToList();
-            if(listArticleViewOfUser.Count > 100)
+            if (listArticleViewOfUser.Count > 100)
             {
                 var listViewDelete = listArticleViewOfUser.Skip(99);
                 _viewRepo.DeleteListView(listViewDelete);
@@ -361,7 +391,7 @@ namespace WebNewsAPIs.Controllers
             {
                 return StatusCode(500, "Thêm Không thanh Cong Cho View of user");
             }
-           
+
             return Ok();
         }
 
