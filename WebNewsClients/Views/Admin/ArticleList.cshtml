@@ -30,20 +30,69 @@
                     <div class="white_card_body">
                         <div class="QA_section">
                             <div class="white_box_tittle list_header">
-                                <h4>Danh sách bài báo</h4>
                                 <div class="box_right d-flex lms_block">
-                                    <div class="serach_field_2">
-                                        <div class="search_inner">
-                                            <form Active="#">
-                                                <div class="search_field">
-                                                    <input type="text" placeholder="Nhập nội dung tìm kiếm...">
+                                    <div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label>Tên bài báo</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
                                                 </div>
-                                                <button type="submit"> <i class="ti-search"></i> </button>
-                                            </form>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Miêu tả ngắn</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Tên tác giả</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Thể loại</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="1">Giải trí</option>
+                                                    <option value="1">Thế giới</option>
+                                                    <option value="1">Quân sự</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Ngày đăng</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="date" value="2022-02-22">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Lần cập nhật cuối</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="date" value="2022-02-22">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Đăng tải</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="0">Đã đăng</option>
+                                                    <option value="1">Chưa đăng</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Tình trạng hiện tại</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="1">Chưa xử lý</option>
+                                                    <option value="1">Đang xử lý</option>
+                                                    <option value="1">Đã xử lý</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="create_report_btn mt_30">
+                                                    <a href="#" class="btn_1 radius_btn d-block text-center">Tìm kiếm</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="add_button ms-2">
-                                        <a href="#" data-toggle="modal" data-target="#addcategory" class="btn_1">Tìm kiếm</a>
                                     </div>
                                 </div>
                             </div>
@@ -55,6 +104,7 @@
                                             <th scope="col">Tên bài báo</th>
                                             <th scope="col">Miêu tả ngắn</th>
                                             <th scope="col">Tên tác giả</th>
+                                            <th scope="col">Thể loại</th>
                                             <th scope="col">Ngày đăng</th>
                                             <th scope="col">Lần cập nhật cuối</th>
                                             <th scope="col">Đăng tải</th>
@@ -67,6 +117,7 @@
                                             <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
                                             <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
                                             <td>Hayden</td>
+                                            <td>Giải trí</td>
                                             <td><p>26/06/2024</p></td>
                                             <td><p>27/06/2024</p></td>
                                             <td><h3 class="badge bg-success">Đã đăng</h3></td>
@@ -82,6 +133,7 @@
                                             <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
                                             <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
                                             <td>Hayden</td>
+                                            <td>Giải trí</td>
                                             <td><p>26/06/2024</p></td>
                                             <td><p>27/06/2024</p></td>
                                             <td><h3 class="badge bg-success">Đã đăng</h3></td>
@@ -97,6 +149,7 @@
                                             <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
                                             <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
                                             <td>Hayden</td>
+                                            <td>Giải trí</td>
                                             <td><p>26/06/2024</p></td>
                                             <td><p>27/06/2024</p></td>
                                             <td><h3 class="badge bg-success">Đã đăng</h3></td>

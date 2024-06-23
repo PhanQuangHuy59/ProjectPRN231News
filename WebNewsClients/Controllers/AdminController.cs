@@ -29,5 +29,9 @@ namespace WebNewsClients.Controllers
         {
             return View("ArticleList");
         }
+        public IActionResult ArticleAdd()
+        {
+            return View("ArticleAdd");
+        }
     }
 }

@@ -4177,6 +4177,10 @@
       "PackagePath": "staticwebassets\\user-management-html\\js\\dashboard_init.js"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\editorForAdd.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\editorForAdd.js"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\jquery1-3.4.1.min.js",
       "PackagePath": "staticwebassets\\user-management-html\\js\\jquery1-3.4.1.min.js"
     },
