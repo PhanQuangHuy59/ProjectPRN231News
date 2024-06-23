@@ -5,9 +5,35 @@
     Layout = "_LayoutPersonalInformation";
 
     // Danh sach comment
-    var ArticleSaves = (ViewBag.ArticleSaves == null ? null : (IEnumerable<IGrouping<DateTime, SaveArticle>>)ViewBag.ArticleSaves).ToList();
+    var listArticleSave = (ViewBag.ArticleSaves == null ? null : (IEnumerable<SaveArticle>)ViewBag.ArticleSaves).ToList();
+
+    IEnumerable<IGrouping<DateTime, SaveArticle>> ArticleSaves = null;
+    if (listArticleSave != null)
+    {
+        ArticleSaves = listArticleSave.GroupBy(c => c.SaveDate.Date);
+    }
 
 
+    int currentPage = (int)ViewBag.CurrentPage;
+    int totalPage = (int)ViewBag.TotalPage;
+    int totalResult = (int)ViewBag.TotalResult;
+    //Xử lí phân trang
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("ArticleSaved", "PersonalInformation", new
+                    {
+                        currentPage = indexpage
+                    });
+                }
+
+            };
+
+
+    // Xử lí đường dẫn hình ảnh
     var informationUser = (User)ViewBag.InformationUser;
     string pathImageDefault = "";
     string pathImageMale = "/images/male_default.png";
@@ -177,7 +203,7 @@
                                     </div>
                                 </div>
                                 <div class="full price_table padding_infor_info">
-                                    @if (ArticleSaves == null || ArticleSaves.Count == 0)
+                                    @if (listArticleSave == null || listArticleSave.Count == 0)
                                     {
                                         <div class="card border-primary mb-3" style="max-width:100%;">
                                             <div class="card-header">Bạn chưa Lưu bài báo nào.</div>
@@ -191,7 +217,7 @@
                                     {
                                         @foreach (var group in ArticleSaves)
                                         {
-                                           <h3>@(group.Key.Equals(DateTime.Now.Date)? "Hôm Nay": group.Key.ToString("dd/MM/yyyy"))</h3> <hr class="w-100 border border-dark mt-3 mb-3 ">
+                                            <h3>@(group.Key.Equals(DateTime.Now.Date) ? "Hôm Nay" : group.Key.ToString("dd/MM/yyyy"))</h3> <hr class="w-100 border border-dark mt-3 mb-3 ">
                                             foreach (var c in group)
                                             {
                                                 <div class="row">
@@ -204,20 +230,26 @@
                                                         </a>
 
                                                         <p>@c.Article.ShortDescription</p>
-                                                       
+
                                                     </div>
                                                     <div class="col-md-1">
                                                         <span>
                                                             <i id="@c.ArticleId" data-userId="@informationUser.UserId.ToString()" data-articleId="@c.ArticleId.ToString()" class="fa fa-bookmark text-primary"></i>
                                                         </span>
-                                                     
+
                                                     </div>
                                                 </div>
                                             }
 
                                         }
+                                        <hr />
                                     }
-
+                                    @if (listArticleSave != null && listArticleSave.Count != 0)
+                                    {
+                                        <div class="text-center">
+                                            @await Html.PartialAsync("_Pagination",PageModel);
+                                        </div>
+                                    }
 
                                 </div>
 

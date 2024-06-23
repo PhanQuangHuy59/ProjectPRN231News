@@ -47,7 +47,7 @@ namespace WebNewsAPIs.Controllers
 
 
 
-            var checkExist = _saveRepo.GetSingleByCondition(c => c.UserId.Equals(userId) && c.ArticleId.Equals(articleId)).Result;
+            var checkExist = _saveRepo.GetSingleByCondition(c => c.UserId.Equals(userId) & c.ArticleId.Equals(articleId)).Result;
             if(checkExist == null)
             {
                 var addSave = new SaveArticle
@@ -58,7 +58,7 @@ namespace WebNewsAPIs.Controllers
                     User = userCheck
                 };
 
-                _saveRepo.AddAsync(addSave);
+                var response = _saveRepo.AddAsync(addSave).Result;
                 return Ok(true);
             }
             else
@@ -67,7 +67,7 @@ namespace WebNewsAPIs.Controllers
                 return Ok(false);
             }
 
-            return Ok(true);
+            
         }
     }
 }
