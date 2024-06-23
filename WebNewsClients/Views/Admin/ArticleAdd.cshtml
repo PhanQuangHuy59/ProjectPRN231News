@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "_LayoutMainAdmin";
+}
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Thêm bài báo mới</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Bài báo</li>
+                            <li class="breadcrumb-item active">Thêm bài báo mới</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            August 1, 2020 - August 31, 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Thêm bài báo mới</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="common_input mb_15">
+                                    <label>Tên bài báo</label>
+                                    <input type="text" placeholder="Nhập tên bài báo...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Tác giả</label>
+                                <div class="common_input mb_15">
+                                    <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                        <option value="1">Chọn tác giả</option>
+                                        <option value="1">Trần văn a</option>
+                                        <option value="1">Trần văn b</option>
+                                        <option value="1">Trần văn c</option>
+                                        <option value="1">Trần văn d</option>
+                                        <option value="1">Trần văn e</option>
+                                        <option value="1">Trần văn f</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="white_box mb_30">
+                                    <div class="box_header ">
+                                        <div class="main-title">
+                                            <h3 class="mb-0">Nội dung</h3>
+                                        </div>
+                                    </div>
+                                    <textarea class="editorImport">
+                                    <h1>Ví dụ cho nội dung</h1>
+                                    <p>Here goes the initial content of the editor. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
+                                    <p>Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.Ut wisi enim ad minim veniam,quis nostrud exerci tation ullamcorper. Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.Ut wisi enim ad minim veniam,quis nostrud exerci tation ullamcorper.</p>
+                                    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            </textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Ngày tạo</label>
+                                <div class="common_input mb_15">
+                                    <input type="date" value="2022-02-22">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Thể loại</label>
+                                <div class="common_input mb_15">
+                                    <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                        <option value="1">Giải trí</option>
+                                        <option value="1">Thế giới</option>
+                                        <option value="1">Kinh tế</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Miêu tả ngắn</label>
+                                <div class="common_input mb_15">
+                                    <input type="text" placeholder="Nhập miêu tả ngắn...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Đăng tải</label>
+                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                    <option value="1">Chưa đăng tải</option>
+                                    <option value="1">Đã đăng tải</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Tình trạng</label>
+                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                    <option value="1">Chưa xử lý</option>
+                                    <option value="1">Đang xử lý</option>
+                                    <option value="1">Đã xử lý</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Hình ảnh</label>
+                                <div class="common_input mb_15">
+                                    <input type="text" placeholder="Đường dẫn hình ảnh...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Nguời quản lý</label>
+                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                    <option value="1">Cao Thịnh Hưng</option>
+                                    <option value="1">Trần Thị Thảo</option>
+                                    <option value="1">Nguyễn Thu Hương</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Âm thanh</label>
+                                <div class="common_input mb_15">
+                                    <input type="text" placeholder="Đường dẫn âm thanh...">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="create_report_btn mt_30">
+                                    <a href="#" class="btn_1 radius_btn d-block text-center">Thêm bài báo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

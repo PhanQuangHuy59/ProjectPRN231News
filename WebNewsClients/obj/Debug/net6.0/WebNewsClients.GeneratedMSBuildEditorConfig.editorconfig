@@ -10,6 +10,8 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebNewsClients
 build_property.RootNamespace = WebNewsClients
 build_property.ProjectDir = D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsClients\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
@@ -30,6 +32,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/AdminAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5BZGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/AdminList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/ArticleAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUFkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/ArticleList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/UserAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlckFkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/UserList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlckxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Article/ArticleDetail.cshtml]

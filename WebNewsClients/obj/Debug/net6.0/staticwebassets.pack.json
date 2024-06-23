@@ -4181,6 +4181,10 @@
       "PackagePath": "staticwebassets\\user-management-html\\js\\chart.min.js"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\charts.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\charts.js"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\ckeditor-classic.js",
       "PackagePath": "staticwebassets\\user-management-html\\js\\ckeditor-classic.js"
     },
@@ -4191,6 +4195,10 @@
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\dashboard_init.js",
       "PackagePath": "staticwebassets\\user-management-html\\js\\dashboard_init.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\editorForAdd.js",
+      "PackagePath": "staticwebassets\\user-management-html\\js\\editorForAdd.js"
     },
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\user-management-html\\js\\jquery1-3.4.1.min.js",

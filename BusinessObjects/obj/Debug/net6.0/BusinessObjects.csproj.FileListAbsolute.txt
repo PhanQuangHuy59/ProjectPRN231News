@@ -12,3 +12,4 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\Busines
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\ref\BusinessObjects.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.runtimeconfig.json
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.genruntimeconfig.cache
+D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.sourcelink.json
