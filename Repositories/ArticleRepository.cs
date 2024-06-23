@@ -40,6 +40,7 @@ namespace Repositories
         }
         public IEnumerable<Article> GetAllFromDateToDate(DateTime from, DateTime to, int statusProcess)
         {
+           
             IEnumerable <Article> articles = GetMulti(
                  predicate: a => a.IsPublish == true
                  && a.StatusProcess == statusProcess

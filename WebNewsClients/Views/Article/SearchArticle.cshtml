@@ -137,8 +137,7 @@
                                             </ul>
                                             @if (currentPage != int.MinValue)
                                             {
-                                                @await Html.PartialAsync("_Pagination",PageModel)
-                                                ;
+                                                @await Html.PartialAsync("_Pagination",PageModel);
                                             }
                                             <a href="#" class="inf-more-but">More Posts</a>
                                             <div class="nav-links">

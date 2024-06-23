@@ -355,6 +355,16 @@ namespace WebNewsClients.Controllers
 
         public IActionResult Logout()
         {
+           string user =  HttpContext.Session.GetString(SaveKeySystem.userLogin);
+            if (!string.IsNullOrEmpty(user))
+            {
+                HttpContext.Session.Remove(SaveKeySystem.userLogin);
+                if (HttpContext.Request.Cookies.ContainsKey(SaveKeySystem.Authentication))
+                {
+                    HttpContext.Response.Cookies.Delete(SaveKeySystem.Authentication);
+                }
+            }
+
             return RedirectToAction("Index","Home");   
         }
 

@@ -45,15 +45,14 @@
         event.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
         // Tạo đối tượng FormData từ form
-       
+
         var inforMainComment = document.getElementById('main_information_comment');
         if ($('#articleId').val() === ''
-            & $('#userId').val() === '')
-        {
+            & $('#userId').val() === '') {
             $('#articleId').val("" + inforMainComment.dataset.articleid);
-            $('#userId').val(""+inforMainComment.dataset.userid);
+            $('#userId').val("" + inforMainComment.dataset.userid);
             $('#replyFor').val('-1');
-            
+
         }
 
         var formData = new FormData(this);
@@ -68,7 +67,7 @@
             formData.append('ReplyFor', $('#replyFor').val());
         }
         const data = {};
-        
+
         formData.forEach((value, key) => {
             if (key != "comment_post_ID" & key != "comment_parent"
                 & key != "__RequestVerificationToken"
@@ -83,60 +82,114 @@
         // In ra console để kiểm tra các giá trị
         console.log(JSON.stringify(data));
         var urlComment = "";
-         //Tạo và gửi request bằng AJAX
+        //Tạo và gửi request bằng AJAX
 
-        $.ajax({
-            url: `https://localhost:7251/api/Comments`,
-            type: 'POST',
-            data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
-            contentType: "application/json",
-            success: function (result, status, xhr) {
-                //location.reload
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["success"]('Comment thanh cong hãy reload lại trang')
-                $("#comment").val('');
-                console.log('Success:', result);
-            },
-            error: function (xhr, status, error) {
-                var text = xhr.responseText;
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr["error"](text)
-            }
-        });
+        if (data["UserId"] === "nologin") {
+            ShowError("Bạn không thể bình luận khi bạn chưa đăng nhập");
+        } else {
+            $.ajax({
+                url: `https://localhost:7251/api/Comments`,
+                type: 'POST',
+                data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+                    //location.reload
+                    var message = 'Comment thanh cong hãy reload lại trang';
+                    ShowSuccess(message);
+                    $("#comment").val('');
+                    console.log('Success:', result);
+                },
+                error: function (xhr, status, error) {
+                    var text = xhr.responseText;
+                    ShowError(text);
+                }
+            });
+        }
     });
+
+    const timerId = setTimeout(function () {
+        addToViewsOfUser();
+    }, 5000);
+   
+   
+    function addToViewsOfUser() {
+        var inforMainComment = document.getElementById('main_information_comment');
+
+        var articleId = inforMainComment.dataset.articleid;
+        var userId = inforMainComment.dataset.userid;
+        console.log(userId + "\n" + articleId);
+        if (userId !== "nologin") {
+            var urlAddViwe = `https://localhost:7251/api/Users/AddArticleToViewUser?userId=${userId}&articleId=${articleId}`;
+            $.ajax({
+                url: urlAddViwe,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+                    //location.reload
+                    var message = 'Thêm vào Danh sách bài báo người dùng xem thành công';
+                    ShowSuccess(message);
+                    console.log('Success:', result);
+                },
+                error: function (xhr, status, error) {
+                    var text = xhr.responseText;
+                    ShowError(text);
+                }
+            });
+        }
+    }
+    // to cancel the timer
+    
+
+
+    function ShowSuccess(message) {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr["success"](message)
+    }
+
+    function ShowError(message) {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr["error"](message)
+    }
 });
+
+
+    
+
+
+
+
 
 
 
