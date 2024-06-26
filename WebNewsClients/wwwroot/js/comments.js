@@ -100,6 +100,7 @@
                     var message = 'Comment thanh cong hãy reload lại trang';
                     ShowSuccess(message);
                     $("#comment").val('');
+
                     console.log('Success:', result);
                 },
                 error: function (xhr, status, error) {
@@ -110,9 +111,10 @@
         }
     });
 
+
     const timerId = setTimeout(function () {
         addToViewsOfUser();
-    }, 2000);
+    }, 12000);
 
 
     function addToViewsOfUser() {
@@ -135,6 +137,20 @@
                         console.log('Success:', result);
                     }
 
+                },
+                error: function (xhr, status, error) {
+                    var text = xhr.responseText;
+                    ShowError(text);
+                }
+            });
+        } else {
+            var urlIncreateViewWithNoLogin = `https://localhost:7251/api/Articles/IncreaseViewArticle?articleId=${articleId}`;
+            
+            $.ajax({
+                url: urlIncreateViewWithNoLogin,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (result, status, xhr) {
                 },
                 error: function (xhr, status, error) {
                     var text = xhr.responseText;
@@ -224,7 +240,7 @@
                         } else {
                             var span = divClick.find('span.numberDropEmotion:first');
                             span.removeClass('text-primary');
-                            var numberDropEmotion = parseInt(span.html(), 10) - 1;
+                            var numberDropEmotion =  parseInt(span.html(), 10) - 1;
                             span.html(numberDropEmotion);
 
                             ShowSuccess("Đã xóa emotion");

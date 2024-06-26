@@ -127,7 +127,7 @@ namespace WebNewsClients.Controllers
 
                 //get all drop emotion of article
                 var urlDropEmotionOfArticle = $"https://localhost:7251/odata/DropEmotions?$filter=ArticleId eq {article1.ArticleId}";
-                var responseMessaDropEmotionOfArticle = _httpClient.GetAsync(urlEmotions).Result;
+                var responseMessaDropEmotionOfArticle = _httpClient.GetAsync(urlDropEmotionOfArticle).Result;
                 responseMessaDropEmotionOfArticle.EnsureSuccessStatusCode();
                 var responseDropEmotion = responseMessaDropEmotionOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<DropEmotion>>>()
                     .Result.data.ToList();
@@ -227,7 +227,7 @@ namespace WebNewsClients.Controllers
 
             //Call api của last new của ngày hôm nay
             var now = new DateTime(2024, 6, 17);
-            string urlOdataLastestnew = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and year(CreatedDate) eq {now.Year} and month(CreatedDate) eq {now.Month} and day(CreatedDate) eq {now.Day}\r\n";
+            string urlOdataLastestnew = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and year(CreatedDate) eq {now.Year} and month(CreatedDate) eq {now.Month} and day(CreatedDate) eq {now.Day}\r\n";
             var responseMessageLastNew = _httpClient.GetAsync(urlOdataLastestnew).Result;
             responseMessageLastNew.EnsureSuccessStatusCode();
             var listLastestArticle = responseMessageLastNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>().Result.data.ToList();
@@ -384,7 +384,7 @@ namespace WebNewsClients.Controllers
             ViewBag.CategoryId = categoryId;
             ViewBag.Time = time;
             ViewBag.TotalResultCount = responseData.total;
-            ViewBag.TotalPage = (int)((decimal)responseData.total / Items_Page_Search);
+            ViewBag.TotalPage = (int)(Math.Ceiling((decimal)responseData.total / Items_Page_Search));
 
             ViewBag.ListSearchArticle = responseData.result;
 

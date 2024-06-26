@@ -141,8 +141,38 @@ namespace WebNewsAPIs.Controllers
 
             return Ok(result);
         }
+		[HttpGet("SearchArticleOfAuthor")]
+		public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticleOfAuthor(Guid? authorId,Guid? categoryId = null, string? keySearch = "", int currentPage = 1, int size = 20)
+		{
+			string guid_Default = "00000000-0000-0000-0000-000000000000";
+			string[] includes = new string[]
+			{
+				nameof(Article.Categorty),
+				nameof(Article.Comments)
+			};
+			if (_articleRepository == null || authorId == null)
+			{
+				return BadRequest();
+			}
+			List<Article> listNew = new List<Article>();
+			int sizeResult = 0;
+			keySearch = (keySearch ?? string.Empty);
 
-        [HttpGet("GetBoardArticleOfUser")]
+			Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
+		    & c.Author.Equals(authorId) &
+			(c.Title.ToLower().Contains(keySearch.ToLower()) || c.ShortDescription.ToLower().Contains(keySearch.ToLower())));
+			listNew = _articleRepository.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();
+
+			var listResponse = _mapper.Map<IEnumerable<ViewArticleDto>>(listNew);
+			var result = new SearchPaging<IEnumerable<ViewArticleDto>>
+			{
+				total = sizeResult,
+				result = listResponse
+			};
+
+			return Ok(result);
+		}
+		[HttpGet("GetBoardArticleOfUser")]
         public async Task<ActionResult<IEnumerable<ViewArticleDto>>> GetBoardArticleOfUser(Guid? userId = null)
         {
             string[] includes = new string[]
@@ -169,6 +199,23 @@ namespace WebNewsAPIs.Controllers
 
 
             return Ok(_mapper.Map<IEnumerable<ViewArticleDto>>(listArticleBoard));
+        }
+
+        [HttpPost("IncreaseViewArticle")]
+        public IActionResult IncreaseViewArticle(Guid? articleId)
+        {
+            if(articleId == null)
+            {
+                return BadRequest();
+            }
+            var articleCheck = _articleRepository.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
+            if(articleCheck == null)
+            {
+                return NotFound();
+            }
+            articleCheck.ViewArticles = articleCheck.ViewArticles + 1;
+            _articleRepository.UpdateAsync(articleCheck).Wait();
+            return Ok();
         }
 
 

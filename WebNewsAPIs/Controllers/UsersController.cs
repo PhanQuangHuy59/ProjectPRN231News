@@ -363,8 +363,9 @@ namespace WebNewsAPIs.Controllers
             }
             // Update luot xem cho bai bao
             articleCheck.ViewArticles = articleCheck.ViewArticles + 1;
+            await _articleRepo.UpdateAsync(articleCheck);
             var viewCheck = _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId)).Result;
-            _articleRepo.UpdateAsync(articleCheck).Wait();
+          
             if (viewCheck != null)
             {
                 return Ok(null);
