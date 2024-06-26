@@ -351,20 +351,23 @@ namespace WebNewsAPIs.Controllers
         [HttpPost("AddArticleToViewUser")]
         public async Task<ActionResult<ViewUserDto>> AddArticleToViewUser(Guid? userId, Guid? articleId)
         {
-
-
-
             string[] includes = new string[]
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-
             var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
             var articleCheck = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
+            if(userCheck == null || articleCheck == null)
+            {
+                return NotFound();
+            }
+            // Update luot xem cho bai bao
+            articleCheck.ViewArticles = articleCheck.ViewArticles + 1;
             var viewCheck = _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId)).Result;
+            _articleRepo.UpdateAsync(articleCheck).Wait();
             if (viewCheck != null)
             {
-                return Ok();
+                return Ok(null);
             }
 
             var listArticleViewOfUser = _viewRepo.GetMulti(c => c.UserId.Equals(userId.Value)).OrderBy(c => c.ViewDate).ToList();
@@ -386,13 +389,14 @@ namespace WebNewsAPIs.Controllers
             try
             {
                 await _viewRepo.AddAsync(viewAdd);
+                  
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Thêm Không thanh Cong Cho View of user");
             }
 
-            return Ok();
+            return Ok(viewAdd);
         }
 
 

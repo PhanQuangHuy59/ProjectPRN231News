@@ -126,30 +126,36 @@
         var apiAppScript =
             "https://script.google.com/macros/s/AKfycbxbO6hUsYNYIEx_ZMY7MvxmT0dFo7zkE5nbg61pexLVVbc2cuicOSHLfHbysv2VxEmz/exec";
         try {
+            $('#displayLoader').css('display','block');
             const response = await fetch(apiAppScript, {
                 method: "POST",
                 body: JSON.stringify(postData),
             });
-            const data = await response.json();
-            console.log(data);
+            if (response.ok) {
+                const data = await response.json();
 
-            img.src = data.link;
+                console.log(data);
 
-            const userId = $("#userId").val();
-            let urlUpdateDisplayName = `https://localhost:7251/api/Users/ChangeAvata?userId=${userId}&urlImage=${data.link}`
-            console.log(urlUpdateDisplayName);
-            const responseUpdateImage = await fetch(urlUpdateDisplayName, {
-                method: "PUT"
-            });
-            if (responseUpdateImage.ok) {
-               
-                const dataUploadImage = await responseUpdateImage.json();
-                console.log(dataUploadImage);
-                showSuccess("Thay đổi hình ảnh thành công.")
-            } else {
-                // Request failed
-               showError("Error updating image:" + responseUpdateImage.statusText);
+                img.src = data.link;
+
+                const userId = $("#userId").val();
+                let urlUpdateDisplayName = `https://localhost:7251/api/Users/ChangeAvata?userId=${userId}&urlImage=${data.link}`
+                console.log(urlUpdateDisplayName);
+                const responseUpdateImage = await fetch(urlUpdateDisplayName, {
+                    method: "PUT"
+                });
+                if (responseUpdateImage.ok) {
+                    const dataUploadImage = await responseUpdateImage.json();
+                    $('#displayLoader').css('display', 'none');
+                    console.log(dataUploadImage);
+                    showSuccess("Thay đổi hình ảnh thành công.")
+                } else {
+                    // Request failed
+                    $('#displayLoader').css('display', 'none');
+                    showError("Error updating image:" + responseUpdateImage.statusText);
+                }
             }
+            
 
         } catch (error) {
             showError("Vui Lòng thử lại");

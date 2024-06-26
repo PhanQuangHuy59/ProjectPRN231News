@@ -35,12 +35,12 @@ namespace WebNewsClients.Controllers
         [Route("ArticleOfCategory/{categoryArticleId}.html")]
         public IActionResult ArticleOfCategory([FromRoute] Guid categoryArticleId)
         {
-           
+
 
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
 
-            var responseMessage =  _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
             responseMessage.EnsureSuccessStatusCode();
 
             var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
@@ -70,7 +70,7 @@ namespace WebNewsClients.Controllers
 
 
             //tra ve view
-           
+
             ViewBag.Category = listCategories;
             ViewBag.CategoryDetail = category1;
             ViewBag.Articles = articles;
@@ -118,6 +118,62 @@ namespace WebNewsClients.Controllers
                 var articlesComment = responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>()
                     .Result.data.ToList();
 
+                // Lay tat ca emotion
+                var urlEmotions = "https://localhost:7251/odata/Emotions";
+                var responseMessaEmotion = _httpClient.GetAsync(urlEmotions).Result;
+                responseMessaEmotion.EnsureSuccessStatusCode();
+                var responseEmotion = responseMessaEmotion.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Emotion>>>()
+                    .Result.data.ToList();
+
+                //get all drop emotion of article
+                var urlDropEmotionOfArticle = $"https://localhost:7251/odata/DropEmotions?$filter=ArticleId eq {article1.ArticleId}";
+                var responseMessaDropEmotionOfArticle = _httpClient.GetAsync(urlEmotions).Result;
+                responseMessaDropEmotionOfArticle.EnsureSuccessStatusCode();
+                var responseDropEmotion = responseMessaDropEmotionOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<DropEmotion>>>()
+                    .Result.data.ToList();
+
+
+                // lấy ra người dung đã drop emotion cho emotion nào
+                Dictionary<Guid, bool> checkDropEmotion = new Dictionary<Guid, bool>();
+                Dictionary<Guid, int> quantityEachEmotion = new Dictionary<Guid, int>();
+
+
+                bool checkSave = false;
+                if (userLogin != null)
+                {
+                    // get article save of user of this article
+                    var urlArticleSave = $"https://localhost:7251/odata/SaveArticles?$filter=UserId eq {userLogin.UserId} and ArticleId eq {article1.ArticleId}";
+                    var responseMessagArticleSaveOfUser = _httpClient.GetAsync(urlArticleSave).Result;
+                    responseMessagArticleSaveOfUser.EnsureSuccessStatusCode();
+                    var articleSave = responseMessagArticleSaveOfUser.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<SaveArticle>>>()
+                        .Result.data.ToList();
+                    if (articleSave.Count != 0)
+                    {
+                        checkSave = true;
+                    }
+
+                    //lấy ra người dùng đã thả emotion nào  
+                    foreach (var emotion in responseEmotion)
+                    {
+                        // kiem tra xem nguoi dung co tha cam xuc cho loai cam xuc nay k
+                        var check = responseDropEmotion.FirstOrDefault(c => c.UserId.Equals(userLogin.UserId)
+                        && c.ArticleId.Equals(article1.ArticleId)
+                        && c.EmotionId.Equals(emotion.EmotionId));
+                        // lay ra so luong thả emotion của mot emotion
+                        checkDropEmotion.Add(emotion.EmotionId, (check != null));
+                    }
+                    ViewBag.CheckDropEmotion = checkDropEmotion;
+                }
+
+                foreach (var emotion in responseEmotion)
+                {                   
+                    // lay ra so luong thả emotion của mot emotion
+                    var numberDropEmotionOfEmotion = responseDropEmotion.Where(c =>
+                    c.ArticleId.Equals(article1.ArticleId)
+                    && c.EmotionId.Equals(emotion.EmotionId)).Count();
+                    quantityEachEmotion.Add(emotion.EmotionId, numberDropEmotionOfEmotion);
+                   
+                }
 
 
                 //Call api tim cacs article theo loai cua bai bao
@@ -149,6 +205,9 @@ namespace WebNewsClients.Controllers
                 ViewBag.CategoryOfArticle = category[0];
                 ViewBag.Comments = articlesComment;
                 ViewBag.UserLogin = userLogin;
+                ViewBag.CheckSave = checkSave;
+                ViewBag.Emotions = responseEmotion;
+                ViewBag.QuantityDropEmotion = quantityEachEmotion;
                 return View();
             }
 
@@ -282,17 +341,17 @@ namespace WebNewsClients.Controllers
             {
                 fromDate = null;
             }
-            
 
-          
-           
-           
-           
+
+
+
+
+
 
             // Tạo select list cho thẻ selelct 
 
             var tempListCategory = listCategories.ToList();
-            tempListCategory.Insert(0,new CategoriesArticle { CategoryId = Guid.Parse(GuidDefault), CategoryName = "Tất Cả" });
+            tempListCategory.Insert(0, new CategoriesArticle { CategoryId = Guid.Parse(GuidDefault), CategoryName = "Tất Cả" });
             SelectList selectListTime = new SelectList(listDayFilter, "value", "title", time);
             SelectList selectListCategory = new SelectList(tempListCategory, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName), categoryId);
 
@@ -300,7 +359,7 @@ namespace WebNewsClients.Controllers
             // Call ApiSearch
 
             //Call api của Category Root
-            
+
 
             string urlSearch = $"https://localhost:7251/api/Articles/SearchArticle?categoryId={categoryId}&keySearch={keySearch}" +
                 $"&from={fromDate}&to={toDate}&currentPage={currentPage}&size={Items_Page_Search}";

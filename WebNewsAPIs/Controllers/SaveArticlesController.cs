@@ -45,8 +45,6 @@ namespace WebNewsAPIs.Controllers
                 return StatusCode(404, "Article Không tồn tại");
             }
 
-
-
             var checkExist = _saveRepo.GetSingleByCondition(c => c.UserId.Equals(userId) & c.ArticleId.Equals(articleId)).Result;
             if(checkExist == null)
             {

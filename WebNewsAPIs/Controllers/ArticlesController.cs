@@ -111,8 +111,9 @@ namespace WebNewsAPIs.Controllers
         }
 
         [HttpGet("SearchArticle")]
-        public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticle(Guid? categoryId = null, string keySearch = "", DateTime? from = null, DateTime? to = null, int currentPage = 1, int size = 20)
+        public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticle(Guid? categoryId = null, string? keySearch = "", DateTime? from = null, DateTime? to = null, int currentPage = 1, int size = 20)
         {
+            string guid_Default = "00000000-0000-0000-0000-000000000000";
             string[] includes = new string[]
             {
                 nameof(Article.Categorty),
@@ -124,8 +125,9 @@ namespace WebNewsAPIs.Controllers
             }
             List<Article> listNew = new List<Article>();
             int sizeResult = 0;
+            keySearch  = (keySearch ?? string.Empty);
 
-            Expression<Func<Article, bool>> predicate = (c => (categoryId == null || c.CategortyId == categoryId)
+            Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
             & (from == null || c.CreatedDate.Date >= from.Value.Date) & (to == null || c.CreatedDate.Date <= to.Value.Date) &
             (c.Title.ToLower().Contains(keySearch.ToLower()) || c.ShortDescription.ToLower().Contains(keySearch.ToLower())));
             listNew = _articleRepository.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();

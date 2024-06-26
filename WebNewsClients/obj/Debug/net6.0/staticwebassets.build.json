@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Km9iJFqIDII5w+Y4Ht/WDjR290rUM/T+gDjRj5LV1vY=",
+  "Hash": "Or+P7NVb5Q+hQvHl2JsmkTCYTkQ48RGIy95d8KzHFBo=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -129,6 +129,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\css\\spinner.css",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "css/spinner.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\spinner.css"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\favicon.ico",

@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\css\\spinner.css",
+      "PackagePath": "staticwebassets\\css\\spinner.css"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

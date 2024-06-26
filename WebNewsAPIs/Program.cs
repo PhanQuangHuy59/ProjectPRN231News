@@ -21,7 +21,7 @@ builder.Services.AddDbContext<FinalProjectPRN231Context>(options =>
     var connectString = builder.Configuration.GetConnectionString("value");
     options.UseSqlServer(connectString);
 });
-
+builder.Services.AddScoped<FinalProjectPRN231Context>();
 
 builder.Services.AddControllers();
 

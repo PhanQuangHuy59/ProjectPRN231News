@@ -1,5 +1,4 @@
-﻿
-@using BusinessObjects.Models;
+﻿@using BusinessObjects.Models;
 @using WebNewsAPIs.Dtos;
 @model AddUserDto;
 @{
@@ -12,7 +11,7 @@
     string pathImageKhac = "/images/img_default.png";
 
 
-    if(informationUser.Gender != null)
+    if (informationUser.Gender != null)
     {
         if (informationUser.Gender.Equals("Nam"))
         {
@@ -27,7 +26,7 @@
             pathImageDefault = pathImageKhac;
         }
 
-       
+
 
         pathImageDefault = informationUser.Image == null ? pathImageDefault : informationUser.Image;
     }
@@ -51,10 +50,13 @@
                 <div class="sidebar_user_info">
                     <div class="icon_setting"></div>
                     <div class="user_profle_side">
-                        <div class="user_img"><img class="img-responsive" src="@pathImageDefault" alt="#" /></div>
+                        <div class="user_img"><img  style="object-fit:cover;width:70px;height:70px" class="img-responsive" src="@pathImageDefault" alt="#" />
+                            <p><span class="online_animation"></span> Online</p>
+                        </div>
+
                         <div class="user_info">
                             <h6 class="text-center">@informationUser.DisplayName</h6>
-                            <p><span class="online_animation"></span> Online</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -70,7 +72,7 @@
                             <span>Thông Tin Tài Khoản</span>
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a asp-controller="PersonalInformation" asp-action="PersonalArticleComment">
                             <i class="fa fa-comments-o blue2_color"></i>
                             <span>Hoạt động bình luận</span>
@@ -83,8 +85,7 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="PersonalInformation" asp-action="ArticleViewed" 
-                        >
+                        <a asp-controller="PersonalInformation" asp-action="ArticleViewed">
 
                             <i class="fa fa-clock-o orange_color"></i>
                             <span>Tin Đã xem</span>
@@ -128,7 +129,7 @@
                                 <ul class="user_profile_dd">
                                     <li>
                                         <a class="dropdown-toggle" data-toggle="dropdown">
-                                            <img class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
+                                            <img  style="object-fit:cover;width:50px;height:50px" class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
                                             <span class="name_user">@informationUser.DisplayName</span>
                                         </a>
                                         <div class="dropdown-menu">
@@ -177,8 +178,9 @@
                                         <div class="col-lg-12">
                                             <div class="full dis_flex center_text">
                                                 <div class="profile_img">
-                                                    <img id="imgAvatarDisplay" width="180" class="rounded-circle" src="@pathImageDefault" alt="#" />
-                                                    <input style="display:none;" id="inputAvatar" type="file" name="UploadImageAvatar"/>
+
+                                                    <img id="imgAvatarDisplay" width="180" height="180"  style="object-fit:cover;" class="rounded-circle" src="@pathImageDefault" alt="#" />
+                                                    <input style="display:none;" id="inputAvatar" type="file" name="UploadImageAvatar" />
                                                     <i id="clickLoadAvatar" title="Cập nhật hình ảnh đại diện mới" style="margin-left: 43%;font-size: 20px; margin-top: 20px;" class="fa fa-camera"></i>
                                                 </div>
                                                 <div class="profile_contant">
@@ -188,12 +190,12 @@
                                                             <div class="row mb-3 align-items-center">
                                                                 <div class="col-10">
                                                                     <div class="input-group mb-3">
-                                                                        <input id="userId"  type="hidden" name="userId" value="@informationUser.UserId"/>
+                                                                        <input id="userId" type="hidden" name="userId" value="@informationUser.UserId" />
                                                                         <input type="text" class="form-control" name="displayName" id="displayName" value="@informationUser.DisplayName" disabled>
                                                                         <button class="btn btn-primary" type="button" id="buttonEnable">
                                                                             <i class="fa fa-pencil"></i>
                                                                         </button>
-                                                                       
+
                                                                     </div>
                                                                 </div>
                                                                 <button style="margin-top:-13px" type="submit" class="btn btn-primary col-2">
@@ -250,8 +252,7 @@
                                                                             <div class="d-flex">
                                                                                 <div class="form-check m-3">
                                                                                     <input class="form-check-input" type="radio" name="gender" id="genderNam" value="Nam"
-                                                                                    @(informationUser.Gender == null ? "": informationUser.Gender.Equals("Nam")?"checked":"")
-                                                                                    >
+                                                                                    @(informationUser.Gender == null ? "" : informationUser.Gender.Equals("Nam") ? "checked" : "")>
                                                                                     <label class="form-check-label" for="nam">Nam</label>
                                                                                 </div>
                                                                                 <div class="form-check  m-3">
@@ -310,10 +311,10 @@
                                                                                 <i class="fa fa-eye"></i>
                                                                             </span>
                                                                         </div>
-                                                                            
+
                                                                         <div class="mb-3 form-check">
-                                                                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                                              <label class="form-check-label" for="exampleCheck1">Ghi nhớ mật khẩu</label>
+                                                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                                            <label class="form-check-label" for="exampleCheck1">Ghi nhớ mật khẩu</label>
                                                                         </div>
                                                                         <button type="submit" class="btn btn-primary">Thay Đổi</button>
                                                                 </form>
@@ -348,8 +349,14 @@
         </div>
     </div>
 </div>
+<div id="displayLoader" style="display:none;">
+    <div class="overlay"></div>
+    <div class="centerScreen">
+        <div class="loader"></div>
+    </div>
+</div>
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial");
     @await Html.PartialAsync("_ToastMessage");
     <script src="~/js/information_personal.js"></script>
-}
+    }
