@@ -14,4 +14,5 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\bin\Debug\net6.0\AccessData
 D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\bin\Debug\net6.0\BusinessObjects.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\bin\Debug\net6.0\AccessDatas.pdb
 D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\bin\Debug\net6.0\BusinessObjects.pdb
-D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\obj\Debug\net6.0\Repositories.csproj.CopyComplete
+D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\obj\Debug\net6.0\Repositories.sourcelink.json
+D:\Ki8\ProjectWebNews\ProjectPRN231News\Repositories\obj\Debug\net6.0\Reposito.787EC4B2.Up2Date

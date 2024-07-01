@@ -123,6 +123,12 @@ namespace WebNewsClients.Controllers
             respond.EnsureSuccessStatusCode();
             var listCate = respond.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>().Result.data.ToList();
             ViewBag.ListCategory = listCate;
+
+            string urlGetProcessor = "https://localhost:7251/odata/Users?$expand=Role&$filter=Role/Rolename eq 'Admin'";
+            var respondtoProcessor = _httpClient.GetAsync(urlGetProcessor).Result;
+            respondtoProcessor.EnsureSuccessStatusCode();
+            var listProcessor = respondtoProcessor.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            ViewBag.ListProcessor = listProcessor;
             return View("ArticleAdd");
         }
         [HttpPost("AddNewArticle")]
@@ -139,15 +145,17 @@ namespace WebNewsClients.Controllers
             respond.EnsureSuccessStatusCode();
             var listCate = respond.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>().Result.data.ToList();
             ViewBag.ListCategory = listCate;
-            Console.Write(dto);
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                var errorMessage = error.ErrorMessage;
-                var exception = error.Exception;
-            }
+
+            string urlGetProcessor = "https://localhost:7251/odata/Users?$expand=Role&$filter=Role/Rolename eq 'Admin'";
+            var respondtoProcessor = _httpClient.GetAsync(urlGetProcessor).Result;
+            respondtoProcessor.EnsureSuccessStatusCode();
+            var listProcessor = respondtoProcessor.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            ViewBag.ListProcessor = listProcessor;
+
+
             if (ModelState.IsValid)
             {
-                string urlRegister = "https://localhost:7251/api/Articles/AddArticle";
+                string urlRegister = "https://localhost:7251/api/Articles/AddNewArticle";
                 var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
                 request.Content = new StringContent(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
 

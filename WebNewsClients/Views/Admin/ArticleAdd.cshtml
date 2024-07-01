@@ -8,6 +8,7 @@
 @{
     var ListArticle = ((IEnumerable<User>)ViewBag.ListArticle).ToList();
     var listCategory = ((IEnumerable<CategoriesArticle>)ViewBag.listCategory).ToList();
+    var listProcessor = ((IEnumerable<User>)ViewBag.ListProcessor).ToList();
 }
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
@@ -43,6 +44,10 @@
                         </div>
                     </div>
                     <form method="post">
+                        @if (ViewBag.Message != null)
+                        {
+                            <h2 class="btn btn-danger">@ViewBag.Message</h2>
+                        }
                         <div class="white_card_body">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -92,9 +97,14 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label>Miêu tả ngắn</label>
+                                        <label>Người quản lý</label>
                                         <div class="common_input mb_15">
-                                            <input asp-for="@Model.PublishDate" type="date">
+                                            <select asp-for="@Model.Processor" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                @foreach (var b in listProcessor)
+                                                {
+                                                    <option value="@b.UserId">@b.DisplayName</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

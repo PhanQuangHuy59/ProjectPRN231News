@@ -111,4 +111,5 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.A
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
-D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\obj\Debug\net6.0\WebNewsAPIs.csproj.CopyComplete
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\obj\Debug\net6.0\WebNewsAPIs.sourcelink.json
+D:\Ki8\ProjectWebNews\ProjectPRN231News\WebNewsAPIs\obj\Debug\net6.0\WebNewsA.1EA3E022.Up2Date

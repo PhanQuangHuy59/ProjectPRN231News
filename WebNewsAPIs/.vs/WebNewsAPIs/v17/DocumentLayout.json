@@ -3,10 +3,11 @@
   "WorkspaceRootPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FF364B31-EEDF-4700-A1E2-8418BFF00A65}|..\\AccessDatas\\AccessDatas.csproj|d:\\ki8\\projectwebnews\\projectprn231news\\accessdatas\\repositorybase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F60BDB21-6CE5-496A-B795-563CF1408863}|WebNewsAPIs.csproj|d:\\ki8\\projectwebnews\\projectprn231news\\webnewsapis\\controllers\\categoriesarticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F60BDB21-6CE5-496A-B795-563CF1408863}|WebNewsAPIs.csproj|solutionrelative:controllers\\categoriesarticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F60BDB21-6CE5-496A-B795-563CF1408863}|WebNewsAPIs.csproj|d:\\ki8\\projectwebnews\\projectprn231news\\webnewsapis\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F60BDB21-6CE5-496A-B795-563CF1408863}|WebNewsAPIs.csproj|D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F60BDB21-6CE5-496A-B795-563CF1408863}|WebNewsAPIs.csproj|solutionrelative:controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -14,6 +15,9 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB62ECEA-46C7-495B-9D11-72F8F1520846}|..\\WebNewsClients\\WebNewsClients.csproj|d:\\ki8\\projectwebnews\\projectprn231news\\webnewsclients\\views\\admin\\articleadd.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB62ECEA-46C7-495B-9D11-72F8F1520846}|..\\WebNewsClients\\WebNewsClients.csproj|d:\\ki8\\projectwebnews\\projectprn231news\\webnewsclients\\views\\admin\\adminadd.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,21 +27,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 2271,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RepositoryBase.cs",
-              "DocumentMoniker": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\RepositoryBase.cs",
-              "RelativeDocumentMoniker": "..\\AccessDatas\\RepositoryBase.cs",
-              "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\RepositoryBase.cs",
-              "RelativeToolTip": "..\\AccessDatas\\RepositoryBase.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAAAC8AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T04:19:23.419Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -52,16 +43,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ArticlesController.cs",
-              "DocumentMoniker": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\ArticlesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ArticlesController.cs",
-              "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\ArticlesController.cs",
-              "RelativeToolTip": "Controllers\\ArticlesController.cs",
-              "ViewState": "AQIAAEwBAAAAAAAAAAAmwBgAAAAgAAAA",
+              "DocumentIndex": 0,
+              "Title": "CategoriesArticlesController.cs",
+              "DocumentMoniker": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\CategoriesArticlesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoriesArticlesController.cs",
+              "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\CategoriesArticlesController.cs",
+              "RelativeToolTip": "Controllers\\CategoriesArticlesController.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAIwD4AAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-30T17:18:14.495Z",
+              "WhenOpened": "2024-07-01T16:40:18.203Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminAdd.cshtml",
+              "DocumentMoniker": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\Views\\Admin\\AdminAdd.cshtml",
+              "RelativeDocumentMoniker": "..\\WebNewsClients\\Views\\Admin\\AdminAdd.cshtml",
+              "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\Views\\Admin\\AdminAdd.cshtml",
+              "RelativeToolTip": "..\\WebNewsClients\\Views\\Admin\\AdminAdd.cshtml",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-01T12:12:50.409Z"
             },
             {
               "$type": "Document",
@@ -71,10 +74,9 @@
               "RelativeDocumentMoniker": "..\\WebNewsClients\\Views\\Admin\\ArticleAdd.cshtml",
               "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\Views\\Admin\\ArticleAdd.cshtml",
               "RelativeToolTip": "..\\WebNewsClients\\Views\\Admin\\ArticleAdd.cshtml",
-              "ViewState": "AQIAAG8AAAAAAAAAAAAAAGQAAAA2AAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAADEAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-30T17:28:47.393Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-30T17:28:47.393Z"
             },
             {
               "$type": "Document",
@@ -84,9 +86,43 @@
               "RelativeDocumentMoniker": "..\\WebNewsClients\\Controllers\\AdminController.cs",
               "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\Controllers\\AdminController.cs",
               "RelativeToolTip": "..\\WebNewsClients\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAAKcAAAAAAAAAAAASwLAAAAAxAAAA",
+              "ViewState": "AQIAALYAAAAAAAAAAAAUwMYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-30T12:58:10.019Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "d88fbd44-7d62-4a05-a5ca-07da6370997b",
+        "Display": 1,
+        "X": 236,
+        "Y": 91,
+        "Width": 1083,
+        "Height": 584,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArticlesController.cs",
+              "DocumentMoniker": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\ArticlesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ArticlesController.cs",
+              "ToolTip": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\Controllers\\ArticlesController.cs",
+              "RelativeToolTip": "Controllers\\ArticlesController.cs",
+              "ViewState": "AQIAABMBAAAAAAAAAAAAACgBAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-01T10:42:04.209Z",
               "EditorCaption": ""
             }
           ]

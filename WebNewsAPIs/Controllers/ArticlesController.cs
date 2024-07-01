@@ -274,7 +274,7 @@ namespace WebNewsAPIs.Controllers
         }
 
         //Add New Article 
-        [Authorize(Roles = "Articles,Admin")] 
+        //[Authorize(Roles = "Articles,Admin")] 
         [HttpPost("AddNewArticle")]
         public IActionResult AddNewArticle(AddArticleDto? articleNew)
         {
