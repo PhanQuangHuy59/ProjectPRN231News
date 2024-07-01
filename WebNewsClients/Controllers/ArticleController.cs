@@ -344,10 +344,6 @@ namespace WebNewsClients.Controllers
 
 
 
-
-
-
-
             // Tạo select list cho thẻ selelct 
 
             var tempListCategory = listCategories.ToList();

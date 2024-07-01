@@ -1,10 +1,45 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace WebNewsAPIs.Services
 {
     public class VerifyInformation
     {
-       
+        public static string ToSlug(string title)
+        {
+            // 1. Convert to lowercase
+            title = title.ToLower();
+
+            // 2. Remove accents and diacritics (e.g., é -> e, ü -> u)
+            title = RemoveAccents(title);
+
+            // 3. Replace non-alphanumeric characters with a space
+            title = Regex.Replace(title, @"[^\w\s]", " ");
+
+            // 4. Replace multiple spaces with a single space
+            title = Regex.Replace(title, @"\s+", " ");
+
+            // 5. Replace spaces with a dash
+            title = title.Replace(" ", "-");
+
+            // 6. Remove trailing dashes
+            title = title.Trim('-');
+
+            // 7. Limit the slug to a maximum length (optional)
+            // title = title.Substring(0, Math.Min(title.Length, 200));
+
+            return title;
+        }
+
+        static string RemoveAccents(string text)
+        {
+            var listChar = text.Normalize(NormalizationForm.FormD)
+                  .Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                  .ToList();
+            return string.Join("", listChar);
+        }
         public string IsValidPassword(string password, string username)
         {
             var passwordPolicy = new
@@ -18,7 +53,7 @@ namespace WebNewsAPIs.Services
                 DisallowCommonWords = true
             };
 
-           
+
 
             if (string.IsNullOrWhiteSpace(password))
             {

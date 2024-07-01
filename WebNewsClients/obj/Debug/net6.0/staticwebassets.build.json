@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Or+P7NVb5Q+hQvHl2JsmkTCYTkQ48RGIy95d8KzHFBo=",
+  "Hash": "L941UUY0i/QbpXc+vy3eDvJac8VeW2/rF2bniavPncA=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -607,6 +607,23 @@
       "OriginalItemSpec": "wwwroot\\fontawesome\\webfonts\\fa-v4compatibility.woff2"
     },
     {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anh_banner_default.jpg",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "images/anh_banner_default.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\anh_banner_default.jpg"
+    },
+    {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anhbialogin.png",
       "SourceId": "WebNewsClients",
       "SourceType": "Discovered",
@@ -843,6 +860,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\save_delete_article.js"
+    },
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\setupCkeditor.js",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "js/setupCkeditor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\setupCkeditor.js"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\site.js",

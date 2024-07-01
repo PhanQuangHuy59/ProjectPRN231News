@@ -14,7 +14,6 @@ namespace WebNewsAPIs.Dtos
         [Required]
         public Guid Author { get; set; }       
 
-        public DateTime? PublishDate { get; set; }
 
         [Required]
         public bool IsPublish { get; set; }
@@ -28,8 +27,7 @@ namespace WebNewsAPIs.Dtos
         public string ShortDescription { get; set; } = null!;
 
 
-        [Url]
-        public string CoverImage { get; set; } = null!;
+        public string? CoverImage { get; set; } = null!;
 
 
         [Url]

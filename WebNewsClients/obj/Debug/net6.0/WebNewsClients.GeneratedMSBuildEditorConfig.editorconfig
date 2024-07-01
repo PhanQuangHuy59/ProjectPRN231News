@@ -108,6 +108,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUb3BBdXRob3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/AddArticle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxBZGRBcnRpY2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/ArticleSaved.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxBcnRpY2xlU2F2ZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -118,6 +122,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/BoardArticleOfUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxCb2FyZEFydGljbGVPZlVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/GetAllArticleOfUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxHZXRBbGxBcnRpY2xlT2ZVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/PersonalArticleComment.cshtml]

@@ -11,7 +11,7 @@
     var categoryId = (Guid)ViewBag.CategoryId;
 
 
-    var listSearchArticle = (ViewBag.ArticleOfAuthor == null ? null : (IEnumerable<ViewArticleDto>)ViewBag.ArticleOfAuthor);
+    var listSearchArticle = (ViewBag.ArticleOfAuthor == null ? null : (List<ViewArticleDto>)ViewBag.ArticleOfAuthor);
     int? total = (ViewBag.TotalResultCount == null ? null : (int)ViewBag.TotalResultCount);
 
 
@@ -149,7 +149,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="keysearch col-6" style="margin-top: 36px">
-                                                       
+
                                                         <div class="input-group mb-3">
                                                             <input type="text" class="form-control" name="keySearch" value="@keySearch" placeholder="Nhập chữ vào đây để tìm kiếm ...." aria-label="Recipient's username" aria-describedby="button-addon2">
                                                             <button class="btn btn-primary" asp-action="Index" asp-controller="AuthorArticle" asp-route-authorId="@author.UserId" type="submit" id="button-addon2">
@@ -157,42 +157,57 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                 
+
 
                                                 </div>
 
                                             </form>
-                                            <ul class="archive-col-list left relative infinite-content">
-                                                @foreach (var a in listSearchArticle)
-                                                {
-                                                    <li class="infinite-post">
-                                                        <a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark" title="@author.DisplayName : @a.Title">
-                                                            <div class="archive-list-out">
-                                                                <div class="archive-list-img left relative">
-                                                                    <img width="450" height="270" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 450w, @a.CoverImage 300w, @a.CoverImage 1024w, @a.CoverImage 1000w, @a.CoverImage 1600w" sizes="(max-width: 450px) 100vw, 450px" />
-                                                                    <img width="80" height="80" src="@a.CoverImage" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 80w, @a.CoverImage 150w, @a.CoverImage 180w, @a.CoverImage 600w" sizes="(max-width: 80px) 100vw, 80px" />
-                                                                    <div class="feat-info-wrap">
-                                                                        <div class="feat-info-views">
-                                                                            <i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@a.ViewArticles</span>
-                                                                        </div><!--feat-info-views-->
-                                                                        <div class="feat-info-comm">
-                                                                            <i class="fa fa-comment"></i> <span class="feat-info-text">@a.Comments.Count</span>
-                                                                        </div><!--feat-info-comm-->
-                                                                    </div><!--feat-info-wrap-->
-                                                                </div><!--archive-list-img-->
-                                                                <div class="archive-list-in">
-                                                                    <div class="archive-list-text left relative">
-                                                                        <span class="side-list-cat">@a.CategortyName</span>
-                                                                        <h2>@author.DisplayName: @a.Title</h2>
-                                                                        <p>@a.ShortDescription</p>
-                                                                    </div><!--archive-list-text-->
-                                                                </div><!--archive-list-in-->
-                                                            </div><!--archive-list-out-->
-                                                        </a>
-                                                    </li>
-                                                }
-                                            </ul>
-                                            @if (currentPage != int.MinValue)
+                                            <p>Kết quả tìm kiếm cho "@keySearch" là có<strong class="text-primary"> @total</strong> bài báo</p>
+                                            @if (listSearchArticle == null || listSearchArticle.Count == 0)
+                                            {
+                                                <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                    <div class="card-header">Bạn có thể bắt đầu search để hiện thị kết quả </div>
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Hãy bắt đầu điền vào thanh tìm kiếm.</h4>
+                                                        <p class="card-text">Hãy tìm kiếm những bài báo của các thể loại khác.</p>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <ul class="archive-col-list left relative infinite-content">
+                                                    @foreach (var a in listSearchArticle)
+                                                    {
+                                                        <li class="infinite-post">
+                                                            <a asp-controller="Article" asp-action="ArticleDetail" asp-route-slug="@a.Slug" rel="bookmark" title="@author.DisplayName : @a.Title">
+                                                                <div class="archive-list-out">
+                                                                    <div class="archive-list-img left relative">
+                                                                        <img width="450" height="270" src="@a.CoverImage" class="reg-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 450w, @a.CoverImage 300w, @a.CoverImage 1024w, @a.CoverImage 1000w, @a.CoverImage 1600w" sizes="(max-width: 450px) 100vw, 450px" />
+                                                                        <img width="80" height="80" src="@a.CoverImage" class="mob-img wp-post-image" alt="" decoding="async" loading="lazy" srcset="@a.CoverImage 80w, @a.CoverImage 150w, @a.CoverImage 180w, @a.CoverImage 600w" sizes="(max-width: 80px) 100vw, 80px" />
+                                                                        <div class="feat-info-wrap">
+                                                                            <div class="feat-info-views">
+                                                                                <i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@a.ViewArticles</span>
+                                                                            </div><!--feat-info-views-->
+                                                                            <div class="feat-info-comm">
+                                                                                <i class="fa fa-comment"></i> <span class="feat-info-text">@a.Comments.Count</span>
+                                                                            </div><!--feat-info-comm-->
+                                                                        </div><!--feat-info-wrap-->
+                                                                    </div><!--archive-list-img-->
+                                                                    <div class="archive-list-in">
+                                                                        <div class="archive-list-text left relative">
+                                                                            <span class="side-list-cat">@a.CategortyName</span>
+                                                                            <h2>@author.DisplayName: @a.Title</h2>
+                                                                            <p>@a.ShortDescription</p>
+                                                                        </div><!--archive-list-text-->
+                                                                    </div><!--archive-list-in-->
+                                                                </div><!--archive-list-out-->
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                            @if (currentPage != int.MinValue && listSearchArticle.Count != 0)
                                             {
                                                 @await Html.PartialAsync("_Pagination",PageModel)
                                                 ;

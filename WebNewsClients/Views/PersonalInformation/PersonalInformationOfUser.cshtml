@@ -98,6 +98,12 @@
                         </a>
                     </li>
                     <li>
+                        <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
+                            <i class="fa fa-briefcase blue1_color"></i>
+                            <span>Bài báo đã tạo của bạn</span>
+                        </a>
+                    </li>
+                    <li>
                         <a asp-controller="User" asp-action="Logout">
                             <i class="fa fa-sign-out red_color"></i>
                             @*<i class="fa fa-arrow-right-from-bracket red_color"></i>*@
@@ -138,7 +144,8 @@
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" asp-controller="User" asp-action="Logout">
+                                                
                                                 <span>Đăng xuất</span>
                                                 <i class="fa fa-sign-out"></i>
                                             </a>

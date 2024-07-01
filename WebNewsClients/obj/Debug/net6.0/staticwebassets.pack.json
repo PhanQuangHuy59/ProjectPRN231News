@@ -133,6 +133,10 @@
       "PackagePath": "staticwebassets\\fontawesome\\webfonts\\fa-v4compatibility.woff2"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anh_banner_default.jpg",
+      "PackagePath": "staticwebassets\\images\\anh_banner_default.jpg"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\images\\anhbialogin.png",
       "PackagePath": "staticwebassets\\images\\anhbialogin.png"
     },
@@ -187,6 +191,10 @@
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\save_delete_article.js",
       "PackagePath": "staticwebassets\\js\\save_delete_article.js"
+    },
+    {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\setupCkeditor.js",
+      "PackagePath": "staticwebassets\\js\\setupCkeditor.js"
     },
     {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\site.js",
