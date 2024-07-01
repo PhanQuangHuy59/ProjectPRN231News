@@ -1,6 +1,12 @@
 ﻿@{
     Layout = "_LayoutMainAdmin";
 }
+@using BusinessObjects.Models;
+@using System.Text;
+@using WebNewsAPIs.Dtos;
+@{
+    var adminList = ((IEnumerable<User>)ViewBag.ListAdmin).ToList();
+}
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
 
@@ -61,32 +67,46 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><p>0988120612</p></td>
-                                            <td><p>Admin</p></td>
-                                            <td><h3 class="badge bg-danger">Female</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><p>0988120612</p></td>
-                                            <td><p>Admin</p></td>
-                                            <td><h3 class="badge bg-danger">Female</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if(adminList.Count == 0)
+                                        {
+                                            <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                <div class="card-header">Không nhận được danh sách người dùng, lỗi</div>
+                                            </div>
+                                        }
+                                        @if(adminList.Count != 0)
+                                        {
+                                            @foreach(var a in adminList)
+                                            {
+                                                <tr>
+                                                    <td>@a.DisplayName</td>
+                                                    <td>@a.Username</td>
+                                                    <td><p>@a.PhoneNumber</p></td>
+                                                    <td><p>@a.Role.Rolename</p></td>
+                                                    @switch (a.Gender)
+                                                    {
+                                                        case "Nam":
+                                                            <td><h3 class="badge bg-success">Nam</h3></td>
+                                                            break;
+                                                        case "Nữ":
+                                                            <td><h3 class="badge bg-danger">Nữ</h3></td>
+                                                            break;
+                                                        case "Khác":
+                                                            <td><h3 class="badge bg-danger">Nữ</h3></td>
+                                                            break;
+                                                        case null:
+                                                            <td><h3 class="badge bg-danger">Khác</h3></td>
+                                                            break;
+                                                    }
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                            <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>

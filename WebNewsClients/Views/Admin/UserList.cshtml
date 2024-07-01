@@ -1,6 +1,12 @@
 ﻿@{
     Layout = "_LayoutMainAdmin";
 }
+@using BusinessObjects.Models;
+@using System.Text;
+@using WebNewsAPIs.Dtos;
+@{
+    var adminList = ((IEnumerable<User>)ViewBag.ListUser).ToList();
+}
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
 
@@ -29,20 +35,78 @@
                     <div class="white_card_body">
                         <div class="QA_section">
                             <div class="white_box_tittle list_header">
-                                <h4>User List </h4>
+                                <h4>Danh sách người dùng</h4>
+                            </div>
+                            <div class="white_box_tittle list_header">
                                 <div class="box_right d-flex lms_block">
-                                    <div class="serach_field_2">
-                                        <div class="search_inner">
-                                            <form Active="#">
-                                                <div class="search_field">
-                                                    <input type="text" placeholder="Search content here...">
+                                    <div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label>Tên người dùng</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
                                                 </div>
-                                                <button type="submit"> <i class="ti-search"></i> </button>
-                                            </form>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Tài khoản</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Ngày sinh</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="date" value="2022-02-22">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Ngày tạo tài khoản</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="date" value="2022-02-22">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Giới tính</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="1">Nam</option>
+                                                    <option value="1">Nữ</option>
+                                                    <option value="1">Khác</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Địa chỉ</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Số điện thoại</label>
+                                                <div class="common_input mb_15">
+                                                    <input type="text" placeholder="Nhập nội dung...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Phân quyền</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="0">Quản lý</option>
+                                                    <option value="1">Khách hàng</option>
+                                                    <option value="1">Tác giả</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Tình trạng xác minh</label>
+                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    <option value="1">Chưa xác minh</option>
+                                                    <option value="1">Đã xác minh</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="create_report_btn mt_30">
+                                                    <a href="#" class="btn_1 radius_btn d-block text-center">Tìm kiếm</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="add_button ms-2">
-                                        <a href="#" data-toggle="modal" data-target="#addcategory" class="btn_1">search</a>
                                     </div>
                                 </div>
                             </div>
@@ -51,54 +115,79 @@
                                 <table class="table lms_table_active ">
                                     <thead>
                                         <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Email Address</th>
-                                            <th scope="col">Role</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Tên người dùng</th>
+                                            <th scope="col">Tài khoản</th>
+                                            <th scope="col">Ngày sinh</th>
+                                            <th scope="col">Ngày tạo tài khoản</th>
+                                            <th scope="col">Giới tính</th>
+                                            <th scope="col">Địa chỉ</th>
+                                            <th scope="col">Số điện thoại</th>
+                                            <th scope="col">Phân quyền</th>
+                                            <th scope="col">Xác minh</th>
+                                            <th scope="col">Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0b7afb2abf4f0f980a7ada1a9aceea3afad">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e79088958cd3d7dea7808a868e8bc984888a">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5c2dac7de81858cf5d2d8d4dcd99bd6dad8">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if (adminList.Count == 0)
+                                        {
+                                            <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                <div class="card-header">Không nhận được danh sách người dùng, lỗi</div>
+                                            </div>
+                                        }
+                                        @if(adminList.Count != 0)
+                                        {
+                                            @foreach(var a in adminList)
+                                            {
+                                                <tr>
+                                                    <td>@a.DisplayName</td>
+                                                    <td>@a.Username</td>
+                                                    <td>@a.DateOfBirth?.ToString("dd/MM/yyyy")</td>
+                                                    <td>@a.Createddate.ToString("dd/MM/yyyy")</td>
+                                                    @switch (a.Gender)
+                                                    {
+                                                        case "Nam":
+                                                            <td><h3 class="badge bg-success">Nam</h3></td>
+                                                            break;
+                                                        case "Nữ":
+                                                            <td><h3 class="badge bg-danger">Nữ</h3></td>
+                                                            break;
+                                                        case "Khác":
+                                                            <td><h3 class="badge bg-danger">Nữ</h3></td>
+                                                            break;
+                                                        case null:
+                                                            <td><h3 class="badge bg-danger">Khác</h3></td>
+                                                            break;
+                                                    }
+                                                    <td>@a.Address</td>
+                                                    <td>@a.PhoneNumber</td>
+                                                    @switch (a.Role.Rolename)
+                                                    {
+                                                        case "Customer":
+                                                            <td><h3 class="badge bg-success">Khách hàng</h3></td>
+                                                            break;
+                                                        case "Articles":
+                                                            <td><h3 class="badge bg-danger">Tác giả</h3></td>
+                                                            break;
+                                                    }
+                                                    @switch (a.IsConfirm)
+                                                    {
+                                                        case true:
+                                                            <td><h3 class="badge bg-success">Đã xác minh</h3></td>
+                                                            break;
+                                                        case false:
+                                                            <td><h3 class="badge bg-danger">Chưa xác minh</h3></td>
+                                                            break;
+                                                    }
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                            <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>

@@ -26,7 +26,8 @@ namespace WebNewsAPIs.Dtos
 
         [Required, MaxLength(300)]
         public string ShortDescription { get; set; } = null!;
-
+        [Required]
+        public Guid Processor { get; set; }
 
         [Url]
         public string CoverImage { get; set; } = null!;

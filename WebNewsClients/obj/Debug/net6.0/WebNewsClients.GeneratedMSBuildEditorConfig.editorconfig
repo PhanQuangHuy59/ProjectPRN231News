@@ -46,8 +46,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/ArticleCategoryAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUNhdGVnb3J5QWRkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/ArticleCategoryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUNhdGVnb3J5TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/ArticleList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/EmotionAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1vdGlvbkFkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/EmotionList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1vdGlvbkxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/Admin/Index.cshtml]

@@ -1,6 +1,12 @@
 ﻿@{
     Layout = "_LayoutMainAdmin";
 }
+@using BusinessObjects.Models;
+@using System.Text;
+@using WebNewsAPIs.Dtos;
+@{
+    var article = ((IEnumerable<Article>)ViewBag.listArticle).ToList();
+}
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
 
@@ -113,54 +119,53 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if (article.Count == 0)
+                                        {
+                                            <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                <div class="card-header">Không nhận được danh sách</div>
+                                            </div>
+                                        }
+                                        @if (article.Count != 0)
+                                        {
+                                            @foreach (var a in article)
+                                            {
+                                                <tr>
+                                                    <th>@a.Title</th>
+                                                    <td>@a.ShortDescription</td>
+                                                    <td>@a.AuthorNavigation.DisplayName</td>
+                                                    <td>@a.Categorty.CategoryName</td>
+                                                    <td><p>@a.PublishDate</p></td>
+                                                    @switch (a.UpdatedDate)
+                                                    {
+                                                        case null:
+                                                            <td><p>Chưa cập nhật</p></td>
+                                                            break;
+
+                                                        case not null:
+                                                            <td><p>@a.UpdatedDate</p></td>
+                                                            break;
+                                                    }
+                                                    @switch (a.IsPublish)
+                                                    {
+                                                        case true:
+                                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
+                                                            break;
+
+                                                        case false:
+                                                            <td><h3 class="badge bg-danger">Chưa đăng</h3></td>
+                                                            break;
+                                                    }
+                                                    <td><h3 class="badge bg-success">@a.StatusProcessNavigation.NameProcess</h3></td>
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                            <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>

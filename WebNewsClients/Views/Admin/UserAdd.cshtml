@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "_LayoutMainAdmin";
 }
+@using WebNewsAPIs.Dtos;
+@model AddUserDto;
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
 
@@ -33,58 +35,65 @@
                             </div>
                         </div>
                     </div>
-                    <div class="white_card_body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Tài khoản">
+                    <form method="post">
+                        @if (ViewBag.Message != null)
+                        {
+                            <h2 class="btn btn-danger">@ViewBag.Message</h2>
+                        }
+                        <div class="white_card_body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.Username" type="text" placeholder="Tài khoản">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="password" placeholder="Mật khẩu">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.Password" type="password" placeholder="Mật khẩu">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Họ và tên">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.DisplayName" type="text" placeholder="Họ và tên">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Địa chỉ">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.Address" type="text" placeholder="Địa chỉ">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Số điện thoại">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.PhoneNumber" type="text" placeholder="Số điện thoại">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="date" placeholder="Ngày sinh">
+                                <div class="col-lg-6">
+                                    <div class="common_input mb_15">
+                                        <input asp-for="@Model.DateOfBirth" type="date" placeholder="Ngày sinh">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                    <option value="0">Giới tính</option>
-                                    <option value="1">Nam</option>
-                                    <option value="1">Nữ</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6">
-                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                    <option value="1">Người dùng</option>
-                                    <option value="1">Tác giả</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <div class="create_report_btn mt_30">
-                                    <a href="#" class="btn_1 radius_btn d-block text-center">Thêm người dùng</a>
+                                <div class="col-lg-6">
+                                    <select asp-for="@Model.Gender" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                        <option value="0">Giới tính</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select asp-for="@Model.RoleId" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                        <option  value="179D557C-D9CC-4504-B869-A4319792F631">Người dùng</option>
+                                        <option  value="90293A39-475C-44BC-8506-DAEA10E80384">Tác giả</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <div class="create_report_btn mt_30">
+                                        <button asp-controller="Admin" asp-action="AddNewUser" type="submit" class="btn_1 radius_btn d-block text-center">Thêm người dùng</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>
