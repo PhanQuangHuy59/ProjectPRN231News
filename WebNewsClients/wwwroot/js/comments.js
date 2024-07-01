@@ -1,5 +1,8 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     // Lấy tất cả các thẻ a có class 'comment-reply-link'
+    var inforMainComment = document.getElementById('main_information_comment');
+    var userLoginId = inforMainComment.dataset.userid;
+    var articleIdSave = inforMainComment.dataset.articleid;
     const replyLinks = document.querySelectorAll('.comment-reply-link');
     $('#articleId').val('');
     $('#userId').val('');
@@ -31,7 +34,7 @@
             // Bạn có thể thực hiện các hành động khác tại đây
         });
     });
-    main_information_comment
+
     $("#cancel-comment-reply-link").on('click', function (event) {
         $('#articleId').val('');
         $('#userId').val('');
@@ -97,6 +100,7 @@
                     var message = 'Comment thanh cong hãy reload lại trang';
                     ShowSuccess(message);
                     $("#comment").val('');
+
                     console.log('Success:', result);
                 },
                 error: function (xhr, status, error) {
@@ -107,11 +111,12 @@
         }
     });
 
+
     const timerId = setTimeout(function () {
         addToViewsOfUser();
-    }, 5000);
-   
-   
+    }, 12000);
+
+
     function addToViewsOfUser() {
         var inforMainComment = document.getElementById('main_information_comment');
 
@@ -126,9 +131,26 @@
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     //location.reload
-                    var message = 'Thêm vào Danh sách bài báo người dùng xem thành công';
-                    ShowSuccess(message);
-                    console.log('Success:', result);
+                    if (result) {
+                        var message = 'Thêm vào Danh sách bài báo người dùng xem thành công';
+                        ShowSuccess(message);
+                        console.log('Success:', result);
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    var text = xhr.responseText;
+                    ShowError(text);
+                }
+            });
+        } else {
+            var urlIncreateViewWithNoLogin = `https://localhost:7251/api/Articles/IncreaseViewArticle?articleId=${articleId}`;
+            
+            $.ajax({
+                url: urlIncreateViewWithNoLogin,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (result, status, xhr) {
                 },
                 error: function (xhr, status, error) {
                     var text = xhr.responseText;
@@ -138,7 +160,110 @@
         }
     }
     // to cancel the timer
-    
+    // Copy link Article
+    var copy_link = $("#copy_link_article");
+    copy_link.click(function () {
+        const link = this.dataset.link;
+        console.log(link);
+        const textarea = document.createElement("textarea");
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        ShowSuccess("Copy link bài viết thành công");
+    });
+
+    var content = $("#hide_content");
+    var printclick = $("#print_click");
+    printclick.click(function () {
+        var contenthtml = content.html();
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`<html><head><title>Print Link</title></head><body><h1>${contenthtml}</h1></body></html>`);
+        printWindow.document.close();
+        printWindow.print();
+    });
+    var saveClick = $("#save_click");
+    saveClick.click(function () {
+
+        if (userLoginId === 'nologin') {
+            ShowError("Ban chưa đang nhập. Nên không thể lưu bài viết.");
+        } else {
+            let urlUpdateSaveArticle = `https://localhost:7251/api/SaveArticles/RemoveOrAddSaveArticle?userId=${userLoginId}&articleId=${articleIdSave}`
+            $.ajax({
+                url: urlUpdateSaveArticle,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+                    if (result === true) {
+                        ShowSuccess("Đã lưu thành công bài báo");
+                        saveClick.removeClass('text-dark');
+                        saveClick.addClass('text-primary');
+                    } else {
+                        ShowSuccess("Đã xóa thành công bài báo");
+
+                        saveClick.removeClass('text-primary');
+                        saveClick.addClass('text-dark');
+                    }
+
+                    console.log("Success:", result);
+                },
+                error: function (xhr, status, error) {
+                    var text = xhr.responseText;
+                    showError(text);
+                }
+            });
+        }
+    });
+    // drop emotion 
+    $('.click_emotion').each(function () {
+        $(this).click(function () {
+            var emotionId = $(this).attr('data-emotionId');
+            var urlAddOrRemoveDropEmotion = `https://localhost:7251/api/DropEmotions/AddOrRemoveDropEmotion?userId=${userLoginId}&articleId=${articleIdSave}&emotionId=${emotionId}`;
+            console.log(urlAddOrRemoveDropEmotion);
+            var divClick = $(this);
+            if (userLoginId == 'nologin') {
+                ShowError("Ban chưa đăng nhập không thể thả cảm xúc");
+            } else {
+                $.ajax({
+                    url: urlAddOrRemoveDropEmotion,
+                    type: 'POST',
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        if (result === true) {
+                            var span = divClick.find('span.numberDropEmotion');
+                            span.addClass('text-primary');
+                            var numberDropEmotion = parseInt(span.html(), 10) + 1;
+                            span.html(numberDropEmotion);
+                            ShowSuccess("Đã thả emotion");
+
+                        } else {
+                            var span = divClick.find('span.numberDropEmotion:first');
+                            span.removeClass('text-primary');
+                            var numberDropEmotion =  parseInt(span.html(), 10) - 1;
+                            span.html(numberDropEmotion);
+
+                            ShowSuccess("Đã xóa emotion");
+
+                        }
+
+                        console.log("Success:", result);
+                    },
+                    error: function (xhr, status, error) {
+                        var text = xhr.responseText;
+                        showError(text);
+                    }
+                });
+                // do something with the emotionId
+                console.log('Emotion ID:', emotionId);
+            }
+
+
+
+        });
+    });
+
+
 
 
     function ShowSuccess(message) {
@@ -185,7 +310,7 @@
 });
 
 
-    
+
 
 
 

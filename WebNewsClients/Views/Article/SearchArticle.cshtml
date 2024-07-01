@@ -13,8 +13,8 @@
     var time = (string)ViewBag.Time;
 
     var listSearchArticle = (ViewBag.ListSearchArticle == null ? null : (List<ViewArticleDto>)ViewBag.ListSearchArticle);
-    var total = (int)ViewBag.TotalResultCount;
-
+    int? total = (ViewBag.TotalResultCount == null ? null : (int)ViewBag.TotalResultCount);
+    
 
 
 
@@ -206,6 +206,7 @@
         </div><!--body-main-in-->
     </div><!--body-main-out-->
 </div><!--body-main-wrap-->
+
 <script>
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -213,4 +214,6 @@
         js = d.createElement(s); js.id = id;
         js.src = "../../../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));
+    
+</script>

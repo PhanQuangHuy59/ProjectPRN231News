@@ -38,7 +38,7 @@ namespace AccessDatas
 
         public async virtual Task UpdateAsync(T entity)
         {
-            dbSet.Attach(entity);
+            dataContext.Set<T>().Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
             SaveAsync();
         }

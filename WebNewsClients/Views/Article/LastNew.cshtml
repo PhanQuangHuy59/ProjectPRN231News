@@ -82,7 +82,12 @@
 													}
 												}	
 											</ul>
-											@await Html.PartialAsync("_Pagination",PageModel);
+											@if(lastestNew!= null && lastestNew.Count != 0)
+											{
+												@await Html.PartialAsync("_Pagination",PageModel)
+												;
+											}
+											
 											<a href="#" class="inf-more-but">More Posts</a>
 											<div class="nav-links">
 												<div class="pagination"><span>Page 1 of 4</span><span class="current">1</span><a href='page/2/index.html' class="inactive">2</a><a href='page/3/index.html' class="inactive">3</a><a href='page/4/index.html' class="inactive">4</a></div>

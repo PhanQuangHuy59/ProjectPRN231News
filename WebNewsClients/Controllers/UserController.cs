@@ -72,6 +72,7 @@ namespace WebNewsClients.Controllers
                 userMapper.UserId = userLogin.UserId;
                 userMapper.Username = userLogin.Username;
                 userMapper.Password = userLogin.Password;
+                userMapper.DisplayName = userLogin.DisplayName;
                 userMapper.Roleid = userLogin.RoleId;
                 userMapper.Role = new Role { RoleId = userLogin.RoleId , Rolename = userLogin.RoleName};
 

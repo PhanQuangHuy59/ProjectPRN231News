@@ -80,7 +80,7 @@
                 <div class="sidebar_user_info">
                     <div class="icon_setting"></div>
                     <div class="user_profle_side">
-                        <div class="user_img"><img class="img-responsive" src="@pathImageDefault" alt="#" /></div>
+                        <div class="user_img"><img style="object-fit:cover;width:70px;height:70px" class="img-responsive" src="@pathImageDefault" alt="#" /></div>
                         <div class="user_info">
                             <h6 class="text-center">@informationUser.DisplayName</h6>
                             <p><span class="online_animation"></span> Online</p>
@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="PersonalInformation" asp-action="PersonalOfNews">
+                        <a asp-controller="PersonalInformation" asp-action="BoardArticleOfUser">
                             <i class="fa fa-newspaper-o"></i>
                             <span>Bảng tin của bạn</span>
                         </a>
@@ -160,7 +160,7 @@
                                 <ul class="user_profile_dd">
                                     <li>
                                         <a class="dropdown-toggle" data-toggle="dropdown">
-                                            <img class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
+                                            <img style="object-fit:cover;width:50px;height:50px" class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
                                             <span class="name_user">@informationUser.DisplayName</span>
                                         </a>
                                         <div class="dropdown-menu">
@@ -220,7 +220,7 @@
                                             <h3>@(group.Key.Equals(DateTime.Now.Date) ? "Hôm Nay" : group.Key.ToString("dd/MM/yyyy"))</h3> <hr class="w-100 border border-dark mt-3 mb-3 ">
                                             foreach (var c in group)
                                             {
-                                                <div class="row">
+                                                <div class="row mt-3 mb-3">
                                                     <div class="col-md-3">
                                                         <img src="@c.Article.CoverImage" alt="@c.Article.Title" class="img-fluid">
                                                     </div>
@@ -277,6 +277,12 @@
         </div>
     </div>
 </div>
+@*<div>
+    <div class="overlay"></div>
+    <div class="centerScreen">
+        <div class="loader"></div>
+    </div>
+</div>*@
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial");
     @await Html.PartialAsync("_ToastMessage");

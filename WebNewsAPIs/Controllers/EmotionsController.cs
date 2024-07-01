@@ -14,24 +14,18 @@ namespace WebNewsAPIs.Controllers
     [ApiController]
     public class EmotionsController : ControllerBase
     {
-        private IMapper _mapper;
-        private IEmotionRepository emotionRepository;
-
-        public EmotionsController(IMapper mapper, IEmotionRepository emotionRepository)
+        private IEmotionRepository _emotionRepo;
+        public EmotionsController(IEmotionRepository emotionRepo
+            )
         {
-            _mapper = mapper;
-            this.emotionRepository = emotionRepository;
+            _emotionRepo = emotionRepo;
+          
         }
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<Emotion>>> Get()
+        public IActionResult Get()
         {
-            if (_mapper == null || emotionRepository == null)
-            {
-                return StatusCode(500, "Hệ thống api đang bảo trì.");
-            }
-            var list = emotionRepository.GetAll();
-            return Ok(list.AsQueryable());
+            return Ok(_emotionRepo.GetAll());
         }
     }
 }

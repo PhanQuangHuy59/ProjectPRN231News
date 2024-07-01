@@ -8,43 +8,7 @@ namespace WebNewsAPIs.Extentions
 	{
 		public static  void ConfigAuthenAuthor(this WebApplicationBuilder builder)
 		{
-			builder.Services.AddAuthorization(
-			//	options =>
-			//{
-			//	options.AddPolicy("PassOrAdmin", p =>
-			//	{
-			//		p.RequireAssertion(context =>
-			//		{
-			//			return context.User.HasClaim("admin", "true") || context.User.HasClaim("pass", "PhanHuy")
-			//			  || context.User.HasClaim("pass", "PhanLong ");
-			//		});
-
-			//	});
-
-			//	options.AddPolicy("Admin", p =>
-			//	{
-			//		p.RequireClaim("admin", "true");
-			//	});
-
-			//	options.AddPolicy("Pass", p =>
-			//	{
-			//		p.RequireClaim("pass", "PhanHuy", "PhanLong");
-			//	});
-
-
-			//	options.AddPolicy("Role", p =>
-			//	{
-			//		p.RequireRole("Pro");
-			//	});
-
-
-			//	options.AddPolicy("AdminPass", policy =>
-			//	{
-			//		policy.RequireClaim("admin", "true");
-			//		policy.RequireClaim("pass", "PhanHuy", "PhanLong");
-			//	});
-			//}
-			);
+			builder.Services.AddAuthorization();
 			builder.Services.AddAuthentication(options =>
 			{
 				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

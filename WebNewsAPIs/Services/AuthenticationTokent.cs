@@ -32,7 +32,7 @@ namespace WebNewsAPIs.Services
                 new Claim(JwtRegisteredClaimNames.Email,"phanhuy59@gmail.com" ),
                 new Claim(nameof(ViewUserDto.UserId), user.UserId.ToString(), ClaimValueTypes.String),
                 new Claim(nameof(ViewUserDto.Username), user.Username, ClaimValueTypes.String),
-                new Claim(nameof(ViewUserDto.DisplayName), user.UserId.ToString(), ClaimValueTypes.String),
+                new Claim(nameof(ViewUserDto.DisplayName), user.DisplayName, ClaimValueTypes.String),
                 new Claim(ClaimTypes.Role,roleOfUser.Rolename,ClaimValueTypes.String)
             };
 
@@ -42,8 +42,8 @@ namespace WebNewsAPIs.Services
             var Token = new JwtSecurityToken(
                 claims: clams,
                 expires: DateTime.UtcNow.Add(TokenLife),
-                issuer: "https://localhost:7058/",
-                audience: "https://localhost:7058/",
+                issuer: "https://localhost:7251/",
+                audience: "https://localhost:7251/",
                 signingCredentials: keyScret
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(Token);

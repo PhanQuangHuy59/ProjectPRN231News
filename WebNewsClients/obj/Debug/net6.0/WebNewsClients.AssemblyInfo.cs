@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebNewsClients")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+286b9c522e773430d7a6c45b81816710ab0e530f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba14b838b99630ee209608e6f1660cf6441755ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebNewsClients")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebNewsClients")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

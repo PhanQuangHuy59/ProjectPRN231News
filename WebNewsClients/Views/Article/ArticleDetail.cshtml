@@ -7,7 +7,17 @@
     var listArticle = (IEnumerable<Article>)ViewBag.ListArticle;
     var category = (CategoriesArticle)ViewBag.CategoryOfArticle;
     var listArticleRecommend = (List<ViewArticleDto>)ViewBag.ListArticleRecomend;
+    var checkSave = (bool)ViewBag.CheckSave;
+    var emotions = (List<Emotion>)ViewBag.Emotions;
+    var quantityDropEmotionOfEachEmotion = (Dictionary<Guid, int>)ViewBag.QuantityDropEmotion;
 
+    var checkUserDropEmotion = (ViewBag.CheckDropEmotion != null ? (Dictionary<Guid, bool>)ViewBag.CheckDropEmotion : null);
+
+
+    string linkArticle = Url.ActionLink("ArticleDetail", "Article", new
+    {
+        slug = article.Slug
+    });
     var tempCategory = category;
     List<CategoriesArticle> listCategory = new List<CategoriesArticle>();
     listCategory.Add(tempCategory);
@@ -26,7 +36,7 @@
 
     string pathImag = @"/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-ent.png";
 
-    
+
     string GenerateCommentHtml(IEnumerable<Comment> comments, int depth)
     {
         StringBuilder sb = new StringBuilder();
@@ -62,7 +72,7 @@
             sb.AppendLine($"        </div>");
             sb.AppendLine($"      </div>");
             sb.AppendLine($"      <div class=\"clear\"></div>");
-            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{(userLogin == null? "nologin":userLogin.UserId.ToString())}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
+            sb.AppendLine($"      <div class=\"comment-reply\"><span class=\"reply\"><a rel='nofollow' class='comment-reply-link' href='index{comment.CommentId}.html?replytocom={comment.CommentId}#respond' data-commentid=\"{comment.CommentId}\" data-articleid=\"{article.ArticleId.ToString()}\" data-userid=\"{(userLogin == null ? "nologin" : userLogin.UserId.ToString())}\" data-postid =\"{comment.ArticleId}\" data-belowelement=\"comment-{comment.CommentId}\" data-respondelement=\"respond\" data-replyto=\"Reply to {comment.User.DisplayName}\" aria-label='Reply to {comment.User.DisplayName}'>Reply</a></span></div>");
             sb.AppendLine($"    </div>");
             sb.AppendLine($"  </div>");
             var listCommentReplyFor = commentReplyFor.Where(c => c.ReplyFor == comment.CommentId);
@@ -134,7 +144,7 @@
 }
 
 <div id="body-main-wrap" class="left relative" itemscope itemtype="http://schema.org/NewsArticle">
-    <div id="main_information_comment" data-articleid="@article.ArticleId.ToString()" data-userid="@(userLogin == null? "nologin":userLogin.UserId.ToString())"></div>
+    <div id="main_information_comment" data-articleid="@article.ArticleId.ToString()" data-userid="@(userLogin == null ? "nologin" : userLogin.UserId.ToString())"></div>
     <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="../amazon-flex-could-be-a-new-way-to-get-your-packages-report-says/index.html" />
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -162,7 +172,7 @@
                     <div class="post-wrap-out1">
                         <div class="post-wrap-in1">
                             <div id="post-left-col" class="relative">
-                                <article id="post-area" class="post-156 post type-post status-publish format-standard has-post-thumbnail hentry category-tech tag-ces-2015 tag-mobile-phones tag-selfie-stick tag-tech">
+                                <div id="post-area" class="post-156 post type-post status-publish format-standard has-post-thumbnail hentry category-tech tag-ces-2015 tag-mobile-phones tag-selfie-stick tag-tech">
                                     <header id="post-header">
                                         <a class="post-cat-link" href="../category/tech/index.html"><span class="post-head-cat">@category.CategoryName</span></a>
                                         <h1 class="post-title entry-title left" itemprop="headline">@article.Title</h1>
@@ -174,7 +184,7 @@
                                                 <div class="post-info-in">
                                                     <div class="post-info-right left relative">
                                                         <div class="post-info-name left relative" itemprop="author" itemscope itemtype="https://schema.org/Person">
-                                                            <span class="post-info-text">By</span> <span class="author-name vcard fn author" itemprop="name"><a href="../author/fanpress/index.html" title="Posts by Flex Mag Staff" rel="author">@article.AuthorNavigation.DisplayName</a></span> <span class="author-twitter"><a href="http://www.twitter.com/mvpthemes" class="twitter-but" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></span> <span class="author-email"><a href="mailto:mvpthemes.alt@gmail.com"><i class="fa-solid fa-envelope"></i></a></span>
+                                                            <span class="post-info-text">By</span> <span class="author-name vcard fn author" itemprop="name"><a asp-controller="AuthorArticle" asp-action="Index" asp-route-authorId="@article.AuthorNavigation.UserId" title="@article.AuthorNavigation.DisplayName" rel="author">@article.AuthorNavigation.DisplayName</a></span> <span class="author-twitter"><a href="http://www.twitter.com/mvpthemes" class="twitter-but" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></span> <span class="author-email"><a href="mailto:mvpthemes.alt@gmail.com"><i class="fa-solid fa-envelope"></i></a></span>
                                                         </div><!--post-info-name-->
                                                         <div class="post-info-date left relative">
                                                             <span class="post-info-text">Posted on</span> <span class="post-date updated"><time class="post-date updated" itemprop="datePublished" datetime="@article.CreatedDate">@article.CreatedDate</time></span>
@@ -208,7 +218,7 @@
                                                         <a href="whatsapp://send?text=The selfie stick has taken over CES 2015 https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="whatsapp-share"><span class="whatsapp-but1"><i class="fa-brands fa-square-whatsapp"></i></span><span class="social-text">Share</span></div></a>
                                                         <a href="#" onclick="window.open('http://pinterest.com/pin/create/button/?url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;media=https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg&amp;description=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'pinterestShare', 'width=750,height=350'); return false;" title="Pin This Post"><div class="pinterest-share"><span class="pinterest-but1"><i class="fa-brands fa-square-pinterest"></i></span><span class="social-text">Share</span></div></a>
                                                         <a href="mailto:?subject=The selfie stick has taken over CES 2015&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="email-share"><span class="email-but"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Email</span></div></a>
-                                                        <a href="index.html#comments"><div class="social-comments comment-click-156"><i class="fa-solid fa-comment-dots"></i><span class="social-text-com">Comments</span></div></a>
+                                                        <a href="@linkArticle#comments"><div class="social-comments comment-click-156"><i class="fa-solid fa-comment-dots"></i><span class="social-text-com">Comments</span></div></a>
                                                     </section><!--social-sharing-top-->
                                                     <p>@article.Content</p>
 
@@ -228,11 +238,29 @@
                                                     </div><!--post-tags-->
 
                                                     <div class="social-sharing-bot">
-                                                        <a href="#" onclick="window.open('http://www.facebook.com/sharer.php?u=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;t=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"><div class="facebook-share"><span class="fb-but1"><i class="fa-brands fa-square-facebook"></i></span><span class="social-text">Share</span></div></a>
+
+                                                        <div class="row">
+                                                            @foreach (var e in emotions)
+                                                            {
+                                                                var checkDrop = checkUserDropEmotion == null ? false : checkUserDropEmotion[e.EmotionId];
+                                                                <div data-emotionId="@e.EmotionId" class="col d-flex click_emotion">
+                                                                    <img title="@e.NameEmotion" style="width:20px;height:20px;object-fit:cover" src="@e.Image" />
+                                                                    <span class="numberDropEmotion @(checkDrop? "text-primary": "")" style="margin-left:5px">@quantityDropEmotionOfEachEmotion[e.EmotionId]</span>
+                                                                </div>
+                                                            }
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="social-sharing-bot">
+                                                        <i title="Copy link bài viết" data-link="@linkArticle" id="copy_link_article" class="fa-solid fa-copy text-dark copy-link"></i>
+                                                        <i title="In bài viết" id="print_click" class="fa-solid fa-print text-dark copy-link"></i>
+                                                        <i title="Lưu bài viết" id="save_click" class="fa-regular fa-bookmark copy-link @(checkSave == true ? "text-primary" : "text-dark")"></i>
+                                                        @* <a href="#" onclick="window.open('http://www.facebook.com/sharer.php?u=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;t=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"><div class="facebook-share"><span class="fb-but1"><i class="fa-brands fa-square-facebook"></i></span><span class="social-text">Share</span></div></a>
                                                         <a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=The%20selfie%20stick%20has%20taken%20over%20CES%202015%20-&amp;url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/', 'twitterShare', 'width=626,height=436'); return false;" title="Tweet This Post"><div class="twitter-share"><span class="twitter-but1"><i class="fa-brands fa-square-twitter"></i></span><span class="social-text">Tweet</span></div></a>
                                                         <a href="whatsapp://send?text=The selfie stick has taken over CES 2015 https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="whatsapp-share"><span class="whatsapp-but1"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Share</span></div></a>
                                                         <a href="#" onclick="window.open('http://pinterest.com/pin/create/button/?url=https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/&amp;media=https://mvpthemes.com/flexmag/wp-content/uploads/2015/08/selfie-stick.jpg&amp;description=The%20selfie%20stick%20has%20taken%20over%20CES%202015', 'pinterestShare', 'width=750,height=350'); return false;" title="Pin This Post"><div class="pinterest-share"><span class="pinterest-but1"><i class="fa-brands fa-square-pinterest"></i></span><span class="social-text">Share</span></div></a>
-                                                        <a href="mailto:?subject=The selfie stick has taken over CES 2015&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="email-share"><span class="email-but"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Email</span></div></a>
+                                                        <a href="mailto:?subject=The selfie stick has taken over CES 2015&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="email-share"><span class="email-but"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Email</span></div></a>*@
                                                     </div><!--social-sharing-bot-->
                                                     <div class="mvp-related-posts left relative">
                                                         <h4 class="post-header"><span class="post-header">Recommended for you</span></h4>
@@ -329,7 +357,7 @@
                                             </div><!--post-sidebar-wrap-->
                                         </div><!--post-cont-out-->
                                     </div><!--content-area-->
-                                </article>
+                                </div>
 
 
                                 <nav class="navigation post-navigation" aria-label="Posts">
@@ -389,6 +417,18 @@
         </div><!--body-main-in-->
     </div><!--body-main-out-->
 </div><!--body-main-wrap-->
+<div id="hide_content" style="width:1000px;padding-left:50px;padding-right:50px;padding-top:20px;padding-bottom:20px;display:none;">
+    <p>Ngày tạo bài : @article.CreatedDate.ToString("dd/MM/yyyy - hh:mm:ss")</p>
+    <p>Tác giả : @(article.AuthorNavigation == null ? "Không có tác giả" : article.AuthorNavigation.DisplayName) </p>
+    <h1>Tiêu đề bài viết : @article.Title</h1>
+    <small>Thể loại bài viết : @article.Categorty.CategoryName</small>
+    <p><i>(Báo Huy Hưng)</i> - @article.ShortDescription</p>
+    <img style="width:1000px;height:600px;object-fit:cover" src="@article.CoverImage" />
+    <p>@article.Content</p>
+    <p>Link Nội dung : <a href="@linkArticle">@linkArticle</a></p>
+
+
+</div>
 @section Scripts{
     <script src="~/js/comments.js" asp-append-version="true"></script>*
 }

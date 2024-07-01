@@ -632,3 +632,34 @@ body.custom-background {
     left: 50%;
     transform: translate(-50%, -0%);
 }
+
+.copy-link {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+   
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+    .copy-link:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        color: antiquewhite;
+    }
+.numberDropEmotion {
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 0px 8px;
+}
+.numberDropEmotion .active {
+    background: blue;
+    color: white;
+}
+
+.click_emotion:hover img {
+    transform: scale(1.2); /* scale up to 120% of original size */
+    transition: transform 0.3s ease-in-out; /* smooth transition effect */
+}
