@@ -124,6 +124,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxCb2FyZEFydGljbGVPZlVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/EditArticle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxFZGl0QXJ0aWNsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Ki8/ProjectWebNews/ProjectPRN231News/WebNewsClients/Views/PersonalInformation/GetAllArticleOfUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYWxJbmZvcm1hdGlvblxHZXRBbGxBcnRpY2xlT2ZVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

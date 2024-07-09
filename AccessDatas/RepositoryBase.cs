@@ -152,6 +152,12 @@ namespace AccessDatas
         {
             return await dataContext.Set<T>().CountAsync<T>(predicate) > 0;
         }
+        public void Detached(T entityDetached)
+        {
+            dataContext.Entry(entityDetached).State = EntityState.Detached;
+        }
+
+
 
         public async Task SaveAsync()
         {

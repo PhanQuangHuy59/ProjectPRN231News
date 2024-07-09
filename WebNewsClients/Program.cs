@@ -1,6 +1,10 @@
 using AutoMapper;
+using Newtonsoft.Json;
 using ProjectAPIAss.MapperConfig;
+using WebNewsAPIs.Common;
+using WebNewsAPIs.Services;
 using WebNewsClients.HttpClients;
+using WebNewsClients.Ultis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +20,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddHttpClient();
 
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,11 +40,14 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
+
+
 app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseMiddleware<MiddelwareAutomationLogin>();
 
 app.Run();

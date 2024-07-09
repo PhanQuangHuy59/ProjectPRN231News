@@ -13,7 +13,8 @@ namespace ProjectAPIAss.MapperConfig
 
             //Article
             CreateMap<AddArticleDto, Article>();
-            CreateMap<UpdateArticleDto, Article>();
+            CreateMap<UpdateArticleDto, Article>().ReverseMap();
+            CreateMap<ViewArticleDto, UpdateArticleDto>();
             CreateMap<Article, ViewArticleDto>()
                 .ForMember(des => des.CategortyName
                 , act =>

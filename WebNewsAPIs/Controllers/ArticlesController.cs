@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using Repositories;
 using System.Linq.Expressions;
@@ -76,13 +77,13 @@ namespace WebNewsAPIs.Controllers
         [HttpGet("GetArticleById/{articleId}")]
         public IActionResult GetArticleById(Guid? articleId)
         {
-            if(articleId == null)
+            if (articleId == null)
             {
                 return NotFound("Id không hợp lệ.");
             }
 
-            var getArticle = _articleRepository.GetSingleByCondition( c => c.ArticleId == articleId).Result;
-            if(getArticle == null) 
+            var getArticle = _articleRepository.GetSingleByCondition(c => c.ArticleId == articleId).Result;
+            if (getArticle == null)
             {
                 return NotFound("Không tìm thấy bài báo nào phù hợp.");
             }
@@ -147,7 +148,7 @@ namespace WebNewsAPIs.Controllers
             }
             List<Article> listNew = new List<Article>();
             int sizeResult = 0;
-            keySearch  = (keySearch ?? string.Empty);
+            keySearch = (keySearch ?? string.Empty);
 
             Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
             && (from == null || c.CreatedDate.Date >= from.Value.Date) && (to == null || c.CreatedDate.Date <= to.Value.Date) &&
@@ -164,39 +165,8 @@ namespace WebNewsAPIs.Controllers
 
             return Ok(result);
         }
-		[HttpGet("SearchArticleOfAuthor")]
-		public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticleOfAuthor(Guid? authorId,Guid? categoryId = null, string? keySearch = "", int currentPage = 1, int size = 20)
-		{
-			string guid_Default = "00000000-0000-0000-0000-000000000000";
-			string[] includes = new string[]
-			{
-				nameof(Article.Categorty),
-				nameof(Article.Comments)
-			};
-			if (_articleRepository == null || authorId == null)
-			{
-				return BadRequest();
-			}
-			List<Article> listNew = new List<Article>();
-			int sizeResult = 0;
-			keySearch = (keySearch ?? string.Empty);
-
-			Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
-		    && c.Author.Equals(authorId) && c.StatusProcess == 3 &&
-			(c.Title.ToLower().Contains(keySearch.ToLower()) || c.ShortDescription.ToLower().Contains(keySearch.ToLower())));
-			listNew = _articleRepository.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();
-
-			var listResponse = _mapper.Map<IEnumerable<ViewArticleDto>>(listNew);
-			var result = new SearchPaging<IEnumerable<ViewArticleDto>>
-			{
-				total = sizeResult,
-				result = listResponse
-			};
-
-			return Ok(result);
-		}
-        [HttpGet("SearchArticleOfUser")]
-        public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticleOfUser(int? processId,Guid? authorId, Guid? categoryId = null, string? keySearch = "", int currentPage = 1, int size = 20)
+        [HttpGet("SearchArticleOfAuthor")]
+        public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticleOfAuthor(Guid? authorId, Guid? categoryId = null, string? keySearch = "", int currentPage = 1, int size = 20)
         {
             string guid_Default = "00000000-0000-0000-0000-000000000000";
             string[] includes = new string[]
@@ -213,7 +183,38 @@ namespace WebNewsAPIs.Controllers
             keySearch = (keySearch ?? string.Empty);
 
             Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
-            && c.Author.Equals(authorId) && (processId == null || c.StatusProcess == processId)&& 
+            && c.Author.Equals(authorId) && c.StatusProcess == 3 &&
+            (c.Title.ToLower().Contains(keySearch.ToLower()) || c.ShortDescription.ToLower().Contains(keySearch.ToLower())));
+            listNew = _articleRepository.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();
+
+            var listResponse = _mapper.Map<IEnumerable<ViewArticleDto>>(listNew);
+            var result = new SearchPaging<IEnumerable<ViewArticleDto>>
+            {
+                total = sizeResult,
+                result = listResponse
+            };
+
+            return Ok(result);
+        }
+        [HttpGet("SearchArticleOfUser")]
+        public async Task<ActionResult<SearchPaging<IEnumerable<ViewArticleDto>>>> SearchArticleOfUser(int? processId, Guid? authorId, Guid? categoryId = null, string? keySearch = "", int currentPage = 1, int size = 20)
+        {
+            string guid_Default = "00000000-0000-0000-0000-000000000000";
+            string[] includes = new string[]
+            {
+                nameof(Article.Categorty),
+                nameof(Article.Comments)
+            };
+            if (_articleRepository == null || authorId == null)
+            {
+                return BadRequest();
+            }
+            List<Article> listNew = new List<Article>();
+            int sizeResult = 0;
+            keySearch = (keySearch ?? string.Empty);
+
+            Expression<Func<Article, bool>> predicate = (c => (categoryId == Guid.Parse(guid_Default) || c.CategortyId == categoryId)
+            && c.Author.Equals(authorId) && (processId == null || c.StatusProcess == processId) &&
             (c.Title.ToLower().Contains(keySearch.ToLower()) || c.ShortDescription.ToLower().Contains(keySearch.ToLower())));
             listNew = _articleRepository.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();
 
@@ -259,12 +260,12 @@ namespace WebNewsAPIs.Controllers
         [HttpPost("IncreaseViewArticle")]
         public IActionResult IncreaseViewArticle(Guid? articleId)
         {
-            if(articleId == null)
+            if (articleId == null)
             {
                 return BadRequest();
             }
             var articleCheck = _articleRepository.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
-            if(articleCheck == null)
+            if (articleCheck == null)
             {
                 return NotFound();
             }
@@ -274,11 +275,11 @@ namespace WebNewsAPIs.Controllers
         }
 
         //Add New Article 
-        [Authorize(Roles = "Articles,Admin")] 
+        [Authorize(Roles = "Articles,Admin")]
         [HttpPost("AddNewArticle")]
         public IActionResult AddNewArticle(AddArticleDto? articleNew)
         {
-            if(articleNew == null)
+            if (articleNew == null)
             {
                 return BadRequest();
             }
@@ -287,26 +288,26 @@ namespace WebNewsAPIs.Controllers
                 nameof(BusinessObjects.Models.User.Role)
             };
 
-            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.Equals(articleNew.Author) && c.Role.Rolename.Equals("Articles"),includes).Result;
+            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.Equals(articleNew.Author) && c.Role.Rolename.Equals("Articles"), includes).Result;
             var checkCategory = _categoryRepository.GetSingleByCondition(c => c.CategoryId.Equals(articleNew.CategortyId)).Result;
-            if(checkUser == null || checkCategory == null)
+            if (checkUser == null || checkCategory == null)
             {
                 return StatusCode(404, "Thông tin cung cấp không phù hợp. ");
             }
-           
+
             var articleAdd = _mapper.Map<Article>(articleNew);
-            articleAdd.Slug = VerifyInformation.ToSlug(articleNew.Title)+DateTime.Now.ToString(" dd-MM-yyyy:hh:mm:ss");
+            articleAdd.Slug = VerifyInformation.ToSlug(articleNew.Title) + DateTime.Now.ToString(" dd-MM-yyyy:hh:mm:ss");
             articleAdd.Processor = Guid.Parse("D5999D13-FC43-4A3D-B18D-1A63F3960BA9");
             articleAdd.StatusProcess = 1;
             articleNew.Title = articleNew.Title.Replace(@"\s+", "");
             articleAdd.CreatedDate = DateTime.Now;
-            if(articleAdd.CoverImage == null)
+            if (articleAdd.CoverImage == null)
             {
                 articleAdd.CoverImage = "/images/anh_banner_default.jpg";
             }
             var checkExistArticle = _articleRepository.GetSingleByCondition(c => c.Slug.Equals(articleAdd.Slug)
             || c.Title.ToLower().Equals(articleAdd.Title)).Result;
-            if(checkExistArticle != null)
+            if (checkExistArticle != null)
             {
                 return StatusCode(400, "Bài báo đã tồn tại không thể thêm. Hãy tạo với tiêu đề khác.");
             }
@@ -318,13 +319,13 @@ namespace WebNewsAPIs.Controllers
             {
                 return StatusCode(500, "Đã xảy ra lỗi trong quá trình thêm bài báo.");
             }
-            
+
             return Ok(articleAdd);
         }
 
         [Authorize(Roles = "Articles,Admin")]
-        [HttpPut("UpdateArticle")]
-        public IActionResult UpdateArticle(Guid? articleId,UpdateArticleDto? articleUpdate)
+        [HttpPut("UpdateArticle/{articleId}")]
+        public IActionResult UpdateArticle(Guid? articleId, UpdateArticleDto? articleUpdate)
         {
             if (articleUpdate == null || articleId == null)
             {
@@ -335,7 +336,7 @@ namespace WebNewsAPIs.Controllers
                 nameof(BusinessObjects.Models.User.Role)
            };
 
-            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.Equals(articleUpdate.Author) && c.Role.Rolename.Equals("Articles"), includes).Result;
+            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.Equals(articleUpdate.Author), includes).Result;
             var checkCategory = _categoryRepository.GetSingleByCondition(c => c.CategoryId.Equals(articleUpdate.CategortyId)).Result;
             if (checkUser == null || checkCategory == null)
             {
@@ -348,29 +349,38 @@ namespace WebNewsAPIs.Controllers
                 return BadRequest();
             }
             var checkArticleExist = _articleRepository.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
-            if(checkArticleExist == null)
+            if (checkArticleExist == null)
             {
                 return NotFound("Không tìm thấy bài báo nào phù hợp để cập nhật.");
             }
 
-            var articleAdd = _mapper.Map<Article>(articleUpdate);
-            articleAdd.UpdatedDate = DateTime.Now;
-            articleAdd.Title = articleAdd.Title.Replace(@"\s+", "");
-            if (!checkArticleExist.Title.ToLower().Equals(articleAdd.Title.ToLower()))
+
+            checkArticleExist.UpdatedDate = DateTime.Now;
+            checkArticleExist.IsPublish = articleUpdate.IsPublish;
+            checkArticleExist.CategortyId = articleUpdate.CategortyId;
+            checkArticleExist.Content = articleUpdate.Content;
+            checkArticleExist.CoverImage = articleUpdate.CoverImage;
+            checkArticleExist.Processor = articleUpdate.Processor;
+            checkArticleExist.LinkAudio = articleUpdate.LinkAudio;
+            checkArticleExist.UpdatedDate = DateTime.Now;
+            checkArticleExist.Author = articleUpdate.Author;
+            checkArticleExist.PublishDate = articleUpdate.PublishDate;
+            checkArticleExist.ShortDescription = articleUpdate.ShortDescription;
+            checkArticleExist.Title = articleUpdate.Title.Replace(@"\s+", "");
+            if (!checkArticleExist.Title.ToLower().Equals(articleUpdate.Title.ToLower()))
             {
-                articleAdd.Slug = VerifyInformation.ToSlug(articleUpdate.Title) + DateTime.Now.ToString(" dd-MM-yyyy:hh:mm:ss");
+                checkArticleExist.Slug = VerifyInformation.ToSlug(articleUpdate.Title) + DateTime.Now.ToString(" dd-MM-yyyy:hh:mm:ss");
             }
-           
-            var checkExistArticleBySlug = _articleRepository.GetSingleByCondition(c => 
-            (c.Slug.Equals(articleAdd.Slug)|| c.Title.ToLower().Equals(articleAdd.Title)) 
-            && !(c.ArticleId.Equals(articleId))).Result;
+
+            var checkExistArticleBySlug = _articleRepository.GetSingleByCondition(c =>
+            c.Title.ToLower().Equals(checkArticleExist.Title.ToLower()) && !c.ArticleId.Equals(articleId)).Result;
 
             if (checkExistArticleBySlug != null)
             {
                 return StatusCode(400, "Bài báo đã tồn tại không thể cập nhât. Hãy cập nhật với tiêu đề khác.");
             }
-            _articleRepository.UpdateAsync(articleAdd).Wait();
-            return Ok(articleAdd);
+            _articleRepository.UpdateAsync(checkArticleExist).Wait();
+            return Ok(checkArticleExist);
         }
 
 

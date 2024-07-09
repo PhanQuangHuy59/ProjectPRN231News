@@ -19,12 +19,9 @@ namespace Repositories
         public IEnumerable<Article> GetAllArticleByKey(string keySearch, int statusProcess);
         public IEnumerable<Article> GetAllByCategoryId(Guid idCategory, int statusProcess);
         public IEnumerable<Article> GetAllFromDateToDate(DateTime from, DateTime to, int statusProcess);
-
-
         ///
         public Article GetArticleBySlug(string slug, int statusProcess);
-
-
+      
 
     }
 
@@ -112,5 +109,7 @@ namespace Repositories
                 , includes:includes);
             return article.Result;
         }
+
+      
     }
 }

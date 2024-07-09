@@ -87,10 +87,10 @@ namespace WebNewsClients.Controllers
                     HttpOnly = true,
                     SameSite = (Microsoft.AspNetCore.Http.SameSiteMode)SameSiteMode.Strict
                 };
-                HttpContext.Response.Cookies.Append(SaveKeySystem.Authentication, token, cookieOptions);
-
-                // Session
                 var jsonSerial = JsonConvert.SerializeObject(userLogin);
+                HttpContext.Response.Cookies.Append(SaveKeySystem.Authentication, token, cookieOptions);
+                HttpContext.Response.Cookies.Append(SaveKeySystem.userLogin, jsonSerial, cookieOptions);
+                // Session
                 HttpContext.Session.SetString(SaveKeySystem.userLogin, jsonSerial);
                 return RedirectToAction("Index", "Home");
             }

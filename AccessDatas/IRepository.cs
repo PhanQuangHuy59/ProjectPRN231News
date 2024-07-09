@@ -37,6 +37,7 @@ namespace AccessDatas
         Task<int> CountAsync(Expression<Func<T, bool>> where);
 
         Task<bool> CheckContainsAsync(Expression<Func<T, bool>> predicate);
+        void Detached(T entityDetached);
         Task SaveAsync();
     }
 }

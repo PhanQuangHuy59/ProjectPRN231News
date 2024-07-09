@@ -11,17 +11,21 @@ using WebNewsAPIs.Common;
 using WebNewsAPIs.Dtos;
 using WebNewsClients.Ultis;
 using System.Text;
+using AutoMapper;
 
 namespace WebNewsClients.Controllers
 {
     public class PersonalInformationController : Controller
     {
         private HttpClient _httpClient;
+        private IMapper _mapper;
 
         private static int Page_Item = 15;
-        public PersonalInformationController(HttpClient httpClient)
+        public PersonalInformationController(HttpClient httpClient,
+            IMapper mapper)
         {
             _httpClient = httpClient;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -449,11 +453,34 @@ namespace WebNewsClients.Controllers
         }
 
 
+
         [HttpGet("EditArticle/{articleId}.html")]
         [ArticlesAuthorize]
         public IActionResult EditArticle(Guid? articleId)
         {
             TempData.Clear();
+            // Thong tin user
+            ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
+            if (userLogin == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
+            var response1 = _httpClient.GetAsync(urlRegister1).Result;
+            if (!response1.IsSuccessStatusCode)
+            {
+                TempData["err"] = "Không thể lấy được thông tin của người dùng";
+                return RedirectToAction("Index", "Home");
+            }
+            var userResponse = response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            if (userResponse.Count == 0)
+            {
+                TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
             if (articleId == null)
             {
                 return RedirectToAction("GetAllArticleOfUser");
@@ -462,7 +489,7 @@ namespace WebNewsClients.Controllers
             string urlGetArticle = $"https://localhost:7251/api/Articles/GetArticleById/{articleId}";
             var responseMessage = _httpClient.GetAsync(urlGetArticle).Result;
 
-            if (responseMessage.IsSuccessStatusCode)
+            if (!responseMessage.IsSuccessStatusCode)
             {
                 var error = responseMessage.Content.ReadAsStringAsync().Result;
                 TempData["error"] = error;
@@ -470,16 +497,62 @@ namespace WebNewsClients.Controllers
             }
             var editArticle = responseMessage.Content.ReadFromJsonAsync<ViewArticleDto>()
                 .Result;
-            return View(editArticle);
+            if(editArticle == null)
+            {
+                var error = "Không thể tìm thấy được Article của bạn.";
+                TempData["error"] = error;
+                return RedirectToAction("GetAllArticleOfUser", "PersonalInformation");
+            }
+            var updateForView = _mapper.Map<UpdateArticleDto>(editArticle);
+           // Dánh sách các thể loại
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            var responseMessageCategory = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            responseMessageCategory.EnsureSuccessStatusCode();
+            var listCategories = responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
+                .Result.data;
+            SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName), editArticle.CategortyId);
+            //
+
+            ViewBag.SelectListCategory = selectListCategory;
+            ViewBag.InformationUser = userResponse[0];
+            return View(updateForView);
         }
 
 
 
-        [HttpPut("EditArticle.html")]
+        [HttpPost("EditArticle.html")]
         [ArticlesAuthorize]
-        public IActionResult EditArticlePut(AddArticleDto? addArticle)
+        public IActionResult EditArticlePost(UpdateArticleDto? updateArticleDto)
         {
             TempData.Clear();
+            // Thong tin user
+            ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
+            if (userLogin == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
+            var response1 = _httpClient.GetAsync(urlRegister1).Result;
+            if (!response1.IsSuccessStatusCode)
+            {
+                TempData["err"] = "Không thể lấy được thông tin của người dùng";
+                return RedirectToAction("Index", "Home");
+            }
+            var userResponse = response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            if (userResponse.Count == 0)
+            {
+                TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
+                return RedirectToAction("Index", "Home");
+            }
+            // Dánh sách các thể loại
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            var responseMessageCategory = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            responseMessageCategory.EnsureSuccessStatusCode();
+            var listCategories = responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
+                .Result.data;
+            SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName), updateArticleDto.CategortyId);
+            //
+
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
             if (!ModelState.IsValid)
             {
@@ -494,26 +567,31 @@ namespace WebNewsClients.Controllers
                 }
                 ModelState.AddModelError(string.Empty, string.Join("\n", errorMessages));
                 TempData["err"] = "Dữ liệu có vẻ không hợp lệ";
-                return View("EditArticlePut", addArticle);
+                ViewBag.SelectListCategory = selectListCategory;
+                ViewBag.InformationUser = userResponse[0];
+                return View("EditArticle", updateArticleDto);
             }
             // call api them bài báo
-            string urlEidtArticle = "https://localhost:7251/api/Articles/UpdateArticle";
+            string urlEidtArticle = $"https://localhost:7251/api/Articles/UpdateArticle/{updateArticleDto.ArticleId}";
             var request = new HttpRequestMessage(HttpMethod.Put, urlEidtArticle);
-            request.Content = new StringContent(JsonConvert.SerializeObject(addArticle), Encoding.UTF8, "application/json");
+            request.Content = new StringContent(JsonConvert.SerializeObject(updateArticleDto), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
             var response = _httpClient.SendAsync(request).Result;
-
 
             if (!response.IsSuccessStatusCode)
             {
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
 
                 TempData["err"] = $"Không thể cập nhật bài báo hãy thử lại \n {errorMessage}";
-                return View("EditArticle", addArticle);
+                ViewBag.SelectListCategory = selectListCategory;
+                ViewBag.InformationUser = userResponse[0];
+                return View("EditArticle", updateArticleDto);
             }
 
+            ViewBag.SelectListCategory = selectListCategory;
+            ViewBag.InformationUser = userResponse[0];
             TempData["success"] = "Đã tạo cập nhật bài báo thành công.";
-            return View("EditArticle", addArticle);
+            return View("EditArticle", updateArticleDto);
         }
 
 

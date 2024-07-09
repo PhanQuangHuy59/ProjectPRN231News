@@ -183,7 +183,7 @@
                                         <form method="post">
                                             <div asp-validation-summary="All" class="text-danger"></div>
                                             <input type="hidden" asp-for="@Model.Author" value="@informationUser.UserId" />
-                                            <input type="hidden" asp-for="@Model.StatusProcess" value="3" />
+                                            <input type="hidden" asp-for="@Model.StatusProcess" value="1" />
                                             <div class="row">
                                                 <div class="form-group col-6">
                                                     <label asp-for="@Model.Title" class="control-label"></label>
@@ -194,7 +194,7 @@
                                                     <label asp-for="@Model.CoverImage" class="control-label"></label><br />
                                                     <div class="input-group">
 
-                                                        <input type="text" asp-for="@Model.CoverImage" disabled class="form-control" placeholder="Đường dẫn ảnh" />
+                                                        <input id="coverimage" type="text" asp-for="@Model.CoverImage"  class="form-control" placeholder="Đường dẫn ảnh" />
                                                         <span class="input-group-text">
                                                             <i class="fa fa-camera"></i>
                                                         </span>
@@ -270,6 +270,17 @@
 
    <script type="text/javascript">
        let editor =  setUpCkeditor('Content');
-      
+        function preventAllInput(event) {
+            event.preventDefault();
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var input = document.getElementById('coverimage');
+            if (input) {
+                input.addEventListener('keydown', preventAllInput);
+                input.addEventListener('keypress', preventAllInput);
+                input.addEventListener('paste', preventAllInput);
+            }
+        });
    </script>
     }
