@@ -38,6 +38,21 @@
     }
 }
 
+<style>
+    .containerImg {
+        width: 900px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .containerImg img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+</style>
 <div class="full_container">
     <div class="inner_container">
 
@@ -179,6 +194,11 @@
                                     <div class="heading1 margin_0">
                                         <h2>Form tạo bài báo</h2>
                                     </div>
+                                    <div class="containerImg">
+                                        <img id="imgPreViewLoad" class=" mt-4" src="@Model.CoverImage" alt="#" />
+
+                                    </div>
+                                   
                                     <div class="p-5">
                                         <form method="post">
                                             <div asp-validation-summary="All" class="text-danger"></div>
@@ -195,8 +215,9 @@
                                                     <div class="input-group">
 
                                                         <input id="coverimage" type="text" asp-for="@Model.CoverImage"  class="form-control" placeholder="Đường dẫn ảnh" />
+                                                        <input style="display:none;" id="inputCovorIamge" type="file" name="UploadImageAvatar" />
                                                         <span class="input-group-text">
-                                                            <i class="fa fa-camera"></i>
+                                                            <i id="clickLoadCoverImage" class="fa fa-camera" title="Chọn ảnh cho bài báo"></i>
                                                         </span>
                                                         <span asp-validation-for="@Model.CoverImage" class="text-danger"></span>
                                                     </div>
@@ -229,7 +250,9 @@
                                                     <label class="form-check-label" asp-for="@Model.IsPublish"></label>
                                                 </div>
                                             </div>
-                                            <button asp-controller="PersonalInformation" asp-action="AddArticlePost" class="btn btn-outline-primary mt-5">Thêm</button>
+                                            <input type="button" value="L" id="submit"  class="btn btn-outline-primary mt-5" />
+                                            
+                                          @*  <button asp-controller="PersonalInformation" asp-action="AddArticlePost" class="btn btn-outline-primary mt-5">Thêm</button>*@
                                         </form>
 
                                     </div>
@@ -263,24 +286,9 @@
         <div class="loader"></div>
     </div>
 </div>
+<div id="hide_content" style="display:none;"></div>
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial");
     @await Html.PartialAsync("_ToastMessage");
-    <script src="~/js/information_personal.js"></script>
-
-   <script type="text/javascript">
-       let editor =  setUpCkeditor('Content');
-        function preventAllInput(event) {
-            event.preventDefault();
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var input = document.getElementById('coverimage');
-            if (input) {
-                input.addEventListener('keydown', preventAllInput);
-                input.addEventListener('keypress', preventAllInput);
-                input.addEventListener('paste', preventAllInput);
-            }
-        });
-   </script>
+    <script src="~/js/add_update_article.js"></script>
     }

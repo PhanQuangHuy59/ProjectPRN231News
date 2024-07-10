@@ -165,6 +165,10 @@
       "PackagePath": "staticwebassets\\images\\male_default.png"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\add_update_article.js",
+      "PackagePath": "staticwebassets\\js\\add_update_article.js"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
     },

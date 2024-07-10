@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "L941UUY0i/QbpXc+vy3eDvJac8VeW2/rF2bniavPncA=",
+  "Hash": "D5EAGE4JkTa9JBiRUyJ00OnPyHAfJV1N6OQhp0/yVns=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -741,6 +741,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\male_default.png"
+    },
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\add_update_article.js",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "js/add_update_article.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\add_update_article.js"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\bootstrap.min.js",

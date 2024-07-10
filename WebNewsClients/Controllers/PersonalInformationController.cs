@@ -375,6 +375,7 @@ namespace WebNewsClients.Controllers
             ViewBag.InformationUser = userResponse[0];
             ViewBag.SelectListCategory = selectListCategory;
             AddArticleDto add = new AddArticleDto();
+            add.CoverImage = "/images/anh_banner_default.jpg";
             return View(add);
         }
         [HttpPost("AddNewArticle.html")]
