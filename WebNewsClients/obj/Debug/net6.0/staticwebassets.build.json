@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "D5EAGE4JkTa9JBiRUyJ00OnPyHAfJV1N6OQhp0/yVns=",
+  "Hash": "XAyr2G2D048DH6/VNVJtM+eoDbKS82KnyN/Huk5haxs=",
   "Source": "WebNewsClients",
   "BasePath": "_content/WebNewsClients",
   "Mode": "Default",
@@ -775,6 +775,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.min.js"
+    },
+    {
+      "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\demo.html",
+      "SourceId": "WebNewsClients",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\",
+      "BasePath": "_content/WebNewsClients",
+      "RelativePath": "js/demo.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\demo.html"
     },
     {
       "Identity": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\information_personal.js",

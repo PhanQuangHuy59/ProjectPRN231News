@@ -37,6 +37,25 @@
         pathImageDefault = pathImageKhac;
     }
 }
+<style>
+    .containerImg {
+        width: 900px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .containerImg img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    #clickLoadCoverImage:hover{
+        cursor:pointer;
+    }
+
+</style>
 
 <div class="full_container">
     <div class="inner_container">
@@ -69,8 +88,7 @@
                 <h4>Action General</h4>
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser"
-                           data-toggle="collapse" aria-expanded="false">
+                        <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">
                             <i class="fa fa-user"></i>
                             <span>Thông Tin Tài Khoản</span>
                         </a>
@@ -100,12 +118,16 @@
                             <span>Tin đã lưu</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
-                            <i class="fa fa-briefcase blue1_color"></i>
-                            <span>Bài báo đã tạo của bạn</span>
-                        </a>
-                    </li>
+                    @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                    {
+                        <li>
+                            <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
+                                <i class="fa-regular fa-newspaper orange_color"></i>
+
+                                <span>Bài báo đã tạo của bạn</span>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a asp-controller="User" asp-action="Logout">
                             <i class="fa fa-sign-out red_color"></i>
@@ -147,6 +169,10 @@
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
+                                            @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                                            {
+                                                <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">Bài báo đã tạo của bạn</a>
+                                            }
                                             <a class="dropdown-item" asp-controller="User" asp-action="Logout">
 
                                                 <span>Đăng xuất</span>
@@ -179,6 +205,9 @@
                                     <div class="heading1 margin_0">
                                         <h2>Form tạo bài báo</h2>
                                     </div>
+                                    <div class="containerImg">
+                                        <img id="imgPreViewLoad" class=" mt-4" src="@Model.CoverImage" alt="#" />
+                                    </div>
                                     <div class="p-5">
                                         <form method="post">
                                             <div asp-validation-summary="All" class="text-danger"></div>
@@ -194,13 +223,13 @@
                                                 </div>
                                                 <div class="form-group  col-6">
                                                     <label asp-for="@Model.CoverImage" class="control-label"></label><br />
-                                                   
                                                     <div class="input-group">
 
-                                                        <input id="coverimage"  asp-for="@Model.CoverImage" class="form-control" placeholder="Đường dẫn ảnh" />
+                                                        <input id="coverimage" type="text" asp-for="@Model.CoverImage" class="form-control" placeholder="Đường dẫn ảnh" />
+                                                        <input style="display:none;" id="inputCovorIamge" type="file" name="UploadImageAvatar" />
                                                         <span class="input-group-text">
-                                                            <i class="fa fa-camera"></i>
-                                                        </span><br />
+                                                            <i id="clickLoadCoverImage" class="fa fa-camera" title="Chọn ảnh cho bài báo"></i>
+                                                        </span>
                                                         <span asp-validation-for="@Model.CoverImage" class="text-danger"></span>
                                                     </div>
 
@@ -232,7 +261,10 @@
                                                     <label class="form-check-label" asp-for="@Model.IsPublish"></label>
                                                 </div>
                                             </div>
-                                            <button asp-controller="PersonalInformation" asp-action="EditArticlePost" class="btn btn-outline-primary mt-5">Cập nhật</button>
+                                            <input type="button" value="Lưu Bài Báo" id="submit" class="btn btn-outline-primary mt-5" />
+
+                                            <button id="ClickSave" asp-controller="PersonalInformation" asp-action="EditArticlePost" class="btn btn-outline-primary mt-5" style="display:none;">Cập nhật</button>
+                                           
                                         </form>
 
                                     </div>
@@ -266,25 +298,11 @@
         <div class="loader"></div>
     </div>
 </div>
+<div id="hide_content" style="display:none;">
+    @* @Html.Raw(Model.Content);*@
+</div>
 @section Scripts{
-    @await Html.PartialAsync("_ValidationScriptsPartial");
-    @await Html.PartialAsync("_ToastMessage");
-    <script src="~/js/information_personal.js"></script>
-
-   <script type="text/javascript">
-       let editor =  setUpCkeditor('Content');
-        function preventAllInput(event) {
-            event.preventDefault();
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var input = document.getElementById('coverimage');
-            if (input) {
-                input.addEventListener('keydown', preventAllInput);
-                input.addEventListener('keypress', preventAllInput);
-                input.addEventListener('paste', preventAllInput);
-            }
-        });
-      
-   </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_ToastMessage")
+    <script src="~/js/add_update_article.js"></script>
     }

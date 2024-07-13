@@ -173,6 +173,10 @@
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
     },
     {
+      "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\demo.html",
+      "PackagePath": "staticwebassets\\js\\demo.html"
+    },
+    {
       "Id": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsClients\\wwwroot\\js\\information_personal.js",
       "PackagePath": "staticwebassets\\js\\information_personal.js"
     },

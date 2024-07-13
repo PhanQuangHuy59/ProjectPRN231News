@@ -94,13 +94,13 @@
             <div class="sidebar_blog_2">
                 <h4>Action General</h4>
                 <ul class="list-unstyled components">
-                    <li>
+                    <li class="active">
                         <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser">
                             <i class="fa fa-user"></i>
                             <span>Thông Tin Tài Khoản</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a asp-controller="PersonalInformation" asp-action="PersonalArticleComment">
                             <i class="fa fa-comments-o blue2_color"></i>
                             <span>Hoạt động bình luận</span>
@@ -125,6 +125,16 @@
                             <span>Tin đã lưu</span>
                         </a>
                     </li>
+                    @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                    {
+                        <li>
+                            <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
+                                <i class="fa-regular fa-newspaper orange_color"></i>
+
+                                <span>Bài báo đã tạo của bạn</span>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a asp-controller="User" asp-action="Logout">
                             <i class="fa fa-sign-out red_color"></i>
@@ -171,7 +181,12 @@
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
+                                            @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                                            {
+                                                <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">Bài báo đã tạo của bạn</a>
+                                            }
                                             <a class="dropdown-item" asp-controller="User" asp-action="Logout">
+
                                                 <span>Đăng xuất</span>
                                                 <i class="fa fa-sign-out"></i>
                                             </a>

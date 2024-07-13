@@ -95,6 +95,7 @@
     if (postData.length > 0) {
       await postArrayFile(postData);
     } else {
+      $("#ClickSave").trigger("click");
       console.log("No base64 images found.");
     }
     // } catch (error) {
@@ -130,7 +131,8 @@
     imgs.forEach((img, index) => {
       const src = img.src;
       if (src.startsWith("data:") && src.includes("base64,")) {
-        img.src = data.shift().view; // Update src and remove first element from data array
+        console.log(data[0].link);
+        img.src = data.shift().link; // Update src and remove first element from data array
       }
     });
 
@@ -139,7 +141,7 @@
     debugger;
     editor.setData(content);
     $("#displayLoader").css("display", "none");
-    console.log(data);
+    $("#ClickSave").trigger("click");
     // } catch (error) {
     //   console.error("Error:", error);
     //   showError("Vui lòng thử lại");
@@ -435,7 +437,7 @@
         // Storing images as Base64 is usually a very bad idea.
         // Replace it on production website with other solutions:
         // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-        // 'Base64UploadAdapter',
+        // "Base64UploadAdapter",
         "MultiLevelList",
         "RealTimeCollaborativeComments",
         "RealTimeCollaborativeTrackChanges",

@@ -50,13 +50,14 @@
                 <div class="sidebar_user_info">
                     <div class="icon_setting"></div>
                     <div class="user_profle_side">
-                        <div class="user_img"><img  style="object-fit:cover;width:70px;height:70px" class="img-responsive" src="@pathImageDefault" alt="#" />
+                        <div class="user_img">
+                            <img style="object-fit:cover;width:70px;height:70px" class="img-responsive" src="@pathImageDefault" alt="#" />
                             <p><span class="online_animation"></span> Online</p>
                         </div>
 
                         <div class="user_info">
                             <h6 class="text-center">@informationUser.DisplayName</h6>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
                 <ul class="list-unstyled components">
                     <li class="active">
                         <a asp-controller="PersonalInformation" asp-action="PersonalInformationOfUser"
-                           data-toggle="collapse" aria-expanded="false">
+                          >
                             <i class="fa fa-user"></i>
                             <span>Thông Tin Tài Khoản</span>
                         </a>
@@ -97,12 +98,16 @@
                             <span>Tin đã lưu</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
-                            <i class="fa fa-briefcase blue1_color"></i>
-                            <span>Bài báo đã tạo của bạn</span>
-                        </a>
-                    </li>
+                    @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                    {
+                        <li>
+                            <a asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">
+                                <i class="fa-regular fa-newspaper orange_color"></i>
+                                
+                                <span>Bài báo đã tạo của bạn</span>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a asp-controller="User" asp-action="Logout">
                             <i class="fa fa-sign-out red_color"></i>
@@ -135,7 +140,7 @@
                                 <ul class="user_profile_dd">
                                     <li>
                                         <a class="dropdown-toggle" data-toggle="dropdown">
-                                            <img  style="object-fit:cover;width:50px;height:50px" class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
+                                            <img style="object-fit:cover;width:50px;height:50px" class="img-responsive rounded-circle" src="@pathImageDefault" alt="#" />
                                             <span class="name_user">@informationUser.DisplayName</span>
                                         </a>
                                         <div class="dropdown-menu">
@@ -144,8 +149,12 @@
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="PersonalOfNews">Bảng Tin của bạn</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleViewed">Tin đã Xem</a>
                                             <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="ArticleSaved">Tin đã lưu</a>
+                                            @if (informationUser.Role.Rolename.ToUpper().Equals("ARTICLES"))
+                                            {
+                                                <a class="dropdown-item" asp-controller="PersonalInformation" asp-action="GetAllArticleOfUser">Bài báo đã tạo của bạn</a>
+                                            }
                                             <a class="dropdown-item" asp-controller="User" asp-action="Logout">
-                                                
+
                                                 <span>Đăng xuất</span>
                                                 <i class="fa fa-sign-out"></i>
                                             </a>
@@ -186,7 +195,7 @@
                                             <div class="full dis_flex center_text">
                                                 <div class="profile_img">
 
-                                                    <img id="imgAvatarDisplay" width="180" height="180"  style="object-fit:cover;" class="rounded-circle" src="@pathImageDefault" alt="#" />
+                                                    <img id="imgAvatarDisplay" width="180" height="180" style="object-fit:cover;" class="rounded-circle" src="@pathImageDefault" alt="#" />
                                                     <input style="display:none;" id="inputAvatar" type="file" name="UploadImageAvatar" />
                                                     <i id="clickLoadAvatar" title="Cập nhật hình ảnh đại diện mới" style="margin-left: 43%;font-size: 20px; margin-top: 20px;" class="fa fa-camera"></i>
                                                 </div>

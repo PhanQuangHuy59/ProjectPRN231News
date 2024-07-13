@@ -37,17 +37,18 @@ namespace WebNewsAPIs.Controllers
             _viewRepository = viewRepository;
             _userRepo = userRepo;
         }
+
         [HttpGet]
         [EnableQuery]
         public IEnumerable<Article> Get()
         {
-            string[] includes = new string[]
-            {
-                nameof(Article.Categorty),
-                nameof(Article.Comments),
-                nameof(Article.AuthorNavigation)
-            };
-            var listArticles = _articleRepository.GetAll(includes);
+            //string[] includes = new string[]
+            //{
+            //    nameof(Article.Categorty),
+            //    nameof(Article.Comments),
+            //    nameof(Article.AuthorNavigation)
+            //};
+            var listArticles = _articleRepository.GetAll();
             return listArticles.AsQueryable();
         }
 

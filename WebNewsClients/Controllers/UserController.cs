@@ -363,6 +363,7 @@ namespace WebNewsClients.Controllers
                 if (HttpContext.Request.Cookies.ContainsKey(SaveKeySystem.Authentication))
                 {
                     HttpContext.Response.Cookies.Delete(SaveKeySystem.Authentication);
+                    HttpContext.Response.Cookies.Delete(SaveKeySystem.userLogin);
                 }
             }
 
