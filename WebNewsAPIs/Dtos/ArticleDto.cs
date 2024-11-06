@@ -17,6 +17,7 @@ namespace WebNewsAPIs.Dtos
 
         [Required]
         public bool IsPublish { get; set; }
+        public DateTime? PublishDate { get; set; }
 
         public int StatusProcess { get; set; }
 
@@ -84,6 +85,7 @@ namespace WebNewsAPIs.Dtos
         public DateTime? PublishDate { get; set; }
         public bool IsPublish { get; set; }
         public int StatusProcess { get; set; }
+        public string StatusProcessName { get; set; }
         public Guid CategortyId { get; set; }
         public string CategortyName { get; set; }
         public string ShortDescription { get; set; } = null!;

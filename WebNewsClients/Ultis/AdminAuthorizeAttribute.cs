@@ -12,8 +12,6 @@ namespace WebNewsClients.Ultis
     {
         public void OnAuthorization(AuthorizationFilterContext filterContext)
         {
-
-
             if (ValidateToken(filterContext.HttpContext))
             {
 

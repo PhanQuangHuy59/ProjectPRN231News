@@ -1,0 +1,182 @@
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@{
+    Layout = "_LayoutMainAdmin";
+
+    var selectListCategory = (SelectList)ViewBag.SelectListCategorys;
+    var articles = (List<ViewArticleDto>)ViewBag.Articles;
+    var author = (BusinessObjects.Models.User)ViewBag.Author;
+
+    var currentPage = (int)ViewBag.CurrentPage;
+    var keySearch = (string)ViewBag.KeySearch;
+    var categoryid = (Guid)ViewBag.CategoryId;
+    var totalPage = (int)ViewBag.TotalPage;
+    var totalResult = (int)ViewBag.TotalResult;
+    var totalRevenue = (string)ViewBag.TotalRevenue;
+    var totalView = (int)ViewBag.TotalView;
+    DateTime? fromDate = null;
+    if (ViewBag.FromDate != null)
+    {
+        fromDate = (DateTime)ViewBag.FromDate;
+    }
+    DateTime? endDate = null;
+    if (ViewBag.EndDate != null)
+    {
+        endDate = (DateTime)ViewBag.EndDate;
+    }
+    var authorId = (Guid)ViewBag.AuthorId;
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("ManagementRevenueOfArticler", "Admin", new
+                    {
+                        currentPage = indexpage,
+                        keySearch = keySearch,
+                        categoryId = categoryid,
+                        authorId = authorId,
+                        fromDate = fromDate,
+                        endDate = endDate
+                    });
+                }
+
+            };
+
+
+}
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Thống kê doanh thu của nhà báo</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Danh sách bài báo</li>
+                            <li class="breadcrumb-item active">Thông kê doanh thu tác giả.</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            Ngày và giờ : @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header">
+                                <div class="box_right lms_block row">
+                                    <div class="col-9">
+                                        <form>
+                                            <input type="hidden" name="authorId" value="@authorId" />
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label>Nhập từ khóa</label>
+                                                    <div class="common_input mb_15">
+                                                        <input name="keySearch" value="@keySearch" type="text" placeholder="Nhập nội dung...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Thể loại</label>
+                                                    <select onchange="this.form.submit()" asp-items="@selectListCategory" name="categoryId" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Chọn ngày bắt đầu</label>
+                                                    <input class="form-control" name="fromDate" value="@fromDate" type="date">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Chọn ngày kết thúc</label>
+                                                    <input class="form-control" name="endDate" value="@endDate" type="date">
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="create_report_btn mt_30">
+                                                        <button asp-action="ManagementRevenueOfArticler" asp-controller="Admin" class="btn_1 radius_btn d-block text-center">Tìm kiếm</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-3" style="align-items:center;text-align:center">
+                                        <img width="100" height="100" class="rounded-circle" src="@author.Image" />
+                                        <h4 class="text-warning">@author.DisplayName</h4>
+                                        <i class="text-primary">@author.Username</i>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Kết quả tìm kiếm cho "@keySearch" là có<strong class="text-primary"> @totalResult</strong> bài báo</p>
+                            <div class="QA_table mb_30">
+                                @*lms_table_active*@
+                                <table class="table  dataTable no-footer dtr-inline">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tên bài báo</th>
+                                            <th scope="col">Miêu tả ngắn</th>
+                                            <th scope="col">Tên tác giả</th>
+                                            <th scope="col">Thể loại</th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Tình trạng hiện tại</th>
+                                            <th scope="col">Tổng lượt xem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var a in articles)
+                                        {
+                                            <tr>
+                                                <th>@a.Title</th>
+                                                <td>@a.ShortDescription</td>
+                                                <td>@a.AuthorName</td>
+                                                <td>@a.CategortyName</td>
+                                                <td><p>@(a.CreatedDate == null ? "Empty" : a.CreatedDate.ToString("d/MM/yyyy"))</p></td>
+                                                @if (a.IsPublish)
+                                                {
+                                                    <td><h3 class="badge bg-success"></h3>Công khai</td>
+                                                }
+                                                @if (!a.IsPublish)
+                                                {
+                                                    <td><h3 class="badge bg-warning"></h3>Cá nhân</td>
+                                                }
+                                                <td><h3 class="badge bg-success">@a.StatusProcessName</h3></td>
+                                                <td>
+                                                    @a.ViewArticles lượt xem
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="text-end">
+                                    <p><i>Tổng lượt xem là</i>   <strong class="text-primary"> @totalView</strong> lượt xem.</p>
+                                    <p><i>Tổng doanh thu là</i>   <strong class="text-warning"> @totalRevenue</strong>.</p>
+                                </div>
+                                @if (currentPage != int.MinValue)
+                                {
+                                    @await Html.PartialAsync("_Pagination",PageModel)
+                                    ;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+
+    <script src="~/js/add_update_article.js"></script>
+    }

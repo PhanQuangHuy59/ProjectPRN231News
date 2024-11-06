@@ -54,6 +54,7 @@ namespace WebNewsAPIs.Dtos
         [Required]
         public Guid RoleId { get; set; }
 
+        [BirthDate]
         public DateTime? DateOfBirth { get; set; }
 
         [EnumDataType(typeof(GenderType), ErrorMessage = "Invalid gender.")]
@@ -89,4 +90,24 @@ namespace WebNewsAPIs.Dtos
 		public bool IsConfirm { get; set; }
 
 	}
+    public class BirthDateAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+
+            if (value is DateTime dateOfBirth && value != null)
+            {
+                if (dateOfBirth < DateTime.Now)
+                {
+                    return ValidationResult.Success;
+                }
+                else
+                {
+                    return new ValidationResult("Date of Birth must be earlier than the current date.");
+                }
+            }
+            return ValidationResult.Success;
+
+        }
+    }
 }

@@ -1,5 +1,48 @@
-﻿@{
+﻿@using BusinessObjects.Models;
+@{
     Layout = "_LayoutMainAdmin";
+    var userInSystem = (int)ViewBag.UserInSystem;
+    var articleInSystem = (int)ViewBag.ArticlerInSystem;
+    var articleApproval = (int)ViewBag.ArticleApproval;
+    var articleNeedApproval = (int)ViewBag.ArticleNeedApproval;
+
+    var userNewest = (List<User>)ViewBag.UserNewest;
+    var articleNewest = (List<Article>)ViewBag.ArticleNewest;
+    var commentNewest = (List<Comment>)ViewBag.CommentNewest;
+    var roles = (SelectList)ViewBag.SelectListRoles;
+    var now = DateTime.Now;
+     string timeComment(DateTime timeComment)
+    {
+        TimeSpan difference = now - timeComment;
+
+        if (difference.TotalSeconds < 60)
+        {
+            return $"{(int)difference.TotalSeconds} giây trước";
+        }
+        else if (difference.TotalMinutes < 60)
+        {
+            return $"{(int)difference.TotalMinutes} phút trước";
+        }
+        else if (difference.TotalHours < 24)
+        {
+             return $"{(int)difference.TotalHours} giờ trước";
+        }
+        else if (difference.TotalDays < 30)
+        {
+           return $"{(int)difference.TotalDays} ngày trước";
+        }
+        else if (difference.TotalDays < 365)
+        {
+            int months = (int)(difference.TotalDays / 30);
+             return $"{months} tháng trước";
+        }
+        else
+        {
+            int years = (int)(difference.TotalDays / 365);
+            return $"{years} năm trước";
+        }
+        return "Lâu về trước";
+    }
 }
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
@@ -17,7 +60,7 @@
                     <div class="page_title_right">
                         <div class="page_date_button d-flex align-items-center">
                             <img src="img/icon/calender_icon.svg" alt>
-                            Nơi để hiển thị ngày và giờ hiện tại - dòng 259
+                          Ngày và giờ :   @DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss")
                         </div>
                     </div>
                 </div>
@@ -131,45 +174,63 @@
             <div class="col-xl-4 ">
                 <div class="white_card card_height_100 mb_30 user_crm_wrapper">
                     <div class="row">
+
                         <div class="col-lg-6">
                             <div class="single_crm">
                                 <div class="crm_head d-flex align-items-center justify-content-between">
                                     <div class="thumb">
-                                        <img src="img/crm/businessman.svg" alt>
+                                        <p action="text-white mt-2">Số người dùng</p> 
                                     </div>
                                     <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                                 </div>
                                 <div class="crm_body">
-                                    <h4>2455</h4>
+                                    <h4>@userInSystem</h4>
                                     <p>Tổng số lượng người dùng</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div class="single_crm ">
                                 <div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
                                     <div class="thumb">
-                                        <img src="img/crm/customer.svg" alt>
+                                        <p action="text-white mt-2">Số nhà báo</p>
                                     </div>
                                     <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                                 </div>
                                 <div class="crm_body">
-                                    <h4>2455</h4>
-                                    <p>Tổng số lượng bài báo</p>
+                                    <h4>@articleInSystem</h4>
+                                    <p>Tổng số nhà báo</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-6">
-                            <div class="single_crm">
+                            <div class="single_crm ">
                                 <div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
                                     <div class="thumb">
-                                        <img src="img/crm/infographic.svg" alt>
+                                        <p action="text-white mt-2">Bài báo cần duyệt</p>
                                     </div>
                                     <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                                 </div>
                                 <div class="crm_body">
-                                    <h4>2455</h4>
-                                    <p>Tổng số lượng truy cập trang web</p>
+                                    <h4>@articleNeedApproval</h4>
+                                    <p>Tổng số bài báo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="single_crm ">
+                                <div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+                                    <div class="thumb">
+                                        <p action="text-white mt-2">Bài báo trên trang</p>
+                                    </div>
+                                    <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                </div>
+                                <div class="crm_body">
+                                    <h4>@articleApproval</h4>
+                                    <p>Tổng số bài báo</p>
                                 </div>
                             </div>
                         </div>
@@ -204,99 +265,53 @@
                         </div>
                     </div>
                     <div class="white_card_body ">
-                        <div class="single_user_pil d-flex align-items-center justify-content-between">
-                            <div class="user_pils_thumb d-flex align-items-center">
-                                <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
-                                <span class="f_s_14 f_w_400 text_color_11">Jhon Smith</span>
+                        @foreach(var u in userNewest)
+                        {
+                            <div class="single_user_pil d-flex align-items-center justify-content-between">
+                                <div class="user_pils_thumb d-flex align-items-center">
+                                    <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
+                                    <span class="f_s_14 f_w_400 text_color_11">@u.DisplayName</span>
+                                </div>
+                                <div class="user_info">
+                                    @u.Role.Rolename
+                                </div>
+                                <div class="action_btns d-flex">
+                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                </div>
                             </div>
-                            <div class="user_info">
-                                Khách hàng
-                            </div>
-                            <div class="action_btns d-flex">
-                                <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_user_pil admin_bg d-flex align-items-center justify-content-between">
-                            <div class="user_pils_thumb d-flex align-items-center">
-                                <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
-                                <span class="f_s_14 f_w_400 text_color_11">Jhon Smith</span>
-                            </div>
-                            <div class="user_info">
-                                Khách hàng
-                            </div>
-                            <div class="action_btns d-flex">
-                                <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_user_pil d-flex align-items-center justify-content-between">
-                            <div class="user_pils_thumb d-flex align-items-center">
-                                <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
-                                <span class="f_s_14 f_w_400 text_color_11">Jhon Smith</span>
-                            </div>
-                            <div class="user_info">
-                                Khách hàng
-                            </div>
-                            <div class="action_btns d-flex">
-                                <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_user_pil d-flex align-items-center justify-content-between">
-                            <div class="user_pils_thumb d-flex align-items-center">
-                                <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
-                                <span class="f_s_14 f_w_400 text_color_11">Jhon Smith</span>
-                            </div>
-                            <div class="user_info">
-                                Khách hàng
-                            </div>
-                            <div class="action_btns d-flex">
-                                <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_user_pil d-flex align-items-center justify-content-between mb-0">
-                            <div class="user_pils_thumb d-flex align-items-center">
-                                <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50" src="img/customers/1.png" alt></div>
-                                <span class="f_s_14 f_w_400 text_color_11">Jhon Smith</span>
-                            </div>
-                            <div class="user_info">
-                                Khách hàng
-                            </div>
-                            <div class="action_btns d-flex">
-                                <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                            </div>
-                        </div>
+                        } 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-7">
                 <div class="white_card card_height_100 mb_20 ">
                     <div class="white_card_header">
                         <div class="box_header m-0">
                             <div class="main-title">
                                 <h3 class="m-0">Bài báo mới đăng</h3>
                             </div>
+
                             <div class="header_more_tool">
                                 <div class="dropdown">
-                                    <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                    <button class="dropdown-toggle btn btn-secondary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ti-more-alt"></i>
-                                    </span>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a>
-                                        <a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a>
-                                        <a class="dropdown-item" href="#"> <i class="fas fa-edit"></i> Edit</a>
-                                        <a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a>
-                                        <a class="dropdown-item" href="#"> <i class="fa fa-download"></i> Download</a>
-                                    </div>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="ti-pencil-alt"></i> Edit</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="ti-download"></i> Download</a></li>
+                                    </ul>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                     <div class="white_card_body QA_section">
-                        <div class="QA_table ">
+                        <div class="QA_table">
 
                             <table class="table lms_table_active2 p-0">
                                 <thead>
@@ -304,81 +319,23 @@
                                         <th scope="col">Tên bài báo</th>
                                         <th scope="col">Thể loại</th>
                                         <th scope="col">Tác giả</th>
-                                        <th scope="col">Thời gian đăng</th>
+                                        <th scope="col">Thời gian tạo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">Biển Đông có thể đón bão tuần tới</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-
-                                                <span class="f_s_12 f_w_600 color_text_5">Tổng thống Putin tặng xe hơi cho Chủ tịch Triều Tiên Kim Jong-un</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">Làm rõ video khóa tu mùa hè "vong nhập" được cho ở chùa Ba Vàng</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">Vụ cháy 4 người tử vong: Ngày chủ nhật tang thương ở nhà ông bà ngoại</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">Hà Nội: Dàn siêu xe diễn tập sẵn sàng đón Tổng thống Nga Putin</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">Đề xuất chi mua tin phòng, chống tham nhũng tối đa 50 triệu đồng/tin</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="customer d-flex align-items-center">
-                                                <span class="f_s_12 f_w_600 color_text_5">4 trường hợp bị phong tỏa tài khoản thanh toán từ 1/7</span>
-                                            </div>
-                                        </td>
-                                        <td class="f_s_12 f_w_400 color_text_6">Thế giới</td>
-                                        <td class="f_s_12 f_w_400 color_text_7">Vladimir Putin</td>
-                                        <td class="f_s_12 f_w_400 color_text_6">19/06/2024</td>
-                                    </tr>
+                                    @foreach (var a in articleNewest)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="customer d-flex align-items-center">
+                                                    <span class="f_s_12 f_w_600 color_text_5">@a.ShortDescription</span>
+                                                </div>
+                                            </td>
+                                            <td class="f_s_12 f_w_400 color_text_6">@a.Categorty.CategoryName</td>
+                                            <td class="f_s_12 f_w_400 color_text_7">@a.AuthorNavigation.DisplayName</td>
+                                            <td class="f_s_12 f_w_400 color_text_6">@a.CreatedDate.ToString("d/MM/yyyy")</td>
+                                        </tr>
+                                    }  
                                 </tbody>
                             </table>
                         </div>
@@ -397,50 +354,20 @@
                     <div class="white_card_body">
                         <div class="Activity_timeline">
                             <ul>
-                                <li>
-                                    <div class="activity_bell"></div>
-                                    <div class="timeLine_inner d-flex align-items-center">
-                                        <div class="activity_wrap">
-                                            <h6>5 phút trước</h6>
-                                            <p>
-                                                Hưng đã bình luận vào bài báo "HEllo world"
-                                            </p>
+                                @foreach (var c in commentNewest)
+                                {
+                                    <li>
+                                        <div class="activity_bell"></div>
+                                        <div class="timeLine_inner d-flex align-items-center">
+                                            <div class="activity_wrap">
+                                                <h6>@timeComment(c.CreateDate)</h6>
+                                                <p>
+                                                   @c.User.DisplayName : @c.Content
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="activity_bell "></div>
-                                    <div class="timeLine_inner d-flex align-items-center">
-                                        <div class="activity_wrap">
-                                            <h6>5 phút trước</h6>
-                                            <p>
-                                                Hưng đã bình luận vào bài báo "HEllo world"
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="activity_bell bell_lite"></div>
-                                    <div class="timeLine_inner d-flex align-items-center">
-                                        <div class="activity_wrap">
-                                            <h6>5 phút trước</h6>
-                                            <p>
-                                                Hưng đã bình luận vào bài báo "HEllo world"
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="activity_bell bell_lite"></div>
-                                    <div class="timeLine_inner d-flex align-items-center">
-                                        <div class="activity_wrap">
-                                            <h6>5 phút trước</h6>
-                                            <p>
-                                                Hưng đã bình luận vào bài báo "HEllo world"
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -464,14 +391,12 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="common_input mb_15">
-                                            <input type="text" placeholder="Email">
+                                            <input name="email" type="text" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <select class="nice_Select2 nice_Select_line wide">
-                                            <option value="1">Quản lý</option>
-                                            <option value="1">Người dùng</option>
-                                            <option value="1">Tác giả</option>
+                                        <select asp-items="@roles" name="roleId" class="nice_Select2 nice_Select_line wide">
+                                            
                                         </select>
                                     </div>
                                     <div class="col-12">
@@ -489,3 +414,7 @@
     </div>
 </div>
 <script src="~/user-management-html/js/charts.js"></script>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+}

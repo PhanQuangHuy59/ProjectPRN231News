@@ -4,7 +4,7 @@
 	var category = (CategoriesArticle)ViewBag.CategoryDetail;
 	var listArticle = (IEnumerable<Article>)ViewBag.Articles;
 
-	var listTop4 = listArticle.Take(4);
+	var listTop4 = listArticle.OrderByDescending(c=> c.ViewArticles).Take(4);
 	var listRemain = listArticle.Skip(4);
 
 	var tempCategory = category;
@@ -58,7 +58,7 @@
 											<i class="fa fa-eye fa-2"></i> <span class="feat-info-text">@b.ViewArticles</span>
 										</div><!--feat-info-views-->
 										<div class="feat-info-comm">
-											<i class="fa fa-comment"></i> <span class="feat-info-text">@b.Comments</span>
+											<i class="fa fa-comment"></i> <span class="feat-info-text">@b.Comments.Count</span>
 										</div><!--feat-info-comm-->
 									</div><!--feat-info-wrap-->
 								</a>

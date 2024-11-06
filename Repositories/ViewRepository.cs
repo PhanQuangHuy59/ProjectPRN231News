@@ -11,6 +11,8 @@ namespace Repositories
     public interface IViewRepository :  IRepository<View>
     {
         void DeleteListView(IEnumerable<View> viewList);
+        Task<View> AddView(View view);
+        Task<View> UpdateView(View view);
     }
     public class ViewRepository : RepositoryBase<View>, IViewRepository
     {
@@ -22,6 +24,24 @@ namespace Repositories
         {
             dataContext.Views.RemoveRange(viewList);
             SaveAsync();
+        }
+        public async Task<View> AddView(View view)
+        {
+            using (FinalProjectPRN231Context _context = new FinalProjectPRN231Context())
+            {
+                var response = await _context.Views.AddAsync(view);
+                await _context.SaveChangesAsync();
+                return response.Entity;
+            }
+        }
+        public async Task<View> UpdateView(View view)
+        {
+            using (FinalProjectPRN231Context _context = new FinalProjectPRN231Context())
+            {
+                var response =  _context.Views.Update(view);
+                await _context.SaveChangesAsync();
+                return response.Entity;
+            }
         }
     }
 }

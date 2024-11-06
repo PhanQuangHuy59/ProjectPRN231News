@@ -1,5 +1,8 @@
-﻿@{
+﻿@using WebNewsAPIs.Dtos;
+@model AddUserDto;
+@{
     Layout = "_LayoutMainAdmin";
+    var selectListRole = (SelectList)ViewBag.SelectListRole;
 }
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
@@ -8,16 +11,21 @@
             <div class="col-12">
                 <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
                     <div class="page_title_left d-flex align-items-center">
-                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Trang chủ</h3>
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                            <a class="large_logo" asp-action="Index" asp-controller="Admin">
+                                <i class="fa-solid fa-house-chimney"></i>
+                            </a>
+                        </h3>
                         <ol class="breadcrumb page_bradcam mb-0">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Người dùng</a></li>
-                            <li class="breadcrumb-item active">Thêm người dùng mới</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Quản lý</a></li>
+                            <li class="breadcrumb-item active">Thêm quản người dùng</li>
                         </ol>
                     </div>
                     <div class="page_title_right">
                         <div class="page_date_button d-flex align-items-center">
                             <img src="img/icon/calender_icon.svg" alt>
-                            Ghi ngày tháng hiện tại
+                            <span class="text-primary">Ngày hôm nay : </span> @DateTime.Now.ToString("dd/MM/yyyy")
+
                         </div>
                     </div>
                 </div>
@@ -34,59 +42,68 @@
                         </div>
                     </div>
                     <div class="white_card_body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Tài khoản">
+                        <form method="post">
+                            <div class="row">
+
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.Username" class="control-label mb-2"></label>
+                                    <input type="email" asp-for="@Model.Username" class="form-control" placeholder="Nhập tài khoản..." />
+                                    <span asp-validation-for="@Model.Username" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.Password" class="control-label mb-2"></label>
+                                    <input type="password" asp-for="@Model.Password" class="form-control" placeholder="Nhập mật khẩu bảo mật..." />
+                                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.DisplayName" class="control-label mb-2"></label>
+                                    <input asp-for="@Model.DisplayName" class="form-control" placeholder="Nhập tên hiển thị..." />
+                                    <span asp-validation-for="@Model.DisplayName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.Address" class="control-label mb-2"></label>
+                                    <input asp-for="@Model.Address" class="form-control" placeholder="Nhập địa chỉ..." />
+                                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.PhoneNumber" class="control-label mb-2"></label>
+                                    <input asp-for="@Model.PhoneNumber" class="form-control" placeholder="Nhập số điện thoại..." />
+                                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-6 mt-2">
+                                    <label asp-for="@Model.DateOfBirth" class="control-label mb-2"></label>
+                                    <input asp-for="@Model.DateOfBirth" class="form-control" placeholder="Nhập ngày sinh ..." />
+                                    <span asp-validation-for="@Model.DateOfBirth" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="Gender" class="form-label mt-4">Gender</label>
+                                    <select id="Gender" name="Gender" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-6 mt-5 text-center">
+                                    <select class="form-select" asp-for="@Model.RoleId" asp-items="@selectListRole"></select>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="create_report_btn mt_30">
+                                        <button asp-controller="Admin" asp-action="UserAddPost" class="btn_1 radius_btn d-block text-center">Thêm người dùng</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="password" placeholder="Mật khẩu">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Họ và tên">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Địa chỉ">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="text" placeholder="Số điện thoại">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="common_input mb_15">
-                                    <input type="date" placeholder="Ngày sinh">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                    <option value="0">Giới tính</option>
-                                    <option value="1">Nam</option>
-                                    <option value="1">Nữ</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6">
-                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                    <option value="1">Người dùng</option>
-                                    <option value="1">Tác giả</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <div class="create_report_btn mt_30">
-                                    <a href="#" class="btn_1 radius_btn d-block text-center">Thêm người dùng</a>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+}

@@ -12,6 +12,7 @@ using WebNewsAPIs.Dtos;
 using WebNewsClients.Ultis;
 using System.Text;
 using AutoMapper;
+using NuGet.Common;
 
 namespace WebNewsClients.Controllers
 {
@@ -34,22 +35,23 @@ namespace WebNewsClients.Controllers
         }
 
         [HttpGet("PersonalInformation.html")]
-        [UserLoginAuthorize ]
-        public IActionResult PersonalInformationOfUser()
+        [UserLoginAuthorize]
+        public async Task<IActionResult> PersonalInformationOfUser()
         {
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
             if (userLogin == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -61,7 +63,7 @@ namespace WebNewsClients.Controllers
         }
 
 
-        public IActionResult PersonalArticleComment(int? currentPage = 1)
+        public async Task<IActionResult> PersonalArticleComment(int? currentPage = 1)
         {
             //Lay thong tin tai khoan khi nguoi dung dang nhap
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
@@ -69,14 +71,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -84,13 +87,14 @@ namespace WebNewsClients.Controllers
             }
 
             var urlListComment = $"https://localhost:7251/odata/Comments?$filter=UserId eq {userLogin.UserId}&$expand=Article,User&$orderby=CreateDate desc";
-            var responseListComments = _httpClient.GetAsync(urlListComment).Result;
+            var responseListComments = await _httpClient.GetAsync(urlListComment);
             if (!responseListComments.IsSuccessStatusCode)
             {
                 TempData["err"] = "Đã xảy ra lỗi trong quá trình truy cập dữ liệu";
                 return View();
             }
-            var listComment = responseListComments.Content.ReadFromJsonAsync<OdataResponse<List<Comment>>>().Result.data.ToList();
+            var listComment1 = await responseListComments.Content.ReadFromJsonAsync<OdataResponse<List<Comment>>>();
+            var listComment = listComment1.data.ToList();
             int totalPage = (int)(Math.Ceiling((decimal)listComment.Count / Page_Item));
             var listResponse = listComment.Skip((currentPage.Value - 1) * Page_Item).Take(Page_Item).ToList();
 
@@ -103,7 +107,7 @@ namespace WebNewsClients.Controllers
             return View();
         }
 
-        public IActionResult ArticleViewed(int? currentPage = 1)
+        public async Task<IActionResult> ArticleViewed(int? currentPage = 1)
         {
 
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
@@ -111,14 +115,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -129,14 +134,14 @@ namespace WebNewsClients.Controllers
 
 
             var urlListArticleView = $"https://localhost:7251/odata/Views?$expand=Article&filter=UserId eq {userLogin.UserId}&$orderby=ViewDate desc";
-            var responseListViewed = _httpClient.GetAsync(urlListArticleView).Result;
+            var responseListViewed = await _httpClient.GetAsync(urlListArticleView);
             if (!responseListViewed.IsSuccessStatusCode)
             {
                 TempData["err"] = "Đã xảy ra lỗi trong quá trình truy cập dữ liệu";
                 return View();
             }
-            var listArticleViewed = responseListViewed.Content.ReadFromJsonAsync<OdataResponse<List<View>>>()
-                .Result.data.OrderByDescending(c => c.ViewDate.Date).ToList();
+            var listArticleViewed1 = await responseListViewed.Content.ReadFromJsonAsync<OdataResponse<List<View>>>();
+            var listArticleViewed = listArticleViewed1.data.OrderByDescending(c => c.ViewDate.Date).ToList();
 
 
             int totalPage = (int)(Math.Ceiling((decimal)listArticleViewed.Count / Page_Item));
@@ -158,7 +163,7 @@ namespace WebNewsClients.Controllers
         }
 
 
-        public IActionResult BoardArticleOfUser(int? currentPage = 1)
+        public async Task<IActionResult> BoardArticleOfUser(int? currentPage = 1)
         {
 
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
@@ -166,14 +171,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -184,14 +190,14 @@ namespace WebNewsClients.Controllers
 
 
             var urlListArticleView = $"https://localhost:7251/api/Articles/GetBoardArticleOfUser?userId={userLogin.UserId}";
-            var responseListViewed = _httpClient.GetAsync(urlListArticleView).Result;
+            var responseListViewed = await _httpClient.GetAsync(urlListArticleView);
             if (!responseListViewed.IsSuccessStatusCode)
             {
                 TempData["err"] = "Đã xảy ra lỗi trong quá trình truy cập dữ liệu";
                 return View();
             }
-            var listArticleViewed = responseListViewed.Content.ReadFromJsonAsync<List<ViewArticleDto>>()
-                .Result.OrderByDescending(c => c.CreatedDate.Date).ToList();
+            var listArticleViewed1 = await responseListViewed.Content.ReadFromJsonAsync<List<ViewArticleDto>>();
+            var listArticleViewed = listArticleViewed1.OrderByDescending(c => c.CreatedDate.Date).ToList();
 
 
             int totalPage = (int)(Math.Ceiling((decimal)listArticleViewed.Count / Page_Item));
@@ -208,21 +214,22 @@ namespace WebNewsClients.Controllers
 
             return View();
         }
-        public IActionResult ArticleSaved(int? currentPage = 1)
+        public async Task<IActionResult> ArticleSaved(int? currentPage = 1)
         {
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
             if (userLogin == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -233,14 +240,14 @@ namespace WebNewsClients.Controllers
 
 
             var urlListArticleView = $"https://localhost:7251/odata/SaveArticles?$expand=Article&filter=UserId eq {userLogin.UserId}&$orderby=SaveDate desc";
-            var responseListViewed = _httpClient.GetAsync(urlListArticleView).Result;
+            var responseListViewed = await _httpClient.GetAsync(urlListArticleView);
             if (!responseListViewed.IsSuccessStatusCode)
             {
                 TempData["err"] = "Đã xảy ra lỗi trong quá trình truy cập dữ liệu";
                 return View();
             }
-            var listArticleViewed = responseListViewed.Content.ReadFromJsonAsync<OdataResponse<List<SaveArticle>>>()
-                .Result.data.OrderByDescending(c => c.SaveDate.Date).ToList();
+            var listArticleViewed1 = await responseListViewed.Content.ReadFromJsonAsync<OdataResponse<List<SaveArticle>>>();
+            var listArticleViewed = listArticleViewed1.data.OrderByDescending(c => c.SaveDate.Date).ToList();
 
 
             int totalPage = (int)(Math.Ceiling((decimal)listArticleViewed.Count / Page_Item));
@@ -260,36 +267,37 @@ namespace WebNewsClients.Controllers
 
         [HttpGet("ArticleOfUser.html")]
         [ArticlesAuthorize]
-        public IActionResult GetAllArticleOfUser(int? processId, Guid? categoryId, string keySearch = "", int? currentPage = 1)
+        public async Task<IActionResult> GetAllArticleOfUser(int? processId, Guid? categoryId, string keySearch = "", int? currentPage = 1)
         {
             string guid_Default = "00000000-0000-0000-0000-000000000000";
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
 
 
             //Call api của Process Status
             string urlOdataAllProessStatus = "https://localhost:7251/odata/ProcessStatuss";
-            var responseMessageProessStatus = _httpClient.GetAsync(urlOdataAllProessStatus).Result;
+            var responseMessageProessStatus = await _httpClient.GetAsync(urlOdataAllProessStatus);
             responseMessageProessStatus.EnsureSuccessStatusCode();
-            var listProessStatus = responseMessageProessStatus.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>()
-                .Result.data;
+            var listProessStatus1 = await responseMessageProessStatus.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
+            var listProessStatus = listProessStatus1.data;
 
 
 
             //lấy thông tin của người dùng khi đăng nhập
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -311,9 +319,9 @@ namespace WebNewsClients.Controllers
                 $"&currentPage={currentPage}&size={Page_Item}&processId={(processId == int.MinValue ? null : processId)}";
 
             var httpMessage = new HttpRequestMessage(HttpMethod.Get, urlSearch);
-            var responseMessageArticleSearch = _httpClient.SendAsync(httpMessage).Result;
+            var responseMessageArticleSearch = await _httpClient.SendAsync(httpMessage);
             responseMessageArticleSearch.EnsureSuccessStatusCode();
-            var responseData = responseMessageArticleSearch.Content.ReadFromJsonAsync<SearchPaging<IEnumerable<ViewArticleDto>>>().Result;
+            var responseData = await responseMessageArticleSearch.Content.ReadFromJsonAsync<SearchPaging<IEnumerable<ViewArticleDto>>>();
 
             //Hiện thị danh sach category để filter
             var tempListCategory = listCategories.ToList();
@@ -342,14 +350,14 @@ namespace WebNewsClients.Controllers
         // 
         [HttpGet("AddNewArticle.html")]
         [ArticlesAuthorize]
-        public IActionResult AddArticle()
+        public async Task<IActionResult> AddArticle()
         {
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName));
             //
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
@@ -357,14 +365,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response = _httpClient.GetAsync(urlRegister).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -376,19 +385,21 @@ namespace WebNewsClients.Controllers
             ViewBag.SelectListCategory = selectListCategory;
             AddArticleDto add = new AddArticleDto();
             add.CoverImage = "/images/anh_banner_default.jpg";
+            add.StatusProcess = 1;
             return View(add);
         }
         [HttpPost("AddNewArticle.html")]
         [ArticlesAuthorize]
-        public IActionResult AddArticlePost(AddArticleDto? addArticle)
+        public async Task<IActionResult> AddArticlePost(AddArticleDto? addArticle)
         {
             TempData.Clear();
+            addArticle.StatusProcess = 1;
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName));
             //
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
@@ -396,14 +407,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response1 = _httpClient.GetAsync(urlRegister1).Result;
+            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response1 = await _httpClient.GetAsync(urlRegister1);
             if (!response1.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -434,12 +446,12 @@ namespace WebNewsClients.Controllers
 
             request.Content = new StringContent(JsonConvert.SerializeObject(addArticle), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
-            var response = _httpClient.SendAsync(request).Result;
+            var response = await _httpClient.SendAsync(request);
 
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage = await response.Content.ReadAsStringAsync();
                 ViewBag.InformationUser = userResponse[0];
                 ViewBag.SelectListCategory = selectListCategory;
                 TempData["err"] = $"Không thể tạo bài báo hãy thử lại \n {errorMessage}";
@@ -457,7 +469,7 @@ namespace WebNewsClients.Controllers
 
         [HttpGet("EditArticle/{articleId}.html")]
         [ArticlesAuthorize]
-        public IActionResult EditArticle(Guid? articleId)
+        public async Task<IActionResult> EditArticle(Guid? articleId)
         {
             TempData.Clear();
             // Thong tin user
@@ -466,14 +478,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response1 = _httpClient.GetAsync(urlRegister1).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response1 = await _httpClient.GetAsync(urlRegister);
             if (!response1.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -488,29 +501,29 @@ namespace WebNewsClients.Controllers
             }
             // get article
             string urlGetArticle = $"https://localhost:7251/api/Articles/GetArticleById/{articleId}";
-            var responseMessage = _httpClient.GetAsync(urlGetArticle).Result;
+            var responseMessage = await _httpClient.GetAsync(urlGetArticle);
 
             if (!responseMessage.IsSuccessStatusCode)
             {
-                var error = responseMessage.Content.ReadAsStringAsync().Result;
-                TempData["error"] = error;
+                var error = await responseMessage.Content.ReadAsStringAsync();
+                TempData["error"] = "Đã xảy ra lỗi" + error;
                 return RedirectToAction("GetAllArticleOfUser", "PersonalInformation");
             }
-            var editArticle = responseMessage.Content.ReadFromJsonAsync<ViewArticleDto>()
-                .Result;
-            if(editArticle == null)
+            var editArticle = await responseMessage.Content.ReadFromJsonAsync<ViewArticleDto>()
+                ;
+            if (editArticle == null)
             {
                 var error = "Không thể tìm thấy được Article của bạn.";
-                TempData["error"] = error;
+                TempData["error"] = "Đã xảy ra lỗi" + error;
                 return RedirectToAction("GetAllArticleOfUser", "PersonalInformation");
             }
             var updateForView = _mapper.Map<UpdateArticleDto>(editArticle);
-           // Dánh sách các thể loại
+            // Dánh sách các thể loại
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessageCategory = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessageCategory = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessageCategory.EnsureSuccessStatusCode();
-            var listCategories = responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName), editArticle.CategortyId);
             //
 
@@ -523,7 +536,7 @@ namespace WebNewsClients.Controllers
 
         [HttpPost("EditArticle.html")]
         [ArticlesAuthorize]
-        public IActionResult EditArticlePost(UpdateArticleDto? updateArticleDto)
+        public async Task<IActionResult> EditArticlePost(UpdateArticleDto? updateArticleDto)
         {
             TempData.Clear();
             // Thong tin user
@@ -532,14 +545,15 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true & UserId eq {userLogin.UserId}";
-            var response1 = _httpClient.GetAsync(urlRegister1).Result;
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response1 = await _httpClient.GetAsync(urlRegister);
             if (!response1.IsSuccessStatusCode)
             {
                 TempData["err"] = "Không thể lấy được thông tin của người dùng";
                 return RedirectToAction("Index", "Home");
             }
-            var userResponse = response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>().Result.data;
+            var userResponse1 = await response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
             if (userResponse.Count == 0)
             {
                 TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
@@ -547,10 +561,10 @@ namespace WebNewsClients.Controllers
             }
             // Dánh sách các thể loại
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessageCategory = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessageCategory = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessageCategory.EnsureSuccessStatusCode();
-            var listCategories = responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessageCategory.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName), updateArticleDto.CategortyId);
             //
 
@@ -577,11 +591,11 @@ namespace WebNewsClients.Controllers
             var request = new HttpRequestMessage(HttpMethod.Put, urlEidtArticle);
             request.Content = new StringContent(JsonConvert.SerializeObject(updateArticleDto), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
-            var response = _httpClient.SendAsync(request).Result;
+            var response = await _httpClient.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage = await response.Content.ReadAsStringAsync();
 
                 TempData["err"] = $"Không thể cập nhật bài báo hãy thử lại \n {errorMessage}";
                 ViewBag.SelectListCategory = selectListCategory;
@@ -594,6 +608,82 @@ namespace WebNewsClients.Controllers
             TempData["success"] = "Đã tạo cập nhật bài báo thành công.";
             return View("EditArticle", updateArticleDto);
         }
+
+        [HttpGet("ConfirmDeleteArticle.html")]
+        [ArticlesAuthorize]
+        public async Task<IActionResult> ConfirmDeleteArticle(Guid? articleId)
+        {
+
+            TempData.Clear();
+            // Thong tin user
+            ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
+            if (userLogin == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            var response1 = await _httpClient.GetAsync(urlRegister);
+            if (!response1.IsSuccessStatusCode)
+            {
+                TempData["err"] = "Không thể lấy được thông tin của người dùng";
+                return RedirectToAction("Index", "Home");
+            }
+            var userResponse1 = await response1.Content.ReadFromJsonAsync<OdataResponse<List<User>>>();
+            var userResponse = userResponse1.data;
+            if (userResponse.Count == 0)
+            {
+                TempData["warning"] = "Không có tài khoản nào phù hợp với phiên đăng nhập của bạn";
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
+            if (articleId == null)
+            {
+                return RedirectToAction("GetAllArticleOfUser");
+            }
+            // get article
+            string urlGetArticle = $"https://localhost:7251/api/Articles/GetArticleById/{articleId}";
+            var responseMessage = await _httpClient.GetAsync(urlGetArticle);
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var error = await responseMessage.Content.ReadAsStringAsync();
+                TempData["error"] = "Đã xảy ra lỗi" + error;
+                return RedirectToAction("GetAllArticleOfUser", "PersonalInformation");
+            }
+            var editArticle = await responseMessage.Content.ReadFromJsonAsync<ViewArticleDto>()
+                ;
+            if (editArticle == null)
+            {
+                var error = "Không thể tìm thấy được Article của bạn.";
+                TempData["error"] = "Đã xảy ra lỗi" + error;
+                return RedirectToAction("GetAllArticleOfUser", "PersonalInformation");
+            }
+            // Dánh sách các thể loại
+
+            ViewBag.InformationUser = userResponse[0];
+            return View(editArticle);
+        }
+        [HttpPost("DeleteArticle.html")]
+        [ArticlesAuthorize]
+        public async Task<IActionResult> DeleteArticlePost(Guid? articleId)
+        {
+            string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
+            string urlDeleteArticle = $"https://localhost:7251/api/Articles/DeleteArticle/{articleId.Value}";
+            var request = new HttpRequestMessage(HttpMethod.Delete, urlDeleteArticle);
+            request.Headers.Add("Authorization", "Bearer " + token);
+            var response = await _httpClient.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Đã xảy ra lỗi trong quá trình xóa";
+                return RedirectToAction("GetAllArticleOfUser");
+            }
+            TempData["success"] = "Đã xóa thành công bài viết.";
+            return RedirectToAction("GetAllArticleOfUser");
+        }
+
 
 
     }

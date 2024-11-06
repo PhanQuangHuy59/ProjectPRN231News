@@ -1,5 +1,45 @@
-﻿@{
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@{
     Layout = "_LayoutMainAdmin";
+    var selectListTime = (SelectList)ViewBag.SelectListTimes;
+    var selectListCategory = (SelectList)ViewBag.SelectListCategorys;
+    var selectListAuthors = (SelectList)ViewBag.SelectListAuthors;
+    var selectListProcess = (SelectList)ViewBag.SelectListProcess;
+    var selectListPublish = (SelectList)ViewBag.SelectLisPublishs;
+
+    var currentPage = (int)ViewBag.CurrentPage;
+    var keySearch = (string)ViewBag.KeySearch;
+    var categoryid = (Guid)ViewBag.CategoryId;
+    var time = (string)ViewBag.Time;
+    var process = (int)ViewBag.Process;
+    var statusPublish = (int)ViewBag.StatusPublish;
+    var author = (Guid)ViewBag.Author;
+    var totalPage = (int)ViewBag.TotalPage;
+    var totalResult = (int)ViewBag.TotalResult;
+    var articles = (List<ViewArticleDto>)ViewBag.ListSearchArticle;
+
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("ArticleList", "Admin", new
+                    {
+                        currentPage = indexpage,
+                        keySearch = keySearch,
+                        categoryId = categoryid,
+                        authorId = author,
+                        processId = process,
+                        time = time
+
+                    });
+                }
+
+            };
+
+
 }
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
@@ -32,73 +72,53 @@
                             <div class="white_box_tittle list_header">
                                 <div class="box_right d-flex lms_block">
                                     <div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label>Tên bài báo</label>
-                                                <div class="common_input mb_15">
-                                                    <input type="text" placeholder="Nhập nội dung...">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label>Nhập từ khóa</label>
+                                                    <div class="common_input mb_15">
+                                                        <input name="keySearch" value="@keySearch" type="text" placeholder="Nhập nội dung...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label> Tác giả</label>
+                                                    <select onchange="this.form.submit()" asp-items="@selectListAuthors" name="authorId" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Thời gian</label>
+                                                    <select onchange="this.form.submit()" asp-items="@selectListTime" name="time" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Thể loại</label>
+                                                    <select onchange="this.form.submit()" asp-items="@selectListCategory" name="categoryId" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Đăng tải</label>
+                                                    <select onchange="this.form.submit()" asp-items="selectListPublish" name="statusPublish" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Tình trạng hiện tại</label>
+                                                    <select onchange="this.form.submit()" asp-items="@selectListProcess" name="processId" class="nice_Select2 nice_Select_line wide" style="display: none;">
+                                                    </select>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="create_report_btn mt_30">
+                                                        <button asp-action="ArticleList" asp-controller="Admin" class="btn_1 radius_btn d-block text-center">Tìm kiếm</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <label>Miêu tả ngắn</label>
-                                                <div class="common_input mb_15">
-                                                    <input type="text" placeholder="Nhập nội dung...">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Tên tác giả</label>
-                                                <div class="common_input mb_15">
-                                                    <input type="text" placeholder="Nhập nội dung...">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Thể loại</label>
-                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                                    <option value="1">Giải trí</option>
-                                                    <option value="1">Thế giới</option>
-                                                    <option value="1">Quân sự</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Ngày đăng</label>
-                                                <div class="common_input mb_15">
-                                                    <input type="date" value="2022-02-22">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Lần cập nhật cuối</label>
-                                                <div class="common_input mb_15">
-                                                    <input type="date" value="2022-02-22">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Đăng tải</label>
-                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                                    <option value="0">Đã đăng</option>
-                                                    <option value="1">Chưa đăng</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Tình trạng hiện tại</label>
-                                                <select class="nice_Select2 nice_Select_line wide" style="display: none;">
-                                                    <option value="1">Chưa xử lý</option>
-                                                    <option value="1">Đang xử lý</option>
-                                                    <option value="1">Đã xử lý</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="create_report_btn mt_30">
-                                                    <a href="#" class="btn_1 radius_btn d-block text-center">Tìm kiếm</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            <p>Kết quả tìm kiếm cho "@keySearch" là có<strong class="text-primary"> @totalResult</strong> bài báo</p>
                             <div class="QA_table mb_30">
-
-                                <table class="table lms_table_active ">
+                                @*lms_table_active*@
+                                <table class="table lms_table_active3 dataTable no-footer dtr-inline">
                                     <thead>
                                         <tr>
                                             <th scope="col">Tên bài báo</th>
@@ -107,62 +127,45 @@
                                             <th scope="col">Thể loại</th>
                                             <th scope="col">Ngày đăng</th>
                                             <th scope="col">Lần cập nhật cuối</th>
-                                            <th scope="col">Đăng tải</th>
+                                            <th scope="col">Trạng thái</th>
                                             <th scope="col">Tình trạng hiện tại</th>
                                             <th scope="col">Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Xoài Non xác nhận ly hôn streamer Xemesis, bài đăng tiếng Anh gây chú ý</th>
-                                            <td>Tối 16/6, Xoài Non chính thức xác nhận đã "đường ai nấy đi" với streamer (người phát nội dung trực tiếp trên mạng) Xemesis.</td>
-                                            <td>Hayden</td>
-                                            <td>Giải trí</td>
-                                            <td><p>26/06/2024</p></td>
-                                            <td><p>27/06/2024</p></td>
-                                            <td><h3 class="badge bg-success">Đã đăng</h3></td>
-                                            <td><h3 class="badge bg-success">Đã xử ly</h3></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach (var a in articles)
+                                        {
+                                            <tr>
+                                                <th>@a.Title</th>
+                                                <td>@a.ShortDescription</td>
+                                                <td>@a.AuthorName</td>
+                                                <td>@a.CategortyName</td>
+                                                <td><p>@(a.CreatedDate == null ? "Empty" : a.CreatedDate.ToString("d/MM/yyyy"))</p></td>
+                                                <td><p>@(a.UpdatedDate == null ? "Empty" : a.UpdatedDate.Value.ToString("d/MM/yyyy"))</p></td>
+                                                @if (a.IsPublish)
+                                                {
+                                                    <td><h3 class="badge bg-success"></h3>Công khai</td>
+                                                }
+                                                @if (!a.IsPublish)
+                                                {
+                                                    <td><h3 class="badge bg-warning"></h3>Cá nhân</td>
+                                                }
+                                                <td><h3 class="badge bg-success">@a.StatusProcessName</h3></td>
+                                                <td>
+                                                    <div class="action_btns d-flex">
+                                                        <a asp-action="UpdateArticleAdmin" asp-controller="Admin" asp-route-articleId="@a.ArticleId" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                        <a asp-action="DeleteArticleAdmin" asp-controller="Admin" asp-route-articleId="@a.ArticleId" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
+                                @if (currentPage != int.MinValue)
+                                {
+                                    @await Html.PartialAsync("_Pagination",PageModel)
+                                    ;
+                                }
                             </div>
                         </div>
                     </div>
@@ -171,3 +174,10 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+
+    <script src="~/js/add_update_article.js"></script>
+    }

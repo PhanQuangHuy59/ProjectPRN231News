@@ -18,13 +18,13 @@ namespace WebNewsClients.Controllers
     {
         private HttpClient _httpClient;
         private IMapper _mapper;
-       
-        public UserController(HttpClient httpClient, IMapper mapper) 
+
+        public UserController(HttpClient httpClient, IMapper mapper)
         {
             _httpClient = httpClient;
             _mapper = mapper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
@@ -32,10 +32,11 @@ namespace WebNewsClients.Controllers
         public IActionResult Login()
         {
             AddUserDto loginUserDto = new AddUserDto();
+            loginUserDto.DateOfBirth = DateTime.Now;
             return View(loginUserDto);
         }
         [HttpPost]
-        public IActionResult LoginPost(AddUserDto user)
+        public async Task<IActionResult> LoginPost(AddUserDto user)
         {
             TempData.Clear();
             if (!ModelState.IsValid)
@@ -56,16 +57,16 @@ namespace WebNewsClients.Controllers
             string urlRegister = "https://localhost:7251/api/Users/Login";
             var request = new HttpRequestMessage(HttpMethod.Get, urlRegister);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
-            var response = _httpClient.SendAsync(request).Result;
+            var response = await _httpClient.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
-                
+                var errorMessage = await response.Content.ReadAsStringAsync();
+
                 TempData["err"] = "Đăng nhập thất bại. " + errorMessage;
                 return View("Login", user);
             }
-            var userLogin =  response.Content.ReadFromJsonAsync<ViewUserDto>().Result;
+            var userLogin = await response.Content.ReadFromJsonAsync<ViewUserDto>();
             if (userLogin != null)
             {
                 var userMapper = new User();
@@ -74,7 +75,7 @@ namespace WebNewsClients.Controllers
                 userMapper.Password = userLogin.Password;
                 userMapper.DisplayName = userLogin.DisplayName;
                 userMapper.Roleid = userLogin.RoleId;
-                userMapper.Role = new Role { RoleId = userLogin.RoleId , Rolename = userLogin.RoleName};
+                userMapper.Role = new Role { RoleId = userLogin.RoleId, Rolename = userLogin.RoleName };
 
                 string token = AuthenticationTokent.GenerationToken(userMapper);
 
@@ -95,20 +96,20 @@ namespace WebNewsClients.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(user);
-            
+
         }
 
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             AddUserDto addUserDto = new AddUserDto();
-            return View("Register",addUserDto);
+            return View("Register", addUserDto);
         }
 
 
         [HttpPost("Register")]
-        public IActionResult RegisterPost(AddUserDto user)
+        public async Task<IActionResult> RegisterPost(AddUserDto user)
         {
             TempData.Clear();
             if (!ModelState.IsValid)
@@ -117,7 +118,7 @@ namespace WebNewsClients.Controllers
                 foreach (var err in ModelState.Keys)
                 {
                     var state = ModelState[err];
-                    if(state != null && state.Errors.Count > 0)
+                    if (state != null && state.Errors.Count > 0)
                     {
                         errorMessages.Add($"{err}: {state.Errors[0].ErrorMessage}");
                     }
@@ -140,25 +141,25 @@ namespace WebNewsClients.Controllers
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
 
-            var response = _httpClient.SendAsync(request).Result;
+            var response = await _httpClient.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
-             
+                var errorMessage = await response.Content.ReadAsStringAsync();
+
                 TempData["err"] = $"Không thể tạo tài khoản hãy thử lại \n {errorMessage}";
                 return View("Register", user);
             }
 
             TempData["success"] = "Đã tạo tài khoản thành công Hãy Login vào tài khoản";
 
-            return View("Login",user);
+            return View("Login", user);
             //return RedirectToAction("Index", "Home");
         }
 
-       
+
         [HttpGet]
-        public IActionResult ResetPassword(string? email)
+        public async Task<IActionResult> ResetPassword(string? email)
         {
             if (email == null || string.IsNullOrEmpty(email.Trim()))
             {
@@ -167,15 +168,16 @@ namespace WebNewsClients.Controllers
                 return View();
             }
             string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
-            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            var response = await _httpClient.GetAsync(urlCheckUser);
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage = await response.Content.ReadAsStringAsync();
                 TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
                 ViewBag.email = email;
                 return View();
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>();
+            var userResponse = userResponse1.data.ToList();
             if (userResponse.Count == 0)
             {
                 TempData["err"] = $"Trong hệ thống không có tài khoản nào có email này.";
@@ -188,10 +190,10 @@ namespace WebNewsClients.Controllers
             var request = new HttpRequestMessage(HttpMethod.Post, urlSendmailResetPass);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
 
-            var responseCodeSendMail = _httpClient.SendAsync(request).Result;
+            var responseCodeSendMail = await _httpClient.SendAsync(request);
             if (!responseCodeSendMail.IsSuccessStatusCode)
             {
-                TempData["err"] = responseCodeSendMail.Content.ReadAsStringAsync().Result;
+                TempData["err"] = await responseCodeSendMail.Content.ReadAsStringAsync();
                 ViewBag.email = email;
                 return View();
             }
@@ -200,24 +202,25 @@ namespace WebNewsClients.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ConfirmResetPassword(string userId, string code)
+        public async Task<IActionResult> ConfirmResetPassword(string userId, string code)
         {
             if (userId == null || code == null)
             {
                 TempData["err"] = "Thông tin truyền bị bỏ trống";
                 return RedirectToAction("Error400", "Home");
             }
-           
+
             string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
-            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            var response = await _httpClient.GetAsync(urlCheckUser);
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage = await response.Content.ReadAsStringAsync();
                 TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
-                return RedirectToAction("Error500","Home");
+                return RedirectToAction("Error500", "Home");
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>();
+            var userResponse = userResponse1.data.ToList();
             if (userResponse.Count == 0)
             {
                 TempData["err"] = $"Thông tin của người dùng cung cấp không chính xác trong link.";
@@ -231,14 +234,14 @@ namespace WebNewsClients.Controllers
                 TempData["err"] = $"\"đường link Code của bạn không hợp lệ. Hãy Confirm email lại\".";
                 return RedirectToAction("Error400", "Home");
             }
-            ViewBag.userId = userId;    
+            ViewBag.userId = userId;
             ViewBag.code = code;
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult ConfirmResetPassword(string userId, string code, string newPassword, string confirmPassword)
+        public async Task<IActionResult> ConfirmResetPassword(string userId, string code, string newPassword, string confirmPassword)
         {
             if (userId == null || code == null)
             {
@@ -247,19 +250,20 @@ namespace WebNewsClients.Controllers
             }
 
             string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
-            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            var response = await _httpClient.GetAsync(urlCheckUser);
 
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage = await response.Content.ReadAsStringAsync();
                 TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
-                return  View(); ;
+                return View(); ;
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            var userResponse1 = await response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>();
+            var userResponse = userResponse1.data.ToList();
             if (userResponse.Count == 0)
             {
                 TempData["err"] = $"Thông tin của người dùng cung cấp không chính xác trong link.";
-                return  View(); ;
+                return View(); ;
             }
             var user = userResponse[0];
 
@@ -267,12 +271,12 @@ namespace WebNewsClients.Controllers
             if (!userId.Equals(idFromCode.ToString()))
             {
                 TempData["err"] = $"\"Code của bạn không hợp lệ. Hãy Confirm email lại\".";
-                return View(); 
+                return View();
             }
 
             VerifyInformation verify = new VerifyInformation();
             var ok = verify.IsValidPassword(newPassword, user.Username);
-            if(ok != "Ok")
+            if (ok != "Ok")
             {
                 TempData["err"] = ok;
                 return View();
@@ -286,18 +290,18 @@ namespace WebNewsClients.Controllers
             var userUdpate = _mapper.Map<UpdateUserDto>(user);
             requestResetPassword.Content = new StringContent(JsonSerializer.Serialize(userUdpate), Encoding.UTF8, "application/json");
 
-            var responseCodeResetPassword = _httpClient.SendAsync(requestResetPassword).Result;
+            var responseCodeResetPassword = await _httpClient.SendAsync(requestResetPassword);
             if (!responseCodeResetPassword.IsSuccessStatusCode)
             {
-                TempData["err"] ="Đã xảy ra lỗi : " +  responseCodeResetPassword.Content.ReadAsStringAsync().Result;
+                TempData["err"] = "Đã xảy ra lỗi : " +await responseCodeResetPassword.Content.ReadAsStringAsync();
                 return View();
             }
             TempData["success"] = "Dã cập nhật thành công password";
 
             return View();
         }
-        
-        public IActionResult ConfirmAccount(string email)
+
+        public async Task<IActionResult> ConfirmAccount(string email)
         {
             if (email == null || string.IsNullOrEmpty(email.Trim()))
             {
@@ -306,15 +310,16 @@ namespace WebNewsClients.Controllers
                 return View();
             }
             string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
-            var response = _httpClient.GetAsync(urlCheckUser).Result;
+            var response =await _httpClient.GetAsync(urlCheckUser);
             if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                var errorMessage =await response.Content.ReadAsStringAsync();
                 TempData["err"] = $"Hệ thống đã xảy ra lỗi :\n {errorMessage}";
                 ViewBag.email = email;
                 return View();
             }
-            var userResponse = response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>().Result.data.ToList();
+            var userResponse1 =await response.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>();
+            var userResponse= userResponse1.data.ToList();
             if (userResponse.Count == 0)
             {
                 TempData["err"] = $"Trong hệ thống không có tài khoản nào có email này.";
@@ -323,12 +328,12 @@ namespace WebNewsClients.Controllers
             }
             var user = userResponse[0];
             string urlConfirmAccount = $"https://localhost:7251/api/Users/SendMailConfirmAccount";
-            var requestConfirmAccount= new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
+            var requestConfirmAccount = new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
             requestConfirmAccount.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
-            var responseCodeConfirmAccount = _httpClient.SendAsync(requestConfirmAccount).Result;
+            var responseCodeConfirmAccount =await _httpClient.SendAsync(requestConfirmAccount);
             if (!responseCodeConfirmAccount.IsSuccessStatusCode)
             {
-                TempData["err"] = "Đã xảy ra lỗi : " + responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+                TempData["err"] = "Đã xảy ra lỗi : " +await responseCodeConfirmAccount.Content.ReadAsStringAsync();
                 return View();
             }
             ViewBag.email = email;
@@ -336,19 +341,19 @@ namespace WebNewsClients.Controllers
 
             return View();
         }
-        public IActionResult NotificationConfirmAccount(Guid userId, string code)
+        public async Task<IActionResult> NotificationConfirmAccount(Guid userId, string code)
         {
 
-            
+
             string urlConfirmAccount = $"https://localhost:7251/api/Users/ConfirmEmail?userId={userId}&code={code}";
             var requestConfirmAccount = new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
-            var responseCodeConfirmAccount = _httpClient.SendAsync(requestConfirmAccount).Result;
+            var responseCodeConfirmAccount =await _httpClient.SendAsync(requestConfirmAccount);
             if (!responseCodeConfirmAccount.IsSuccessStatusCode)
             {
-                TempData["err"] = "Đã xảy ra lỗi : " + responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+                TempData["err"] = "Đã xảy ra lỗi : " +await responseCodeConfirmAccount.Content.ReadAsStringAsync();
                 return View("ConfirmAccount");
             }
-            TempData["success"] = responseCodeConfirmAccount.Content.ReadAsStringAsync().Result;
+            TempData["success"] =await responseCodeConfirmAccount.Content.ReadAsStringAsync();
 
 
             return View("ConfirmAccount");
@@ -356,18 +361,11 @@ namespace WebNewsClients.Controllers
 
         public IActionResult Logout()
         {
-           string user =  HttpContext.Session.GetString(SaveKeySystem.userLogin);
-            if (!string.IsNullOrEmpty(user))
-            {
-                HttpContext.Session.Remove(SaveKeySystem.userLogin);
-                if (HttpContext.Request.Cookies.ContainsKey(SaveKeySystem.Authentication))
-                {
-                    HttpContext.Response.Cookies.Delete(SaveKeySystem.Authentication);
-                    HttpContext.Response.Cookies.Delete(SaveKeySystem.userLogin);
-                }
-            }
-
-            return RedirectToAction("Index","Home");   
+            HttpContext.Session.Remove(SaveKeySystem.userLogin);
+            HttpContext.Response.Cookies.Delete(SaveKeySystem.Authentication);
+            HttpContext.Response.Cookies.Delete(SaveKeySystem.userLogin);
+            string user = HttpContext.Session.GetString(SaveKeySystem.userLogin);
+            return RedirectToAction("Index", "Home");
         }
 
     }

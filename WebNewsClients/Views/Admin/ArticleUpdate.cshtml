@@ -1,0 +1,178 @@
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@model UpdateArticleDto;
+@{
+    var selectListCategory = (SelectList)ViewBag.SelectListCategory;
+    var selectListProcess = (SelectList)ViewBag.SelectListProcess;
+    var informationUser = (User)ViewBag.InformationUser;
+    Layout = "_LayoutMainAdmin";
+}
+
+<style>
+    .containerImg {
+        width: 900px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .containerImg img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    #clickLoadCoverImage:hover {
+        cursor: pointer;
+    }
+</style>
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Cập nhật bài báo</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Bài báo</li>
+                            <li class="breadcrumb-item active">Cập nhật bài báo</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            August 1, 2020 - August 31, 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Cập nhật bài báo mới</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="w-100">
+                            <div class="containerImg mx-auto">
+                                <img id="imgPreViewLoad" class=" mt-4" src="@Model.CoverImage" alt="#" />
+
+                            </div>
+
+                        </div>
+                       
+
+                        @*common_input*@
+                        @*class="nice_Select2 nice_Select_line wide" style="display: none;"*@
+
+                       @* <div class="col-12">
+                            <div class="white_box mb_30">
+                                <div class="box_header ">
+                                    <div class="main-title">
+                                        <h3 class="mb-0">Nội dung</h3>
+                                    </div>
+                                </div>
+                                <textarea class="editorImport">
+                            </textarea>
+                            </div>
+                        </div>*@
+                        <div class="p-5">
+                            <form method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                               
+                                <input type="hidden" asp-for="@Model.Author" />
+                                <input type="hidden" asp-for="@Model.Processor" />
+                                <input type="hidden" asp-for="@Model.ArticleId" />
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label asp-for="@Model.Title" class="control-label"></label>
+                                        <input type="text" asp-for="@Model.Title" class="form-control" placeholder="Nhập tiêu đề cho bài báo" />
+                                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group  col-6">
+                                        <label asp-for="@Model.CoverImage" class="control-label"></label><br />
+                                        <div class="input-group">
+
+                                            <input id="coverimage" type="text" asp-for="@Model.CoverImage" class="form-control" placeholder="Đường dẫn ảnh" />
+                                            <input style="display:none;" id="inputCovorIamge" type="file" name="UploadImageAvatar" />
+                                            <span class="input-group-text">
+                                                <i id="clickLoadCoverImage" class="fa fa-camera" title="Chọn ảnh cho bài báo"></i>
+                                            </span>
+                                            <span asp-validation-for="@Model.CoverImage" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group  col-6">
+                                        <label asp-for="@Model.LinkAudio" class="control-label"></label>
+                                        <input type="text" asp-for="@Model.LinkAudio" class="form-control" placeholder="Nhập link Audio nếu muốn ..." />
+                                        <span asp-validation-for="@Model.LinkAudio" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group  col-6">
+                                        <label asp-for="@Model.PublishDate" class="control-label"></label>
+                                        <input asp-for="@Model.PublishDate" class="form-control" placeholder="Nhập chọn ngày publish ..." />
+                                        <span asp-validation-for="@Model.PublishDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShortDescription" class="control-label"></label>
+                                    <textarea id="shortDesciption" rows="5" asp-for="@Model.ShortDescription" class="form-control"></textarea>
+                                    <span asp-validation-for="@Model.ShortDescription" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.Content" class="control-label"></label>
+                                    <textarea asp-for="@Model.Content" class="form-control"> ></textarea>
+                                    <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label mt-4">Chọn thể loại</label>
+                                        <select class="nice_Select2 nice_Select_line wide" style="display: none;" asp-for="@Model.CategortyId" asp-items="@selectListCategory"></select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="form-label mt-4">Chọn Xử Lý</label>
+                                        <select class="nice_Select2 nice_Select_line wide" style="display: none;" asp-for="@Model.StatusProcess" asp-items="@selectListProcess"></select>
+                                    </div>
+                                   
+                                    <div style="margin-top:60px;" class="form-check form-switch col-3">
+                                        <input class="form-check-input"  asp-for="@Model.IsPublish">
+                                        <label class="form-check-label" asp-for="@Model.IsPublish"></label>
+                                    </div>
+                                </div>
+                                <input type="button" value="Lưu Bài Báo" id="submit" class="btn btn-outline-primary mt-5" />
+
+                                <button id="ClickSave" asp-controller="Admin" asp-action="UpdateArticleAdminPost" class="btn btn-outline-primary mt-5" style="display:none;">Thêm</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="displayLoader" style="display:none;">
+    <div class="overlay"></div>
+    <div class="centerScreen">
+        <div class="loader"></div>
+    </div>
+</div>
+<div id="hide_content" style="display:none;">
+    @* @Html.Raw(Model.Content);*@
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+
+    <script src="~/js/add_update_article.js"></script>
+    }

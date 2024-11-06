@@ -31,39 +31,36 @@ namespace WebNewsAPIs.Controllers
             return Ok(_dropEmotionRepo.GetAll().AsQueryable());
         }
         [HttpPost("AddOrRemoveDropEmotion")]
-        public ActionResult<bool> AddOrRemoveDropEmotion(Guid? emotionId, Guid? userId, Guid? articleId)
+        public async Task<ActionResult<bool>> AddOrRemoveDropEmotion(Guid? emotionId, Guid? userId, Guid? articleId)
         {
             if (emotionId == null || userId == null || articleId == null)
             {
                 return BadRequest();
             }
 
-            var checkEmotionExist = _emotionRepo.GetSingleByCondition(c => c.EmotionId.Equals(emotionId)).Result;
-            var checkUserExist = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
-            var checkArticleExist = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
+            var checkEmotionExist =await _emotionRepo.GetSingleByCondition(c => c.EmotionId.Equals(emotionId));
+            var checkUserExist = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
+            var checkArticleExist = await _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId));
             if (checkEmotionExist == null || checkUserExist == null || checkArticleExist == null)
             {
                 return NotFound();
             }
-            var checkDropEmotion = _dropEmotionRepo.GetSingleByCondition(c => c.UserId.Equals(userId)
-            && c.ArticleId.Equals(articleId) && c.EmotionId.Equals(emotionId)).Result;
+            var checkDropEmotion =await _dropEmotionRepo.GetSingleByCondition(c => c.UserId.Equals(userId)
+            && c.ArticleId.Equals(articleId) && c.EmotionId.Equals(emotionId));
             if (checkDropEmotion == null)
             {
                 var newDropEmotion = new DropEmotion
                 {
                     EmotionId = emotionId.Value,
                     UserId = userId.Value,
-                    ArticleId = articleId.Value,
-                    Emotion = checkEmotionExist,
-                    User = checkUserExist,
-                    Article = checkArticleExist
+                    ArticleId = articleId.Value 
                 };
-                var response = _dropEmotionRepo.AddAsync(newDropEmotion).Result;
+                var response = await _dropEmotionRepo.AddDropEmotion(newDropEmotion);
                 return Ok(true);
             }
             try
             {
-                var response = _dropEmotionRepo.DeleteAsync(checkDropEmotion).Result;
+                var response = await _dropEmotionRepo.DeleteAsync(checkDropEmotion);
             }
             catch (Exception ex)
             {

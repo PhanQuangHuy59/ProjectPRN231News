@@ -1,0 +1,177 @@
+﻿@{
+    Layout = "_LayoutMainAdmin";
+}
+@using BusinessObjects.Models;
+@using System.Text;
+@using WebNewsAPIs.Dtos;
+@using WebNewsAPIs.Common;
+@using Microsoft.AspNetCore.Http;
+@{
+    var ListEmotion = ((IEnumerable<Emotion>)ViewBag.ListEmotion).ToList();
+    var token = Context.Request.Cookies[SaveKeySystem.Authentication];
+
+}
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+       
+       <input id="token" type="hidden" value="@token"/>
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Danh sách cảm xúc</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Tương tác</li>
+                            <li class="breadcrumb-item active">Danh sách cảm xúc</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            Chỗ để thời gian - dòng 260
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header">
+                                <h4>Danh sách cảm xúc</h4>
+                                <div class="box_right d-flex lms_block">
+                                    <div class="serach_field_2">
+                                        <div class="search_inner">
+                                            <form Active="#">
+                                                <div class="search_field">
+                                                    <input type="text" placeholder="Nhập nội dung tìm kiếm...">
+                                                </div>
+                                                <button type="submit"> <i class="ti-search"></i> </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="add_button ms-2">
+                                        <a href="#" data-toggle="modal" data-target="#addcategory" class="btn_1">Tìm kiếm</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+
+                                <table class="table lms_table_active ">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Tên cảm xúc</th>
+                                            <th scope="col">Hình ảnh</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ListEmotion.Count == 0)
+                                        {
+                                            <div class="card border-primary mb-3" style="max-width: 100%;">
+                                                <div class="card-header">Chưa có cảm xúc nào trong hệ thống.</div>
+                                            </div>
+                                        }
+                                        @if (ListEmotion.Count != 0)
+                                        {
+                                            @foreach (var a in ListEmotion)
+                                            {
+                                                <tr id="@a.EmotionId" class="text-center">
+                                                    <td>@a.NameEmotion</td>
+                                                    <td><img src="@a.Image" width="100" height="100" /></td>
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a asp-action="EmotionUpdate" asp-route-emotionId="@a.EmotionId" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                            <span data-id="@a.EmotionId" class="action_btn delete_emotion">
+                                                                <i class="fas fa-trash"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+
+        var itemEmotionDeletes = $(".action_btn.delete_emotion");
+
+        // Thêm sự kiện click cho từng phần tử
+        itemEmotionDeletes.on('click', function () {
+            // Lấy giá trị data-id từ phần tử được click
+            var id = $(this).data('id');
+            var token = $("input#token").val();
+            console.log(token);
+
+
+            if (confirm("Bạn có muốn xóa Emotion này không ?")) {
+                $.ajax({
+                    url: `https://localhost:7251/api/Emotions/DeleteEmotion/${id}`, // Đường dẫn đến file PHP xử lý dữ liệu
+                    type: 'DELETE',
+                    headers:{
+                        "Authorization": "Bearer " + token,
+                    },
+                    success: function (response) {
+                        $(`tr#${id}`).remove();
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr["success"]('Đã xóa emotion thành công.');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Xử lý lỗi
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr["error"]('Đã xảy ra lỗi trong quá trình xóa Emotion.')
+                    }
+                });
+            }
+            console.log("Element with ID " + id + " clicked!");
+        });
+
+
+    </script>
+}

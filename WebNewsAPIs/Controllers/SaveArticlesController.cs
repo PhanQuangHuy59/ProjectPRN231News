@@ -23,49 +23,47 @@ namespace WebNewsAPIs.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public ActionResult<IEnumerable<SaveArticle>> Get()
+        public async Task<ActionResult<IEnumerable<SaveArticle>>> Get()
         {
-            return Ok(_saveRepo.GetAll().AsQueryable());    
+            return Ok(_saveRepo.GetAll().AsQueryable());
         }
         [HttpPost("RemoveOrAddSaveArticle")]
-        public  ActionResult<bool> RemoveOrAddSaveArticle(Guid? userId, Guid? articleId)
+        public async Task<ActionResult<bool>> RemoveOrAddSaveArticle(Guid? userId, Guid? articleId)
         {
-            if(userId == null || articleId == null)
+            if (userId == null || articleId == null)
             {
                 return BadRequest();
             }
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
-            if(userCheck == null)
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
+            if (userCheck == null)
             {
-                return StatusCode(404,"User không tồn tại!");
+                return StatusCode(404, "User không tồn tại!");
             }
-            var articleCheck = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
+            var articleCheck = await _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId));
             if (articleCheck == null)
             {
                 return StatusCode(404, "Article Không tồn tại");
             }
 
-            var checkExist = _saveRepo.GetSingleByCondition(c => c.UserId.Equals(userId) & c.ArticleId.Equals(articleId)).Result;
-            if(checkExist == null)
+            var checkExist = await _saveRepo.GetSingleByCondition(c => c.UserId.Equals(userId) & c.ArticleId.Equals(articleId));
+            if (checkExist == null)
             {
                 var addSave = new SaveArticle
                 {
                     UserId = userId.Value,
-                    ArticleId = articleId.Value,
-                    Article = articleCheck,
-                    User = userCheck
+                    ArticleId = articleId.Value
                 };
 
-                var response = _saveRepo.AddAsync(addSave).Result;
+                var response =await _saveRepo.AddSaveArticle(addSave);
                 return Ok(true);
             }
             else
             {
-               var a = _saveRepo.DeleteAsync(checkExist).Result;
+                var a =await _saveRepo.DeleteAsync(checkExist);
                 return Ok(false);
             }
 
-            
+
         }
     }
 }

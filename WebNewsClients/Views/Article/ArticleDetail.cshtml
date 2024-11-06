@@ -174,12 +174,19 @@
                             <div id="post-left-col" class="relative">
                                 <div id="post-area" class="post-156 post type-post status-publish format-standard has-post-thumbnail hentry category-tech tag-ces-2015 tag-mobile-phones tag-selfie-stick tag-tech">
                                     <header id="post-header">
-                                        <a class="post-cat-link" href="../category/tech/index.html"><span class="post-head-cat">@category.CategoryName</span></a>
-                                        <h1 class="post-title entry-title left" itemprop="headline">@article.Title</h1>
+                                        <a class="post-cat-link" asp-controller="Article" asp-action="ArticleOfCategory" asp-route-categoryArticleId="@article.CategortyId"><span class="post-head-cat">@category.CategoryName</span></a>
+                                        <div>
+                                            <h1 class="post-title entry-title left" itemprop="headline">@article.Title</h1>
+                                            <p>
+                                                <i class="fa-solid fa-eye"></i> @article.ViewArticles lượt xem
+                                            </p>
+                                        </div>
+                                        
+                                       
                                         <div id="post-info-wrap" class="left relative">
-                                            <div class="post-info-out">
+                                            <div class="post-info-out" style="margin-bottom: 20px">
                                                 <div class="post-info-img left relative">
-                                                    <img alt='' src='@article.AuthorNavigation.Image;d=mm&amp;r=g' srcset='@article.AuthorNavigation.Image;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' />
+                                                    <img alt='' src='@article.AuthorNavigation.Image;d=mm&amp;r=g' srcset='@article.AuthorNavigation.Image;d=mm&#038;r=g 2x' style="object-fit:cover;width:50px;height:50px" class="img-responsive" decoding='async' />
                                                 </div><!--post-info-img-->
                                                 <div class="post-info-in">
                                                     <div class="post-info-right left relative">
@@ -220,7 +227,7 @@
                                                         <a href="mailto:?subject=The selfie stick has taken over CES 2015&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://mvpthemes.com/flexmag/the-selfie-stick-has-taken-over-ces-2015/"><div class="email-share"><span class="email-but"><i class="fa-solid fa-envelope"></i></span><span class="social-text">Email</span></div></a>
                                                         <a href="@linkArticle#comments"><div class="social-comments comment-click-156"><i class="fa-solid fa-comment-dots"></i><span class="social-text-com">Comments</span></div></a>
                                                     </section><!--social-sharing-top-->
-                                                    <p>@article.Content</p>
+                                                    <p>@Html.Raw(article.Content)</p>
 
                                                     <div class="mvp-org-wrap" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
                                                         <div class="mvp-org-logo" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
@@ -424,7 +431,7 @@
     <small>Thể loại bài viết : @article.Categorty.CategoryName</small>
     <p><i>(Báo Huy Hưng)</i> - @article.ShortDescription</p>
     <img style="width:1000px;height:600px;object-fit:cover" src="@article.CoverImage" />
-    <p>@article.Content</p>
+    <p>@Html.Raw(article.Content)</p>
     <p>Link Nội dung : <a href="@linkArticle">@linkArticle</a></p>
 
 

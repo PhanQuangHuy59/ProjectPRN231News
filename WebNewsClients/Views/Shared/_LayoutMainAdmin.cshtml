@@ -1,4 +1,40 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using WebNewsClients.Ultis;
+@using WebNewsAPIs.Dtos;
+@{
+    ViewUserDto informationUser = InformationLogin.getUserLogin(Context);
+    string pathImageDefault = "";
+    string pathImageMale = "/images/male_default.png";
+    string pathImageFemale = "/images/female_default.png";
+    string pathImageKhac = "/images/img_default.png";
+
+
+    if (informationUser.Gender != null)
+    {
+        if (informationUser.Gender.Equals("Nam"))
+        {
+            pathImageDefault = pathImageMale;
+        }
+        else if (informationUser.Gender.Equals("Nữ"))
+        {
+            pathImageDefault = pathImageFemale;
+        }
+        else if (informationUser.Gender.Equals("Khác"))
+        {
+            pathImageDefault = pathImageKhac;
+        }
+
+
+
+        pathImageDefault = informationUser.Image == null ? pathImageDefault : informationUser.Image;
+    }
+    else
+    {
+        pathImageDefault = pathImageKhac;
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,7 +56,12 @@
 
     <link rel="stylesheet" href="~/user-management-html/vendors/gijgo/gijgo.min.css" />
 
-    <link rel="stylesheet" href="~/user-management-html/vendors/font_awesome/css/all.min.css" />
+
+   @* <link rel="stylesheet" href="~/user-management-html/vendors/font_awesome/css/all.min.css" />*@
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/user-management-html/vendors/tagsinput/tagsinput.css" />
 
     <link rel="stylesheet" href="~/user-management-html/vendors/datepicker/date-picker.css" />
@@ -56,32 +97,19 @@
     <body class="crm_body_bg">
         <nav class="sidebar">
             <div class="logo d-flex justify-content-between">
-                <a class="large_logo" asp-action="Index" asp-controller="Admin">
-                    <h2>Trang chủ</h2>
+                <a class="large_logo" style="padding-left: 30%" asp-action="Index" asp-controller="Admin">
+                    <i style="font-size:50px" class="fa-solid fa-house-chimney"></i>
                 </a>
-                <a class="small_logo" asp-action="Index" asp-controller="Admin">
-                    <h2>Trang chủ</h2>
-                </a>
+                @*<a class="small_logo" asp-action="Index" asp-controller="Admin">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </a>*@
                 <div class="sidebar_close_icon d-lg-none">
                     <i class="ti-close"></i>
                 </div>
             </div>
             <ul id="sidebar_menu">
-                <li class>
-                    <a class="has-arrow" href="#" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="~/user-management-html/img/menu-icon/4.svg" alt>
-                        </div>
-                        <div class="nav_title">
-                            <span>Quản lý</span>
-                        </div>
-                    </a>
-                    <ul>
-                        <li><a asp-action="AdminList" asp-controller="Admin">Danh sách quản lý</a></li>
-                        <li><a asp-action="AdminAdd" asp-controller="Admin">Thêm quản lý mới</a></li>
-                    </ul>
-                </li>
-                <li class>
+               
+                <li class="">
                     <a class="has-arrow" href="#" aria-expanded="false">
                         <div class="nav_icon_small">
                             <img src="~/user-management-html/img/menu-icon/5.svg" alt>
@@ -93,9 +121,10 @@
                     <ul>
                         <li><a asp-action="UserList" asp-controller="Admin">Danh sách người dùng</a></li>
                         <li><a asp-action="UserAdd" asp-controller="Admin">Thêm người dùng mới</a></li>
+                        <li><a asp-action="AdminAdd" asp-controller="Admin">Thêm quản lý mới</a></li>
                     </ul>
                 </li>
-                <li class>
+                <li class="">
                     <a class="has-arrow" href="#" aria-expanded="false">
                         <div class="nav_icon_small">
                             <img src="~/user-management-html/img/menu-icon/11.svg" alt>
@@ -106,10 +135,10 @@
                     </a>
                     <ul>
                         <li><a asp-action="ArticleList" asp-controller="Admin">Danh sách bài báo</a></li>
-                        <li><a asp-action="ArticleAdd" asp-controller="Admin">Thêm bài báo mới</a></li>
+                        <li><a asp-action="AddArticleAdmin" asp-controller="Admin">Thêm bài báo mới</a></li>
                     </ul>
                 </li>
-                <li class>
+                <li class="">
                     <a class="has-arrow" href="#" aria-expanded="false">
                         <div class="nav_icon_small">
                             <img src="~/user-management-html/img/menu-icon/11.svg" alt>
@@ -123,7 +152,8 @@
                         <li><a asp-action="ArticleCategoryAdd" asp-controller="Admin">Thêm bài phân loại mới</a></li>
                     </ul>
                 </li>
-                <li class>
+
+                <li class="">
                     <a class="has-arrow" href="#" aria-expanded="false">
                         <div class="nav_icon_small">
                             <img src="~/user-management-html/img/menu-icon/16.svg" alt>
@@ -176,55 +206,6 @@
                                                 <h4>Notifications</h4>
                                             </div>
                                             <div class="Notification_body">
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="~/user-management-html/img/staf/2.png" alt /></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#"><h5>Cool Marketing</h5></a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="~/user-management-html/img/staf/4.png" alt /></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#"><h5>Awesome packages</h5></a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="~/user-management-html/img/staf/3.png" alt /></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#"><h5>what a packages</h5></a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="~/user-management-html/img/staf/2.png" alt /></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#"><h5>Cool Marketing</h5></a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="~/user-management-html//staf/4.png" alt /></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#"><h5>Awesome packages</h5></a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
 
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
@@ -245,15 +226,15 @@
                                     </li>
                                 </div>
                                 <div class="profile_info">
-                                    <img src="~/user-management-html/img/client_img.png" alt="#" />
+                                    <img src="@pathImageDefault" alt="#" />
                                     <div class="profile_info_iner">
                                         <div class="profile_author_name">
-                                            <p>Neurologist</p>
-                                            <h5>Dr. Robar Smith</h5>
+                                            <p>@informationUser.DisplayName</p>
+                                            <h5>@informationUser.Username</h5>
                                         </div>
                                         <div class="profile_info_details">
-                                            <a href="#">My Profile </a>
-                                            <a href="#">Log Out </a>
+                                            <a asp-controller="Home" asp-action="Index">Go Web Home</a>
+                                            <a asp-controller="User" asp-action="Logut">Log Out </a>
                                         </div>
                                     </div>
                                 </div>
@@ -337,12 +318,16 @@
     <script src="~/user-management-html/vendors/chart_am/chart-custom.js"></script>
 
     <script src="~/user-management-html/js/custom.js"></script>
-    <script src="~/user-management-html/js/ckeditor-classic.js"></script>
-    <script src="~/user-management-html/js/editorForAdd.js"></script>
+@*    <script src="~/user-management-html/js/ckeditor-classic.js"></script>*@
+    @*<script src="~/user-management-html/js/editorForAdd.js"></script>*@
     @*Import Link Addmn Main Template*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/super-build/ckeditor.js"></script>
+    <script src="~/js/setupCkeditor.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

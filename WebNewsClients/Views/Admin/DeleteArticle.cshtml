@@ -1,0 +1,110 @@
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@model ViewArticleDto;
+@{
+   
+    var informationUser = (User)ViewBag.InformationUser;
+    Layout = "_LayoutMainAdmin";
+}
+
+<style>
+    .containerImg {
+        width: 500px;
+        height: 200;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .containerImg img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    #clickLoadCoverImage:hover {
+        cursor: pointer;
+    }
+</style>
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Xác nhận xóa bài báo</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Bài báo</li>
+                            <li class="breadcrumb-item active">Xác nhận xóa</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            August 1, 2020 - August 31, 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Xác nhận xóa bài viết</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="w-100">
+                            <div class="containerImg mx-auto">
+                                <img id="imgPreViewLoad" class=" mt-4" src="@Model.CoverImage" alt="#" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-5">
+                            <form method="post">
+                                <input type="hidden" name="articleId" value="@Model.ArticleId" />
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <h1 class="text-primary">@Model.Title</h1>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p>@Model.ShortDescription</p>
+                                </div>
+                                <div>
+                                    @Html.Raw(Model.Content);
+                                </div>
+
+                                <button asp-controller="Admin" asp-action="DeleteArticlePost" class="btn btn-outline-danger mt-5">Xóa bài viết</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="displayLoader">
+    <div class="overlay"></div>
+    <div class="centerScreen">
+        <div class="loader"></div>
+    </div>
+</div>
+<div id="hide_content" style="display:none;">
+    @* @Html.Raw(Model.Content);*@
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+
+    <script src="~/js/add_update_article.js"></script>
+    }

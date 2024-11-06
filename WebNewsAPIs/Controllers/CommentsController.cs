@@ -17,7 +17,7 @@ namespace WebNewsAPIs.Controllers
         private ICommentRepository _commentRepo;
         IUserRepository _userRepo;
         private IMapper _mapper;
-        public CommentsController(ICommentRepository _comment, 
+        public CommentsController(ICommentRepository _comment,
             IMapper mapper,
             IUserRepository userRepo)
         {
@@ -30,18 +30,18 @@ namespace WebNewsAPIs.Controllers
 
         public async Task<ActionResult<IQueryable<Comment>>> Get()
         {
-            if(_commentRepo == null || _mapper == null)
+            if (_commentRepo == null || _mapper == null)
             {
-               return BadRequest();
+                return BadRequest();
             }
-            
+
             return Ok(_commentRepo.GetAll());
         }
 
         [HttpPost]
-        public  ActionResult<Comment> PostComment(AddCommentStringDto comment)
+        public async Task<ActionResult<Comment>> PostComment(AddCommentStringDto comment)
         {
-            if(_commentRepo == null|| _mapper == null)
+            if (_commentRepo == null || _mapper == null)
             {
                 return StatusCode(500, "Dịch vụ hệ thống đang gặp lỗi xin hãy chờ đợi");
             }
@@ -49,21 +49,22 @@ namespace WebNewsAPIs.Controllers
             {
                 return StatusCode(400, "Dữ liệu của bạn không thỏa mãn");
             }
-            var checkUser = _userRepo.GetSingleByCondition(c => c.UserId.ToString().Equals(comment.UserId)).Result;
-            if (checkUser == null){
+            var checkUser =await _userRepo.GetSingleByCondition(c => c.UserId.ToString().Equals(comment.UserId));
+            if (checkUser == null)
+            {
                 return StatusCode(404, "Không tìm thấy User");
             }
 
             var commentAdd = _mapper.Map<Comment>(comment);
             commentAdd.CreateDate = DateTime.Now;
-            commentAdd = _commentRepo.AddAsync(commentAdd).Result;
+            commentAdd =await _commentRepo.AddComment(commentAdd);
             commentAdd.User = checkUser;
 
             return Ok(_mapper.Map<ViewCommentDto>(commentAdd));
         }
 
         [HttpGet("GetCommentOfArticle")]
-        public  ActionResult<List<ViewCommentDto>> GetCommentOfArticle(Guid id)
+        public ActionResult<List<ViewCommentDto>> GetCommentOfArticle(Guid id)
         {
             if (_commentRepo == null || _mapper == null)
             {
@@ -81,7 +82,7 @@ namespace WebNewsAPIs.Controllers
             };
             var commentOfArticle = _commentRepo.GetMulti(c => c.ArticleId.Equals(id), includes);
             var listCommentRespont = _mapper.Map<List<ViewCommentDto>>(commentOfArticle);
-            
+
             return Ok(listCommentRespont);
         }
     }

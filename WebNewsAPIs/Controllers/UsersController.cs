@@ -21,6 +21,8 @@ using BusinessObjects.Models;
 using WebNewsAPIs.Services;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 using Microsoft.AspNetCore.Components;
+using System.Linq.Expressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebNewsAPIs.Controllers
 {
@@ -70,7 +72,7 @@ namespace WebNewsAPIs.Controllers
             {
                 return BadRequest();
             }
-            var checkExistAccount = _userRepo.GetSingleByCondition(c => c.Username.ToLower() == addUser.Username.ToLower()).Result;
+            var checkExistAccount = await _userRepo.GetSingleByCondition(c => c.Username.ToLower() == addUser.Username.ToLower());
             if (checkExistAccount != null)
             {
                 return StatusCode(405, "Tài khoản đã tồn tại xin hãy tạo tài khoản mới");
@@ -84,7 +86,7 @@ namespace WebNewsAPIs.Controllers
             }
             try
             {
-                userRegister = _userRepo.AddAsync(userRegister).Result;
+                userRegister = await _userRepo.AddUser(userRegister);
             }
             catch (Exception ex)
             {
@@ -105,14 +107,52 @@ namespace WebNewsAPIs.Controllers
             await _emailSender.SendEmailAsync(userRegister.Username, "Thông Báo tạo tài khoảng thành Công!", WebNewsAPIs.Services.HtmlHelper.GetHtmlForSendMailRegister(userRegister, code));
             return _mapper.Map<AddUserDto>(userRegister);
         }
+
+        [HttpPost("AddAdmin")]
+        public async Task<ActionResult<AddUserDto>> AddAdminPost(AddUserDto addUser)
+        {
+            if (_userRepo == null || _mapper == null || _emailSender == null)
+            {
+                return StatusCode(500, "Hệ thống api đang bảo trì.");
+            }
+            if (addUser == null)
+            {
+                return BadRequest();
+            }
+
+            var checkExistAccount = await _userRepo.GetSingleByCondition(c => c.Username.ToLower() == addUser.Username.ToLower());
+            if (checkExistAccount != null)
+            {
+                return StatusCode(405, "Tài khoản đã tồn tại xin hãy tạo tài khoản mới");
+            }
+
+            var admin = _mapper.Map<User>(addUser);
+            admin.Password = BCrypt.Net.BCrypt.HashPassword(admin.Password);
+            admin.Createddate = DateTime.Now;
+            admin.IsConfirm = true;
+
+
+            try
+            {
+                admin = await _userRepo.AddUser(admin);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("User Register Fail");
+                return BadRequest(ex.Message);
+            }
+            // lay user moi login vao kem them role
+            return _mapper.Map<AddUserDto>(admin);
+        }
+
         [HttpGet("ConfirmEmail")]
-        public IActionResult ConfirmEmail(Guid userId, string code)
+        public async Task<IActionResult> ConfirmEmail(Guid userId, string code)
         {
             if (userId == null || code == null)
             {
                 return BadRequest();
             }
-            var user = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
+            var user = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
             if (user == null)
             {
                 return NotFound($"Khong thể load được thông tin của bạn có id :'{userId}'.");
@@ -126,7 +166,7 @@ namespace WebNewsAPIs.Controllers
             if (!user.IsConfirm)
             {
                 user.IsConfirm = true;
-                _userRepo.UpdateAsync(user);
+                _userRepo.UpdateUser(user);
             }
             // Logic to confirm email
             return Ok("Đã confirm thành công bạn có thể đăng nhập lại.");
@@ -150,7 +190,26 @@ namespace WebNewsAPIs.Controllers
             return Ok();
         }
 
+        [HttpPut("LockOrActive")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> LockOrActive(Guid? userId, bool isLock)
+        {
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var user = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
+            if (user == null)
+            {
+                return NotFound($"Không thể load được thông tin của bạn có id :'{userId}'.");
+            }
 
+            user.IsConfirm = !isLock;
+            _userRepo.UpdateUser(user);
+
+            // Logic to confirm email
+            return Ok();
+        }
         [HttpPost("SendMailResetPassword")]
         public async Task<IActionResult> SendMailResetPasswordAsync(User user)
         {
@@ -180,12 +239,12 @@ namespace WebNewsAPIs.Controllers
             {
                 return NotFound();
             }
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
 
             try
             {
                 userCheck.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                await _userRepo.UpdateAsync(userCheck);
+                _userRepo.UpdateUser(userCheck);
             }
             catch (Exception ex)
             {
@@ -207,7 +266,7 @@ namespace WebNewsAPIs.Controllers
                 return BadRequest();
             }
 
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes);
 
             if (userCheck == null)
             {
@@ -217,7 +276,7 @@ namespace WebNewsAPIs.Controllers
 
             try
             {
-                await _userRepo.UpdateAsync(userCheck);
+                _userRepo.UpdateUser(userCheck);
             }
             catch (Exception ex)
             {
@@ -239,7 +298,7 @@ namespace WebNewsAPIs.Controllers
                 return BadRequest();
             }
 
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes);
 
             if (userCheck == null)
             {
@@ -261,7 +320,7 @@ namespace WebNewsAPIs.Controllers
 
             try
             {
-                await _userRepo.UpdateAsync(userCheck);
+                _userRepo.UpdateUser(userCheck);
             }
             catch (Exception ex)
             {
@@ -286,7 +345,7 @@ namespace WebNewsAPIs.Controllers
             {
                 return BadRequest();
             }
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes);
             if (userCheck == null)
             {
                 return StatusCode(404, "Khong tìm thấy người dùng nào hợp lệ");
@@ -306,7 +365,7 @@ namespace WebNewsAPIs.Controllers
 
             try
             {
-                await _userRepo.UpdateAsync(userCheck);
+                _userRepo.UpdateUser(userCheck);
             }
             catch (Exception ex)
             {
@@ -328,7 +387,7 @@ namespace WebNewsAPIs.Controllers
             {
                 return BadRequest();
             }
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes).Result;
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId), includes);
             if (userCheck == null)
             {
                 return StatusCode(404, "Khong tìm thấy người dùng nào hợp lệ");
@@ -338,7 +397,7 @@ namespace WebNewsAPIs.Controllers
 
             try
             {
-                await _userRepo.UpdateAsync(userCheck);
+                _userRepo.UpdateUser(userCheck);
             }
             catch (Exception ex)
             {
@@ -355,20 +414,21 @@ namespace WebNewsAPIs.Controllers
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-            var userCheck = _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId)).Result;
-            var articleCheck = _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId)).Result;
-            if(userCheck == null || articleCheck == null)
+            var userCheck = await _userRepo.GetSingleByCondition(c => c.UserId.Equals(userId));
+            var articleCheck = await _articleRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId));
+            if (userCheck == null || articleCheck == null)
             {
                 return NotFound();
             }
             // Update luot xem cho bai bao
             articleCheck.ViewArticles = articleCheck.ViewArticles + 1;
-            await _articleRepo.UpdateAsync(articleCheck);
-            var viewCheck = _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId)).Result;
-          
+            _articleRepo.UpdateArticle(articleCheck);
+
+            var viewCheck = await _viewRepo.GetSingleByCondition(c => c.ArticleId.Equals(articleId) && c.UserId.Equals(userId));
+
             if (viewCheck != null)
             {
-                return Ok(null);
+                return Ok("Đã được thêm vào các bài đã xem.");
             }
 
             var listArticleViewOfUser = _viewRepo.GetMulti(c => c.UserId.Equals(userId.Value)).OrderBy(c => c.ViewDate).ToList();
@@ -381,23 +441,24 @@ namespace WebNewsAPIs.Controllers
             var viewAdd = new View
             {
                 ArticleId = articleId.Value,
-                Article = articleCheck,
+
                 UserId = userId.Value,
-                User = userCheck,
+
                 ViewDate = DateTime.Now
             };
 
             try
             {
-                await _viewRepo.AddAsync(viewAdd);
-                  
+                await _viewRepo.AddView(viewAdd);
+                return Ok(true);
+
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Thêm Không thanh Cong Cho View of user");
             }
 
-            return Ok(viewAdd);
+           
         }
 
 
@@ -416,7 +477,7 @@ namespace WebNewsAPIs.Controllers
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Equals(userDto.Username.ToLower()) && c.IsConfirm == true, includes).ToList();
+            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Equals(userDto.Username.ToLower()) && c.IsConfirm, includes).ToList();
             if (listUserLogin == null || listUserLogin.Count == 0)
             {
                 return StatusCode(404, "Tài khoản không tồn tại trong hệ thống.");
@@ -441,7 +502,40 @@ namespace WebNewsAPIs.Controllers
 
             return _mapper.Map<ViewUserDto>(userLogin);
         }
+        [HttpGet("SearchUser")]
+        public async Task<ActionResult<SearchPaging<IEnumerable<ViewUserDto>>>> SearchUser(Guid? roleId = null, string? keySearch = "", int currentPage = 1, int size = 20)
+        {
+            string[] includes = new string[]
+            {
+               "Role"
+            };
+            if (_userRepo == null)
+            {
+                return BadRequest();
+            }
+            List<User> listUser = new List<User>();
+            int sizeResult = 0;
+            keySearch = (keySearch ?? string.Empty);
 
+
+            Expression<Func<User, bool>> predicate = (c => (roleId == null || c.Roleid == roleId)
+            && ((string.IsNullOrEmpty(c.DisplayName) || c.DisplayName.ToLower().Contains(keySearch.ToLower()))
+            || (string.IsNullOrEmpty(c.Address) || c.Address.ToLower().Contains(keySearch.ToLower())
+             || (string.IsNullOrEmpty(c.PhoneNumber) || c.PhoneNumber.ToLower().Contains(keySearch.ToLower())
+            ))));
+
+
+            listUser = _userRepo.GetMultiPaging(predicate, out sizeResult, currentPage - 1, size, includes).ToList();
+
+            var listResponse = _mapper.Map<IEnumerable<ViewUserDto>>(listUser);
+            var result = new SearchPaging<IEnumerable<ViewUserDto>>
+            {
+                total = sizeResult,
+                result = listResponse
+            };
+
+            return Ok(result);
+        }
 
 
     }

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Repositories;
 
 namespace WebNewsAPIs.Controllers
 {
@@ -7,5 +10,16 @@ namespace WebNewsAPIs.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
+        private IRoleRepository _roleRepo;
+        public RolesController(IRoleRepository roleRepo)
+        {
+            _roleRepo = roleRepo;
+        }
+        [HttpGet]
+        [EnableQuery]
+        public IActionResult Get()
+        {
+            return Ok(_roleRepo.GetAll().AsQueryable());
+        }
     }
 }

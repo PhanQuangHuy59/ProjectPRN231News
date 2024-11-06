@@ -15,12 +15,12 @@ namespace WebNewsClients.Controllers
         public HomeController(ILogger<HomeController> logger, HttpClient httpClient)
         {
             _logger = logger;
-           _httpClient = httpClient;
-           
+            _httpClient = httpClient;
+
         }
 
-        
-        public  IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
             ////$"{BaseUrls.BASE_URL_CategoryArticle}/api/CategoriesArticles/getAllCategory"
             ////Call api của Category
@@ -34,35 +34,42 @@ namespace WebNewsClients.Controllers
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
 
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             //
-           
+
 
 
             //Call Api lastest new 
-            string urlOdataLastestNew = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=20&orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3";
-            var responseMessageLastestNew = _httpClient.GetAsync(urlOdataLastestNew).Result;
+            string urlOdataLastestNew = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments & $top=20&orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3";
+            var responseMessageLastestNew = await _httpClient.GetAsync(urlOdataLastestNew);
             responseMessageLastestNew.EnsureSuccessStatusCode();
-            var listLastestNews = responseMessageLastestNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>()
-                .Result.data;
+            var listLastestNews1 = await responseMessageLastestNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
+            var listLastestNews = listLastestNews1.data;
             // slide 
             string urlGetAllArticleOfRoot = "https://localhost:7251/api/Articles/GetArticleOfRootCategory";
-			var responseMessageAllArticleOfRoot = _httpClient.GetAsync(urlGetAllArticleOfRoot).Result;
-			responseMessageLastestNew.EnsureSuccessStatusCode();
-            var slide =  responseMessageAllArticleOfRoot.Content.ReadFromJsonAsync<Dictionary<string, List<ViewArticleDto>>>().Result;
+            var responseMessageAllArticleOfRoot = await _httpClient.GetAsync(urlGetAllArticleOfRoot);
+            responseMessageLastestNew.EnsureSuccessStatusCode();
+            var slide = await responseMessageAllArticleOfRoot.Content.ReadFromJsonAsync<Dictionary<string, List<ViewArticleDto>>>();
 
-            //lấy top 20 bài article có view nhiều nhất
-            string urlGetAllArticleHaveViewHighest = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$top=10&orderby=ViewArticles desc,CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and month(CreatedDate) eq month(now()) and year(CreatedDate) eq year(CreatedDate)";
-			var responseMessageAllArticleHighest = _httpClient.GetAsync(urlGetAllArticleHaveViewHighest).Result;
-			responseMessageAllArticleHighest.EnsureSuccessStatusCode();
-			var mostPopular = responseMessageAllArticleHighest.Content.ReadFromJsonAsync<OdataResponse<List<Article>>>().Result.data;
+            //lấy top 20 bài article có view nhiều nhất  &$filter=IsPublish eq true and StatusProcess eq 3 and month(CreatedDate) eq month(now()) and year(CreatedDate) eq year(CreatedDate)"
+            string urlGetAllArticleHaveViewHighest = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$top=10&orderby=ViewArticles desc,CreatedDate desc";
+            var responseMessageAllArticleHighest = await _httpClient.GetAsync(urlGetAllArticleHaveViewHighest);
+            responseMessageAllArticleHighest.EnsureSuccessStatusCode();
+            var mostPopular1 = await responseMessageAllArticleHighest.Content.ReadFromJsonAsync<OdataResponse<List<Article>>>();
+            var mostPopular = mostPopular1.data;
+
+            string urlListArticleContactHighest = "https://localhost:7251/api/Articles/GetTopArticleContactHighest?take=20";
+			var listArticleContactHighest = await _httpClient.GetFromJsonAsync<List<ViewArticleDto>>(urlListArticleContactHighest);
+			
+
 			//Trả dữ liệu về view
 			ViewBag.Category = listCategories;
             ViewBag.LastestNews = listLastestNews;
             ViewBag.Slide = slide;
+            ViewBag.HighestContact = listArticleContactHighest;
             ViewBag.MostPopular = mostPopular;
 
             return View();
@@ -73,16 +80,16 @@ namespace WebNewsClients.Controllers
             return View();
         }
 
-      
-        public IActionResult Error400()
+
+        public async Task<IActionResult> Error400()
         {
             //Call api của Category
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
 
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
 
             ViewBag.Category = listCategories;
 
@@ -90,20 +97,20 @@ namespace WebNewsClients.Controllers
             ViewBag.message = message;
             return View();
         }
-        
-        public IActionResult Error500()
+
+        public async Task<IActionResult> Error500()
         {
             //Call api của Category
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
 
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;    
 
 
-			ViewBag.Category = listCategories;
-           
+            ViewBag.Category = listCategories;
+
             return View();
         }
     }

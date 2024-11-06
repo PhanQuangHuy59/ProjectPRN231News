@@ -195,7 +195,7 @@
   async function postFile(postData) {
     var apiAppScript =
       "https://script.google.com/macros/s/AKfycbxbO6hUsYNYIEx_ZMY7MvxmT0dFo7zkE5nbg61pexLVVbc2cuicOSHLfHbysv2VxEmz/exec";
-
+      debugger;
     $("#displayLoader").css("display", "block");
     const response = await fetch(apiAppScript, {
       method: "POST",

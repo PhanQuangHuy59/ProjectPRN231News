@@ -76,7 +76,7 @@
             <div class="sidebar_blog_1">
                 <div class="sidebar-header">
                     <div class="logo_section">
-                        <a href="index.html"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
+                        <a asp-controller="Home" asp-action="Index"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
                     </div>
                 </div>
                 <div class="sidebar_user_info">
@@ -282,9 +282,8 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <a asp-action="DeleteArticle" asp-controller="PersonalInformation" asp-route-articleId="@c.ArticleId" title="Cập nhật bài báo" class="pt-2 pb-2 ps-3 pe-3 btn btn-outline-danger">
+                                                                <a asp-action="ConfirmDeleteArticle" asp-controller="PersonalInformation" asp-route-articleId="@c.ArticleId" title="Xác nhận xóa bài báo" class="pt-2 pb-2 ps-3 pe-3 btn btn-outline-danger">
                                                                     <i style="font-size:10px" class="fa fa-remove"></i>
-
                                                                 </a>
                                                             </div>
                                                         </div>

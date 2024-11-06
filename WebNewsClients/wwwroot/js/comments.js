@@ -114,7 +114,7 @@
 
     const timerId = setTimeout(function () {
         addToViewsOfUser();
-    }, 12000);
+    }, 2000);
 
 
     function addToViewsOfUser() {
@@ -131,7 +131,7 @@
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     //location.reload
-                    if (result) {
+                    if (result === true) {
                         var message = 'Thêm vào Danh sách bài báo người dùng xem thành công';
                         ShowSuccess(message);
                         console.log('Success:', result);
@@ -209,8 +209,8 @@
                     console.log("Success:", result);
                 },
                 error: function (xhr, status, error) {
-                    var text = xhr.responseText;
-                    showError(text);
+                    let text = xhr.responseText;
+                    ShowError("Đã xảy ra lỗi hãy thử lại.");
                 }
             });
         }

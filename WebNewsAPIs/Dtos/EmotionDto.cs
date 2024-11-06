@@ -10,7 +10,6 @@ namespace WebNewsAPIs.Dtos
         public string NameEmotion { get; set; } = null!;
 
         [Required]
-        [Url]
         public string Image { get; set; } = null!;
     }
 
@@ -23,7 +22,6 @@ namespace WebNewsAPIs.Dtos
         public string NameEmotion { get; set; } = null!;
 
         [Required]
-        [Url]
         public string Image { get; set; } = null!;
     }
 

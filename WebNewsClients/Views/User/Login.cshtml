@@ -43,6 +43,7 @@
                     </div>
                     <form method="post">
                         <div class="form-group">
+                            <input type="hidden" asp-for="@Model.DateOfBirth" class="form-control"  />
                             <label asp-for="@Model.Username" class="control-label"></label>
                             <input type="email" asp-for="@Model.Username" class="form-control" placeholder="E-mail Address" />
                             <span asp-validation-for="@Model.Username" class="text-danger"></span>

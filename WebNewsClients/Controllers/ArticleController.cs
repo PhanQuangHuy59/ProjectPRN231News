@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.OData.Edm;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
@@ -33,25 +34,26 @@ namespace WebNewsClients.Controllers
             return View();
         }
         [Route("ArticleOfCategory/{categoryArticleId}.html")]
-        public IActionResult ArticleOfCategory([FromRoute] Guid categoryArticleId)
+        public async Task<IActionResult> ArticleOfCategory([FromRoute] Guid categoryArticleId)
         {
 
 
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $orderby=OrderLevel";
 
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
 
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             //
             //
-            string urlCallApiCategoryOfArticle = $"https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=CategoryId eq {categoryArticleId} & orderby=OrderLevel";
-            var responseMessageCallApiCategoryOfArticle = _httpClient.GetAsync(urlCallApiCategoryOfArticle).Result;
+            string urlCallApiCategoryOfArticle = $"https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $filter=CategoryId eq {categoryArticleId} & orderby=OrderLevel";
+            var responseMessageCallApiCategoryOfArticle = await _httpClient.GetAsync(urlCallApiCategoryOfArticle);
             responseMessageCallApiCategoryOfArticle.EnsureSuccessStatusCode();
-            var category = responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data.ToList();
+            var category2 = await responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+
+            var category = category2.data.ToList();
             if (category.Count == 0)
             {
                 TempData["message"] = "Đường dẫn truy câp không hợp lệ ! ";
@@ -60,11 +62,12 @@ namespace WebNewsClients.Controllers
             var category1 = category[0];
 
             //Call api tim cacs article theo loai cua bai bao
-            string urlCallApiArticles = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=10&$orderby=CreatedDate desc &$filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {categoryArticleId}";
-            var responseMessageCallApiArticles = _httpClient.GetAsync(urlCallApiArticles).Result;
+            string urlCallApiArticles = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments & $top=10 & $orderby=CreatedDate desc & $filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {categoryArticleId}";
+            var responseMessageCallApiArticles = await _httpClient.GetAsync(urlCallApiArticles);
             responseMessageCallApiArticles.EnsureSuccessStatusCode();
-            var articles = responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>()
-                .Result.data.ToList();
+            var articles1 = await responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
+            var articles = articles1.data.ToList();
+
 
             //
 
@@ -78,60 +81,59 @@ namespace WebNewsClients.Controllers
         }
 
         [HttpGet("{slug}.html")]
-        public IActionResult ArticleDetail([FromRoute] string slug)
+        public async Task<IActionResult> ArticleDetail([FromRoute] string slug)
         {
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data;
             //
 
             //Call api tim article theo slug
             string urlOdataOfArticleBySlug = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=1&$filter=IsPublish eq true and StatusProcess eq 3 and Slug eq '{slug}'";
-            var responseMessageArticle = _httpClient.GetAsync(urlOdataOfArticleBySlug).Result;
+            var responseMessageArticle = await _httpClient.GetAsync(urlOdataOfArticleBySlug);
             responseMessageArticle.EnsureSuccessStatusCode();
-            var article = responseMessageArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>()
-                .Result.data.ToList();
+            var article3 = await responseMessageArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
+            var article = article3.data.ToList();
 
             if (article.Count > 0)
             {
                 var article1 = article[0];
                 //Call api tim cacs article theo loai cua bai bao
                 string urlCallApiArticles = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=10&$orderby=CreatedDate desc &$filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {article1.CategortyId}";
-                var responseMessageCallApiArticles = _httpClient.GetAsync(urlCallApiArticles).Result;
+                var responseMessageCallApiArticles = await _httpClient.GetAsync(urlCallApiArticles);
                 responseMessageCallApiArticles.EnsureSuccessStatusCode();
-                var articles = responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>()
-                    .Result.data.ToList();
+                var articles2 = await responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
+                var articles = articles2.data.ToList();
 
                 string urlCallApiCategoryOfArticle = $"https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=CategoryId eq {article1.CategortyId} & orderby=OrderLevel";
-                var responseMessageCallApiCategoryOfArticle = _httpClient.GetAsync(urlCallApiCategoryOfArticle).Result;
+                var responseMessageCallApiCategoryOfArticle = await _httpClient.GetAsync(urlCallApiCategoryOfArticle);
                 responseMessageCallApiCategoryOfArticle.EnsureSuccessStatusCode();
-                var category = responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                    .Result.data.ToList();
+                var category1 = await responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+                var category = category1.data.ToList();
+
                 // Call api comment of Article 
                 string urlCallApiComment = $"https://localhost:7251/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ArticleId eq {article1.ArticleId}";
-                var responseMessageCallApiComment = _httpClient.GetAsync(urlCallApiComment).Result;
+                var responseMessageCallApiComment = await _httpClient.GetAsync(urlCallApiComment);
                 responseMessageCallApiComment.EnsureSuccessStatusCode();
-                var articlesComment = responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>()
-                    .Result.data.ToList();
+                var articlesComment1 = await responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>();
+                var articlesComment = articlesComment1.data.ToList();
 
                 // Lay tat ca emotion
                 var urlEmotions = "https://localhost:7251/odata/Emotions";
-                var responseMessaEmotion = _httpClient.GetAsync(urlEmotions).Result;
+                var responseMessaEmotion = await _httpClient.GetAsync(urlEmotions);
                 responseMessaEmotion.EnsureSuccessStatusCode();
-                var responseEmotion = responseMessaEmotion.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Emotion>>>()
-                    .Result.data.ToList();
-
+                var responseEmotion1 = await responseMessaEmotion.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Emotion>>>();
+                var responseEmotion = responseEmotion1.data.ToList();
                 //get all drop emotion of article
                 var urlDropEmotionOfArticle = $"https://localhost:7251/odata/DropEmotions?$filter=ArticleId eq {article1.ArticleId}";
-                var responseMessaDropEmotionOfArticle = _httpClient.GetAsync(urlDropEmotionOfArticle).Result;
+                var responseMessaDropEmotionOfArticle = await _httpClient.GetAsync(urlDropEmotionOfArticle);
                 responseMessaDropEmotionOfArticle.EnsureSuccessStatusCode();
-                var responseDropEmotion = responseMessaDropEmotionOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<DropEmotion>>>()
-                    .Result.data.ToList();
-
+                var responseDropEmotion1 = await responseMessaDropEmotionOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<DropEmotion>>>();
+                var responseDropEmotion = responseDropEmotion1.data.ToList();
 
                 // lấy ra người dung đã drop emotion cho emotion nào
                 Dictionary<Guid, bool> checkDropEmotion = new Dictionary<Guid, bool>();
@@ -143,10 +145,11 @@ namespace WebNewsClients.Controllers
                 {
                     // get article save of user of this article
                     var urlArticleSave = $"https://localhost:7251/odata/SaveArticles?$filter=UserId eq {userLogin.UserId} and ArticleId eq {article1.ArticleId}";
-                    var responseMessagArticleSaveOfUser = _httpClient.GetAsync(urlArticleSave).Result;
+                    var responseMessagArticleSaveOfUser = await _httpClient.GetAsync(urlArticleSave);
                     responseMessagArticleSaveOfUser.EnsureSuccessStatusCode();
-                    var articleSave = responseMessagArticleSaveOfUser.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<SaveArticle>>>()
-                        .Result.data.ToList();
+                    var articleSave1 = await responseMessagArticleSaveOfUser.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<SaveArticle>>>();
+                    var articleSave = articleSave1.data.ToList();
+
                     if (articleSave.Count != 0)
                     {
                         checkSave = true;
@@ -166,22 +169,22 @@ namespace WebNewsClients.Controllers
                 }
 
                 foreach (var emotion in responseEmotion)
-                {                   
+                {
                     // lay ra so luong thả emotion của mot emotion
                     var numberDropEmotionOfEmotion = responseDropEmotion.Where(c =>
                     c.ArticleId.Equals(article1.ArticleId)
                     && c.EmotionId.Equals(emotion.EmotionId)).Count();
                     quantityEachEmotion.Add(emotion.EmotionId, numberDropEmotionOfEmotion);
-                   
+
                 }
 
 
                 //Call api tim cacs article theo loai cua bai bao
                 string urlCallApiArticlesForRecomment = $"https://localhost:7251/api/Articles/GetAllArticleOfAllCategory?categoryId={category[0].CategoryId}";
-                var responseMessageCallApiArticlesForRecomment = _httpClient.GetAsync(urlCallApiArticlesForRecomment).Result;
+                var responseMessageCallApiArticlesForRecomment = await _httpClient.GetAsync(urlCallApiArticlesForRecomment);
                 responseMessageCallApiArticlesForRecomment.EnsureSuccessStatusCode();
-                var articlesRecomment = responseMessageCallApiArticlesForRecomment.Content.ReadFromJsonAsync<List<ViewArticleDto>>()
-                    .Result.ToList();
+                var articlesRecomment1 = await responseMessageCallApiArticlesForRecomment.Content.ReadFromJsonAsync<List<ViewArticleDto>>();
+                var articlesRecomment = articlesRecomment1.ToList();
 
                 List<ViewArticleDto> listArticlesRecommend = new List<ViewArticleDto>();
                 List<int> checkExist = new List<int>();
@@ -217,20 +220,22 @@ namespace WebNewsClients.Controllers
 
 
         [HttpGet("LastNew.html")]
-        public IActionResult LastNew(int currentPage = 1)
+        public async Task<IActionResult> LastNew(int currentPage = 1)
         {
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>().Result.data.ToList();
+            var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+            var listCategories = listCategories1.data.ToList();
 
 
             //Call api của last new của ngày hôm nay
             var now = new DateTime(2024, 6, 17);
             string urlOdataLastestnew = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and year(CreatedDate) eq {now.Year} and month(CreatedDate) eq {now.Month} and day(CreatedDate) eq {now.Day}\r\n";
-            var responseMessageLastNew = _httpClient.GetAsync(urlOdataLastestnew).Result;
+            var responseMessageLastNew = await _httpClient.GetAsync(urlOdataLastestnew);
             responseMessageLastNew.EnsureSuccessStatusCode();
-            var listLastestArticle = responseMessageLastNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>().Result.data.ToList();
+            var listLastestArticle1 = await responseMessageLastNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
+            var listLastestArticle = listLastestArticle1.data.ToList();
 
             int totalPage = (int)Math.Ceiling((decimal)listLastestArticle.Count / Items_Page);
 
@@ -247,15 +252,15 @@ namespace WebNewsClients.Controllers
         }
 
         [HttpGet("Search.html")]
-        public IActionResult SearchArticleView()
+        public async Task<IActionResult> SearchArticleView()
         {
 
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 =await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+             var listCategories = listCategories1.data;
 
 
             var listDayFilter = new List<object> {
@@ -285,14 +290,14 @@ namespace WebNewsClients.Controllers
 
 
         [HttpGet("SearchWithContent")]
-        public IActionResult SearchArticle(int currentPage = 1, Guid? categoryId = null, string time = "all", string keySearch = "")
+        public async Task<IActionResult> SearchArticle(int currentPage = 1, Guid? categoryId = null, string time = "all", string keySearch = "")
         {
             //Call api của Category Root
             string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
-            var responseMessage = _httpClient.GetAsync(urlOdataAllCategory).Result;
+            var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
-            var listCategories = responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>()
-                .Result.data;
+            var listCategories1 =await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
+             var listCategories = listCategories1.data;
 
             //Call api
             //
@@ -360,9 +365,9 @@ namespace WebNewsClients.Controllers
             string urlSearch = $"https://localhost:7251/api/Articles/SearchArticle?categoryId={categoryId}&keySearch={keySearch}" +
                 $"&from={fromDate}&to={toDate}&currentPage={currentPage}&size={Items_Page_Search}";
             var httpMessage = new HttpRequestMessage(HttpMethod.Get, urlSearch);
-            var responseMessageArticleSearch = _httpClient.SendAsync(httpMessage).Result;
+            var responseMessageArticleSearch =await _httpClient.SendAsync(httpMessage);
             responseMessageArticleSearch.EnsureSuccessStatusCode();
-            var responseData = responseMessageArticleSearch.Content.ReadFromJsonAsync<SearchPaging<IEnumerable<ViewArticleDto>>>().Result;
+            var responseData =await responseMessageArticleSearch.Content.ReadFromJsonAsync<SearchPaging<IEnumerable<ViewArticleDto>>>();
 
 
 

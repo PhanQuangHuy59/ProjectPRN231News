@@ -9107,11 +9107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
+      "projectUniqueName": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
       "projectName": "WebNewsAPIs",
-      "projectPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
+      "projectPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\WebNewsAPIs.csproj",
       "packagesPath": "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\",
-      "outputPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\obj\\",
+      "outputPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\WebNewsAPIs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PhanQuangHuy59\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9129,14 +9129,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\AccessDatas.csproj": {
-              "projectPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\AccessDatas.csproj"
+            "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\AccessDatas.csproj": {
+              "projectPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\AccessDatas\\AccessDatas.csproj"
             },
-            "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {
-              "projectPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj"
+            "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj"
             },
-            "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\Repositories\\Repositories.csproj"
+            "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\Repositories\\Repositories.csproj"
             }
           }
         }

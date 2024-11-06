@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {}
+    "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {}
   },
   "projects": {
-    "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {
+    "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj",
+        "projectPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\BusinessObjects.csproj",
         "packagesPath": "C:\\Users\\PhanQuangHuy59\\.nuget\\packages\\",
-        "outputPath": "D:\\Ki8\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\obj\\",
+        "outputPath": "D:\\Ki8\\Back-Up\\ProjectWebNews\\ProjectWebNews\\ProjectPRN231News\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhanQuangHuy59\\AppData\\Roaming\\NuGet\\NuGet.Config",

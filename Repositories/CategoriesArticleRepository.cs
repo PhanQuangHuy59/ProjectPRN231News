@@ -12,7 +12,10 @@ namespace Repositories
 	{
 		public List<Guid> getAllParentIDChildrentID(Guid parentId);
 		public CategoriesArticle getRootOfCategory(Guid categoryID);
-	}
+		Task<CategoriesArticle> AddCategoriesArticle(CategoriesArticle categoriesArticle);
+		Task<CategoriesArticle> UpdateCategoriesArticle(CategoriesArticle categoriesArticle);
+
+    }
 	public class CategoriesArticleRepository : RepositoryBase<CategoriesArticle>, ICategoriesArticleRepository
 	{
 		public CategoriesArticleRepository(FinalProjectPRN231Context context) : base(context)
@@ -71,5 +74,23 @@ namespace Repositories
 			}
 			return category;
 		}
-	}
+        public async Task<CategoriesArticle> AddCategoriesArticle(CategoriesArticle categoriesArticle)
+        {
+            using (FinalProjectPRN231Context _context = new FinalProjectPRN231Context())
+            {
+                var response = await _context.CategoriesArticles.AddAsync(categoriesArticle);
+                await _context.SaveChangesAsync();
+                return response.Entity;
+            }
+        }
+        public async Task<CategoriesArticle> UpdateCategoriesArticle(CategoriesArticle categoriesArticle)
+        {
+            using (FinalProjectPRN231Context _context = new FinalProjectPRN231Context())
+            {
+                var response =  _context.CategoriesArticles.Update(categoriesArticle);
+                await _context.SaveChangesAsync();
+                return response.Entity;
+            }
+        }
+    }
 }

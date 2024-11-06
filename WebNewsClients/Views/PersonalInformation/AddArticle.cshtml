@@ -65,7 +65,7 @@
             <div class="sidebar_blog_1">
                 <div class="sidebar-header">
                     <div class="logo_section">
-                        <a href="index.html"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
+                        <a asp-controller="Home" asp-action="Index"><img class="logo_icon img-responsive" src="~/pluto/images/logo/logo_icon.png" alt="#" /></a>
                     </div>
                 </div>
                 <div class="sidebar_user_info">
@@ -148,7 +148,7 @@
                     <div class="full">
                         <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
                         <div class="logo_section">
-                            <a href="index.html"><img class="img-responsive" src="~/pluto/images/logo/logo_black.png" alt="#" /></a>
+                            <a asp-controller="Home" asp-action="Index"><img class="img-responsive" src="~/pluto/images/logo/logo_black.png" alt="#" /></a>
                         </div>
                         <div class="right_topbar">
                             <div class="icon_info">
@@ -235,11 +235,19 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group  col-6">
-                                                <label asp-for="@Model.LinkAudio" class="control-label"></label>
-                                                <input type="text" asp-for="@Model.LinkAudio" class="form-control" placeholder="Nhập link Audio nếu muốn ..." />
-                                                <span asp-validation-for="@Model.LinkAudio" class="text-danger"></span>
+                                            <div class="row">
+                                                <div class="form-group  col-6">
+                                                    <label asp-for="@Model.LinkAudio" class="control-label"></label>
+                                                    <input type="text" asp-for="@Model.LinkAudio" class="form-control" placeholder="Nhập link Audio nếu muốn ..." />
+                                                    <span asp-validation-for="@Model.LinkAudio" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group  col-6">
+                                                    <label asp-for="@Model.PublishDate" class="control-label"></label>
+                                                    <input asp-for="@Model.PublishDate" class="form-control" placeholder="Nhập chọn ngày publish ..." />
+                                                    <span asp-validation-for="@Model.PublishDate" class="text-danger"></span>
+                                                </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <label asp-for="@Model.ShortDescription" class="control-label"></label>
                                                 <textarea id="shortDesciption" rows="5" asp-for="@Model.ShortDescription" class="form-control"></textarea>
@@ -257,7 +265,7 @@
                                                     <select class="form-select" asp-for="@Model.CategortyId" asp-items="@selectListCategory"></select>
                                                 </div>
                                                 <div style="margin-top:50px;" class="form-check form-switch col-6">
-                                                    <input class="form-check-input" checked type="checkbox" asp-for="@Model.IsPublish">
+                                                    <input class="form-check-input" asp-for="@Model.IsPublish">
                                                     <label class="form-check-label" asp-for="@Model.IsPublish"></label>
                                                 </div>
                                             </div>
@@ -298,7 +306,7 @@
     </div>
 </div>
 <div id="hide_content" style="display:none;">
-   @* @Html.Raw(Model.Content);*@
+    @* @Html.Raw(Model.Content);*@
 </div>
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial");

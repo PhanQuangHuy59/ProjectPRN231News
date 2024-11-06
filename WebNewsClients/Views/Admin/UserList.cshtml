@@ -1,5 +1,38 @@
-﻿@{
+﻿@using BusinessObjects.Models;
+@using WebNewsAPIs.Dtos;
+@{
     Layout = "_LayoutMainAdmin";
+
+    var currentPage = ((ViewBag.CurrentPage) == null ? int.MinValue : (int)(ViewBag.CurrentPage));
+    var totalPage = (ViewBag.TotalPage) == null ? int.MinValue : (int)(ViewBag.TotalPage);
+    var selectListRole = (SelectList)ViewBag.SelectListRole;
+    var keySearch = (string)ViewBag.KeySearch;
+
+    var roleId = (Guid)ViewBag.RoleId;
+
+    var users = (List<ViewUserDto>)ViewBag.ListUser;
+
+    int? total = (ViewBag.TotalResultCount == null ? null : (int)ViewBag.TotalResultCount);
+    var count = 0;
+
+
+
+
+    PagingModel PageModel = new PagingModel()
+            {
+                CurrentPage = currentPage,
+                PageCount = totalPage,
+                Url = (int indexpage) =>
+                {
+                    return Url.ActionLink("UserList", "Admin", new
+                    {
+                        currentPage = indexpage,
+                        roleId = roleId,
+                        keySearch = keySearch
+                    });
+                }
+
+            };
 }
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
@@ -11,7 +44,7 @@
                         <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
                         <ol class="breadcrumb page_bradcam mb-0">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Analytic</li>
+                            <li class="breadcrumb-item active">User List</li>
                         </ol>
                     </div>
                     <div class="page_title_right">
@@ -30,77 +63,117 @@
                         <div class="QA_section">
                             <div class="white_box_tittle list_header">
                                 <h4>User List </h4>
+
                                 <div class="box_right d-flex lms_block">
-                                    <div class="serach_field_2">
-                                        <div class="search_inner">
-                                            <form Active="#">
-                                                <div class="search_field">
-                                                    <input type="text" placeholder="Search content here...">
-                                                </div>
-                                                <button type="submit"> <i class="ti-search"></i> </button>
-                                            </form>
+                                    <form method="get">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                <select onchange="this.form.submit()" class="form-select" name="roleId" id="role" asp-items="@selectListRole"></select>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <input class="form-control" type="text" name="keySearch" placeholder="Search content here...">
+                                            </div>
+                                            <button class="btn btn-primary col-lg-1" asp-action="UserList" asp-controller="Admin"> <i class="ti-search"></i> </button>
                                         </div>
-                                    </div>
-                                    <div class="add_button ms-2">
-                                        <a href="#" data-toggle="modal" data-target="#addcategory" class="btn_1">search</a>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
+                            <p>Kết quả tìm kiếm cho "@keySearch" là có<strong class="text-primary"> @total</strong> bài báo</p>
                             <div class="QA_table mb_30">
-
-                                <table class="table lms_table_active ">
+                                @*lms_table_active*@
+                                <table class="table  ">
                                     <thead>
                                         <tr>
-                                            <th scope="col">User</th>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Display Name</th>
                                             <th scope="col">Username</th>
-                                            <th scope="col">Email Address</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Phone</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0b7afb2abf4f0f980a7ada1a9aceea3afad">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e79088958cd3d7dea7808a868e8bc984888a">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hayden</td>
-                                            <td>Hayden</td>
-                                            <td><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5c2dac7de81858cf5d2d8d4dcd99bd6dad8">[email&#160;protected]</a></td>
-                                            <td><a href="#">Admin</a></td>
-                                            <td><a href="#" class="status_btn">Active</a></td>
-                                            <td>
-                                                <div class="action_btns d-flex">
-                                                    <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
-                                                    <a href="#" class="action_btn"> <i class="fas fa-trash"></i> </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach (var item in users)
+                                        {
+                                            count++;
+                                            <tr>
+                                                <td>@count</td>
+                                                <td>@item.DisplayName</td>
+                                                <td>@item.Username</td>
+                                                <td>@(string.IsNullOrEmpty(item.Gender) == true ? "Gender Empty" : item.Gender)</td>
+                                                <td>@item.PhoneNumber</td>
+                                                <td>@item.RoleName</td>
+                                                @if (item.IsConfirm)
+                                                {
+                                                    <td><a href="#" class="status_btn">Active</a></td>
+                                                }
+                                                @if (!item.IsConfirm)
+                                                {
+                                                    <td><a href="#" class="status_btn bg-danger">InActive</a></td>
+                                                }
+
+                                                @if (item.RoleName.ToUpper().Equals("ADMIN"))
+                                                {
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                @if (item.RoleName.ToUpper().Equals("ARTICLES"))
+                                                {
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            
+                                                            <a title="Xem các bài báo của tác giả @item.DisplayName" asp-action="ArticleList" asp-route-authorId="@item.UserId" class="action_btn mr_10"> <i class="fa-regular fa-newspaper"></i> </a>
+                                                            <a title="Thống kê doanh thu từ các bài báo của @item.DisplayName" asp-action="ManagementRevenueOfArticler"
+                                                               asp-route-authorId="@item.UserId"
+                                                               
+                                                            class="action_btn mr_10"> <i class="fa-solid fa-list-check"></i> </a>
+                                                            @if (item.IsConfirm)
+                                                            {
+                                                                <a asp-action="LockOrActive" asp-route-userId="@item.UserId" asp-route-isLock="true" title="Khóa tài khoản của @item.DisplayName" class="action_btn"> <i class="fa-solid fa-user-lock"></i> </a>
+                                                            }
+                                                            @if (!item.IsConfirm)
+                                                            {
+                                                                <a asp-action="LockOrActive" asp-route-userId="@item.UserId" asp-route-isLock="false" title="Mở khóa tài khoản của @item.DisplayName" class="action_btn"> <i class="fa-solid fa-lock-open"></i> </a>
+                                                                
+                                                            }
+                                                         </div>
+                                                    </td>
+                                                }
+                                                @if (item.RoleName.ToUpper().Equals("CUSTOMER"))
+                                                {
+                                                    <td>
+                                                        <div class="action_btns d-flex">
+                                                            <a href="#" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                            @if (item.IsConfirm)
+                                                            {
+                                                                <a asp-action="LockOrActive" asp-route-userId="@item.UserId" asp-route-isLock="true" title="Khóa tài khoản của @item.DisplayName" class="action_btn"> <i class="fa-solid fa-user-lock"></i> </a>
+                                                            }
+                                                            @if (!item.IsConfirm)
+                                                            {
+                                                                <a asp-action="LockOrActive" asp-route-userId="@item.UserId" asp-route-isLock="false" title="Mở khóa tài khoản của @item.DisplayName" class="action_btn"> <i class="fa-solid fa-lock-open"></i> </a>
+
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                }
+
+                                            </tr>
+                                        }
+
+
                                     </tbody>
                                 </table>
+                                @if (currentPage != int.MinValue)
+                                {
+                                    @await Html.PartialAsync("_Pagination",PageModel)
+                                    ;
+                                }
                             </div>
                         </div>
                     </div>
@@ -109,3 +182,7 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    @await Html.PartialAsync("_ToastMessage");
+}

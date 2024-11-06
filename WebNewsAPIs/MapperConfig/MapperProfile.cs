@@ -30,6 +30,10 @@ namespace ProjectAPIAss.MapperConfig
                 , act =>
                 {
                     act.MapFrom(src => src.AuthorNavigation.DisplayName);
+                }).ForMember(des => des.StatusProcessName
+                , act =>
+                {
+                    act.MapFrom(src => src.StatusProcessNavigation.NameProcess);
                 });
 
             //Article
@@ -142,9 +146,9 @@ namespace ProjectAPIAss.MapperConfig
                     act.MapFrom(src => src.Emotion != null ? src.Emotion.NameEmotion : null);
                 });
             // Emotion
-            CreateMap<AddEmotionDto, DropEmotion>();
-            CreateMap<UpdateEmotionDto, DropEmotion>();
-            CreateMap<DropEmotion, ViewEmotionDto>();
+            CreateMap<AddEmotionDto, Emotion>();
+            CreateMap<UpdateEmotionDto, Emotion>();
+            CreateMap<Emotion, ViewEmotionDto>();
             // Follow
             CreateMap<AddFollowDto, DropEmotion>();
             CreateMap<UpdateEmotionDto, DropEmotion>();
