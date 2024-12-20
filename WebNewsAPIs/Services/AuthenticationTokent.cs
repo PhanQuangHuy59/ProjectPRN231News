@@ -25,6 +25,7 @@ namespace WebNewsAPIs.Services
             {
                 throw new Exception("Role not found");
             }
+
             var clams = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),

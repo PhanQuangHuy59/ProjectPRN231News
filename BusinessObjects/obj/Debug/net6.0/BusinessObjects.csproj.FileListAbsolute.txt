@@ -12,3 +12,17 @@ D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\Busines
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\ref\BusinessObjects.dll
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.runtimeconfig.json
 D:\Ki8\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.genruntimeconfig.cache
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.deps.json
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.runtimeconfig.json
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.dll
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\bin\Debug\net6.0\BusinessObjects.pdb
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.csproj.AssemblyReference.cache
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.AssemblyInfoInputs.cache
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.AssemblyInfo.cs
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.csproj.CoreCompileInputs.cache
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.dll
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\refint\BusinessObjects.dll
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.pdb
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\BusinessObjects.genruntimeconfig.cache
+D:\Ki8\Back-Up\ProjectWebNews\ProjectWebNews\ProjectPRN231News\BusinessObjects\obj\Debug\net6.0\ref\BusinessObjects.dll
