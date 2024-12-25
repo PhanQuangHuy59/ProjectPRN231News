@@ -139,7 +139,7 @@
                 img.src = data.link;
 
                 const userId = $("#userId").val();
-                let urlUpdateDisplayName = `https://localhost:7251/api/Users/ChangeAvata?userId=${userId}&urlImage=${data.link}`
+                let urlUpdateDisplayName = `https://localhost:8080/api/Users/ChangeAvata?userId=${userId}&urlImage=${data.link}`
                 console.log(urlUpdateDisplayName);
                 const responseUpdateImage = await fetch(urlUpdateDisplayName, {
                     method: "PUT"
@@ -187,7 +187,7 @@
 
         // hoặc gửi dữ liệu đến server sử dụng fetch
 
-        let urlUpdateDisplayName = `https://localhost:7251/api/Users/UpdateDisplayName?userId=${userId}&displayName=${displayName}`
+        let urlUpdateDisplayName = `https://localhost:8080/api/Users/UpdateDisplayName?userId=${userId}&displayName=${displayName}`
 
         $.ajax({
             url: urlUpdateDisplayName,
@@ -229,7 +229,7 @@
         });
 
 
-        let urlUpdateDisplayName = `https://localhost:7251/api/Users/UpdateInformationBasic?userId=${userId}&phoneNumber=${phoneNumber}&dateOfBirth=${ngaysinh}&gioiTinh=${gender}&address=${diachi}`
+        let urlUpdateDisplayName = `https://localhost:8080/api/Users/UpdateInformationBasic?userId=${userId}&phoneNumber=${phoneNumber}&dateOfBirth=${ngaysinh}&gioiTinh=${gender}&address=${diachi}`
         console.log(urlUpdateDisplayName);
         $.ajax({
             url: urlUpdateDisplayName,
@@ -284,7 +284,7 @@
         }
 
         if (checkIsValid) {
-            let urlUpdateDisplayName = `https://localhost:7251/api/Users/ChangePassword?userId=${userId}&oldPassword=${oldPassword}&newPassword=${newPassword}`;
+            let urlUpdateDisplayName = `https://localhost:8080/api/Users/ChangePassword?userId=${userId}&oldPassword=${oldPassword}&newPassword=${newPassword}`;
             console.log(urlUpdateDisplayName);
             $.ajax({
                 url: urlUpdateDisplayName,

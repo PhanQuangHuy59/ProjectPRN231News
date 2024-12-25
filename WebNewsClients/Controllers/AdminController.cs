@@ -35,14 +35,14 @@ namespace WebNewsClients.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            string urlArticleProcessApproval = "https://localhost:7251/odata/Articles?$filter=StatusProcess eq 3";
-            string urlArticleNeedApproval = "https://localhost:7251/odata/Articles?$filter=StatusProcess eq 1";
-            string urlCustomerInSystem = "https://localhost:7251/odata/Users?$filter=RoleId eq 179D557C-D9CC-4504-B869-A4319792F631";
-            string urlArticleInSystem = "https://localhost:7251/odata/Users?$filter=RoleId eq 90293A39-475C-44BC-8506-DAEA10E80384";
-            string urlUserNewest = "https://localhost:7251/odata/Users?$expand=Role&$orderBy=Createddate desc&top=20";
-            string urlArticleNewest = "https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$orderBy=CreatedDate & $top=15";
-            string urlCommentNewest = "https://localhost:7251/odata/Comments?$expand=User&$top=20&$orderBy=CreateDate desc";
-            string urlRole = "https://localhost:7251/odata/Roles";
+            string urlArticleProcessApproval = "https://localhost:8080/odata/Articles?$filter=StatusProcess eq 3";
+            string urlArticleNeedApproval = "https://localhost:8080/odata/Articles?$filter=StatusProcess eq 1";
+            string urlCustomerInSystem = "https://localhost:8080/odata/Users?$filter=RoleId eq 179D557C-D9CC-4504-B869-A4319792F631";
+            string urlArticleInSystem = "https://localhost:8080/odata/Users?$filter=RoleId eq 90293A39-475C-44BC-8506-DAEA10E80384";
+            string urlUserNewest = "https://localhost:8080/odata/Users?$expand=Role&$orderBy=Createddate desc&top=20";
+            string urlArticleNewest = "https://localhost:8080/odata/Articles?$expand=Categorty,AuthorNavigation&$orderBy=CreatedDate & $top=15";
+            string urlCommentNewest = "https://localhost:8080/odata/Comments?$expand=User&$top=20&$orderBy=CreateDate desc";
+            string urlRole = "https://localhost:8080/odata/Roles";
 
 
             var OdatauserInSystem = await _httpClient.GetFromJsonAsync<OdataResponse<List<BusinessObjects.Models.User>>>(urlCustomerInSystem);
@@ -86,7 +86,7 @@ namespace WebNewsClients.Controllers
                 return View("AdminAdd");
             }
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlRegister = "https://localhost:7251/api/Users/AddAdmin";
+            string urlRegister = "https://localhost:8080/api/Users/AddAdmin";
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
             request.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
@@ -108,7 +108,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("UserManagement.html")]
         public async Task<IActionResult> UserList(string? keySearch, Guid? roleId, int currentPage = 1)
         {
-            string urlOdataRole = "https://localhost:7251/odata/Roles";
+            string urlOdataRole = "https://localhost:8080/odata/Roles";
             var respondMessageRole = await _httpClient.GetAsync(urlOdataRole);
             if (!respondMessageRole.IsSuccessStatusCode)
             {
@@ -127,7 +127,7 @@ namespace WebNewsClients.Controllers
             roleId = roleId ?? GuidDefault;
 
 
-            string urlSearchUser = $"https://localhost:7251/api/Users/SearchUser?currentPage={currentPage}&keySearch={keySearch}&roleId={tempRoleId}&size={Item_Page}";
+            string urlSearchUser = $"https://localhost:8080/api/Users/SearchUser?currentPage={currentPage}&keySearch={keySearch}&roleId={tempRoleId}&size={Item_Page}";
             var respondMessage = await _httpClient.GetAsync(urlSearchUser);
             if (!respondMessage.IsSuccessStatusCode)
             {
@@ -161,7 +161,7 @@ namespace WebNewsClients.Controllers
                 TempData["err"] = "Cung cấp không đủ thông tin";
             }
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlRegister = $"https://localhost:7251/api/Users/LockOrActive?userId={userId}&isLock={isLock}";
+            string urlRegister = $"https://localhost:8080/api/Users/LockOrActive?userId={userId}&isLock={isLock}";
             var request = new HttpRequestMessage(HttpMethod.Put, urlRegister);
             request.Headers.Add("Authorization", "Bearer " + token);
 
@@ -181,7 +181,7 @@ namespace WebNewsClients.Controllers
         public async Task<IActionResult> UserAdd()
         {
             TempData.Clear();
-            string urlOdataRole = "https://localhost:7251/odata/Roles";
+            string urlOdataRole = "https://localhost:8080/odata/Roles";
             var respondMessageRole = await _httpClient.GetAsync(urlOdataRole);
             if (!respondMessageRole.IsSuccessStatusCode)
             {
@@ -208,7 +208,7 @@ namespace WebNewsClients.Controllers
         {
             TempData.Clear();
 
-            string urlOdataRole = "https://localhost:7251/odata/Roles";
+            string urlOdataRole = "https://localhost:8080/odata/Roles";
             var respondMessageRole = await _httpClient.GetAsync(urlOdataRole);
             if (!respondMessageRole.IsSuccessStatusCode)
             {
@@ -236,7 +236,7 @@ namespace WebNewsClients.Controllers
             }
 
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlRegister = "https://localhost:7251/api/Users/AddAdmin";
+            string urlRegister = "https://localhost:8080/api/Users/AddAdmin";
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
@@ -262,21 +262,21 @@ namespace WebNewsClients.Controllers
         public async Task<IActionResult> ArticleList(int currentPage = 1, Guid? categoryId = null, Guid? authorId = null, int processId = 0, int statusPublish = -1, string time = "all", string keySearch = "")
         {
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
             var listCategories = listCategories1.data.ToList();
 
             //Call api của All Author
-            string urlOdataAllAuthor = "https://localhost:7251/odata/Users?$filter=RoleId eq 90293A39-475C-44BC-8506-DAEA10E80384";
+            string urlOdataAllAuthor = "https://localhost:8080/odata/Users?$filter=RoleId eq 90293A39-475C-44BC-8506-DAEA10E80384";
             var responseMessageAllAuthor = await _httpClient.GetAsync(urlOdataAllAuthor);
             responseMessageAllAuthor.EnsureSuccessStatusCode();
             var listAuthor1 = await responseMessageAllAuthor.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<User>>>();
             var listAuthor = listAuthor1.data.ToList();
 
             // Call api của App process status
-            string urlProcessStastus = "https://localhost:7251/odata/ProcessStatuss";
+            string urlProcessStastus = "https://localhost:8080/odata/ProcessStatuss";
             var responseMessageAllProcess = await _httpClient.GetAsync(urlProcessStastus);
             responseMessageAllProcess.EnsureSuccessStatusCode();
             var listProcess1 = await responseMessageAllProcess.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
@@ -357,7 +357,7 @@ namespace WebNewsClients.Controllers
 
 
             //Call api của Category Root
-            string urlSearch = $"https://localhost:7251/api/Articles/SearchArticleAdmin?categoryId={categoryId}&authorId={authorId}&processId={processId}" +
+            string urlSearch = $"https://localhost:8080/api/Articles/SearchArticleAdmin?categoryId={categoryId}&authorId={authorId}&processId={processId}" +
                 $"&keySearch={keySearch}&statusPublish={statusPublish}" +
                 $"&from={fromDate}&to={toDate}&currentPage={currentPage}&size={Item_Page}";
 
@@ -401,7 +401,7 @@ namespace WebNewsClients.Controllers
         public async Task<IActionResult> AddArticleAdmin()
         {
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -409,7 +409,7 @@ namespace WebNewsClients.Controllers
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName));
 
             // Call api của App process status
-            string urlProcessStastus = "https://localhost:7251/odata/ProcessStatuss";
+            string urlProcessStastus = "https://localhost:8080/odata/ProcessStatuss";
             var responseMessageAllProcess = await _httpClient.GetAsync(urlProcessStastus);
             responseMessageAllProcess.EnsureSuccessStatusCode();
             var listProcess1 = await responseMessageAllProcess.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
@@ -422,7 +422,7 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            string urlRegister = $"https://localhost:8080/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
             var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
@@ -453,7 +453,7 @@ namespace WebNewsClients.Controllers
             TempData.Clear();
 
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -463,7 +463,7 @@ namespace WebNewsClients.Controllers
 
 
             // Call api của App process status
-            string urlProcessStastus = "https://localhost:7251/odata/ProcessStatuss";
+            string urlProcessStastus = "https://localhost:8080/odata/ProcessStatuss";
             var responseMessageAllProcess = await _httpClient.GetAsync(urlProcessStastus);
             responseMessageAllProcess.EnsureSuccessStatusCode();
             var listProcess1 = await responseMessageAllProcess.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
@@ -477,7 +477,7 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister1 = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            string urlRegister1 = $"https://localhost:8080/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
             var response1 = await _httpClient.GetAsync(urlRegister1);
             if (!response1.IsSuccessStatusCode)
             {
@@ -512,7 +512,7 @@ namespace WebNewsClients.Controllers
                 return View("ArticleAdd", addArticle);
             }
             // call api them bài báo
-            string urlRegister = "https://localhost:7251/api/Articles/AddNewArticle";
+            string urlRegister = "https://localhost:8080/api/Articles/AddNewArticle";
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
 
             request.Content = new StringContent(JsonConvert.SerializeObject(addArticle), Encoding.UTF8, "application/json");
@@ -547,7 +547,7 @@ namespace WebNewsClients.Controllers
                 return RedirectToAction("Index");
             }
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -555,7 +555,7 @@ namespace WebNewsClients.Controllers
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName));
 
             // Call api của App process status
-            string urlProcessStastus = "https://localhost:7251/odata/ProcessStatuss";
+            string urlProcessStastus = "https://localhost:8080/odata/ProcessStatuss";
             var responseMessageAllProcess = await _httpClient.GetAsync(urlProcessStastus);
             responseMessageAllProcess.EnsureSuccessStatusCode();
             var listProcess1 = await responseMessageAllProcess.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
@@ -566,7 +566,7 @@ namespace WebNewsClients.Controllers
             ViewBag.SelectListProcess = selectListProcessStatus;
 
             // Lấy article
-            string urlGetArticle = $"https://localhost:7251/api/Articles/GetArticleById/{articleId}";
+            string urlGetArticle = $"https://localhost:8080/api/Articles/GetArticleById/{articleId}";
             var responseMessageUpdate = await _httpClient.GetAsync(urlGetArticle);
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -593,7 +593,7 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            string urlRegister = $"https://localhost:8080/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
             var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
@@ -618,7 +618,7 @@ namespace WebNewsClients.Controllers
         {
             TempData.Clear();
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -626,7 +626,7 @@ namespace WebNewsClients.Controllers
             SelectList selectListCategory = new SelectList(listCategories, nameof(CategoriesArticle.CategoryId), nameof(CategoriesArticle.CategoryName));
 
             // Call api của App process status
-            string urlProcessStastus = "https://localhost:7251/odata/ProcessStatuss";
+            string urlProcessStastus = "https://localhost:8080/odata/ProcessStatuss";
             var responseMessageAllProcess = await _httpClient.GetAsync(urlProcessStastus);
             responseMessageAllProcess.EnsureSuccessStatusCode();
             var listProcess1 = await responseMessageAllProcess.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<ProcessStatus>>>();
@@ -641,7 +641,7 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            string urlRegister = $"https://localhost:8080/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
             var response = await _httpClient.GetAsync(urlRegister);
             if (!response.IsSuccessStatusCode)
             {
@@ -677,7 +677,7 @@ namespace WebNewsClients.Controllers
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
 
             // call api them bài báo
-            string urlEidtArticle = $"https://localhost:7251/api/Articles/UpdateArticle/{updateArticleDto.ArticleId}";
+            string urlEidtArticle = $"https://localhost:8080/api/Articles/UpdateArticle/{updateArticleDto.ArticleId}";
             var request = new HttpRequestMessage(HttpMethod.Put, urlEidtArticle);
             request.Content = new StringContent(JsonConvert.SerializeObject(updateArticleDto), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
@@ -709,7 +709,7 @@ namespace WebNewsClients.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            string urlRegister = $"https://localhost:7251/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
+            string urlRegister = $"https://localhost:8080/odata/Users?$expand=Role&$filter=IsConfirm eq true and UserId eq {userLogin.UserId}";
             var response1 = await _httpClient.GetAsync(urlRegister);
             if (!response1.IsSuccessStatusCode)
             {
@@ -731,7 +731,7 @@ namespace WebNewsClients.Controllers
                 return RedirectToAction("ArticleList");
             }
             // get article
-            string urlGetArticle = $"https://localhost:7251/api/Articles/GetArticleById/{articleId}";
+            string urlGetArticle = $"https://localhost:8080/api/Articles/GetArticleById/{articleId}";
             var responseMessage = await _httpClient.GetAsync(urlGetArticle);
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -758,7 +758,7 @@ namespace WebNewsClients.Controllers
         public async Task<IActionResult> DeleteArticlePost(Guid? articleId)
         {
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlDeleteArticle = $"https://localhost:7251/api/Articles/DeleteArticle/{articleId.Value}";
+            string urlDeleteArticle = $"https://localhost:8080/api/Articles/DeleteArticle/{articleId.Value}";
             var request = new HttpRequestMessage(HttpMethod.Delete, urlDeleteArticle);
             request.Headers.Add("Authorization", "Bearer " + token);
             var response = await _httpClient.SendAsync(request);
@@ -778,7 +778,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("ManagementEmotion.html")]
         public async Task<IActionResult> EmotionList()
         {
-            string urlEmotion = "https://localhost:7251/odata/Emotions";
+            string urlEmotion = "https://localhost:8080/odata/Emotions";
             var OdataEmotion = await _httpClient.GetFromJsonAsync<OdataResponse<List<BusinessObjects.Models.Emotion>>>(urlEmotion);
             ViewBag.ListEmotion = OdataEmotion.data;
             return View();
@@ -800,7 +800,7 @@ namespace WebNewsClients.Controllers
                 return View("AdminAdd");
             }
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlRegister = "https://localhost:7251/api/Emotions/AddEmotion";
+            string urlRegister = "https://localhost:8080/api/Emotions/AddEmotion";
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
             request.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(addDto), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
@@ -820,7 +820,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("UpdateEmotion/{emotionId}")]
         public async Task<IActionResult> EmotionUpdate(Guid emotionId)
         {
-            string urlGetEmotion = $"https://localhost:7251/odata/Emotions?$filter=EmotionId eq {emotionId}";
+            string urlGetEmotion = $"https://localhost:8080/odata/Emotions?$filter=EmotionId eq {emotionId}";
             var OdataEmotion = await _httpClient.GetFromJsonAsync<OdataResponse<List<Emotion>>>(urlGetEmotion);
             if (OdataEmotion.data.Count() == 0)
             {
@@ -847,7 +847,7 @@ namespace WebNewsClients.Controllers
                 return View("AdminAdd");
             }
             string token = HttpContext.Request.Cookies[SaveKeySystem.Authentication];
-            string urlRegister = $"https://localhost:7251/api/Emotions/UpdateEmotion/{updateEmotion.EmotionId}";
+            string urlRegister = $"https://localhost:8080/api/Emotions/UpdateEmotion/{updateEmotion.EmotionId}";
             var request = new HttpRequestMessage(HttpMethod.Put, urlRegister);
             request.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(updateEmotion), Encoding.UTF8, "application/json");
             request.Headers.Add("Authorization", "Bearer " + token);
@@ -869,7 +869,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("StaisticRevenueArticle.html")]
         public async Task<IActionResult> ManagementRevenueOfArticler(Guid authorId, Guid? categoryId, DateTime? fromDate, DateTime? endDate, string? keySearch = "", int currentPage = 1)
         {
-            string urlAuthor = $"https://localhost:7251/odata/Users?$filter=UserId eq {authorId}";
+            string urlAuthor = $"https://localhost:8080/odata/Users?$filter=UserId eq {authorId}";
             var odataAuthor = await _httpClient.GetFromJsonAsync<OdataResponse<List<User>>>(urlAuthor);
             var listUser = odataAuthor.data;
             if(listUser.Count == 0)
@@ -882,11 +882,11 @@ namespace WebNewsClients.Controllers
                 categoryId = null;
             }
             // 
-            string urlGetArticleOfAuthor = $"https://localhost:7251/api/Articles/GetArticleFromToByOfAuthorId?authorId={authorId}&fromDate={fromDate}&endDate={endDate}&keySearch={keySearch}&categoryId={categoryId}";
+            string urlGetArticleOfAuthor = $"https://localhost:8080/api/Articles/GetArticleFromToByOfAuthorId?authorId={authorId}&fromDate={fromDate}&endDate={endDate}&keySearch={keySearch}&categoryId={categoryId}";
             var listArticle = await _httpClient.GetFromJsonAsync<List<ViewArticleDto>>(urlGetArticleOfAuthor);
 
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$orderby=OrderLevel";
             var odataCategory = await _httpClient.GetFromJsonAsync<OdataResponse<List<CategoriesArticle>>>(urlOdataAllCategory);
             var listCategory = odataCategory.data;
             var temp = categoryId ?? GuidDefault;

@@ -8,7 +8,7 @@
             let articleId = this.getAttribute('data-articleId');
             const iconElement = this;
             console.log(`Bookmark button clicked for article ${articleId} by user ${userId}!`);
-            let urlUpdateDisplayName = `https://localhost:7251/api/SaveArticles/RemoveOrAddSaveArticle?userId=${userId}&articleId=${articleId}`
+            let urlUpdateDisplayName = `https://localhost:8080/api/SaveArticles/RemoveOrAddSaveArticle?userId=${userId}&articleId=${articleId}`
             $.ajax({
                 url: urlUpdateDisplayName,
                 type: 'POST',

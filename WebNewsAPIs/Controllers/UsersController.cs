@@ -477,7 +477,7 @@ namespace WebNewsAPIs.Controllers
             {
                 nameof(BusinessObjects.Models.User.Role)
             };
-            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Equals(userDto.Username.ToLower()) && c.IsConfirm, includes).ToList();
+            var listUserLogin = _userRepo.GetMulti(c => c.Username.ToLower().Trim().Equals(userDto.Username.ToLower().Trim()) && c.IsConfirm, includes).ToList();
             if (listUserLogin == null || listUserLogin.Count == 0)
             {
                 return StatusCode(404, "Tài khoản không tồn tại trong hệ thống.");

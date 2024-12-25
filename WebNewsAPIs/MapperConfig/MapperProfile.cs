@@ -123,6 +123,11 @@ namespace ProjectAPIAss.MapperConfig
                 , act =>
                 {
                     act.MapFrom(src => src.InverseReplyForNavigation);
+                })
+                .ForMember(des => des.UserImage
+                , act =>
+                {
+                    act.MapFrom(src => src.User != null ? src.User.Image : "");
                 });
 
 

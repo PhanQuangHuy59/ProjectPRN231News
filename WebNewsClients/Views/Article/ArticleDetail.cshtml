@@ -34,7 +34,8 @@
     var commentReplyForNull = comment.Where(c => c.ReplyFor == null);
     var commentReplyFor = comment.Where(c => c.ReplyFor != null);
 
-    string pathImag = @"/template/mvpthemes.com/flexmag/wp-content/themes/flex-mag/images/logos/logo-ent.png";
+    string pathImag = @"/images/male_default.png";
+    
 
 
     string GenerateCommentHtml(IEnumerable<Comment> comments, int depth)

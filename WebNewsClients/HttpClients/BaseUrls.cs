@@ -2,6 +2,6 @@
 {
 	public static class BaseUrls
 	{
-		public  const string BASE_URL_CategoryArticle = @"https://localhost:7251";
+		public  const string BASE_URL_CategoryArticle = @"https://localhost:8080";
 	}
 }

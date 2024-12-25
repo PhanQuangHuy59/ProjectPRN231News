@@ -82,6 +82,7 @@ public class ViewCommentDto
         public Guid ArticleId { get; set; }
         public string ArticleName { get; set; }
         public Guid UserId { get; set; }
+        public string? UserImage { get; set; }
         public string UserName { get; set; }
         public string Content { get; set; } = null!;
         public DateTime CreateDate { get; set; }

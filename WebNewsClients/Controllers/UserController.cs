@@ -54,7 +54,7 @@ namespace WebNewsClients.Controllers
                 TempData["err"] = "Dữ liệu có vẻ không hợp lệ";
                 return View("Login", user);
             }
-            string urlRegister = "https://localhost:7251/api/Users/Login";
+            string urlRegister = "https://localhost:8080/api/Users/Login";
             var request = new HttpRequestMessage(HttpMethod.Get, urlRegister);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
             var response = await _httpClient.SendAsync(request);
@@ -137,7 +137,7 @@ namespace WebNewsClients.Controllers
                 return View("Register", user);
 
             }
-            string urlRegister = "https://localhost:7251/api/Users";
+            string urlRegister = "https://localhost:8080/api/Users";
             var request = new HttpRequestMessage(HttpMethod.Post, urlRegister);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
 
@@ -167,7 +167,7 @@ namespace WebNewsClients.Controllers
                 ViewBag.email = email;
                 return View();
             }
-            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
+            string urlCheckUser = $"https://localhost:8080/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
             var response = await _httpClient.GetAsync(urlCheckUser);
             if (!response.IsSuccessStatusCode)
             {
@@ -186,7 +186,7 @@ namespace WebNewsClients.Controllers
             }
             var user = userResponse[0];
 
-            string urlSendmailResetPass = "https://localhost:7251/api/Users/SendMailResetPassword";
+            string urlSendmailResetPass = "https://localhost:8080/api/Users/SendMailResetPassword";
             var request = new HttpRequestMessage(HttpMethod.Post, urlSendmailResetPass);
             request.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
 
@@ -210,7 +210,7 @@ namespace WebNewsClients.Controllers
                 return RedirectToAction("Error400", "Home");
             }
 
-            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
+            string urlCheckUser = $"https://localhost:8080/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
             var response = await _httpClient.GetAsync(urlCheckUser);
 
             if (!response.IsSuccessStatusCode)
@@ -249,7 +249,7 @@ namespace WebNewsClients.Controllers
                 return View();
             }
 
-            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
+            string urlCheckUser = $"https://localhost:8080/odata/Users?$top=1&$expand=Role&$filter=UserId eq {Guid.Parse(userId)}";
             var response = await _httpClient.GetAsync(urlCheckUser);
 
             if (!response.IsSuccessStatusCode)
@@ -284,7 +284,7 @@ namespace WebNewsClients.Controllers
 
 
             // Call Api to reset password 
-            string urlUpdatePassword = $"https://localhost:7251/api/Users/{user.UserId}";
+            string urlUpdatePassword = $"https://localhost:8080/api/Users/{user.UserId}";
             var requestResetPassword = new HttpRequestMessage(HttpMethod.Put, urlUpdatePassword);
             user.Password = newPassword;
             var userUdpate = _mapper.Map<UpdateUserDto>(user);
@@ -309,7 +309,7 @@ namespace WebNewsClients.Controllers
                 ViewBag.email = email;
                 return View();
             }
-            string urlCheckUser = $"https://localhost:7251/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
+            string urlCheckUser = $"https://localhost:8080/odata/Users?$top=1&$expand=Role&$filter=Username eq '{email}'";
             var response =await _httpClient.GetAsync(urlCheckUser);
             if (!response.IsSuccessStatusCode)
             {
@@ -327,7 +327,7 @@ namespace WebNewsClients.Controllers
                 return View();
             }
             var user = userResponse[0];
-            string urlConfirmAccount = $"https://localhost:7251/api/Users/SendMailConfirmAccount";
+            string urlConfirmAccount = $"https://localhost:8080/api/Users/SendMailConfirmAccount";
             var requestConfirmAccount = new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
             requestConfirmAccount.Content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
             var responseCodeConfirmAccount =await _httpClient.SendAsync(requestConfirmAccount);
@@ -345,7 +345,7 @@ namespace WebNewsClients.Controllers
         {
 
 
-            string urlConfirmAccount = $"https://localhost:7251/api/Users/ConfirmEmail?userId={userId}&code={code}";
+            string urlConfirmAccount = $"https://localhost:8080/api/Users/ConfirmEmail?userId={userId}&code={code}";
             var requestConfirmAccount = new HttpRequestMessage(HttpMethod.Get, urlConfirmAccount);
             var responseCodeConfirmAccount =await _httpClient.SendAsync(requestConfirmAccount);
             if (!responseCodeConfirmAccount.IsSuccessStatusCode)

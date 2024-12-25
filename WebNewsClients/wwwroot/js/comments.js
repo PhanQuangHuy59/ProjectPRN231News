@@ -34,7 +34,32 @@
             // Bạn có thể thực hiện các hành động khác tại đây
         });
     });
+    function addEventClickForReply() {
+        const replyLinks1 = document.querySelectorAll('.comment-reply-link');
+        replyLinks1.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a nếu cần
+                // hiển thị nut cancle
+                $('#cancel-comment-reply-link').show();
+                // Lấy các dữ liệu từ thuộc tính data-*
+                const commentId = link.dataset.commentid;
+                const articleid = link.dataset.articleid;
+                const userid = link.dataset.userid;
 
+                document.getElementById('articleId').value = articleid;
+                document.getElementById('userId').value = userid; // Thay thế 'currentUserId' bằng ID người dùng hiện tại nếu có
+                document.getElementById('replyFor').value = commentId;
+
+                // In các dữ liệu ra console hoặc xử lý chúng theo nhu cầu của bạn
+                console.log('Comment ID:', commentId);
+                console.log('Article ID:', articleid);
+                console.log('User Id:', userid);
+
+
+                // Bạn có thể thực hiện các hành động khác tại đây
+            });
+        });
+    }
     $("#cancel-comment-reply-link").on('click', function (event) {
         $('#articleId').val('');
         $('#userId').val('');
@@ -50,6 +75,7 @@
         // Tạo đối tượng FormData từ form
 
         var inforMainComment = document.getElementById('main_information_comment');
+        
         if ($('#articleId').val() === ''
             & $('#userId').val() === '') {
             $('#articleId').val("" + inforMainComment.dataset.articleid);
@@ -91,17 +117,55 @@
             ShowError("Bạn không thể bình luận khi bạn chưa đăng nhập");
         } else {
             $.ajax({
-                url: `https://localhost:7251/api/Comments`,
+                url: `https://localhost:8080/api/Comments`,
                 type: 'POST',
                 data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     //location.reload
-                    var message = 'Comment thanh cong hãy reload lại trang';
+                    var message = 'Comment thanh công hãy reload lại trang';
                     ShowSuccess(message);
                     $("#comment").val('');
 
-                    console.log('Success:', result);
+                    var commentHtml = `
+                <li style="margin-left: ${result.replyFor ? '60px' : '20px'}" class="list-group-item" id="li-comment-${result.commentId}">
+                    <div class="comment-wrapper" id="comment-${result.commentId}">
+                        <div class="comment-inner">
+                            <div class="comment-avatar">
+                                <img alt='' src='${result.userImage ? result.userImage : "../images/male_default.png"}' class='avatar avatar-46 photo' height='46' width='46' loading='lazy' decoding='async' />
+                            </div>
+                            <div class="commentmeta">
+                                <p class="comment-meta-1">
+                                    <cite class="fn">${result.userName}</cite>
+                                </p>
+                                <p class="comment-meta-2">
+                                    ${new Date(result.createDate).toLocaleString()}
+                                </p>
+                            </div>
+                            <div class="text">
+                                <div class="c">
+                                    <p>${result.content}</p>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="comment-reply"><span class="reply"><a rel='nofollow' class='comment-reply-link' href='index${result.commentId}.html?replytocom=${result.commentId}#respond' data-commentid="${result.commentId}" data-articleid="${result.articleId}" data-userid="${result.userId}" data-postid="${result.articleId}" data-belowelement="comment-${result.commentId}" data-respondelement="respond" data-replyto="Reply to ${result.commentId}" aria-label='Reply to ${result.commentId}'>Reply</a></span></div>
+                        </div>
+                    </div>
+                </li>
+            `;
+
+                    if (result.replyFor) {
+                        var parentComment = $(`#li-comment-${result.replyFor}`);
+                        if (parentComment.find('ul.list-group').length === 0) {
+                            parentComment.append('<ul class="list-group"></ul>');
+                        }
+                        parentComment.find('ul.list-group').append(commentHtml);
+                    } else {
+                        $("#mainCommentArticle").append(commentHtml);
+                    }
+                    addEventClickForReply();
+                    console.log("Success:", result);
+                    
                 },
                 error: function (xhr, status, error) {
                     var text = xhr.responseText;
@@ -124,7 +188,7 @@
         var userId = inforMainComment.dataset.userid;
         console.log(userId + "\n" + articleId);
         if (userId !== "nologin") {
-            var urlAddViwe = `https://localhost:7251/api/Users/AddArticleToViewUser?userId=${userId}&articleId=${articleId}`;
+            var urlAddViwe = `https://localhost:8080/api/Users/AddArticleToViewUser?userId=${userId}&articleId=${articleId}`;
             $.ajax({
                 url: urlAddViwe,
                 type: 'POST',
@@ -144,8 +208,8 @@
                 }
             });
         } else {
-            var urlIncreateViewWithNoLogin = `https://localhost:7251/api/Articles/IncreaseViewArticle?articleId=${articleId}`;
-            
+            var urlIncreateViewWithNoLogin = `https://localhost:8080/api/Articles/IncreaseViewArticle?articleId=${articleId}`;
+
             $.ajax({
                 url: urlIncreateViewWithNoLogin,
                 type: 'POST',
@@ -189,7 +253,7 @@
         if (userLoginId === 'nologin') {
             ShowError("Ban chưa đang nhập. Nên không thể lưu bài viết.");
         } else {
-            let urlUpdateSaveArticle = `https://localhost:7251/api/SaveArticles/RemoveOrAddSaveArticle?userId=${userLoginId}&articleId=${articleIdSave}`
+            let urlUpdateSaveArticle = `https://localhost:8080/api/SaveArticles/RemoveOrAddSaveArticle?userId=${userLoginId}&articleId=${articleIdSave}`
             $.ajax({
                 url: urlUpdateSaveArticle,
                 type: 'POST',
@@ -219,7 +283,7 @@
     $('.click_emotion').each(function () {
         $(this).click(function () {
             var emotionId = $(this).attr('data-emotionId');
-            var urlAddOrRemoveDropEmotion = `https://localhost:7251/api/DropEmotions/AddOrRemoveDropEmotion?userId=${userLoginId}&articleId=${articleIdSave}&emotionId=${emotionId}`;
+            var urlAddOrRemoveDropEmotion = `https://localhost:8080/api/DropEmotions/AddOrRemoveDropEmotion?userId=${userLoginId}&articleId=${articleIdSave}&emotionId=${emotionId}`;
             console.log(urlAddOrRemoveDropEmotion);
             var divClick = $(this);
             if (userLoginId == 'nologin') {
@@ -240,7 +304,7 @@
                         } else {
                             var span = divClick.find('span.numberDropEmotion:first');
                             span.removeClass('text-primary');
-                            var numberDropEmotion =  parseInt(span.html(), 10) - 1;
+                            var numberDropEmotion = parseInt(span.html(), 10) - 1;
                             span.html(numberDropEmotion);
 
                             ShowSuccess("Đã xóa emotion");

@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
 var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
 builder.Services.Configure<MailSettings>(mailsettings);
 
-builder.Services.AddTransient<IEmailSender,SendMailService>();
+builder.Services.AddTransient<IEmailSender, SendMailService>();
 
 
 builder.Services.AddControllers();
@@ -57,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -64,5 +66,4 @@ app.UseAuthorization();
 app.UseCors("CORSPolicy");
 
 app.MapControllers();
-
 app.Run();

@@ -39,7 +39,7 @@ namespace WebNewsClients.Controllers
 
 
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $orderby=OrderLevel";
 
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
@@ -48,7 +48,7 @@ namespace WebNewsClients.Controllers
             var listCategories = listCategories1.data;
             //
             //
-            string urlCallApiCategoryOfArticle = $"https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $filter=CategoryId eq {categoryArticleId} & orderby=OrderLevel";
+            string urlCallApiCategoryOfArticle = $"https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory & $filter=CategoryId eq {categoryArticleId} & orderby=OrderLevel";
             var responseMessageCallApiCategoryOfArticle = await _httpClient.GetAsync(urlCallApiCategoryOfArticle);
             responseMessageCallApiCategoryOfArticle.EnsureSuccessStatusCode();
             var category2 = await responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -62,7 +62,7 @@ namespace WebNewsClients.Controllers
             var category1 = category[0];
 
             //Call api tim cacs article theo loai cua bai bao
-            string urlCallApiArticles = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments & $top=10 & $orderby=CreatedDate desc & $filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {categoryArticleId}";
+            string urlCallApiArticles = $"https://localhost:8080/odata/Articles?$expand=Categorty,AuthorNavigation,Comments & $top=10 & $orderby=CreatedDate desc & $filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {categoryArticleId}";
             var responseMessageCallApiArticles = await _httpClient.GetAsync(urlCallApiArticles);
             responseMessageCallApiArticles.EnsureSuccessStatusCode();
             var articles1 = await responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
@@ -85,7 +85,7 @@ namespace WebNewsClients.Controllers
         {
             ViewUserDto userLogin = InformationLogin.getUserLogin(HttpContext);
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -93,7 +93,7 @@ namespace WebNewsClients.Controllers
             //
 
             //Call api tim article theo slug
-            string urlOdataOfArticleBySlug = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=1&$filter=IsPublish eq true and StatusProcess eq 3 and Slug eq '{slug}'";
+            string urlOdataOfArticleBySlug = $"https://localhost:8080/odata/Articles?$expand=Categorty,AuthorNavigation&$top=1&$filter=IsPublish eq true and StatusProcess eq 3 and Slug eq '{slug}'";
             var responseMessageArticle = await _httpClient.GetAsync(urlOdataOfArticleBySlug);
             responseMessageArticle.EnsureSuccessStatusCode();
             var article3 = await responseMessageArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
@@ -103,33 +103,33 @@ namespace WebNewsClients.Controllers
             {
                 var article1 = article[0];
                 //Call api tim cacs article theo loai cua bai bao
-                string urlCallApiArticles = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation&$top=10&$orderby=CreatedDate desc &$filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {article1.CategortyId}";
+                string urlCallApiArticles = $"https://localhost:8080/odata/Articles?$expand=Categorty,AuthorNavigation&$top=10&$orderby=CreatedDate desc &$filter=IsPublish eq true and StatusProcess eq 3 and CategortyId eq {article1.CategortyId}";
                 var responseMessageCallApiArticles = await _httpClient.GetAsync(urlCallApiArticles);
                 responseMessageCallApiArticles.EnsureSuccessStatusCode();
                 var articles2 = await responseMessageCallApiArticles.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
                 var articles = articles2.data.ToList();
 
-                string urlCallApiCategoryOfArticle = $"https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=CategoryId eq {article1.CategortyId} & orderby=OrderLevel";
+                string urlCallApiCategoryOfArticle = $"https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=CategoryId eq {article1.CategortyId} & orderby=OrderLevel";
                 var responseMessageCallApiCategoryOfArticle = await _httpClient.GetAsync(urlCallApiCategoryOfArticle);
                 responseMessageCallApiCategoryOfArticle.EnsureSuccessStatusCode();
                 var category1 = await responseMessageCallApiCategoryOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
                 var category = category1.data.ToList();
 
                 // Call api comment of Article 
-                string urlCallApiComment = $"https://localhost:7251/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ArticleId eq {article1.ArticleId}";
+                string urlCallApiComment = $"https://localhost:8080/odata/Comments?$expand=ReplyForNavigation,User,UserIdReplyNavigation,InverseReplyForNavigation($expand=User,InverseReplyForNavigation)&$filter=ArticleId eq {article1.ArticleId}";
                 var responseMessageCallApiComment = await _httpClient.GetAsync(urlCallApiComment);
                 responseMessageCallApiComment.EnsureSuccessStatusCode();
                 var articlesComment1 = await responseMessageCallApiComment.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Comment>>>();
                 var articlesComment = articlesComment1.data.ToList();
 
                 // Lay tat ca emotion
-                var urlEmotions = "https://localhost:7251/odata/Emotions";
+                var urlEmotions = "https://localhost:8080/odata/Emotions";
                 var responseMessaEmotion = await _httpClient.GetAsync(urlEmotions);
                 responseMessaEmotion.EnsureSuccessStatusCode();
                 var responseEmotion1 = await responseMessaEmotion.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Emotion>>>();
                 var responseEmotion = responseEmotion1.data.ToList();
                 //get all drop emotion of article
-                var urlDropEmotionOfArticle = $"https://localhost:7251/odata/DropEmotions?$filter=ArticleId eq {article1.ArticleId}";
+                var urlDropEmotionOfArticle = $"https://localhost:8080/odata/DropEmotions?$filter=ArticleId eq {article1.ArticleId}";
                 var responseMessaDropEmotionOfArticle = await _httpClient.GetAsync(urlDropEmotionOfArticle);
                 responseMessaDropEmotionOfArticle.EnsureSuccessStatusCode();
                 var responseDropEmotion1 = await responseMessaDropEmotionOfArticle.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<DropEmotion>>>();
@@ -144,7 +144,7 @@ namespace WebNewsClients.Controllers
                 if (userLogin != null)
                 {
                     // get article save of user of this article
-                    var urlArticleSave = $"https://localhost:7251/odata/SaveArticles?$filter=UserId eq {userLogin.UserId} and ArticleId eq {article1.ArticleId}";
+                    var urlArticleSave = $"https://localhost:8080/odata/SaveArticles?$filter=UserId eq {userLogin.UserId} and ArticleId eq {article1.ArticleId}";
                     var responseMessagArticleSaveOfUser = await _httpClient.GetAsync(urlArticleSave);
                     responseMessagArticleSaveOfUser.EnsureSuccessStatusCode();
                     var articleSave1 = await responseMessagArticleSaveOfUser.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<SaveArticle>>>();
@@ -180,7 +180,7 @@ namespace WebNewsClients.Controllers
 
 
                 //Call api tim cacs article theo loai cua bai bao
-                string urlCallApiArticlesForRecomment = $"https://localhost:7251/api/Articles/GetAllArticleOfAllCategory?categoryId={category[0].CategoryId}";
+                string urlCallApiArticlesForRecomment = $"https://localhost:8080/api/Articles/GetAllArticleOfAllCategory?categoryId={category[0].CategoryId}";
                 var responseMessageCallApiArticlesForRecomment = await _httpClient.GetAsync(urlCallApiArticlesForRecomment);
                 responseMessageCallApiArticlesForRecomment.EnsureSuccessStatusCode();
                 var articlesRecomment1 = await responseMessageCallApiArticlesForRecomment.Content.ReadFromJsonAsync<List<ViewArticleDto>>();
@@ -222,7 +222,7 @@ namespace WebNewsClients.Controllers
         [HttpGet("LastNew.html")]
         public async Task<IActionResult> LastNew(int currentPage = 1)
         {
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&$filter=ParentCategory eq null & orderby=OrderLevel";
             var responseMessage = await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 = await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -231,7 +231,7 @@ namespace WebNewsClients.Controllers
 
             //Call api của last new của ngày hôm nay
             var now = new DateTime(2024, 6, 17);
-            string urlOdataLastestnew = $"https://localhost:7251/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and year(CreatedDate) eq {now.Year} and month(CreatedDate) eq {now.Month} and day(CreatedDate) eq {now.Day}\r\n";
+            string urlOdataLastestnew = $"https://localhost:8080/odata/Articles?$expand=Categorty,AuthorNavigation,Comments&$orderby=CreatedDate desc&$filter=IsPublish eq true and StatusProcess eq 3 and year(CreatedDate) eq {now.Year} and month(CreatedDate) eq {now.Month} and day(CreatedDate) eq {now.Day}\r\n";
             var responseMessageLastNew = await _httpClient.GetAsync(urlOdataLastestnew);
             responseMessageLastNew.EnsureSuccessStatusCode();
             var listLastestArticle1 = await responseMessageLastNew.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<Article>>>();
@@ -256,7 +256,7 @@ namespace WebNewsClients.Controllers
         {
 
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
             var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 =await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -293,7 +293,7 @@ namespace WebNewsClients.Controllers
         public async Task<IActionResult> SearchArticle(int currentPage = 1, Guid? categoryId = null, string time = "all", string keySearch = "")
         {
             //Call api của Category Root
-            string urlOdataAllCategory = "https://localhost:7251/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
+            string urlOdataAllCategory = "https://localhost:8080/odata/CategoriesArticles?$expand=ParentCategory,InverseParentCategory&orderby=OrderLevel";
             var responseMessage =await _httpClient.GetAsync(urlOdataAllCategory);
             responseMessage.EnsureSuccessStatusCode();
             var listCategories1 =await responseMessage.Content.ReadFromJsonAsync<OdataResponse<IEnumerable<CategoriesArticle>>>();
@@ -362,7 +362,7 @@ namespace WebNewsClients.Controllers
             //Call api của Category Root
 
 
-            string urlSearch = $"https://localhost:7251/api/Articles/SearchArticle?categoryId={categoryId}&keySearch={keySearch}" +
+            string urlSearch = $"https://localhost:8080/api/Articles/SearchArticle?categoryId={categoryId}&keySearch={keySearch}" +
                 $"&from={fromDate}&to={toDate}&currentPage={currentPage}&size={Items_Page_Search}";
             var httpMessage = new HttpRequestMessage(HttpMethod.Get, urlSearch);
             var responseMessageArticleSearch =await _httpClient.SendAsync(httpMessage);
